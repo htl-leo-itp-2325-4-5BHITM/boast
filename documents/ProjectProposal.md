@@ -3,9 +3,6 @@
 - [Team](#team)
 - [Projektauftraggeber](#projektauftraggeber)
 - [Projektbezeichnung](#projektbezeichnung)
-- [Ausgangssituation](#ausgangssituation)
-	- [Problemstellung](#problemstellung)
-	- [Lösung](#lösung)
 - [Generelle Richtlinien](#richtlinien)
 - [Projektphasen / Meilensteine](#meilensteine)
 - [Projektziele](#projektziele)
@@ -17,10 +14,10 @@
   - [Welches Ergebnis soll am Projektende vorliegen?](#ergebnis)
   - [Messbare Eigenschaften](#messbar)
 ## Team
-- Sideras Jannis
-- Wimberger Felix
 - Mihaescu Teofan
 - Scharrer Raphael
+- Sideras Jannis
+- Wimberger Felix - Scrum Master
 
 ## Projektauftraggeber
 - Herr Professor Steiner
@@ -28,16 +25,7 @@
 - Herr Professor Huemer
 
 ## Projektbezeichnung
-
-
-## Ausgangssituation
-
-
-### Problemstellung
-
-
-### Lösung
-
+Boast soll eine interaktive Social Media Plattform sein, die eine Alternative zu herkömmlichen Social Media's bietet und mit neuartigem Content wie Challenges und userdefinierten Wetten einen neuen sozialen Aspekt miteinbezieht.
 
 <a id="richtlinien"></a>
 ## Generelle Richtlinien
@@ -45,47 +33,33 @@
 - Es werden GitHub, Clockify und E-Mail für Versionsverwaltung, Zeitmessung und Kommunikation genutzt.
 - Das Projekt muss bis März 2025 fertiggestellt sein.
 
-
-<a id="meilensteine"></a>
-## Projektphasen / Meilensteine
-
-| Phase | Meilenstein / Ergebnis | Soll - Termin | Ist - Termin |
-| ----- | ---------------------- | ------------- | ------------ |
-| 1 | Der Projektstart ist erfolgt | 29.09.23 | 29.09.23 |
-| 2 |  | / | / | 
-| 3 |  | / | / |
-| 4 |  | / | / |
-| 5 |  | / | / |
-| 6 |  | / | / |
-| 7 |  | / | / | 
-| 8 |  | / | / | 
-| 9 |  | März 2025 | / |
-
 ## Projektziele
 ### Ziele 
-
+Ziel des Projektes ist eine Social Media Plattform, die Nutzern ermöglicht, mit von Benutzern erstellten Plattformspezifischen Content zu interagieren.
 
 
 <a id="nichtZiele"></a>
 ### Nicht-Ziele
-
+- nicht intuitive Userinteraktion
+- Suchtpotential für minderjährige bieten
 
 <a id="nice"></a>
 ### Nice-to-have 
-
+- Eigene Serverumgebung
+- Deployment in Appstore/GooglePlayStore
+- Web Anwendung
 
 
 ## Stakeholder
-- 
-- 
-- 
-- 
+- Gesetzgeber
+- Definerte Userbase
 
 
 ## Projektendergebnis
 <a id="ergebnis"></a>
 ### Welches Ergebnis soll am Projektende vorliegen?
-
+Am Projektende soll eine voll funktionsfähige Social Media App vorliegen, die es den Nutzern ermöglicht dynamisch Content zu erstellen und mit Freunden und Communities zu teilen.
 
 <a id="messbar"></a>
 ### Welche messbaren Eigenschaften hat das Endergebnis, damit von einem Projekterfolg gesprochen werden kann?
+Von einem Projekterfolg kann gesprochen werden, sobald die App voll funktional deployed ist und eine definierte Userbase diese Plattform für ihre Alleinstellungsmerkmale nutzt.
