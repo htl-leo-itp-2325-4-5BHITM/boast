@@ -17,7 +17,7 @@
 - Mihaescu Teofan
 - Scharrer Raphael
 - Sideras Jannis
-- Wimberger Felix - Scrum Master
+- Wimberger Felix
 
 ## Projektauftraggeber
 - Herr Professor Steiner
@@ -35,19 +35,21 @@ Boast soll eine interaktive Social Media Plattform sein, die eine Alternative zu
 
 ## Projektziele
 ### Ziele 
-Ziel des Projektes ist eine Social Media Plattform, die Nutzern ermöglicht, mit von Benutzern erstellten Plattformspezifischen Content zu interagieren.
+Ziel des Projektes ist eine Social Media Plattform, die Nutzern ermöglicht, mit von Benutzern erstellten plattformspezifischen Content, wie Challenges und Wetten zu interagieren. Auf dieser Plattform kann man klassische Funktionen wie die Profilübersicht und das Freundschaften/Follow System verwenden, jedoch liegt der Hauptfokus auf der Contenterstellung, hier können User an ihre Freundesgruppe oder auch öffentlich, Challenges, Wetten oder ähnliches verschicken und mit diesen, können andere User interagieren.
+Diese Plattform soll eine Informations-Webseite, native IOS und Android Apps haben und eventuell auch als Web-App abrufbar sein (Nice-to-Have). Die Web-App würde im Falle der Entwicklung, die zuvor erstellte Informations-Webseite erweitern.
 
 
 <a id="nichtZiele"></a>
 ### Nicht-Ziele
 - nicht intuitive Userinteraktion
 - Suchtpotential für minderjährige bieten
+- klassische Wettplattform
 
 <a id="nice"></a>
 ### Nice-to-have 
 - Eigene Serverumgebung
 - Deployment in Appstore/GooglePlayStore
-- Web Anwendung
+- Web App
 
 
 ## Stakeholder
