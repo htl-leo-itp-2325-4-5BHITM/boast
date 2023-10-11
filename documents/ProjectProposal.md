@@ -9,7 +9,7 @@
   - [Ziele](#ziele)
 	- [Nicht-Ziele](#nichtZiele)
 	- [Nice-to-have](#nice)
-- [Stakeholde[ProjectProposal.md](ProjectProposal.md)r](#stakeholder)
+- [Stakeholder](#stakeholder)
 - [Projektendergebnis](#projektendergebnis)
   - [Welches Ergebnis soll am Projektende vorliegen?](#ergebnis)
   - [Messbare Eigenschaften](#messbar)
