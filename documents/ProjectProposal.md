@@ -19,8 +19,8 @@
 ## Team
 - Mihaescu Teofan
 - Scharrer Raphael
-- Sideras Jannis
-- Wimberger Felix
+- Sideras Jannis - Product Owner
+- Wimberger Felix - Scrum Master
 
 ---
 
