@@ -1,0 +1,19 @@
+  @startuml
+  
+  class boast {
+  - title
+  - definition
+  - creator
+  - winner
+  }
+  
+  class detail {
+  - bet
+  - creator
+  }
+  
+  boast "1"--"*" detail
+
+  
+  @enduml
+  
