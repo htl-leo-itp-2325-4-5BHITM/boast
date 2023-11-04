@@ -1,6 +1,7 @@
 package it.boast.repository;
 
 import it.boast.model.Post;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -10,6 +11,7 @@ import jakarta.persistence.criteria.Root;
 
 import java.util.List;
 
+@ApplicationScoped
 public class PostRepository {
 
     @Inject
