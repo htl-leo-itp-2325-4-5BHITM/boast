@@ -1,13 +1,10 @@
 package it.boast.repository;
 
 import it.boast.model.Post;
+import it.boast.model.PostDetail;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Root;
 
 import java.util.List;
 
@@ -21,7 +18,11 @@ public class PostRepository {
         this.entityManager = entityManager;
     }
 
-    public void addPost(Post post) {
+    public void addPost(Post post, List<PostDetail> postDetailList) {
+        for (PostDetail current: postDetailList) {
+            entityManager.persist(current);
+            post.addPostDetail(current);
+        }
         entityManager.persist(post);
     }
 
@@ -30,11 +31,10 @@ public class PostRepository {
     }
 
     public List<Post> getPostsAsList() {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Post> cq = ((CriteriaBuilder) cb).createQuery(Post.class);
-        Root<Post> rootEntry = cq.from(Post.class);
-        CriteriaQuery<Post> all = cq.select(rootEntry);
-        TypedQuery<Post> allQuery = entityManager.createQuery(all);
-        return allQuery.getResultList();
+        return entityManager.createQuery("select p from Post p", Post.class).getResultList().stream().toList();
+    }
+
+    public void clearList() {
+        entityManager.clear();
     }
 }

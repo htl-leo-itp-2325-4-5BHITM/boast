@@ -3,6 +3,7 @@ package it.boast.model;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -23,15 +24,15 @@ public class Post implements Serializable {
     @Column(length = 50, nullable = false)
     private String winner;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<PostDetail> postDetails;
 
-    public Post(Long postId, String title, String definition, String creator, String winner) {
-        this.postId = postId;
+    public Post(String title, String definition, String creator, String winner) {
         this.setTitle(title);
         this.setDefinition(definition);
         this.setCreator(creator);
         this.setWinner(winner);
+        postDetails = new LinkedList<>();
     }
 
     public Post() {
@@ -83,5 +84,14 @@ public class Post implements Serializable {
     public void setWinner(String winner) {
         this.winner = winner;
     }
+
+    public List<PostDetail> getPostDetails() {
+        return postDetails;
+    }
+
+    public void setPostDetails(List<PostDetail> postDetails) {
+        this.postDetails = postDetails;
+    }
+
     //</editor-fold>
 }

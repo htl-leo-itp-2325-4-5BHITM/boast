@@ -14,15 +14,9 @@ public class PostDetail implements Serializable {
     @Column(length = 50, nullable = false)
     private String creator;
 
-    @ManyToOne
-    @JoinColumn(name = "postId")
-    private Post post;
-
-    public PostDetail(Long postDetailsId, String bet, String creator, Post post) {
-        this.postDetailsId = postDetailsId;
+    public PostDetail(String bet, String creator) {
         this.setBet(bet);
         this.setCreator(creator);
-        this.setPost(post);
     }
 
     public PostDetail() {
@@ -49,14 +43,6 @@ public class PostDetail implements Serializable {
 
     public void setCreator(String creator) {
         this.creator = creator;
-    }
-
-    public Post getPost() {
-        return post;
-    }
-
-    public void setPost(Post post) {
-        this.post = post;
     }
 
     //</editor-fold>
