@@ -6,14 +6,12 @@ import it.boast.repository.PostRepository;
 import jakarta.inject.Inject;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
-import jakarta.json.JsonValue;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.StreamingOutput;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -32,7 +30,7 @@ public class PostResource {
     }
 
     @GET
-    @Path("clearPosts")
+    @Path("/clearPosts")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public void clearPosts() {
@@ -55,7 +53,7 @@ public class PostResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public void addPost(JsonObject object) {
-         Post post = new Post(object.getString("title"), object.getString("definition"), object.getString("creator"), object.getString("winner"));
+        Post post = new Post(object.getString("title"), object.getString("definition"), object.getString("creator"), object.getString("winner"));
         JsonArray postDetails = object.getJsonArray("postDetails");
 
         List<PostDetail> postDetailList = new LinkedList<>();

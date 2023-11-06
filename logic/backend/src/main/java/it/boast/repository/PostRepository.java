@@ -19,7 +19,7 @@ public class PostRepository {
     }
 
     public void addPost(Post post, List<PostDetail> postDetailList) {
-        for (PostDetail current: postDetailList) {
+        for (PostDetail current : postDetailList) {
             entityManager.persist(current);
             post.addPostDetail(current);
         }
@@ -35,6 +35,7 @@ public class PostRepository {
     }
 
     public void clearList() {
-        entityManager.clear();
+        entityManager.createQuery("delete from Post").executeUpdate();
+        entityManager.createQuery("delete from PostDetail").executeUpdate();
     }
 }
