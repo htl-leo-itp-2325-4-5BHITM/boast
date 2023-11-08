@@ -1,6 +1,13 @@
--- This file allow to write SQL commands that will be emitted in test and dev.
--- The commands are commented as their support depends of the database
--- insert into myentity (id, field) values(1, 'field-1');
--- insert into myentity (id, field) values(2, 'field-2');
--- insert into myentity (id, field) values(3, 'field-3');
--- alter sequence myentity_seq restart with 4;
+insert into POST (POSTID, CREATOR, WINNER, TITLE, DEFINITION)
+VALUES (1000, 'Teo', 'Raphi', 'Do 10 Sit-Ups',
+        'Try to do 10 Sit-Ups in the lowest possible time and submit your time in seconds');
+
+insert into POSTDETAIL (POSTDETAILSID, CREATOR, BET) VALUES (1000, 'Raphi', '16s');
+insert into POSTDETAIL (POSTDETAILSID, CREATOR, BET) VALUES (1001, 'Felix', '19s');
+insert into POSTDETAIL (POSTDETAILSID, CREATOR, BET) VALUES (1002, 'Jannis', '19s');
+insert into POSTDETAIL (POSTDETAILSID, CREATOR, BET) VALUES (1003, 'Teo', '17s');
+
+insert into POST_POSTDETAIL (POST_POSTID, POSTDETAILS_POSTDETAILSID) VALUES (1000, 1000);
+insert into POST_POSTDETAIL (POST_POSTID, POSTDETAILS_POSTDETAILSID) VALUES (1000, 1001);
+insert into POST_POSTDETAIL (POST_POSTID, POSTDETAILS_POSTDETAILSID) VALUES (1000, 1002);
+insert into POST_POSTDETAIL (POST_POSTID, POSTDETAILS_POSTDETAILSID) VALUES (1000, 1003);
