@@ -1,6 +1,8 @@
 package it.boast.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Check;
 
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -26,6 +28,14 @@ public class Post implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<PostDetail> postDetails;
+
+    public Post(Long postId, String title, String definition, String creator, String winner) {
+        this.postId = postId;
+        this.title = title;
+        this.definition = definition;
+        this.creator = creator;
+        this.winner = winner;
+    }
 
     public Post(String title, String definition, String creator, String winner) {
         this.setTitle(title);

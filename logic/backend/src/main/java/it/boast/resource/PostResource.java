@@ -1,16 +1,13 @@
 package it.boast.resource;
 
+import it.boast.dto.PostDTO;
+import it.boast.dto.PostDetailDTO;
 import it.boast.model.Post;
 import it.boast.model.PostDetail;
 import it.boast.repository.PostRepository;
 import jakarta.inject.Inject;
-import jakarta.json.JsonArray;
-import jakarta.json.JsonObject;
 import jakarta.transaction.Transactional;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
 import java.util.LinkedList;
@@ -42,8 +39,8 @@ public class PostResource {
     @Path("/getPostsAsList")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public List<Post> getPostsAsList() {
-        List<Post> posts = postRepository.getPostsAsList();
+    public List<PostDTO> getPostsAsList() {
+        List<PostDTO> posts = postRepository.getPostsAsList();
         System.out.println(posts);
         return posts;
     }
@@ -52,18 +49,14 @@ public class PostResource {
     @Path("/addPost")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public void addPost(JsonObject object) {
-        Post post = new Post(object.getString("title"), object.getString("definition"), object.getString("creator"), object.getString("winner"));
-        JsonArray postDetails = object.getJsonArray("postDetails");
+    public void addPost(PostDTO postDTO) {
+        List<PostDetail> postDetails = new LinkedList<>();
 
-        List<PostDetail> postDetailList = new LinkedList<>();
+        for (PostDetailDTO postDetailDTO : postDTO.postDetails()) {
+            postDetails.add(new PostDetail(postDetailDTO.bet(), postDetailDTO.creator()));
+        }
 
-        postDetails.forEach((current) -> {
-            JsonObject currentDetailObject = current.asJsonObject();
-            postDetailList.add(new PostDetail(currentDetailObject.getString("bet"), currentDetailObject.getString("creator")));
-        });
-
-        postRepository.addPost(post, postDetailList);
+        postRepository.addPost(new Post(postDTO.title(), postDTO.definition(), postDTO.creator(), postDTO.winner()), postDetails);
     }
 
 }

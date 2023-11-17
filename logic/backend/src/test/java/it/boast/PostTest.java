@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
 
 @QuarkusTest
 @TestHTTPEndpoint(PostResource.class)
@@ -122,6 +121,6 @@ public class PostTest {
                 .when().get("/getPostsAsList")
                 .then()
                 .statusCode(200)
-                .body(not("[]"));
+                .body("size()", is(1));
     }
 }
