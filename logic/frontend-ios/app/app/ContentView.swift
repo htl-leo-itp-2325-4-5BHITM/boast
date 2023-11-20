@@ -1,19 +1,26 @@
-//
-//  ContentView.swift
-//  app
-//
-//  Created by Jannis Sideras on 17.11.23.
-//
+
 
 import SwiftUI
 
 struct ContentView: View {
+    @State private var posts = [Post]()
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            ForEach(posts, id: \.id) { post in
+                VStack {
+                    Text(post.title)
+                    Text(post.definition)
+                    Text(post.creator)
+                    Text(post.winner)
+                    ForEach(post.postDetails, id: \.id) { details in
+                        Text(details.bet + details.creator)
+                    }
+                }
+            }
+
+        }
+        .task {
+            posts = await getPostsAsList()
         }
         .padding()
     }
