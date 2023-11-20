@@ -6,7 +6,7 @@ import SwiftUI
 struct BoastApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            GetPostsAsList()
         }
     }
 }
