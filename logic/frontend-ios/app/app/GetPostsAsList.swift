@@ -2,7 +2,7 @@
 import SwiftUI
 
 struct GetPostsAsList: View {
-    @State private var posts = [Post]()
+    @State private var posts = [PostModel]()
     var body: some View {
         ScrollView{
             VStack {

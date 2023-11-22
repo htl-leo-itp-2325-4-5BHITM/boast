@@ -2,20 +2,16 @@
 import SwiftUI
 
 struct AddPost: View {
-    @State private var numberOfRects = 0
-    @State private var title: String = ""
-    @State private var creator: String = ""
-    @State private var description: String = ""
-    @State private var counter: Int = 2
-    @State var details = [PostDetail]()
+    @ObservedObject var postModel = PostModel()
+    @State var counter = 2
     
     var body: some View {
         ScrollView {
             Text("Create new Bet").font(.largeTitle)
             Form {
-                TextField("Title", text: $title)
-                TextField("Creator", text: $creator)
-                TextField("Description", text: $description, axis: .vertical)
+                TextField("Title", text: $postModel.title)
+                TextField("Creator", text: $postModel.creator)
+                TextField("Definition", text: $postModel.definition, axis: .vertical)
                     .lineLimit(3, reservesSpace: true)
                 Stepper("Number of Participants: \(counter)", value: $counter, in: 2...99)
             }
@@ -26,9 +22,10 @@ struct AddPost: View {
             ForEach(0..<counter, id: \.self){ i in
                 @State var betCreator: String = ""
                 @State var bet: String = ""
+            
                 Form {
-                    TextField("Creator \(i+1)", text: $betCreator)
-                    TextField("Bet \(i+1)", text: $bet)
+                    TextField("Creator \(i+1)", text: $postModel.postDetails[i].creator)
+                    TextField("Bet \(i+1)", text: $postModel.postDetails[i].bet)
                 }
                 .frame(width: 400, height: 150)
             }
