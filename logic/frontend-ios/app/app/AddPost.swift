@@ -13,6 +13,7 @@ struct AddPost: View {
                 TextField("Creator", text: $postModel.creator)
                 TextField("Definition", text: $postModel.definition, axis: .vertical)
                     .lineLimit(3, reservesSpace: true)
+                TextField("Winner", text: $postModel.winner)
             }
             .frame(width: 400, height: 300)
             .padding(0)

@@ -6,6 +6,9 @@ struct GetPostsAsList: View {
     var body: some View {
         ScrollView{
             VStack {
+                Text("All Bets: ")
+                    .frame(width: 330, alignment: .leading)
+                    .font(.largeTitle)
                 ForEach(posts, id: \.id) { post in
                     VStack(alignment: .leading) {
                         Text("Titel: \(post.title)")
