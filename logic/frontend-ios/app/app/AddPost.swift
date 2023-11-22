@@ -13,7 +13,6 @@ struct AddPost: View {
                 TextField("Creator", text: $postModel.creator)
                 TextField("Definition", text: $postModel.definition, axis: .vertical)
                     .lineLimit(3, reservesSpace: true)
-                Stepper("Number of Participants: \(counter)", value: $counter, in: 2...99)
             }
             .frame(width: 400, height: 300)
             .padding(0)
@@ -30,11 +29,16 @@ struct AddPost: View {
                 .frame(width: 400, height: 150)
             }
             
+            Button("Add bet") {
+                counter += 1;
+                postModel.addPostDetail()
+            }
+            
             Spacer(minLength: 20)
             
-            Button("Submit Bet", action: {
-                
-            })
+            Button("Submit Bet", action: { Task {
+                await addPost(postModel: postModel)
+            }})
             .buttonStyle(.borderedProminent)
         }
     }

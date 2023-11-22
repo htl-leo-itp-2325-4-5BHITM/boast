@@ -1,17 +1,5 @@
 import Foundation
 
-struct Model {
-    struct Post: Codable {
-        let id = UUID()
-        let title, definition, creator, winner: String
-        let postDetails: [PostDetail]
-    }
-    struct PostDetail: Codable {
-        let id = UUID()
-        let bet, creator: String
-    }
-}
-
 class PostModel: ObservableObject, Codable {
     enum CodingKeys: String, CodingKey {
             case id
@@ -29,12 +17,15 @@ class PostModel: ObservableObject, Codable {
     @Published var winner = "";
     @Published var postDetails = [PostDetailModel]();
     
-    init () {}
+    init () {
+        postDetails = [
+            PostDetailModel(),
+            PostDetailModel()
+        ]
+    }
     
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-
-        id = try values.decode(UUID.self, forKey: .id)
         title = try values.decode(String.self, forKey: .title)
         definition = try values.decode(String.self, forKey: .definition)
         creator = try values.decode(String.self, forKey: .creator)
@@ -50,6 +41,10 @@ class PostModel: ObservableObject, Codable {
         try container.encode(creator, forKey: .creator)
         try container.encode(winner, forKey: .winner)
         try container.encode(postDetails, forKey: .postDetails)
+    }
+    
+    func addPostDetail() {
+        postDetails.append(PostDetailModel())
     }
 }
 
@@ -69,7 +64,6 @@ class PostDetailModel: ObservableObject, Codable {
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
 
-        id = try values.decode(UUID.self, forKey: .id)
         bet = try values.decode(String.self, forKey: .bet)
         creator = try values.decode(String.self, forKey: .creator)
     }
