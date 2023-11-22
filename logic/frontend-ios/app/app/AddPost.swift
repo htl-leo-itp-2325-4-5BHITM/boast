@@ -4,6 +4,7 @@ import SwiftUI
 struct AddPost: View {
     @ObservedObject var postModel = PostModel()
     @State var counter = 2
+    @State var error = ""
     
     var body: some View {
         ScrollView {
@@ -18,6 +19,8 @@ struct AddPost: View {
             .frame(width: 400, height: 300)
             .padding(0)
             .scrollDisabled(true)
+            Text(error)
+                .foregroundStyle(Color(.red))
             
             ForEach(0..<counter, id: \.self){ i in
                 @State var betCreator: String = ""
@@ -30,6 +33,8 @@ struct AddPost: View {
                 .frame(width: 400, height: 150)
             }
             
+            Spacer(minLength: 20)
+
             Button("Add bet") {
                 counter += 1;
                 postModel.addPostDetail()
@@ -38,7 +43,12 @@ struct AddPost: View {
             Spacer(minLength: 20)
             
             Button("Submit Bet", action: { Task {
-                await addPost(postModel: postModel)
+                
+                if(postModel.title != "" && postModel.creator != "" && postModel.definition != "" && postModel.winner != "") {
+                    await addPost(postModel: postModel)
+                }else {
+                    error = "Fields must not be empty"
+                }
             }})
             .buttonStyle(.borderedProminent)
         }
