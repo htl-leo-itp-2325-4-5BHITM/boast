@@ -15,3 +15,4 @@ struct Model {
 }
 
 typealias Post = Model.Post
+typealias PostDetail = Model.PostDetail
