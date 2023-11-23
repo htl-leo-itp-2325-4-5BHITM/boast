@@ -23,19 +23,32 @@ struct AddPost: View {
                 .foregroundStyle(Color(.red))
             
             ForEach(0..<counter, id: \.self){ i in
-                Form {
-                    TextField("Creator \(i+1)", text: $postModel.postDetails[i].creator)
-                    TextField("Bet \(i+1)", text: $postModel.postDetails[i].bet)
+                Section{
+                    Form {
+                        TextField("Creator \(i+1)", text: $postModel.postDetails[i].creator)
+                        TextField("Bet \(i+1)", text: $postModel.postDetails[i].bet)
+                    }
                 }
+                .scrollDisabled(true)
                 .frame(width: 400, height: 150)
             }
             
             Spacer(minLength: 20)
+            
+            Button("Remove bet") {
+                if counter > 2 {
+                    counter -= 1
+                }
+                postModel.addPostDetail()
+            }
+            .buttonStyle(.borderedProminent)
 
             Button("Add bet") {
                 counter += 1;
                 postModel.addPostDetail()
-            }
+            }            
+            .buttonStyle(.borderedProminent)
+
             
             Spacer(minLength: 20)
             
