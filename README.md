@@ -1,6 +1,6 @@
 
 
-<img alt="boast" src="https://raw.githubusercontent.com/htl-leo-itp-2325-4-5BHITM/boast/main/documents/Design/logo.svg" style="width: 60%; display: block; margin-left: auto; margin-right: auto;"/>
+<img alt="boast" src="https://raw.githubusercontent.com/htl-leo-itp-2325-4-5BHITM/boast/main/documents/Design/logo_white.svg" style="width: 60%; display: block; margin-left: auto; margin-right: auto;"/>
 
 <h1 style="text-align: center;">boast ~ Every Bet Has A Story</h1>
 
