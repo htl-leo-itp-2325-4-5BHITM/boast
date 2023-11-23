@@ -23,9 +23,6 @@ struct AddPost: View {
                 .foregroundStyle(Color(.red))
             
             ForEach(0..<counter, id: \.self){ i in
-                @State var betCreator: String = ""
-                @State var bet: String = ""
-            
                 Form {
                     TextField("Creator \(i+1)", text: $postModel.postDetails[i].creator)
                     TextField("Bet \(i+1)", text: $postModel.postDetails[i].bet)
