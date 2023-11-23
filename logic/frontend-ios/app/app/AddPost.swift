@@ -19,6 +19,7 @@ struct AddPost: View {
             .frame(width: 400, height: 300)
             .padding(0)
             .scrollDisabled(true)
+            
             Text(error)
                 .foregroundStyle(Color(.red))
             
@@ -35,20 +36,21 @@ struct AddPost: View {
             
             Spacer(minLength: 20)
             
-            Button("Remove bet") {
-                if counter > 2 {
-                    counter -= 1
+            HStack {
+                Button("Remove bet") {
+                    if counter > 2 {
+                        counter -= 1
+                    }
+                    postModel.addPostDetail()
                 }
-                postModel.addPostDetail()
+                .buttonStyle(.borderedProminent)
+                
+                Button("Add bet") {
+                    counter += 1;
+                    postModel.addPostDetail()
+                }
+                .buttonStyle(.borderedProminent)
             }
-            .buttonStyle(.borderedProminent)
-
-            Button("Add bet") {
-                counter += 1;
-                postModel.addPostDetail()
-            }            
-            .buttonStyle(.borderedProminent)
-
             
             Spacer(minLength: 20)
             
