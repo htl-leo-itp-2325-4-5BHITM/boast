@@ -1,0 +1,64 @@
+@startuml
+  
+  entity Post {
+  - postId: number <<generated>>
+  - creator: number <<FK - User>>
+  - status: number <<FK - Status>>
+  - title: varchar(80)
+  - definition: varchar(150)
+  - createdOn: date
+  }
+  
+  entity PostType {
+  - postTypeId: number <<generated>>
+  - title: varchar(50)  
+  }
+  
+  entity PostDetail {
+  - postDetailsId: number <<generated>>
+  - post: number <<FK - Post>>
+  - player: number <<FK - User>>
+  - statusId: number <<FK - Status>>
+  - bet: varchar(100)
+  - isWinner: boolean
+  - createdOn: date
+  }
+
+  entity User {
+  - userId: number <<generated>>
+  - username: varchar(50)
+  - email: varchar(320)
+  - createdOn: date
+  }
+  
+  entity Group {
+  - groupId: number <<generated>>
+  - name: varchar(50)
+  }
+  
+  entity UserRelation {
+    - user1: number <<FK User>>
+    - user2: number <<FK User>>
+    - status: number <<FK Status>>
+  }
+  
+  entity Status {
+  - statusId: number <<generated>>
+  - description: varchar(30)
+  }
+  
+  Post "1"--"*" PostDetail
+  Post "1"--"*" PostDetail
+  Post "*"--"1" PostType
+  User "1"--"*" Post
+  User "1"--"*" PostDetail
+  Status "1"--"*" Post
+  Status "1"--"*" PostDetail
+  User "1"--"*" UserRelation
+  User "1"--"*" UserRelation
+  User "*"--"*" Group
+  
+  
+
+  
+  @enduml

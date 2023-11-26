@@ -1,0 +1,28 @@
+{
+  "postId": 100,
+  "createdOn": "",
+  "title": "Can we do it??",
+  "definition": "",
+  "creator": 100,
+  "status": 0,
+  "typeInfo": {
+    "type": ""
+  },
+  "postDetails": [
+    {
+      "postDetailsId": 1,
+      "createdOn": "",
+      "creator": 101
+    },
+    {
+      "postDetailsId": 2,
+      "createdOn": "",
+      "creator": 102
+    },
+    {
+      "postDetailsId": 3,
+      "createdOn": "",
+      "creator": 102
+    }
+  ]
+}

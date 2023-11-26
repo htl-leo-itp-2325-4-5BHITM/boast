@@ -1,16 +1,16 @@
 package it.boast.resource;
 
-import it.boast.dto.PostDTO;
-import it.boast.dto.PostDetailDTO;
-import it.boast.model.Post;
-import it.boast.model.PostDetail;
+import it.boast.dto.post.PostDTO;
+import it.boast.dto.post.type.poll.Poll_PostDTO;
+import it.boast.dto.post.type.poll.Poll_PostDetailDTO;
 import it.boast.repository.PostRepository;
 import jakarta.inject.Inject;
+import jakarta.json.JsonObject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
-import java.util.LinkedList;
 import java.util.List;
 
 @Path("/post")
@@ -27,12 +27,18 @@ public class PostResource {
     }
 
     @GET
-    @Path("/clearPosts")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/get/{id}")
     @Transactional
-    public void clearPosts() {
-        System.out.println("CLEAR");
-        postRepository.clearList();
+    public PostDTO getPost(@PathParam("id") Long id) {
+        return postRepository.getPost(id);
+    }
+
+    @GET
+    @Path("/remove/{id}")
+    @Transactional
+    public void removePost(@PathParam("id") Long id) {
+        System.out.printf("removePost: " + id);
+        postRepository.removePost(id);
     }
 
     @GET
@@ -40,23 +46,37 @@ public class PostResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public List<PostDTO> getPostsAsList() {
-        List<PostDTO> posts = postRepository.getPostsAsList();
-        System.out.println(posts);
-        return posts;
+        System.out.println("Get Posts");
+        return postRepository.getPostsAsList();
     }
 
     @POST
-    @Path("/addPost")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/addPostDetail/poll")
     @Transactional
-    public void addPost(PostDTO postDTO) {
-        List<PostDetail> postDetails = new LinkedList<>();
-
-        for (PostDetailDTO postDetailDTO : postDTO.postDetails()) {
-            postDetails.add(new PostDetail(postDetailDTO.bet(), postDetailDTO.creator()));
+    public Response addPollPostDetail(Poll_PostDetailDTO postDetailDTO) {
+        System.out.println("addPollPostDetail");
+        try {
+            postRepository.addPollPostDetails(postDetailDTO);
+            return Response.status(200).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.status(422).build();
         }
+    }
 
-        postRepository.addPost(new Post(postDTO.title(), postDTO.definition(), postDTO.creator(), postDTO.winner()), postDetails);
+    @POST
+    @Path("/createPost/poll")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response addPollPost(Poll_PostDTO postDTO) {
+        System.out.println("addPollPost");
+        try {
+            postRepository.createPollPost(postDTO);
+            return Response.status(200).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.status(422).build();
+        }
     }
 
 }
