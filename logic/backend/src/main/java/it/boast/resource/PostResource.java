@@ -3,6 +3,7 @@ package it.boast.resource;
 import it.boast.dto.post.PostDTO;
 import it.boast.dto.post.type.poll.Poll_PostDTO;
 import it.boast.dto.post.type.poll.Poll_PostDetailDTO;
+import it.boast.model.Status;
 import it.boast.repository.PostRepository;
 import jakarta.inject.Inject;
 import jakarta.json.JsonObject;
@@ -42,6 +43,14 @@ public class PostResource {
     }
 
     @GET
+    @Path("/status/{id}/{status}")
+    @Transactional
+    public void updateStatus(@PathParam("id") Long id, @PathParam("status") Status status) {
+        System.out.printf("update Status: " + id + " Set: " + status.name());
+        postRepository.updateStatus(id, status);
+    }
+
+    @GET
     @Path("/getPostsAsList")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
@@ -50,6 +59,7 @@ public class PostResource {
         return postRepository.getPostsAsList();
     }
 
+    //<editor-fold desc="POLL">
     @POST
     @Path("/addPostDetail/poll")
     @Transactional
@@ -78,5 +88,6 @@ public class PostResource {
             return Response.status(422).build();
         }
     }
+    //</editor-fold>
 
 }
