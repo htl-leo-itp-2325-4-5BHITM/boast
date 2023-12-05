@@ -21,11 +21,23 @@ public class UserResource {
     @Path("/get/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public UserDTO getUser(@PathParam("id") Long id) {
+    public Response getUser(@PathParam("id") Long id) {
         try {
-            return userRepository.getUser(id);
+            return Response.ok(userRepository.getUser(id)).status(200).build();
         } catch (Exception e) {
-            return null;
+            return Response.status(404).build();
+        }
+    }
+
+    @GET
+    @Path("/login/{username}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response getUser(@PathParam("username") String username) {
+        try {
+            return Response.ok(userRepository.loginUser(username)).status(200).build();
+        } catch (Exception e) {
+            return Response.status(404).build();
         }
     }
 }
