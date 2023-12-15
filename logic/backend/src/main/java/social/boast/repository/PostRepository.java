@@ -115,18 +115,5 @@ public class PostRepository {
         }
 
     }
-
-    public void addPollPostDetails(Poll_PostDetailDTO postDetailDTO) {
-        try {
-            BoastUser user = entityManager.find(BoastUser.class, postDetailDTO.getCreator());
-            Post post = entityManager.find(Post.class, postDetailDTO.getPostId());
-            Poll_PostAnswer postAnswer = entityManager.find(Poll_PostAnswer.class, postDetailDTO.getPollAnswer());
-            if (user == null || post == null || postAnswer == null) throw new IllegalArgumentException();
-
-            entityManager.persist(new Poll_PostDetail(postDetailDTO, user, (Poll_Post) post, postAnswer));
-        } catch (Exception e) {
-            throw new IllegalArgumentException();
-        }
-    }
     //</editor-fold>
 }

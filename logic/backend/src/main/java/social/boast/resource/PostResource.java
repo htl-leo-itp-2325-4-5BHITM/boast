@@ -2,7 +2,6 @@ package social.boast.resource;
 
 import social.boast.dto.post.PostDTO;
 import social.boast.dto.post.type.poll.Poll_PostDTO;
-import social.boast.dto.post.type.poll.Poll_PostDetailDTO;
 import social.boast.model.Status;
 import social.boast.repository.PostRepository;
 import jakarta.inject.Inject;
@@ -13,7 +12,7 @@ import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 
-@Path("/post")
+@Path("/posts")
 public class PostResource {
 
     @Inject
@@ -27,30 +26,46 @@ public class PostResource {
     }
 
     @GET
-    @Path("/get/{id}")
+    @Path("/{id}")
     @Transactional
-    public PostDTO getPost(@PathParam("id") Long id) {
-        return postRepository.getPost(id);
+    public Response getPost(@PathParam("id") Long id) {
+        try {
+            return Response.ok(postRepository.getPost(id)).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.status(404).build();
+        }
     }
 
-    @GET
-    @Path("/remove/{id}")
+    @DELETE
+    @Path("/{id}")
     @Transactional
-    public void removePost(@PathParam("id") Long id) {
-        System.out.printf("removePost: " + id);
-        postRepository.removePost(id);
+    public Response removePost(@PathParam("id") Long id) {
+        try {
+            postRepository.removePost(id);
+            return Response.ok().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.status(404).build();
+        }
     }
 
-    @GET
-    @Path("/status/{id}/{status}")
+    @POST
+    @Path("/{id}/status/{status}")
     @Transactional
-    public void updateStatus(@PathParam("id") Long id, @PathParam("status") Status status) {
+    public Response updateStatus(@PathParam("id") Long id, @PathParam("status") Status status) {
         System.out.printf("update Status: " + id + " Set: " + status.name());
-        postRepository.updateStatus(id, status);
+        try {
+            postRepository.updateStatus(id, status);
+            return Response.ok().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.status(404).build();
+        }
     }
 
     @GET
-    @Path("/getPostsAsList")
+    @Path("")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public List<PostDTO> getPostsAsList() {
@@ -60,21 +75,7 @@ public class PostResource {
 
     //<editor-fold desc="POLL">
     @POST
-    @Path("/addPostDetail/poll")
-    @Transactional
-    public Response addPollPostDetail(Poll_PostDetailDTO postDetailDTO) {
-        System.out.println("addPollPostDetail");
-        try {
-            postRepository.addPollPostDetails(postDetailDTO);
-            return Response.status(200).build();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return Response.status(422).build();
-        }
-    }
-
-    @POST
-    @Path("/createPost/poll")
+    @Path("/poll")
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
     public Response addPollPost(Poll_PostDTO postDTO) {

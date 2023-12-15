@@ -10,14 +10,14 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-@Path("/user")
+@Path("/users")
 public class UserResource {
 
     @Inject
     UserRepository userRepository;
 
     @GET
-    @Path("/get/{id}")
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response getUser(@PathParam("id") Long id) {
