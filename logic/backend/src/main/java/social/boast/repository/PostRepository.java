@@ -7,7 +7,7 @@ import social.boast.dto.post.type.poll.Poll_PostDetailDTO;
 import social.boast.dto.post.type.poll.Poll_TypeInfoDTO;
 import social.boast.model.Status;
 import social.boast.model.post.Post;
-import social.boast.model.post.PostTypes;
+import social.boast.model.post.PostType;
 import social.boast.model.post.type.poll.Poll_Post;
 import social.boast.model.post.type.poll.Poll_PostAnswer;
 import social.boast.model.post.type.poll.Poll_PostDetail;
@@ -48,7 +48,7 @@ public class PostRepository {
                     for (Poll_PostAnswer postAnswer : ((Poll_Post) post).getPollAnswers()) {
                         postAnswerDTOS.add(new Poll_PostAnswerDTO(postAnswer.getPoll_answerId(), postAnswer.getTitle()));
                     }
-                    Poll_TypeInfoDTO typeInfoDTO = new Poll_TypeInfoDTO(PostTypes.POLL.name(), postAnswerDTOS);
+                    Poll_TypeInfoDTO typeInfoDTO = new Poll_TypeInfoDTO(PostType.POLL.name(), postAnswerDTOS);
                     List<Poll_PostDetailDTO> postDetailDTOS = new LinkedList<>();
                     for (Poll_PostDetail postDetail : ((Poll_Post) post).getPostDetails()) {
                         postDetailDTOS.add(new Poll_PostDetailDTO(

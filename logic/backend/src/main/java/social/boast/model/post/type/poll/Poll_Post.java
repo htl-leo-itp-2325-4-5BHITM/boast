@@ -3,8 +3,8 @@ package social.boast.model.post.type.poll;
 import social.boast.dto.post.type.poll.Poll_PostDTO;
 import social.boast.model.Status;
 import social.boast.model.post.Post;
+import social.boast.model.post.PostType_Interface;
 import social.boast.model.post.PostType;
-import social.boast.model.post.PostTypes;
 import social.boast.model.user.BoastUser;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -14,7 +14,7 @@ import jakarta.persistence.OneToMany;
 import java.util.List;
 
 @Entity
-public class Poll_Post extends Post implements PostType<Poll_PostDetail> {
+public class Poll_Post extends Post implements PostType_Interface<Poll_PostDetail> {
     @OneToMany(mappedBy = "pollPost", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Poll_PostAnswer> pollAnswers;
 
@@ -27,7 +27,7 @@ public class Poll_Post extends Post implements PostType<Poll_PostDetail> {
                 postDTO.getDefinition(),
                 user,
                 Status.valueOf(postDTO.getStatus()),
-                PostTypes.POLL);
+                PostType.POLL);
     }
 
     public Poll_Post(){

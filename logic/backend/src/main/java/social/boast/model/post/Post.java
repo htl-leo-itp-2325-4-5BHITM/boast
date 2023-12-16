@@ -30,9 +30,9 @@ public class Post implements Serializable {
     private Status status;
 
     @Enumerated(EnumType.STRING)
-    private PostTypes postType;
+    private PostType postType;
 
-    public Post(Date createdOn, String title, String definition, BoastUser creator, Status status, PostTypes postType) {
+    public Post(Date createdOn, String title, String definition, BoastUser creator, Status status, PostType postType) {
         this.createdOn = (createdOn != null) ? createdOn : new Date();
         this.title = title;
         this.definition = definition;
@@ -95,11 +95,11 @@ public class Post implements Serializable {
         this.status = status;
     }
 
-    public PostTypes getPostType() {
+    public PostType getPostType() {
         return postType;
     }
 
-    public void setPostType(PostTypes postType) {
+    public void setPostType(PostType postType) {
         this.postType = postType;
     }
 

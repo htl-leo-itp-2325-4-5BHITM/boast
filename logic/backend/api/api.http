@@ -1,5 +1,46 @@
-GET http://localhost:8080/api/post/get/101
+GET http://localhost:8080/api/posts
 Accept: application/json
+
+###
+
+POST http://localhost:8080/api/posts/poll
+
+{
+    "title": "Can we do it?",
+    "definition": "???",
+    "creator": 100,
+    "status": "OPEN",
+    "typeInfo": {
+      "type": "POLL",
+      "pollAnswers": [
+        {
+          "title": "YES
+        },
+        {
+          "title": "NO"
+        }
+      ]
+    }
+}
+
+###
+
+GET http://localhost:8080/api/users/100
+
+###
+
+GET http://localhost:8080/api/posts
+
+
+###
+
+POST http://localhost:8080/api/post-details/poll
+
+{
+    "creator": 100,
+    "postId": 100,
+    "pollAnswerId": 1
+}
 
 ###
 

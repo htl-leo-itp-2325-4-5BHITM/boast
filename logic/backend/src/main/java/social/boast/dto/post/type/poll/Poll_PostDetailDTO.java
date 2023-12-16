@@ -5,18 +5,18 @@ import social.boast.dto.post.PostDetailDTO;
 import java.util.Date;
 
 public class Poll_PostDetailDTO extends PostDetailDTO {
-    Long pollAnswer;
+    Long pollAnswerId;
 
-    public Poll_PostDetailDTO(Long postDetailsId, Date createdOn, Long creator, Long postId, Long pollAnswer) {
+    public Poll_PostDetailDTO(Long postDetailsId, Date createdOn, Long creator, Long postId, Long pollAnswerId) {
         super(postDetailsId, createdOn, creator, postId);
-        this.pollAnswer = pollAnswer;
+        this.pollAnswerId = pollAnswerId;
     }
 
-    public Long getPollAnswer() {
-        return pollAnswer;
+    public Long getPollAnswerId() {
+        return pollAnswerId;
     }
 
-    public void setPollAnswer(Long pollAnswer) {
-        this.pollAnswer = pollAnswer;
+    public void setPollAnswerId(Long pollAnswerId) {
+        this.pollAnswerId = pollAnswerId;
     }
 }

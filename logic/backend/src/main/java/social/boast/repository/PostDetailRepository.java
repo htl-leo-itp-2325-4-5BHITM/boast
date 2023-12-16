@@ -21,7 +21,7 @@ public class PostDetailRepository {
         try {
             BoastUser user = entityManager.find(BoastUser.class, postDetailDTO.getCreator());
             Post post = entityManager.find(Post.class, postDetailDTO.getPostId());
-            Poll_PostAnswer postAnswer = entityManager.find(Poll_PostAnswer.class, postDetailDTO.getPollAnswer());
+            Poll_PostAnswer postAnswer = entityManager.find(Poll_PostAnswer.class, postDetailDTO.getPollAnswerId());
             if (user == null || post == null || postAnswer == null) throw new IllegalArgumentException();
 
             entityManager.persist(new Poll_PostDetail(postDetailDTO, user, (Poll_Post) post, postAnswer));

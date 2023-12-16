@@ -27,5 +27,5 @@ PostDetails - create:
 {
     "creator": 100,
     "postId": 1,
-    "pollAnswer": 1
+    "pollAnswerId": 1
 }

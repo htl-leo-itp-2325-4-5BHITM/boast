@@ -2,14 +2,14 @@ package social.boast.model.post.type.poll;
 
 import social.boast.dto.post.type.poll.Poll_PostDetailDTO;
 import social.boast.model.post.PostDetail;
-import social.boast.model.post.PostDetailType;
+import social.boast.model.post.PostDetailType_Interface;
 import social.boast.model.user.BoastUser;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Poll_PostDetail extends PostDetail implements PostDetailType<Poll_Post> {
+public class Poll_PostDetail extends PostDetail implements PostDetailType_Interface<Poll_Post> {
 
     @ManyToOne
     Poll_PostAnswer pollAnswer;
