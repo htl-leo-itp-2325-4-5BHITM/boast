@@ -25,4 +25,10 @@ public class UserRepository {
         if (user == null) throw new IllegalArgumentException();
         return new UserDTO(user.getUserId(), user.getCreatedOn(), user.getUsername(), user.getEmail());
     }
+
+    public BoastUser createUser(UserDTO userDTO) {
+        BoastUser user = new BoastUser(userDTO);
+        entityManager.persist(user);
+        return user;
+    }
 }

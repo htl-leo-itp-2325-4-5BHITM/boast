@@ -1,5 +1,6 @@
 package social.boast.model.user;
 
+import social.boast.dto.user.UserDTO;
 import social.boast.model.post.Post;
 import social.boast.model.post.PostDetail;
 import jakarta.persistence.*;
@@ -29,7 +30,14 @@ public class BoastUser implements Serializable {
     @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
     List<PostDetail> postDetails;
 
-    public BoastUser() {
+    public BoastUser () {
+
+    }
+
+    public BoastUser(UserDTO userDTO) {
+        this.email = userDTO.getEmail();
+        this.username = userDTO.getUsername();
+        this.createdOn = (userDTO.getCreatedOn() != null) ? userDTO.getCreatedOn() : new Date();
     }
 
     //<editor-fold desc="getter & setter">

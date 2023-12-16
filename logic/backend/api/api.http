@@ -1,2 +1,37 @@
 GET http://localhost:8080/api/post/get/101
 Accept: application/json
+
+###
+
+POST http://158.101.172.243/api/users
+
+{
+  "username": "Felix",
+  "email": "derbeste@gmx.at"
+}
+
+###
+
+POST http://158.101.172.243/api/posts/poll
+
+{
+  "title": "Can we do it??",
+  "definition": "",
+  "creator": 1,
+  "status": "OPEN",
+  "typeInfo": {
+    "type": "POLL",
+    "pollAnswers": [
+      {
+        "poll_answerId": null,
+        "title": "yes"
+      },
+      {
+        "poll_answerId": null,
+        "title": "no"
+      }
+    ]
+  },
+  "postDetails": [
+  ]
+}
