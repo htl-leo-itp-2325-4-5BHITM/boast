@@ -2,20 +2,15 @@
 
 import SwiftUI
 
+fileprivate let model = Poll_PostModel()
+
 @main
 struct BoastApp: App {
     var body: some Scene {
+        var viewModel = PollPostViewModel(model: Poll_PostModel())
         WindowGroup {
             TabView{
-                GetPostsAsList()
-                    .tabItem {
-                        Label("All bets",
-                              systemImage: "list.bullet.circle")
-                    }
-                AddPost()
-                    .tabItem {
-                        Label("Create new bet", systemImage: "plus.circle")
-                    }
+                PostsView(viewModel: viewModel)
             }
         }
     }
