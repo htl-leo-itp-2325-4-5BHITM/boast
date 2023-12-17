@@ -11,13 +11,16 @@ public class PostDTO {
     Long creator;
     String status;
 
-    public PostDTO(Long postId, Date createdOn, String title, String definition, Long creator, String status) {
+    String type;
+
+    public PostDTO(Long postId, Date createdOn, String title, String definition, Long creator, String status, String type) {
         this.postId = postId;
         this.createdOn = createdOn;
         this.title = title;
         this.definition = definition;
         this.creator = creator;
         this.status = status;
+        this.type = type;
     }
 
     public PostDTO() {
@@ -71,5 +74,14 @@ public class PostDTO {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     //</editor-fold>
 }

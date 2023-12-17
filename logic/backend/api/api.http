@@ -10,8 +10,8 @@ POST http://localhost:8080/api/posts/poll
     "definition": "???",
     "creator": 100,
     "status": "OPEN",
+    "type": "POLL",
     "typeInfo": {
-      "type": "POLL",
       "pollAnswers": [
         {
           "title": "YES
@@ -41,6 +41,11 @@ POST http://localhost:8080/api/post-details/poll
     "postId": 100,
     "pollAnswerId": 1
 }
+
+###
+
+GET http://boast.social/api/posts
+Accept: application/json
 
 ###
 

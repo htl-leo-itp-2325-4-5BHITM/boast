@@ -48,7 +48,7 @@ public class PostRepository {
                     for (Poll_PostAnswer postAnswer : ((Poll_Post) post).getPollAnswers()) {
                         postAnswerDTOS.add(new Poll_PostAnswerDTO(postAnswer.getPoll_answerId(), postAnswer.getTitle()));
                     }
-                    Poll_TypeInfoDTO typeInfoDTO = new Poll_TypeInfoDTO(PostType.POLL.name(), postAnswerDTOS);
+                    Poll_TypeInfoDTO typeInfoDTO = new Poll_TypeInfoDTO(postAnswerDTOS);
                     List<Poll_PostDetailDTO> postDetailDTOS = new LinkedList<>();
                     for (Poll_PostDetail postDetail : ((Poll_Post) post).getPostDetails()) {
                         postDetailDTOS.add(new Poll_PostDetailDTO(
@@ -65,6 +65,7 @@ public class PostRepository {
                             post.getDefinition(),
                             post.getCreator().getUserId(),
                             post.getStatus().name(),
+                            PostType.POLL.name(),
                             typeInfoDTO,
                             postDetailDTOS);
                 }

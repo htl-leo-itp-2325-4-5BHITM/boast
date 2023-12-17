@@ -9,8 +9,8 @@ public class Poll_PostDTO extends PostDTO {
         Poll_TypeInfoDTO typeInfo;
         List<Poll_PostDetailDTO> postDetails;
 
-        public Poll_PostDTO(Long postId, Date createdOn, String title, String definition, Long creator, String status, Poll_TypeInfoDTO typeInfo, List<Poll_PostDetailDTO> postDetails) {
-                super(postId, createdOn, title, definition, creator, status);
+        public Poll_PostDTO(Long postId, Date createdOn, String title, String definition, Long creator, String status, String type, Poll_TypeInfoDTO typeInfo, List<Poll_PostDetailDTO> postDetails) {
+                super(postId, createdOn, title, definition, creator, status, type);
                 this.typeInfo = typeInfo;
                 this.postDetails = postDetails;
         }

@@ -21,7 +21,7 @@ public class PostDetailResource {
     public Response addPollPostDetail(Poll_PostDetailDTO postDetailDTO) {
         System.out.println("addPollPostDetail");
         try {
-            System.err.println("POLL ANSWER: " + postDetailDTO.getPollAnswerId());
+            System.err.println("POLL ANSWER: " + postDetailDTO.getPoll_answerId());
             postDetailRepository.addPollPostDetails(postDetailDTO);
             return Response.status(200).build();
         } catch (Exception e) {
