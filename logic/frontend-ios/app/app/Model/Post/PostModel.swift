@@ -10,4 +10,5 @@ class PostModel: Codable {
     var definition: String?
     var creator: Int?
     var status: Status?
+    var type: PostType?
 }

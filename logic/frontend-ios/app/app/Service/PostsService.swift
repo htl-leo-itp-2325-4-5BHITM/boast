@@ -3,21 +3,25 @@ import Foundation
 
 
 
-func posts() -> Poll_PostModel {
+func posts() async -> PostModel {
     
-    var post = Poll_PostModel()
+    var post = PostModel()
     
     guard let url = URL(string: "http://www.boast.social/api/posts/100") else{ return post }
     let task = URLSession.shared.dataTask(with: url){
         data, response, error in
         if let data = data, let string = String(data: data, encoding: .utf8){     
             do {
+                let postType = try JSONDecoder().decode(TypeModel.self, from: data)
+                let type = PostType(rawValue: postType.type!)
                 
-                // ERSTELLE MODEL KLASSE NUR MIT TYP -> DECODEN DAMIT -> CASE JE NACH POSTTYPE -> JEWEILIGEN JSONDECODER AUFRUFEN
+                switch type {
+                    case .POLL:
+                        post = try JSONDecoder().decode(Poll_PostModel.self, from: data)
+                    default:
+                        break
+                }
                 
-                let loadedPosts = try JSONDecoder().decode(PostModel.self, from: data)
-                //post = loadedPosts
-                print(loadedPosts)
             } catch {
                 print(error)
             }

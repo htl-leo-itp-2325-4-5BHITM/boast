@@ -7,14 +7,17 @@ import SwiftUI
  */
 
 struct PostsView: View {
-    @ObservedObject var viewModel : PollPostViewModel
     var body: some View {
         Button{
             Task {
-                posts()
+                var test: PostModel = try await posts()
             }
         } label: {
             Text("Button")
         }
     }
+}
+
+#Preview {
+    PostsView()
 }
