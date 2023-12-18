@@ -1,3 +1,16 @@
+### POST DETAILS
+
+POST http://localhost:8080/api/post-details/poll
+
+{
+    "creator": 101,
+    "postId": 101,
+    "pollAnswerId": 1001
+}
+
+
+### POSTS
+
 GET http://localhost:8080/api/posts
 Accept: application/json
 
@@ -26,13 +39,15 @@ POST http://localhost:8080/api/posts/poll
 
 ###
 
-POST http://localhost:8080/api/post-details/poll
+GET http://localhost:8080/api/posts/100
 
-{
-    "creator": 101,
-    "postId": 101,
-    "pollAnswerId": 1
-}
+###
+
+DELETE http://localhost:8080/api/posts/100
+
+###
+
+POST http://localhost:8080/api/posts/100/status/OPEN
 
 ###
 
@@ -43,12 +58,7 @@ GET http://localhost:8080/api/users/100
 GET http://localhost:8080/api/posts/100
 
 
-###
-
-GET http://boast.social/api/posts
-Accept: application/json
-
-###
+### USER
 
 POST http://158.101.172.243/api/users
 
@@ -57,3 +67,12 @@ POST http://158.101.172.243/api/users
   "email": "derbeste@gmx.at"
 }
 
+###
+
+GET http://localhost:8080/api/users/login/Felix
+Accept: application/json
+
+###
+
+GET http://localhost:8080/api/users/100
+Accept: application/json
