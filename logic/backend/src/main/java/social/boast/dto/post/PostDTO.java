@@ -1,24 +1,26 @@
 package social.boast.dto.post;
 
 import java.util.Date;
-import java.util.List;
 
 public class PostDTO {
     Long postId;
     Date createdOn;
     String title;
     String definition;
-    Long creator;
+    Long creatorId;
+    String creatorName;
+
     String status;
 
     String type;
 
-    public PostDTO(Long postId, Date createdOn, String title, String definition, Long creator, String status, String type) {
+    public PostDTO(Long postId, Date createdOn, String title, String definition, Long creator, String creatorName, String status, String type) {
         this.postId = postId;
         this.createdOn = createdOn;
         this.title = title;
         this.definition = definition;
-        this.creator = creator;
+        this.creatorId = creator;
+        this.creatorName = creatorName;
         this.status = status;
         this.type = type;
     }
@@ -59,12 +61,12 @@ public class PostDTO {
         this.definition = definition;
     }
 
-    public Long getCreator() {
-        return creator;
+    public Long getCreatorId() {
+        return creatorId;
     }
 
-    public void setCreator(Long creator) {
-        this.creator = creator;
+    public void setCreatorId(Long creatorId) {
+        this.creatorId = creatorId;
     }
 
     public String getStatus() {
@@ -81,6 +83,14 @@ public class PostDTO {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getCreatorName() {
+        return creatorName;
+    }
+
+    public void setCreatorName(String creatorName) {
+        this.creatorName = creatorName;
     }
 
     //</editor-fold>

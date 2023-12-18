@@ -55,6 +55,7 @@ public class PostRepository {
                                 postDetail.getPostDetailsId(),
                                 postDetail.getCreatedOn(),
                                 postDetail.getCreator().getUserId(),
+                                postDetail.getCreator().getUsername(),
                                 post.getPostId(),
                                 postDetail.getPollAnswer().getPoll_answerId()));
                     }
@@ -64,6 +65,7 @@ public class PostRepository {
                             post.getTitle(),
                             post.getDefinition(),
                             post.getCreator().getUserId(),
+                            post.getCreator().getUsername(),
                             post.getStatus().name(),
                             PostType.POLL.name(),
                             typeInfoDTO,
@@ -72,6 +74,10 @@ public class PostRepository {
             }
         }
         throw new IllegalArgumentException();
+    }
+
+    public List<Long> getPostIds() {
+        return entityManager.createQuery("select p.id from Post p", Long.class).getResultList().stream().toList();
     }
 
     public List<PostDTO> getPostsAsList() {
@@ -100,7 +106,7 @@ public class PostRepository {
     //<editor-fold desc="POLL">
     public void createPollPost(Poll_PostDTO postDTO) {
         try {
-            BoastUser user = entityManager.find(BoastUser.class, postDTO.getCreator());
+            BoastUser user = entityManager.find(BoastUser.class, postDTO.getCreatorId());
             if (user == null) throw new IllegalArgumentException();
 
             Poll_Post post = new Poll_Post(postDTO, user);

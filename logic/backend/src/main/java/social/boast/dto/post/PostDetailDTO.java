@@ -5,19 +5,22 @@ import java.util.Date;
 public class PostDetailDTO {
     Long postDetailsId;
     Date createdOn;
-    Long creator;
+    Long creatorId;
+    String creatorName;
     Long postId;
 
-    public PostDetailDTO(Long postDetailsId, Date createdOn, Long creator, Long postId) {
+    public PostDetailDTO(Long postDetailsId, Date createdOn, Long creatorId, String creatorName, Long postId) {
         this.postDetailsId = postDetailsId;
         this.createdOn = createdOn;
-        this.creator = creator;
+        this.creatorId = creatorId;
+        this.creatorName = creatorName;
         this.postId = postId;
     }
 
     public PostDetailDTO() {
     }
 
+    //<editor-fold desc="getter & setter">
     public Long getPostDetailsId() {
         return postDetailsId;
     }
@@ -34,12 +37,12 @@ public class PostDetailDTO {
         this.createdOn = createdOn;
     }
 
-    public Long getCreator() {
-        return creator;
+    public Long getCreatorId() {
+        return creatorId;
     }
 
-    public void setCreator(Long creator) {
-        this.creator = creator;
+    public void setCreatorId(Long creatorId) {
+        this.creatorId = creatorId;
     }
 
     public Long getPostId() {
@@ -49,4 +52,13 @@ public class PostDetailDTO {
     public void setPostId(Long postId) {
         this.postId = postId;
     }
+
+    public String getCreatorName() {
+        return creatorName;
+    }
+
+    public void setCreatorName(String creatorName) {
+        this.creatorName = creatorName;
+    }
+    //</editor-fold>
 }

@@ -7,8 +7,8 @@ import java.util.Date;
 public class Poll_PostDetailDTO extends PostDetailDTO {
     Long poll_answerId;
 
-    public Poll_PostDetailDTO(Long postDetailsId, Date createdOn, Long creator, Long postId, Long pollAnswerId) {
-        super(postDetailsId, createdOn, creator, postId);
+    public Poll_PostDetailDTO(Long postDetailsId, Date createdOn, Long creator, String creatorName, Long postId, Long pollAnswerId) {
+        super(postDetailsId, createdOn, creator, creatorName, postId);
         this.poll_answerId = pollAnswerId;
     }
 

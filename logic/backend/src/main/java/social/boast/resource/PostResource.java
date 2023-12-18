@@ -19,13 +19,6 @@ public class PostResource {
     PostRepository postRepository;
 
     @GET
-    @Path("/ping")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String ping() {
-        return "pong";
-    }
-
-    @GET
     @Path("/{id}")
     @Transactional
     public Response getPost(@PathParam("id") Long id) {
@@ -64,13 +57,22 @@ public class PostResource {
         }
     }
 
+    /*
     @GET
     @Path("")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public List<PostDTO> getPostsAsList() {
-        System.out.println("Get Posts");
         return postRepository.getPostsAsList();
+    }
+     */
+
+    @GET
+    @Path("")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public List<Long> getPostIds() {
+        return postRepository.getPostIds();
     }
 
     //<editor-fold desc="POLL">
