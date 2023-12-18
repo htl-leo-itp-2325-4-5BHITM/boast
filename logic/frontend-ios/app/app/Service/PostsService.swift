@@ -1,20 +1,14 @@
 
 import Foundation
 
-
-
-func posts() async -> PostModel {
-    
+func loadPost() async -> PostModel {
     var post = PostModel()
-    
-    guard let url = URL(string: "http://www.boast.social/api/posts/100") else{ return post }
-    let task = URLSession.shared.dataTask(with: url){
-        data, response, error in
-        if let data = data, let string = String(data: data, encoding: .utf8){     
+    let url = URL(string: "http://www.boast.social/api/posts/100")!
+    if let (data, _) = try? await URLSession.shared.data(from: url) {
+        if let getPost = try? JSONDecoder().decode(PostModel.self, from: data) {
             do {
                 let postType = try JSONDecoder().decode(TypeModel.self, from: data)
                 let type = PostType(rawValue: postType.type!)
-                
                 switch type {
                     case .POLL:
                         post = try JSONDecoder().decode(Poll_PostModel.self, from: data)
@@ -25,10 +19,12 @@ func posts() async -> PostModel {
             } catch {
                 print(error)
             }
+        } else {
+            print("failed to decode")
         }
+    } else {
+        print("failed to load url")
     }
-    task.resume()
     
     return post
 }
-

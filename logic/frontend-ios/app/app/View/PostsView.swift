@@ -2,19 +2,20 @@
 
 import SwiftUI
 
-/*
- VIEWMODEL IST ARRAY VON  POSTMODELVIEWMODEL ( ELTERNKLASSE )
- */
+var post: PostModel?
 
 struct PostsView: View {
     var body: some View {
-        Button{
-            Task {
-                var test: PostModel = try await posts()
-            }
-        } label: {
-            Text("Button")
+        VStack {
+            
+            
+            Text(post?.createdOn ?? "")
+            
+        }.task {
+            post = await loadPost()
+            print(post?.createdOn)
         }
+        
     }
 }
 
