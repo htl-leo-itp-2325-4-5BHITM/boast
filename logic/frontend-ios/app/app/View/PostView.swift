@@ -5,7 +5,7 @@ import SwiftUI
 struct PostView: View {
     let postId: Int
     var body: some View {
-        ScrollView {
+        VStack {
             Post(postId: postId)
         }
     }
