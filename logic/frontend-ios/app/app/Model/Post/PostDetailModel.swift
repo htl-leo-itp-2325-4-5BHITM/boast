@@ -5,6 +5,7 @@ import Foundation
 class PostDetailModel: Codable {
     var postDetailsId: Int?
     var createdOn: String?
-    var creator: Int?
+    var creatorId: Int?
+    var creatorName: String?
     var postId: Int?
 }

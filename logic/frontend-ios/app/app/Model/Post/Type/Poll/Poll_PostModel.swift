@@ -11,7 +11,8 @@ class Poll_PostModel: PostModel {
         createdOn: String?,
         title: String?,
         definiton: String?,
-        creator: Int?,
+        creatorId: Int?,
+        creatorName: String?,
         status: Status?,
         typeInfo: Poll_TypeInfoModel?,
         postDetails: [Poll_PostDetailModel]?
@@ -28,8 +29,11 @@ class Poll_PostModel: PostModel {
         if let val = definiton {
             self.definition = val
         }
-        if let val = creator {
-            self.creator = val
+        if let val = creatorId {
+            self.creatorId = val
+        }
+        if let val = creatorName {
+            self.creatorName = val
         }
         if let val = status {
             self.status = val

@@ -31,9 +31,14 @@ class PollPostViewModel: ObservableObject {
             model.definition!
         }
     }
-    var creator: Int {
+    var creatorId: Int {
         get {
-            model.creator!
+            model.creatorId!
+        }
+    }
+    var creatorName: String {
+        get {
+            model.creatorName!
         }
     }
     var status: Status {
@@ -57,7 +62,8 @@ class PollPostViewModel: ObservableObject {
         createdOn: String? = nil,
         title: String? = nil,
         definiton: String? = nil,
-        creator: Int? = nil,
+        creatorId: Int? = nil,
+        creatorName: String? = nil,
         status: Status? = nil,
         typeInfo: Poll_TypeInfoModel? = nil,
         postDetails: [Poll_PostDetailModel]? = nil
@@ -67,10 +73,12 @@ class PollPostViewModel: ObservableObject {
             createdOn: createdOn,
             title: title,
             definiton: definiton,
-            creator: creator,
+            creatorId: creatorId,
+            creatorName: creatorName,
             status: status,
             typeInfo: typeInfo,
             postDetails: postDetails
         )
     }
+    
 }

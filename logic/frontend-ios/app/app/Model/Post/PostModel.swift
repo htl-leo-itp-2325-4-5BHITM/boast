@@ -8,7 +8,8 @@ class PostModel: Codable {
     var createdOn: String?
     var title: String?
     var definition: String?
-    var creator: Int?
+    var creatorId: Int?
+    var creatorName: String?
     var status: Status?
     var type: PostType?
 }

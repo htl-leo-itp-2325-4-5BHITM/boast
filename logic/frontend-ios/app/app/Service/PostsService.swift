@@ -1,9 +1,9 @@
 
 import Foundation
 
-func loadPost() async -> PostModel {
+func loadPost(postId: Int) async -> PostModel {
     var post = PostModel()
-    let url = URL(string: "http://www.boast.social/api/posts/100")!
+    let url = URL(string: "http://www.boast.social/api/posts/\(postId)")!
     if let (data, _) = try? await URLSession.shared.data(from: url) {
         if let getPost = try? JSONDecoder().decode(PostModel.self, from: data) {
             do {
@@ -15,7 +15,6 @@ func loadPost() async -> PostModel {
                     default:
                         break
                 }
-                
             } catch {
                 print(error)
             }
@@ -25,6 +24,16 @@ func loadPost() async -> PostModel {
     } else {
         print("failed to load url")
     }
-    
     return post
+}
+
+func posts() async -> [Int] {
+    var postList: [Int] = []
+    let url = URL(string: "http://www.boast.social/api/posts")!
+    if let (data, _) = try? await URLSession.shared.data(from: url) {
+        postList = try! JSONDecoder().decode([Int].self, from: data)
+    } else {
+        print("failed to load url")
+    }
+    return postList
 }
