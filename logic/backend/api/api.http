@@ -6,21 +6,32 @@ Accept: application/json
 POST http://localhost:8080/api/posts/poll
 
 {
-    "title": "Can we do it?",
-    "definition": "???",
-    "creator": 100,
-    "status": "OPEN",
-    "type": "POLL",
-    "typeInfo": {
-      "pollAnswers": [
-        {
-          "title": "YES
-        },
-        {
-          "title": "NO"
-        }
-      ]
-    }
+  "createdOn": "2022-03-10",
+  "title": "Can we do it???",
+  "definition": "???",
+  "creatorId": 100,
+  "status": "OPEN",
+  "type": "POLL",
+  "typeInfo": {
+    "pollAnswers": [
+      {
+        "title": "yes"
+      },
+      {
+        "title": "no"
+      }
+    ]
+  }
+}
+
+###
+
+POST http://localhost:8080/api/post-details/poll
+
+{
+    "creator": 101,
+    "postId": 101,
+    "pollAnswerId": 1
 }
 
 ###
@@ -29,18 +40,8 @@ GET http://localhost:8080/api/users/100
 
 ###
 
-GET http://localhost:8080/api/posts
+GET http://localhost:8080/api/posts/100
 
-
-###
-
-POST http://localhost:8080/api/post-details/poll
-
-{
-    "creator": 100,
-    "postId": 100,
-    "pollAnswerId": 1
-}
 
 ###
 
@@ -56,28 +57,3 @@ POST http://158.101.172.243/api/users
   "email": "derbeste@gmx.at"
 }
 
-###
-
-POST http://158.101.172.243/api/posts/poll
-
-{
-  "title": "Can we do it??",
-  "definition": "",
-  "creator": 1,
-  "status": "OPEN",
-  "typeInfo": {
-    "type": "POLL",
-    "pollAnswers": [
-      {
-        "poll_answerId": null,
-        "title": "yes"
-      },
-      {
-        "poll_answerId": null,
-        "title": "no"
-      }
-    ]
-  },
-  "postDetails": [
-  ]
-}

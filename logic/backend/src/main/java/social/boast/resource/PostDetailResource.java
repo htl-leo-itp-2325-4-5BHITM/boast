@@ -19,7 +19,6 @@ public class PostDetailResource {
     @Path("/poll")
     @Transactional
     public Response addPollPostDetail(Poll_PostDetailDTO postDetailDTO) {
-        System.out.println("addPollPostDetail");
         try {
             System.err.println("POLL ANSWER: " + postDetailDTO.getPoll_answerId());
             postDetailRepository.addPollPostDetails(postDetailDTO);

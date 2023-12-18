@@ -1,5 +1,6 @@
 package social.boast.resource;
 
+import jakarta.json.JsonObject;
 import social.boast.dto.post.PostDTO;
 import social.boast.dto.post.type.poll.Poll_PostDTO;
 import social.boast.model.Status;
@@ -82,6 +83,7 @@ public class PostResource {
     @Transactional
     public Response addPollPost(Poll_PostDTO postDTO) {
         System.out.println("addPollPost");
+
         try {
             postRepository.createPollPost(postDTO);
             return Response.status(200).build();

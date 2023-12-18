@@ -14,16 +14,16 @@ VALUES (current_timestamp, 103, 'Teofan', 'teofan.mihaescu@gmail.com');
 --POST
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
 values (current_timestamp, 103, 100, 'Swift Test',
-        'Do you think that we have to retake the Test in MC?', 'POLL', 'CLOSED');
+        'Do you think that we have to retake the Test in MC?', 'POLL', 'OPEN');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
 values (current_timestamp, 100, 101, 'Buzz Cut',
-        'Should I buzz my hair?', 'POLL', 'CLOSED');
+        'Should I buzz my hair?', 'POLL', 'OPEN');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
 values (current_timestamp, 101, 102, 'Athletic',
         'Am I the most athletic guy at school?',
-        'POLL', 'CLOSED');
+        'POLL', 'OPEN');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
 values (current_timestamp, 100, 103, 'New Car',
@@ -38,17 +38,17 @@ values (current_timestamp, 102, 104, 'Smoking',
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
 values (current_timestamp, 103, 105, 'Eating',
         'Should the bulk continue?', 'POLL',
-        'CLOSED');
+        'CANCELED');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
 values (current_timestamp, 103, 106, 'Class',
         'Do you think that everybody in our class will make it to 5BHITM?',
-        'POLL', 'CLOSED');
+        'POLL', 'CANCELED');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
 values (current_timestamp, 101, 107, 'Adult',
         'Do you think that I should act more maturely?',
-        'POLL', 'CLOSED');
+        'POLL', 'OPEN');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
 values (current_timestamp, 102, 108, 'Hair',

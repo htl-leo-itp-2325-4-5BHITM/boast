@@ -1,5 +1,7 @@
 package social.boast.dto.post;
 
+import social.boast.service.Service;
+
 import java.util.Date;
 
 public class PostDetailDTO {
@@ -29,7 +31,11 @@ public class PostDetailDTO {
         this.postDetailsId = postDetailsId;
     }
 
-    public Date getCreatedOn() {
+    public String getCreatedOn() {
+        return Service.formatDate(createdOn);
+    }
+
+    public Date createdOnDate() {
         return createdOn;
     }
 

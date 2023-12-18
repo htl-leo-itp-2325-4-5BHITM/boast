@@ -1,5 +1,7 @@
 package social.boast.dto.post;
 
+import social.boast.service.Service;
+
 import java.util.Date;
 
 public class PostDTO {
@@ -9,17 +11,15 @@ public class PostDTO {
     String definition;
     Long creatorId;
     String creatorName;
-
     String status;
-
     String type;
 
-    public PostDTO(Long postId, Date createdOn, String title, String definition, Long creator, String creatorName, String status, String type) {
+    public PostDTO(Long postId, Date createdOn, String title, String definition, Long creatorId, String creatorName, String status, String type) {
         this.postId = postId;
         this.createdOn = createdOn;
         this.title = title;
         this.definition = definition;
-        this.creatorId = creator;
+        this.creatorId = creatorId;
         this.creatorName = creatorName;
         this.status = status;
         this.type = type;
@@ -37,7 +37,11 @@ public class PostDTO {
         this.postId = postId;
     }
 
-    public Date getCreatedOn() {
+    public String getCreatedOn() {
+        return Service.formatDate(createdOn);
+    }
+
+    public Date createdOnDate() {
         return createdOn;
     }
 

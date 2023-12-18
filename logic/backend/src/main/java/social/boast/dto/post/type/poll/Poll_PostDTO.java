@@ -34,4 +34,3 @@ public class Poll_PostDTO extends PostDTO {
         this.postDetails = postDetails;
     }
 }
-

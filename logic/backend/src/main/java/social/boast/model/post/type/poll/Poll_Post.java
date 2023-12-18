@@ -22,7 +22,7 @@ public class Poll_Post extends Post implements PostType_Interface<Poll_PostDetai
     private List<Poll_PostDetail> postDetails;
 
     public Poll_Post(Poll_PostDTO postDTO, BoastUser user) {
-        super(postDTO.getCreatedOn(),
+        super(postDTO.createdOnDate(),
                 postDTO.getTitle(),
                 postDTO.getDefinition(),
                 user,
@@ -30,7 +30,7 @@ public class Poll_Post extends Post implements PostType_Interface<Poll_PostDetai
                 PostType.POLL);
     }
 
-    public Poll_Post(){
+    public Poll_Post() {
 
     }
 

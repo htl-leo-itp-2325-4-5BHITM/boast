@@ -19,7 +19,7 @@ public class Poll_PostDetail extends PostDetail implements PostDetailType_Interf
     Poll_Post post;
 
     public Poll_PostDetail(Poll_PostDetailDTO pollAnswer, BoastUser user, Poll_Post post, Poll_PostAnswer postAnswer) {
-        super(pollAnswer.getCreatedOn(), user);
+        super(pollAnswer.createdOnDate(), user);
         this.post = post;
         this.pollAnswer = postAnswer;
     }

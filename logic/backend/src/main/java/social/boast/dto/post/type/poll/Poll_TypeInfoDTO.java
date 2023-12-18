@@ -9,6 +9,9 @@ public class Poll_TypeInfoDTO {
         this.pollAnswers = pollAnswers;
     }
 
+    public Poll_TypeInfoDTO() {
+    }
+
     public List<Poll_PostAnswerDTO> getPollAnswers() {
         return pollAnswers;
     }
