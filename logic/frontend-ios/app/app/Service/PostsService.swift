@@ -5,7 +5,6 @@ func loadPost(postId: Int) async -> PostModel {
     var post = PostModel()
     let url = URL(string: "http://www.boast.social/api/posts/\(postId)")!
     if let (data, _) = try? await URLSession.shared.data(from: url) {
-        if let getPost = try? JSONDecoder().decode(PostModel.self, from: data) {
             do {
                 let postType = try JSONDecoder().decode(TypeModel.self, from: data)
                 let type = PostType(rawValue: postType.type!)
@@ -17,10 +16,8 @@ func loadPost(postId: Int) async -> PostModel {
                 }
             } catch {
                 print(error)
+                print("failed to decode")
             }
-        } else {
-            print("failed to decode")
-        }
     } else {
         print("failed to load url")
     }
