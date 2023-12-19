@@ -23,7 +23,7 @@ Primary Color
 
 <br> <br>
 
-<div style="background-color: #292B34; width: 90px; height: 30px; border-radius: 5px; display: inline-block; text-align: center; line-height: 30px; color: #ffffff;">#3498db</div>
+<div style="background-color: #292B34; width: 90px; height: 30px; border-radius: 5px; display: inline-block; text-align: center; line-height: 30px; color: #ffffff;">#292B34</div>
 Background
 
 <br> <br>
