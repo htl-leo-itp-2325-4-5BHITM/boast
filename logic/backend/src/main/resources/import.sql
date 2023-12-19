@@ -1,148 +1,148 @@
 --BOASTUSER
 insert into BOASTUSER (CREATEDON, USERID, USERNAME, EMAIL)
-VALUES (current timestamp, 100, 'Felix', 'felix.wimberger@gmail.com');
+VALUES (current_timestamp, 100, 'Felix', 'felix.wimberger@gmail.com');
 
 insert into BOASTUSER (CREATEDON, USERID, USERNAME, EMAIL)
-VALUES (current timestamp, 101, 'Raphael', 'raphael.scharrer@gmail.com');
+VALUES (current_timestamp, 101, 'Raphael', 'raphael.scharrer@gmail.com');
 
 insert into BOASTUSER (CREATEDON, USERID, USERNAME, EMAIL)
-VALUES (current timestamp, 102, 'JannisBeVibing', 'jannis.sideras@gmail.com');
+VALUES (current_timestamp, 102, 'JannisBeVibing', 'jannis.sideras@gmail.com');
 
 insert into BOASTUSER (CREATEDON, USERID, USERNAME, EMAIL)
-VALUES (current timestamp, 103, 'Teofan', 'teofan.mihaescu@gmail.com');
+VALUES (current_timestamp, 103, 'Teofan', 'teofan.mihaescu@gmail.com');
 
 --POST
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
-values (current timestamp, 103, 100, 'Swift Test',
-        'Do you think that we have to retake the Test in MC?', 'POLL', 'CLOSED');
+values (current_timestamp, 103, 100, 'Swift Test',
+        'Do you think that we have to retake the Test in MC?', 'POLL', 'OPEN');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
-values (current timestamp, 100, 101, 'Buzz Cut',
-        'Should I buzz my hair?', 'POLL', 'CLOSED');
+values (current_timestamp, 100, 101, 'Buzz Cut',
+        'Should I buzz my hair?', 'POLL', 'OPEN');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
-values (current timestamp, 101, 102, 'Athletic',
+values (current_timestamp, 101, 102, 'Athletic',
         'Am I the most athletic guy at school?',
-        'POLL', 'CLOSED');
+        'POLL', 'OPEN');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
-values (current timestamp, 100, 103, 'New Car',
+values (current_timestamp, 100, 103, 'New Car',
         'Should I buy another Tesla?',
         'POLL', 'CLOSED');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
-values (current timestamp, 102, 104, 'Smoking',
+values (current_timestamp, 102, 104, 'Smoking',
         'Should I quit smoking and start taking crack?',
         'POLL', 'CLOSED');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
-values (current timestamp, 103, 105, 'Eating',
+values (current_timestamp, 103, 105, 'Eating',
         'Should the bulk continue?', 'POLL',
-        'CLOSED');
+        'CANCELED');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
-values (current timestamp, 103, 106, 'Class',
+values (current_timestamp, 103, 106, 'Class',
         'Do you think that everybody in our class will make it to 5BHITM?',
-        'POLL', 'CLOSED');
+        'POLL', 'CANCELED');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
-values (current timestamp, 101, 107, 'Adult',
+values (current_timestamp, 101, 107, 'Adult',
         'Do you think that I should act more maturely?',
-        'POLL', 'CLOSED');
+        'POLL', 'OPEN');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
-values (current timestamp, 102, 108, 'Hair',
+values (current_timestamp, 102, 108, 'Hair',
         'Should I change my Hairstyle?',
         'POLL', 'CLOSED');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
-values (current timestamp, 103, 109, 'Training',
+values (current_timestamp, 103, 109, 'Training',
         'Should I start calisthenics?', 'POLL', 'CLOSED');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
-values (current timestamp, 100, 110, 'Sigma',
+values (current_timestamp, 100, 110, 'Sigma',
         'Do you think that I should stop helping Classmates?', 'POLL', 'CLOSED');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
-values (current timestamp, 102, 111, 'Aggression',
+values (current_timestamp, 102, 111, 'Aggression',
         'I want to beat Julian Jaklitsch to a pulp. Should I do that?',
         'POLL', 'CLOSED');
 
 --POSTDETAIL
 insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
-values (current timestamp, 103, 1000);
+values (current_timestamp, 103, 1000);
 
 insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
-values (current timestamp, 100, 1001);
+values (current_timestamp, 100, 1001);
 
 insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
-values (current timestamp, 101, 1002);
+values (current_timestamp, 101, 1002);
 
 insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
-values (current timestamp, 100, 1003);
+values (current_timestamp, 100, 1003);
 
 insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
-values (current timestamp, 102, 1004);
+values (current_timestamp, 102, 1004);
 
 insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
-values (current timestamp, 103, 1005);
+values (current_timestamp, 103, 1005);
 
 insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
-values (current timestamp, 103, 1006);
+values (current_timestamp, 103, 1006);
 
 insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
-values (current timestamp, 101, 1007);
+values (current_timestamp, 101, 1007);
 
 insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
-values (current timestamp, 102, 1008);
+values (current_timestamp, 102, 1008);
 
 insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
-values (current timestamp, 103, 1009);
+values (current_timestamp, 103, 1009);
 
 insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
-values (current timestamp, 100, 1010);
+values (current_timestamp, 100, 1010);
 
 insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
-values (current timestamp, 102, 1011);
+values (current_timestamp, 102, 1011);
 
 insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
-values (current timestamp, 103, 1012);
+values (current_timestamp, 103, 1012);
 
 insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
-values (current timestamp, 100, 1013);
+values (current_timestamp, 100, 1013);
 
 insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
-values (current timestamp, 101, 1014);
+values (current_timestamp, 101, 1014);
 
 insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
-values (current timestamp, 100, 1015);
+values (current_timestamp, 100, 1015);
 
 insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
-values (current timestamp, 102, 1016);
+values (current_timestamp, 102, 1016);
 
 insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
-values (current timestamp, 103, 1017);
+values (current_timestamp, 103, 1017);
 
 insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
-values (current timestamp, 103, 1018);
+values (current_timestamp, 103, 1018);
 
 insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
-values (current timestamp, 102, 1019);
+values (current_timestamp, 102, 1019);
 
 insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
-values (current timestamp, 103, 1020);
+values (current_timestamp, 103, 1020);
 
 insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
-values (current timestamp, 100, 1021);
+values (current_timestamp, 100, 1021);
 
 insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
-values (current timestamp, 102, 1022);
+values (current_timestamp, 102, 1022);
 
 insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
-values (current timestamp, 101, 1023);
+values (current_timestamp, 101, 1023);
 
 insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
-values (current timestamp, 100, 1024);
+values (current_timestamp, 100, 1024);
 
 --POLL_POST
 insert into POLL_POST (POSTID)

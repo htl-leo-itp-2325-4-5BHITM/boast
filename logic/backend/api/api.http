@@ -1,0 +1,78 @@
+### POST DETAILS
+
+POST http://localhost:8080/api/post-details/poll
+
+{
+    "creator": 101,
+    "postId": 101,
+    "pollAnswerId": 1001
+}
+
+
+### POSTS
+
+GET http://localhost:8080/api/posts
+Accept: application/json
+
+###
+
+POST http://localhost:8080/api/posts/poll
+
+{
+  "createdOn": "2022-03-10",
+  "title": "Can we do it???",
+  "definition": "???",
+  "creatorId": 100,
+  "status": "OPEN",
+  "type": "POLL",
+  "typeInfo": {
+    "pollAnswers": [
+      {
+        "title": "yes"
+      },
+      {
+        "title": "no"
+      }
+    ]
+  }
+}
+
+###
+
+GET http://localhost:8080/api/posts/100
+
+###
+
+DELETE http://localhost:8080/api/posts/100
+
+###
+
+POST http://localhost:8080/api/posts/100/status/OPEN
+
+###
+
+GET http://localhost:8080/api/users/100
+
+###
+
+GET http://localhost:8080/api/posts/100
+
+
+### USER
+
+POST http://158.101.172.243/api/users
+
+{
+  "username": "Felix",
+  "email": "derbeste@gmx.at"
+}
+
+###
+
+GET http://localhost:8080/api/users/login/Felix
+Accept: application/json
+
+###
+
+GET http://localhost:8080/api/users/100
+Accept: application/json

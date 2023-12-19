@@ -2,15 +2,15 @@
 
 ```json
 {
-   "postId": 1,
-   "title": "",
-   "definition": "",
-   "creator": 1,
-   "status": "",
-   "typeInfo": {
-      "type": ""
-   },
+   "createdOn": "2022-03-10",
+   "title": "Can we do it???",
+   "definition": "???",
+   "creatorId": 100,
+   "status": "OPEN",
+   "type": "POLL",
+   "typeInfo": {},
    "postDetails": [
+      
    ]
 }
 ```
