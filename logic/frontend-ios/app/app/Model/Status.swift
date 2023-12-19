@@ -1,7 +1,7 @@
 
 import Foundation
 
-enum Status: String, Codable {
+enum Status: String, Codable, CaseIterable {
     case OPEN
     case CLOSED
     case CANCELED

@@ -34,3 +34,16 @@ func posts() async -> [Int] {
     }
     return postList
 }
+
+func updateStatus(postId: Int, postStatus: Status) async {
+    if postId != -1 {
+        let url = URL(string: "http://www.boast.social/api/posts/\(postId)/status/\(postStatus)")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            let statusCode = (response as! HTTPURLResponse).statusCode
+            print("status:  \(statusCode)")
+        }
+        task.resume()
+    }
+}

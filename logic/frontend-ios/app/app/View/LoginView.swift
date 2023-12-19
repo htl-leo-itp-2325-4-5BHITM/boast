@@ -21,6 +21,7 @@ struct LoginView: View {
                             }
                         ))
                     }
+                    /*
                     Section(header: Text("Email:")) {
                         TextField("Email", text: Binding(
                             get: {
@@ -32,7 +33,7 @@ struct LoginView: View {
                                 }
                             }
                         ))
-                    }
+                    }*/
                 }
                 Button("Submit", action: {
                     Task {
