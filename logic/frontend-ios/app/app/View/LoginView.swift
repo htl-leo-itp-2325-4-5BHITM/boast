@@ -45,7 +45,7 @@ struct LoginView: View {
                     }
                 })
                 
-                NavigationLink(destination: MainFeedView().navigationBarBackButtonHidden(), isActive: $goNext){}.hidden()
+                NavigationLink(destination: AllViews().navigationBarBackButtonHidden(), isActive: $goNext){}.hidden()
             }
         }
     }
