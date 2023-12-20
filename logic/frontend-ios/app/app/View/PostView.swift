@@ -8,6 +8,7 @@ struct PostView: View {
     @State var dict = [Int:String]()
     @State var postStatus:Status = .CLOSED
     @State var answerOption = ""
+    @State var answerCreatorIds = [Int]()
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -56,7 +57,7 @@ struct PostView: View {
                 .background(Color.yellow.opacity(0.1))
                 
                 VStack(alignment: .trailing) {
-                    if(post?.creatorId != UserDefaults.standard.integer(forKey: "userId")){
+                    if(post?.creatorId != UserDefaults.standard.integer(forKey: "userId") && !answerCreatorIds.contains(UserDefaults.standard.integer(forKey: "userId")) && post?.status == .OPEN){
                         Picker("answers", selection: $answerOption) {
                             Text("No Answer")
                                 .tag(-1)
@@ -65,10 +66,14 @@ struct PostView: View {
                                     .tag(val)
                             }
                         }
-                        .onChange(of: postStatus) {
+                        .onChange(of: answerOption) {
                             Task {
                                 do {
-                                    // TODO
+                                    let key = dict.first(where: { $0.value == answerOption})?.key
+                                    let status = await createPostDetail(creatorId: UserDefaults.standard.integer(forKey: "userId"), postId: post?.postId ?? -1, pollAnswerId: key ?? -1)
+                                    
+                                    await loadView()
+                                    
                                 }
                             }
                         }
@@ -76,18 +81,26 @@ struct PostView: View {
                 }
             }
         }.task {
-            post = await PollPostViewModel(model: loadPost(postId: postId) as! Poll_PostModel)
-            for answer in post?.typeInfo.pollAnswers ?? [Poll_PostAnswerModel]() {
-                dict.updateValue(answer.title ?? "", forKey: answer.poll_answerId ?? 0)
-            }
-            postStatus = post?.status ?? .OPEN
+            await loadView()
         }
         .frame(width: UIScreen.main.bounds.width - 20)
         .background(Color.black.opacity(0.1))
     }
+    
+    func loadView() async {
+        post = await PollPostViewModel(model: loadPost(postId: postId) as! Poll_PostModel)
+        for answer in post?.typeInfo.pollAnswers ?? [Poll_PostAnswerModel]() {
+            dict.updateValue(answer.title ?? "", forKey: answer.poll_answerId ?? 0)
+        }
+        postStatus = post?.status ?? .OPEN
+        
+        for detail in post?.postDetails ?? [Poll_PostDetailModel]() {
+            answerCreatorIds.append(detail.creatorId ?? -1)
+        }
+    }
 }
 
 #Preview {
-    PostView(postId: 100)
+    PostView(postId: 102)
 }
 

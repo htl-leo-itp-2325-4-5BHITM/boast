@@ -19,7 +19,6 @@ struct MainFeedView: View {
         }
         .task {
             postFeed = await posts()
-            print(UserDefaults.standard.value(forKey: "userId"))
         }
     }
 }

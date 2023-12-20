@@ -7,7 +7,7 @@ struct BoastApp: App {
     var body: some Scene {
         WindowGroup {
             TabView{
-                LoginView()
+                CreatePostView()
             }
         }
     }
