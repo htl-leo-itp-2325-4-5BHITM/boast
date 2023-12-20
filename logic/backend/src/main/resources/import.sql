@@ -3,13 +3,13 @@ insert into BOASTUSER (CREATEDON, USERID, USERNAME, EMAIL)
 VALUES (current_timestamp, 100, 'Felix', 'felix.wimberger@gmail.com');
 
 insert into BOASTUSER (CREATEDON, USERID, USERNAME, EMAIL)
-VALUES (current_timestamp, 101, 'Raphael', 'raphael.scharrer@gmail.com');
+VALUES (current_timestamp, 101, 'Raphi', 'raphael.scharrer@gmail.com');
 
 insert into BOASTUSER (CREATEDON, USERID, USERNAME, EMAIL)
-VALUES (current_timestamp, 102, 'JannisBeVibing', 'jannis.sideras@gmail.com');
+VALUES (current_timestamp, 102, 'Jannis', 'jannis.sideras@gmail.com');
 
 insert into BOASTUSER (CREATEDON, USERID, USERNAME, EMAIL)
-VALUES (current_timestamp, 103, 'Teofan', 'teofan.mihaescu@gmail.com');
+VALUES (current_timestamp, 103, 'Teo', 'teofan.mihaescu@gmail.com');
 
 --POST
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
@@ -124,7 +124,7 @@ insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
 values (current_timestamp, 103, 1017);
 
 insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
-values (current_timestamp, 103, 1018);
+values (current_timestamp, 101, 1018);
 
 insert into POSTDETAIL (CREATEDON, CREATOR_USERID, POSTDETAILSID)
 values (current_timestamp, 102, 1019);
