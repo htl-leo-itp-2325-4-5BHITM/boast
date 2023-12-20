@@ -3,7 +3,7 @@
 POST http://localhost:8080/api/post-details/poll
 
 {
-    "creator": 101,
+    "creatorId": 101,
     "postId": 101,
     "pollAnswerId": 1001
 }

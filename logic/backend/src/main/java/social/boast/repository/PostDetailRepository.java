@@ -18,7 +18,6 @@ public class PostDetailRepository {
 
     //<editor-fold desc="POLL">
     public void addPollPostDetails(Poll_PostDetailDTO postDetailDTO) {
-        System.out.println("test");
         try {
             BoastUser user = entityManager.find(BoastUser.class, postDetailDTO.getCreatorId());
             Poll_Post post = entityManager.find(Poll_Post.class, postDetailDTO.getPostId());
