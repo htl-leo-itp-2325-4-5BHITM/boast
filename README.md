@@ -15,7 +15,7 @@
     <img src="https://img.shields.io/badge/Kotlin-7F52FF?logo=kotlin&logoColor=fff&style=for-the-badge" alt="Kotlin Badge">
     <img src="https://img.shields.io/badge/Android-3DDC84?logo=android&logoColor=fff&style=for-the-badge" alt="Android Badge">
     <img src="https://img.shields.io/badge/Android%20Studio-3DDC84?logo=androidstudio&logoColor=fff&style=for-the-badge" alt="Android Studio Badge">
-    <img alt="apache derby" src="https://img.shields.io/badge/Apache-D22128?logo=apache&logoColor=fff&style=for-the-badge">
+    <img src="https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=fff&style=for-the-badge" alt="PostgreSQL Badge">
 </p>
 
 
