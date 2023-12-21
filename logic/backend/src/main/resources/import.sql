@@ -15,73 +15,73 @@ VALUES (current_timestamp, 103, 'Teo', 'teofan.mihaescu@gmail.com');
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
 values (current_timestamp, 103, 100,
         'Swift Test',
-        'We will have to retake the Test in MC',
+        'I bet we will have to retake the Test in MC',
         'POLL', 'OPEN');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
 values (current_timestamp, 100, 101,
         'School',
-        'Teo will not be able to have an autism-free day this week',
+        'I bet Teo will not be able to have an autism-free day this week',
         'POLL', 'OPEN');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
 values (current_timestamp, 101, 102,
         'UFC 293',
-        'Strickland wont win against Adesanya',
+        'I bet Strickland wont win against Adesanya',
         'POLL', 'OPEN');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
 values (current_timestamp, 100, 103,
         'Attendance',
-        'Raphi will be 5min late today',
+        'I bet Raphi will be 5min late today',
         'POLL', 'CLOSED');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
 values (current_timestamp, 102, 104,
         'Smoking',
-        'Felix will start smoking by the end of February',
+        'I bet Felix will start smoking by the end of February',
         'POLL', 'CLOSED');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
 values (current_timestamp, 101, 105,
         'Eating',
-        'After next years Summer break Teo will be overweight',
+        'I bet after next years Summer break Teo will be overweight',
         'POLL', 'CANCELED');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
 values (current_timestamp, 103, 106,
         'Class',
-        'Everybody in our class will make it to 5BHITM',
+        'I bet everybody in our class will make it to 5BHITM',
         'POLL', 'CANCELED');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
 values (current_timestamp, 102, 107,
         '1. Sem ending',
-        'Teo will have a grade average of 3.5 by the end of the first Semester',
+        'I bet Teo will have a grade average of 4.5 by the end of the first Semester',
         'POLL', 'OPEN');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
 values (current_timestamp, 102, 108,
         'Hair',
-        'Raphi will start balding at 21.',
+        'I bet Raphi will start a successful Business by 21.',
         'POLL', 'CLOSED');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
 values (current_timestamp, 101, 109,
         'Football',
-        'Italy will win the EM.',
+        'I bet Italy will win the EM.',
         'POLL', 'CLOSED');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
 values (current_timestamp, 100, 110,
         'Ronaldo retirement',
-        'Ronaldo will retire in 5 years',
+        'I bet Ronaldo will retire in 5 years',
         'POLL', 'CLOSED');
 
 insert into POST (CREATEDON, CREATOR_USERID, POSTID, TITLE, DEFINITION, POSTTYPE, STATUS)
 values (current_timestamp, 102, 111,
         'School',
-        'The 2nd Semester will be harder than the first',
+        'I bet the 2nd Semester will be harder than the first',
         'POLL', 'CLOSED');
 
 --POSTDETAIL
