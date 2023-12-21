@@ -12,12 +12,12 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>yourdomain.com</key>
+			<key>it.boast.app</key>
 			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
 				<key>NSIncludesSubdomains</key>
 				<true/>
-				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
-				<false/>
 			</dict>
 		</dict>
 	</dict>
