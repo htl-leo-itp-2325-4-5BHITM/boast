@@ -1,9 +1,4 @@
-//
-//  TabView.swift
-//  app
-//
-//  Created by Jannis Sideras on 20.12.23.
-//
+
 
 import SwiftUI
 

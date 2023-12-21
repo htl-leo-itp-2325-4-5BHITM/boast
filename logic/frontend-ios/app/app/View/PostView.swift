@@ -35,13 +35,13 @@ struct PostView: View {
                     Text("\((post?.status ?? .OPEN).rawValue)")
                 }
             }
-            .background(Color.green.opacity(0.1))
+            //.background(Color.green.opacity(0.1))
             
             VStack(alignment: .leading) {
                 Text(post?.title ?? "")
                 Text(post?.definiton ?? "")
             }
-            .background(Color.red.opacity(0.1))
+            //.background(Color.red.opacity(0.1))
             
             HStack {
                 VStack(alignment: .leading) {
@@ -54,7 +54,7 @@ struct PostView: View {
                     }
                     
                 }
-                .background(Color.yellow.opacity(0.1))
+                //.background(Color.yellow.opacity(0.1))
                 
                 VStack(alignment: .trailing) {
                     if(post?.creatorId != UserDefaults.standard.integer(forKey: "userId") && !answerCreatorIds.contains(UserDefaults.standard.integer(forKey: "userId")) && post?.status == .OPEN){
@@ -84,7 +84,7 @@ struct PostView: View {
             await loadView()
         }
         .frame(width: UIScreen.main.bounds.width - 20)
-        .background(Color.black.opacity(0.1))
+        //.background(Color.black.opacity(0.1))
     }
     
     func loadView() async {

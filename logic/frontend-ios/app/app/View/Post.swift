@@ -17,13 +17,13 @@ struct Post: View {
                 Spacer()
                 Text("\((post?.status ?? .OPEN).rawValue)")
             }
-            .background(Color.green.opacity(0.1))
+            //.background(Color.green.opacity(0.1))
             
             VStack(alignment: .leading) {
                 Text(post?.title ?? "")
                 Text(post?.definiton ?? "")
             }
-            .background(Color.red.opacity(0.1))
+            //.background(Color.red.opacity(0.1))
 
             VStack(alignment: .leading) {
                 ForEach(post?.postDetails ?? [Poll_PostDetailModel](), id: \.postDetailsId) { detail in
@@ -34,7 +34,7 @@ struct Post: View {
                     }
                 }
             }
-            .background(Color.yellow.opacity(0.1))
+            //.background(Color.yellow.opacity(0.1))
         }.task {
             post = await PollPostViewModel(model: loadPost(postId: postId) as! Poll_PostModel)
             for answer in post?.typeInfo.pollAnswers ?? [Poll_PostAnswerModel]() {
@@ -42,7 +42,7 @@ struct Post: View {
             }
         }
         .frame(width: UIScreen.main.bounds.width - 20)
-        .background(Color.black.opacity(0.1))
+        //.background(Color.black.opacity(0.1))
 
     }
 }
