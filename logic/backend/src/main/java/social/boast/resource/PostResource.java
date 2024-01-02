@@ -58,16 +58,6 @@ public class PostResource {
         }
     }
 
-    /*
-    @GET
-    @Path("")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Transactional
-    public List<PostDTO> getPostsAsList() {
-        return postRepository.getPostsAsList();
-    }
-     */
-
     @GET
     @Path("")
     @Produces(MediaType.APPLICATION_JSON)
@@ -81,9 +71,8 @@ public class PostResource {
     @Path("/poll")
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response addPollPost(Poll_PostDTO postDTO) {
+    public Response createPollPost(Poll_PostDTO postDTO) {
         System.out.println("addPollPost");
-
         try {
             postRepository.createPollPost(postDTO);
             return Response.status(200).build();

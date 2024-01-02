@@ -49,18 +49,9 @@ DELETE http://localhost:8080/api/posts/100
 
 POST http://localhost:8080/api/posts/100/status/OPEN
 
-###
-
-GET http://localhost:8080/api/users/100
-
-###
-
-GET http://localhost:8080/api/posts/100
-
-
 ### USER
 
-POST http://158.101.172.243/api/users
+POST http://localhost:8080/api/users
 
 {
   "username": "Felix",
