@@ -3,6 +3,7 @@ package social.boast.resource;
 import jakarta.json.JsonObject;
 import social.boast.dto.post.PostDTO;
 import social.boast.dto.post.type.poll.Poll_PostDTO;
+import social.boast.dto.post.type.text.Text_PostDTO;
 import social.boast.model.Status;
 import social.boast.repository.PostRepository;
 import jakarta.inject.Inject;
@@ -72,9 +73,24 @@ public class PostResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
     public Response createPollPost(Poll_PostDTO postDTO) {
-        System.out.println("addPollPost");
         try {
             postRepository.createPollPost(postDTO);
+            return Response.status(200).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.status(422).build();
+        }
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="TEXT">
+    @POST
+    @Path("/text")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response createTextPost(Text_PostDTO postDTO) {
+        try {
+            postRepository.createTextPost(postDTO);
             return Response.status(200).build();
         } catch (Exception e) {
             e.printStackTrace();

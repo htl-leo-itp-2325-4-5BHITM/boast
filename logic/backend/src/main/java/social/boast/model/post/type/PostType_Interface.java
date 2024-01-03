@@ -1,4 +1,4 @@
-package social.boast.model.post;
+package social.boast.model.post.type;
 
 import java.util.List;
 

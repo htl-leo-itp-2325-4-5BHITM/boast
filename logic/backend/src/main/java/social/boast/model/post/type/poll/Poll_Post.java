@@ -3,7 +3,7 @@ package social.boast.model.post.type.poll;
 import social.boast.dto.post.type.poll.Poll_PostDTO;
 import social.boast.model.Status;
 import social.boast.model.post.Post;
-import social.boast.model.post.PostType_Interface;
+import social.boast.model.post.type.PostType_Interface;
 import social.boast.model.post.PostType;
 import social.boast.model.user.BoastUser;
 import jakarta.persistence.CascadeType;
@@ -30,10 +30,7 @@ public class Poll_Post extends Post implements PostType_Interface<Poll_PostDetai
                 PostType.POLL);
     }
 
-    public Poll_Post() {
-
-    }
-
+    public Poll_Post() {}
 
     //<editor-fold desc="getter & setter">
     @Override
@@ -46,10 +43,12 @@ public class Poll_Post extends Post implements PostType_Interface<Poll_PostDetai
         this.postDetails = postDetails;
     }
 
+    @Override
     public void addPostDetail(Poll_PostDetail postDetail) {
         postDetails.add(postDetail);
     }
 
+    @Override
     public void removePostDetail(Poll_PostDetail postDetail) {
         this.postDetails.remove(postDetail);
     }

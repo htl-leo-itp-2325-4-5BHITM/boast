@@ -8,6 +8,16 @@ POST http://localhost:8080/api/post-details/poll
     "pollAnswerId": 1001
 }
 
+###
+
+POST http://localhost:8080/api/post-details/text
+
+{
+    "creatorId": 101,
+    "postId": 1,
+    "text": "test"
+}
+
 
 ### POSTS
 
@@ -19,7 +29,7 @@ Accept: application/json
 POST http://localhost:8080/api/posts/poll
 
 {
-  "createdOn": "2022-03-10",
+  "createdOn": "2024-01-01",
   "title": "Can we do it???",
   "definition": "???",
   "creatorId": 100,
@@ -35,6 +45,19 @@ POST http://localhost:8080/api/posts/poll
       }
     ]
   }
+}
+
+###
+
+POST http://localhost:8080/api/posts/text
+
+{
+  "createdOn": "2024-01-01",
+  "title": "Can we do it???",
+  "definition": "???",
+  "creatorId": 100,
+  "status": "OPEN",
+  "type": "TEXT"
 }
 
 ###

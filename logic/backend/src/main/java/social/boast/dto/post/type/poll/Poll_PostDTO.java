@@ -1,11 +1,12 @@
 package social.boast.dto.post.type.poll;
 
 import social.boast.dto.post.PostDTO;
+import social.boast.dto.post.type.PostTypeDTO_Interface;
 
 import java.util.Date;
 import java.util.List;
 
-public class Poll_PostDTO extends PostDTO {
+public class Poll_PostDTO extends PostDTO implements PostTypeDTO_Interface<Poll_PostDetailDTO> {
     Poll_TypeInfoDTO typeInfo;
     List<Poll_PostDetailDTO> postDetails;
 
@@ -26,10 +27,12 @@ public class Poll_PostDTO extends PostDTO {
         this.typeInfo = typeInfo;
     }
 
+    @Override
     public List<Poll_PostDetailDTO> getPostDetails() {
         return postDetails;
     }
 
+    @Override
     public void setPostDetails(List<Poll_PostDetailDTO> postDetails) {
         this.postDetails = postDetails;
     }

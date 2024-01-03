@@ -2,7 +2,7 @@ package social.boast.model.post.type.poll;
 
 import social.boast.dto.post.type.poll.Poll_PostDetailDTO;
 import social.boast.model.post.PostDetail;
-import social.boast.model.post.PostDetailType_Interface;
+import social.boast.model.post.type.PostDetailType_Interface;
 import social.boast.model.user.BoastUser;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -18,8 +18,8 @@ public class Poll_PostDetail extends PostDetail implements PostDetailType_Interf
     @JoinColumn(name = "postId")
     Poll_Post post;
 
-    public Poll_PostDetail(Poll_PostDetailDTO pollAnswer, BoastUser user, Poll_Post post, Poll_PostAnswer postAnswer) {
-        super(pollAnswer.createdOnDate(), user);
+    public Poll_PostDetail(Poll_PostDetailDTO postDetailDTO, BoastUser user, Poll_Post post, Poll_PostAnswer postAnswer) {
+        super(postDetailDTO.createdOnDate(), user);
         this.post = post;
         this.pollAnswer = postAnswer;
     }

@@ -8,6 +8,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import social.boast.dto.post.type.poll.Poll_PostDetailDTO;
+import social.boast.dto.post.type.text.Text_PostDetailDTO;
 import social.boast.repository.PostDetailRepository;
 
 @Path("/post-details")
@@ -23,8 +24,23 @@ public class PostDetailResource {
     @Transactional
     public Response addPollPostDetail(Poll_PostDetailDTO postDetailDTO) {
         try {
-            System.err.println("POLL ANSWER: " + postDetailDTO.getPoll_answerId());
             postDetailRepository.addPollPostDetails(postDetailDTO);
+            return Response.status(200).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.status(422).build();
+        }
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="TEXT">
+    @POST
+    @Path("/text")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response addTextPostDetail(Text_PostDetailDTO postDetailDTO) {
+        try {
+            postDetailRepository.addTextPostDetails(postDetailDTO);
             return Response.status(200).build();
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,4 +1,4 @@
-package social.boast.model.post;
+package social.boast.model.post.type;
 
 public interface PostDetailType_Interface<Post> {
     public Post getPost();
