@@ -30,11 +30,9 @@
 
 ## Steps to build new Post Type and fully implement it (only backend):
 
-- name is the name of the new PostType
-
-**to develop new Model please look / copy the code of a already developed (similar) type and go threw all these steps**
-<br>
-**While going threw the steps there can be a lot of errors which will be automatically fixed when finished with all steps**
+- ***{name}*** is the name of the new PostType
+- To develop new Model please **look / copy** the code of a already developed (similar) type and go threw all these steps**
+- **While going threw the steps there can be a lot of errors** which will be automatically fixed when finished with all steps**
 
 ### Model:
 
@@ -206,7 +204,7 @@ METHOD: CREATE
 
 CASE IN THE GETPOST METHOD
         
-case TEXT -> {
+case {name} -> {
     /* OPTIONAL: specific Data - typeInfoDTO */
     List<{name}_PostDetailDTO> postDetailDTOS = new LinkedList<>();
     for ({name}_PostDetail postDetail : (({name}_Post) post).getPostDetails()) {

@@ -1,6 +1,6 @@
 package social.boast.dto.post;
 
-import social.boast.service.Service;
+import social.boast.service.DateService;
 
 import java.util.Date;
 
@@ -38,7 +38,7 @@ public class PostDTO {
     }
 
     public String getCreatedOn() {
-        return Service.formatDate(createdOn);
+        return DateService.formatDate(createdOn);
     }
 
     public Date createdOnDate() {
