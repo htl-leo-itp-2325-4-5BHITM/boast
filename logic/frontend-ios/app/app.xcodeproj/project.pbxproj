@@ -19,6 +19,8 @@
 		1F6AFF922B2E07C0007BDB48 /* PollPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6AFF912B2E07C0007BDB48 /* PollPostViewModel.swift */; };
 		1F6AFF962B2E0CF8007BDB48 /* MainFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6AFF952B2E0CF8007BDB48 /* MainFeedView.swift */; };
 		1F6AFF982B2E0D68007BDB48 /* PostsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6AFF972B2E0D68007BDB48 /* PostsService.swift */; };
+		1F72C7BA2B4FCC93000415C2 /* Text_PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F72C7B92B4FCC93000415C2 /* Text_PostModel.swift */; };
+		1F72C7BC2B4FCCA5000415C2 /* Text_PostDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F72C7BB2B4FCCA5000415C2 /* Text_PostDetailModel.swift */; };
 		1FB05C7B2B30AB4000B3BD02 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB05C7A2B30AB4000B3BD02 /* LoginView.swift */; };
 		1FB05C7F2B30AC4C00B3BD02 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB05C7E2B30AC4C00B3BD02 /* UserViewModel.swift */; };
 		1FB05C822B30B1CB00B3BD02 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB05C812B30B1CB00B3BD02 /* UserService.swift */; };
@@ -47,6 +49,8 @@
 		1F6AFF952B2E0CF8007BDB48 /* MainFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeedView.swift; sourceTree = "<group>"; };
 		1F6AFF972B2E0D68007BDB48 /* PostsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsService.swift; sourceTree = "<group>"; };
 		1F6AFF992B2E17EE007BDB48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1F72C7B92B4FCC93000415C2 /* Text_PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text_PostModel.swift; sourceTree = "<group>"; };
+		1F72C7BB2B4FCCA5000415C2 /* Text_PostDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text_PostDetailModel.swift; sourceTree = "<group>"; };
 		1FB05C7A2B30AB4000B3BD02 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		1FB05C7E2B30AC4C00B3BD02 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		1FB05C812B30B1CB00B3BD02 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
@@ -105,6 +109,7 @@
 		1F0809912B2DE6FD007131F8 /* Type */ = {
 			isa = PBXGroup;
 			children = (
+				1F72C7B82B4FCC49000415C2 /* Text */,
 				1F0809942B2DE7FB007131F8 /* Poll */,
 				1FB88F7A2B2F8A9400F9D8F2 /* TypeModel.swift */,
 			);
@@ -133,6 +138,15 @@
 				1FBCA2C52B33A6AE00548070 /* AllViews.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		1F72C7B82B4FCC49000415C2 /* Text */ = {
+			isa = PBXGroup;
+			children = (
+				1F72C7B92B4FCC93000415C2 /* Text_PostModel.swift */,
+				1F72C7BB2B4FCCA5000415C2 /* Text_PostDetailModel.swift */,
+			);
+			path = Text;
 			sourceTree = "<group>";
 		};
 		1FDB13822B074DF500AC1089 = {
@@ -266,6 +280,7 @@
 				1FBCA2C62B33A6AE00548070 /* AllViews.swift in Sources */,
 				1F6AFF922B2E07C0007BDB48 /* PollPostViewModel.swift in Sources */,
 				1F0809982B2DE852007131F8 /* Poll_PostDetailModel.swift in Sources */,
+				1F72C7BC2B4FCCA5000415C2 /* Text_PostDetailModel.swift in Sources */,
 				1FB88F7B2B2F8A9400F9D8F2 /* TypeModel.swift in Sources */,
 				1F0809962B2DE837007131F8 /* Poll_PostModel.swift in Sources */,
 				1FF080DE2B3086A7000E33AE /* Post.swift in Sources */,
@@ -275,6 +290,7 @@
 				1F66776D2B331FE70082CA15 /* CreatePostView.swift in Sources */,
 				1F08098B2B2DE4FF007131F8 /* PostDetailModel.swift in Sources */,
 				1FDB138F2B074DF500AC1089 /* BoastApp.swift in Sources */,
+				1F72C7BA2B4FCC93000415C2 /* Text_PostModel.swift in Sources */,
 				1FB88F792B2F89B100F9D8F2 /* PostViewModel.swift in Sources */,
 				1FF080DC2B308643000E33AE /* PostView.swift in Sources */,
 				1FB05C7B2B30AB4000B3BD02 /* LoginView.swift in Sources */,
