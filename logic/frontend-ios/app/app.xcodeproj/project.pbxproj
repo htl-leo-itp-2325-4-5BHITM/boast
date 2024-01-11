@@ -57,7 +57,7 @@
 		1FB88F782B2F89B100F9D8F2 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		1FB88F7A2B2F8A9400F9D8F2 /* TypeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeModel.swift; sourceTree = "<group>"; };
 		1FBCA2C52B33A6AE00548070 /* AllViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllViews.swift; sourceTree = "<group>"; };
-		1FDB138B2B074DF500AC1089 /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FDB138B2B074DF500AC1089 /* boast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = boast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FDB138E2B074DF500AC1089 /* BoastApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoastApp.swift; sourceTree = "<group>"; };
 		1FDB13922B074DF600AC1089 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1FDB13952B074DF600AC1089 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -160,7 +160,7 @@
 		1FDB138C2B074DF500AC1089 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1FDB138B2B074DF500AC1089 /* app.app */,
+				1FDB138B2B074DF500AC1089 /* boast.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -210,9 +210,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1FDB138A2B074DF500AC1089 /* app */ = {
+		1FDB138A2B074DF500AC1089 /* boast */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1FDB13992B074DF600AC1089 /* Build configuration list for PBXNativeTarget "app" */;
+			buildConfigurationList = 1FDB13992B074DF600AC1089 /* Build configuration list for PBXNativeTarget "boast" */;
 			buildPhases = (
 				1FDB13872B074DF500AC1089 /* Sources */,
 				1FDB13882B074DF500AC1089 /* Frameworks */,
@@ -222,9 +222,9 @@
 			);
 			dependencies = (
 			);
-			name = app;
+			name = boast;
 			productName = app;
-			productReference = 1FDB138B2B074DF500AC1089 /* app.app */;
+			productReference = 1FDB138B2B074DF500AC1089 /* boast.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -255,7 +255,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1FDB138A2B074DF500AC1089 /* app */,
+				1FDB138A2B074DF500AC1089 /* boast */,
 			);
 		};
 /* End PBXProject section */
@@ -435,7 +435,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"boast/Preview Content\"";
-				DEVELOPMENT_TEAM = 8TT4PH6UFS;
+				DEVELOPMENT_TEAM = VUPWXC4B39;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = boast/Info.plist;
@@ -450,7 +450,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = social.boast;
+				PRODUCT_BUNDLE_IDENTIFIER = social.boast.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -468,7 +468,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"boast/Preview Content\"";
-				DEVELOPMENT_TEAM = 8TT4PH6UFS;
+				DEVELOPMENT_TEAM = VUPWXC4B39;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = boast/Info.plist;
@@ -483,7 +483,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = social.boast;
+				PRODUCT_BUNDLE_IDENTIFIER = social.boast.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -504,7 +504,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1FDB13992B074DF600AC1089 /* Build configuration list for PBXNativeTarget "app" */ = {
+		1FDB13992B074DF600AC1089 /* Build configuration list for PBXNativeTarget "boast" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1FDB139A2B074DF600AC1089 /* Debug */,
