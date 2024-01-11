@@ -152,7 +152,7 @@
 		1FDB13822B074DF500AC1089 = {
 			isa = PBXGroup;
 			children = (
-				1FDB138D2B074DF500AC1089 /* app */,
+				1FDB138D2B074DF500AC1089 /* boast */,
 				1FDB138C2B074DF500AC1089 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -165,7 +165,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1FDB138D2B074DF500AC1089 /* app */ = {
+		1FDB138D2B074DF500AC1089 /* boast */ = {
 			isa = PBXGroup;
 			children = (
 				1F0809852B2DE305007131F8 /* Model */,
@@ -177,7 +177,7 @@
 				1F6AFF992B2E17EE007BDB48 /* Info.plist */,
 				1FDB13942B074DF600AC1089 /* Preview Content */,
 			);
-			path = app;
+			path = boast;
 			sourceTree = "<group>";
 		};
 		1FDB13942B074DF600AC1089 /* Preview Content */ = {
@@ -434,11 +434,11 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"app/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"boast/Preview Content\"";
 				DEVELOPMENT_TEAM = 8TT4PH6UFS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = app/Info.plist;
+				INFOPLIST_FILE = boast/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = BOAST;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -467,11 +467,11 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"app/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"boast/Preview Content\"";
 				DEVELOPMENT_TEAM = 8TT4PH6UFS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = app/Info.plist;
+				INFOPLIST_FILE = boast/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = BOAST;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

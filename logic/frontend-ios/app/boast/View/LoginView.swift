@@ -37,7 +37,7 @@ struct LoginView: View {
                 }
                 Button("Submit", action: {
                     Task {
-                        userId = await userLogin(userName: viewModel.username)
+                        userId = try await userLogin(userName: viewModel.username)
                         if userId != -1 {
                             UserDefaults.standard.set(userId, forKey: "userId")
                             goNext = true

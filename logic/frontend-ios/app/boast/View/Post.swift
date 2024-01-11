@@ -36,9 +36,13 @@ struct Post: View {
             }
             //.background(Color.yellow.opacity(0.1))
         }.task {
-            post = await PollPostViewModel(model: loadPost(postId: postId) as! Poll_PostModel)
-            for answer in post?.typeInfo.pollAnswers ?? [Poll_PostAnswerModel]() {
-                dict.updateValue(answer.title ?? "", forKey: answer.poll_answerId ?? 0)
+            do {
+                post = try await PollPostViewModel(model: loadPost(postId: postId) as! Poll_PostModel)
+                for answer in post?.typeInfo.pollAnswers ?? [Poll_PostAnswerModel]() {
+                    dict.updateValue(answer.title ?? "", forKey: answer.poll_answerId ?? 0)
+                }
+            }catch {
+                print("too fast")
             }
         }
         .frame(width: UIScreen.main.bounds.width - 20)

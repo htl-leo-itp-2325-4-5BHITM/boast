@@ -21,8 +21,12 @@ struct MainFeedView: View {
             }
             Spacer(minLength: 40)
         }
-        .task {
-            postFeed = await posts()
+        .task{
+            do {
+                try postFeed = try await posts()
+            } catch{
+                print("error")
+            }
         }
     }
 }
