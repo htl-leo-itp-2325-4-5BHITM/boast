@@ -1,6 +1,5 @@
 package social.boast.model.post;
 
-import social.boast.model.Status;
 import social.boast.model.user.BoastUser;
 import jakarta.persistence.*;
 
@@ -27,12 +26,12 @@ public class Post implements Serializable {
     private BoastUser creator;
 
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private PostStatus status;
 
     @Enumerated(EnumType.STRING)
     private PostType postType;
 
-    public Post(Date createdOn, String title, String definition, BoastUser creator, Status status, PostType postType) {
+    public Post(Date createdOn, String title, String definition, BoastUser creator, PostStatus status, PostType postType) {
         this.createdOn = (createdOn != null) ? createdOn : new Date();
         this.title = title;
         this.definition = definition;
@@ -87,11 +86,11 @@ public class Post implements Serializable {
         this.createdOn = createdOn;
     }
 
-    public Status getStatus() {
+    public PostStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(PostStatus status) {
         this.status = status;
     }
 

@@ -21,38 +21,30 @@ public class PostDetailRepository {
 
     //<editor-fold desc="POLL">
     public void addPollPostDetails(Poll_PostDetailDTO postDetailDTO) {
-        try {
-            BoastUser user = entityManager.find(BoastUser.class, postDetailDTO.getCreatorId());
-            Poll_Post post = entityManager.find(Poll_Post.class, postDetailDTO.getPostId());
-            Poll_PostAnswer postAnswer = entityManager.find(Poll_PostAnswer.class, postDetailDTO.getPoll_answerId());
-            if (user == null || post == null || postAnswer == null) throw new IllegalArgumentException();
+        BoastUser user = entityManager.find(BoastUser.class, postDetailDTO.getCreatorId());
+        Poll_Post post = entityManager.find(Poll_Post.class, postDetailDTO.getPostId());
+        Poll_PostAnswer postAnswer = entityManager.find(Poll_PostAnswer.class, postDetailDTO.getPoll_answerId());
+        if (user == null || post == null || postAnswer == null) throw new IllegalArgumentException();
 
-            Poll_PostDetail postDetail = new Poll_PostDetail(postDetailDTO, user, post, postAnswer);
+        Poll_PostDetail postDetail = new Poll_PostDetail(postDetailDTO, user, post, postAnswer);
 
-            post.addPostDetail(postDetail);
+        post.addPostDetail(postDetail);
 
-            entityManager.persist(postDetail);
-        } catch (Exception e) {
-            throw new IllegalArgumentException();
-        }
+        entityManager.persist(postDetail);
     }
     //</editor-fold>
 
     //<editor-fold desc="TEXT">
     public void addTextPostDetails(Text_PostDetailDTO postDetailDTO) {
-        try {
-            BoastUser user = entityManager.find(BoastUser.class, postDetailDTO.getCreatorId());
-            Text_Post post = entityManager.find(Text_Post.class, postDetailDTO.getPostId());
-            if (user == null || post == null) throw new IllegalArgumentException();
+        BoastUser user = entityManager.find(BoastUser.class, postDetailDTO.getCreatorId());
+        Text_Post post = entityManager.find(Text_Post.class, postDetailDTO.getPostId());
+        if (user == null || post == null) throw new IllegalArgumentException();
 
-            Text_PostDetail postDetail = new Text_PostDetail(postDetailDTO, user, post, postDetailDTO.getText());
+        Text_PostDetail postDetail = new Text_PostDetail(postDetailDTO, user, post, postDetailDTO.getText());
 
-            post.addPostDetail(postDetail);
+        post.addPostDetail(postDetail);
 
-            entityManager.persist(postDetail);
-        } catch (Exception e) {
-            throw new IllegalArgumentException();
-        }
+        entityManager.persist(postDetail);
     }
     //</editor-fold>
 }

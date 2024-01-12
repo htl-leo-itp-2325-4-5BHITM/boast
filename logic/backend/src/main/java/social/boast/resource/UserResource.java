@@ -2,6 +2,7 @@ package social.boast.resource;
 
 import io.smallrye.openapi.runtime.io.mediatype.MediaTypeWriter;
 import jakarta.ws.rs.*;
+import social.boast.dto.user.RelationDTO;
 import social.boast.dto.user.UserDTO;
 import social.boast.repository.UserRepository;
 import jakarta.inject.Inject;
@@ -17,7 +18,7 @@ public class UserResource {
 
     @POST
     @Path("")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
     public Response createUser(UserDTO user) {
         try {
@@ -49,6 +50,20 @@ public class UserResource {
             return Response.ok(userRepository.loginUser(username)).status(200).build();
         } catch (Exception e) {
             return Response.status(404).build();
+        }
+    }
+
+    // RELATIONS
+    @POST
+    @Path("/relations")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response relation (RelationDTO relationDTO) {
+        try {
+            userRepository.relation(relationDTO);
+            return Response.ok().build();
+        } catch (Exception e) {
+            return Response.status(422).build();
         }
     }
 }

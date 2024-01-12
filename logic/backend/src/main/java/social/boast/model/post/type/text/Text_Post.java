@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import social.boast.dto.post.type.text.Text_PostDTO;
-import social.boast.model.Status;
+import social.boast.model.post.PostStatus;
 import social.boast.model.post.Post;
 import social.boast.model.post.PostType;
 import social.boast.model.post.type.PostType_Interface;
@@ -24,7 +24,7 @@ public class Text_Post extends Post implements PostType_Interface<Text_PostDetai
                 postDTO.getTitle(),
                 postDTO.getDefinition(),
                 user,
-                Status.valueOf(postDTO.getStatus()),
+                PostStatus.valueOf(postDTO.getStatus()),
                 PostType.TEXT);
     }
 

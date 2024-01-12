@@ -7,7 +7,7 @@ import social.boast.dto.post.type.poll.Poll_PostDetailDTO;
 import social.boast.dto.post.type.poll.Poll_TypeInfoDTO;
 import social.boast.dto.post.type.text.Text_PostDTO;
 import social.boast.dto.post.type.text.Text_PostDetailDTO;
-import social.boast.model.Status;
+import social.boast.model.post.PostStatus;
 import social.boast.model.post.Post;
 import social.boast.model.post.PostType;
 import social.boast.model.post.type.poll.Poll_Post;
@@ -120,46 +120,33 @@ public class PostRepository {
 
     }
 
-    public void updateStatus(Long id, Status status) {
-        try {
-            Post post = entityManager.find(Post.class, id);
-            post.setStatus(status);
-        } catch (Exception e) {
-            throw new IllegalArgumentException();
-        }
+    public void updateStatus(Long id, PostStatus status) {
+        Post post = entityManager.find(Post.class, id);
+        if (post == null) throw new IllegalArgumentException();
+        post.setStatus(status);
     }
 
     //<editor-fold desc="POLL">
     public void createPollPost(Poll_PostDTO postDTO) {
-        try {
-            BoastUser user = entityManager.find(BoastUser.class, postDTO.getCreatorId());
-            if (user == null) throw new IllegalArgumentException();
+        BoastUser user = entityManager.find(BoastUser.class, postDTO.getCreatorId());
+        if (user == null) throw new IllegalArgumentException();
 
-            Poll_Post post = new Poll_Post(postDTO, user);
-            for (Poll_PostAnswerDTO postAnswerDTO : postDTO.getTypeInfo().getPollAnswers()) {
-                Poll_PostAnswer postAnswer = new Poll_PostAnswer(post, postAnswerDTO.getTitle());
-                entityManager.persist(postAnswer);
-            }
-            entityManager.persist(post);
-        } catch (Exception e) {
-            throw new IllegalArgumentException();
+        Poll_Post post = new Poll_Post(postDTO, user);
+        for (Poll_PostAnswerDTO postAnswerDTO : postDTO.getTypeInfo().getPollAnswers()) {
+            Poll_PostAnswer postAnswer = new Poll_PostAnswer(post, postAnswerDTO.getTitle());
+            entityManager.persist(postAnswer);
         }
-
+        entityManager.persist(post);
     }
     //</editor-fold>
 
     //<editor-fold desc="TEXT">
     public void createTextPost(Text_PostDTO postDTO) {
-        try {
-            BoastUser user = entityManager.find(BoastUser.class, postDTO.getCreatorId());
-            if (user == null) throw new IllegalArgumentException();
+        BoastUser user = entityManager.find(BoastUser.class, postDTO.getCreatorId());
+        if (user == null) throw new IllegalArgumentException();
 
-            Text_Post post = new Text_Post(postDTO, user);
-            entityManager.persist(post);
-        } catch (Exception e) {
-            throw new IllegalArgumentException();
-        }
-
+        Text_Post post = new Text_Post(postDTO, user);
+        entityManager.persist(post);
     }
     //</editor-fold>
 }

@@ -1,10 +1,8 @@
 package social.boast.resource;
 
-import jakarta.json.JsonObject;
-import social.boast.dto.post.PostDTO;
 import social.boast.dto.post.type.poll.Poll_PostDTO;
 import social.boast.dto.post.type.text.Text_PostDTO;
-import social.boast.model.Status;
+import social.boast.model.post.PostStatus;
 import social.boast.repository.PostRepository;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -48,7 +46,7 @@ public class PostResource {
     @POST
     @Path("/{id}/status/{status}")
     @Transactional
-    public Response updateStatus(@PathParam("id") Long id, @PathParam("status") Status status) {
+    public Response updateStatus(@PathParam("id") Long id, @PathParam("status") PostStatus status) {
         System.out.printf("update Status: " + id + " Set: " + status.name());
         try {
             postRepository.updateStatus(id, status);

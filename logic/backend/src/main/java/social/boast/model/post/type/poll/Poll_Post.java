@@ -1,7 +1,7 @@
 package social.boast.model.post.type.poll;
 
 import social.boast.dto.post.type.poll.Poll_PostDTO;
-import social.boast.model.Status;
+import social.boast.model.post.PostStatus;
 import social.boast.model.post.Post;
 import social.boast.model.post.type.PostType_Interface;
 import social.boast.model.post.PostType;
@@ -26,7 +26,7 @@ public class Poll_Post extends Post implements PostType_Interface<Poll_PostDetai
                 postDTO.getTitle(),
                 postDTO.getDefinition(),
                 user,
-                Status.valueOf(postDTO.getStatus()),
+                PostStatus.valueOf(postDTO.getStatus()),
                 PostType.POLL);
     }
 

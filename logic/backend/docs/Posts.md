@@ -188,17 +188,12 @@ METHOD: CREATE
 
 //<editor-fold desc="{name}">
     public void create{name}Post({name}_PostDTO postDTO) {
-        try {
-            BoastUser user = entityManager.find(BoastUser.class, postDTO.getCreatorId());
-            if (user == null) throw new IllegalArgumentException();
+        BoastUser user = entityManager.find(BoastUser.class, postDTO.getCreatorId());
+        if (user == null) throw new IllegalArgumentException();
 
-            {name}_Post post = new {name}_Post(postDTO, user);
-            // OPTIONAL: if a extra class for the type specific data is used build the objects here (check createPollPost for reference)
-            entityManager.persist(post);
-        } catch (Exception e) {
-            throw new IllegalArgumentException();
-        }
-
+        {name}_Post post = new {name}_Post(postDTO, user);
+        // OPTIONAL: if a extra class for the type specific data is used build the objects here (check createPollPost for reference)
+        entityManager.persist(post);
     }
 //</editor-fold>
 
