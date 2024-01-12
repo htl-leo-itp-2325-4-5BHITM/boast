@@ -1,0 +1,19 @@
+name: Build backend
+run-name: building maven project
+on: [push]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: ls -l logic/backend
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin' # See 'Supported distributions' for available options
+          java-version: '21'
+          cache: 'maven'
+      - run: java -version
+      - name: build java backend
+        working-directory: ./logic/backend
+        run: | 
+          mvn -B package

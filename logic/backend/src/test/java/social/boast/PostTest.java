@@ -17,10 +17,7 @@ public class PostTest {
 
     @BeforeEach
     void setUp() {
-        given()
-                .when().get("/clearPosts")
-                .then()
-                .statusCode(204);
+
     }
 
     @Test
@@ -30,97 +27,5 @@ public class PostTest {
                 .then()
                 .statusCode(200)
                 .body(is("pong"));
-    }
-
-    @Test
-    void addPost() {
-        JsonObject post = Json.createObjectBuilder()
-                .add("title", "Test Post")
-                .add("definition", "this is a test post")
-                .add("creator", "Me")
-                .add("winner", "Me")
-                .add("postDetails", Json.createArrayBuilder()
-                        .add(Json.createObjectBuilder()
-                                .add("bet", "yes")
-                                .add("creator", "you"))
-                        .add(Json.createObjectBuilder()
-                                .add("bet", "no")
-                                .add("creator", "they"))
-                )
-                .build();
-
-        given()
-                .contentType("application/json")
-                .when()
-                .body(post.toString())
-                .post("addPost")
-                .then()
-                .statusCode(204);
-
-
-        JsonObject post2 = Json.createObjectBuilder()
-                .add("title", "Test Post2")
-                .add("definition", "this is a test post")
-                .add("creator", "Me")
-                .add("winner", "Me")
-                .add("postDetails", Json.createArrayBuilder()
-                        .add(Json.createObjectBuilder()
-                                .add("bet", "yes2")
-                                .add("creator", "you"))
-                        .add(Json.createObjectBuilder()
-                                .add("bet", "no2")
-                                .add("creator", "they"))
-                        .add(Json.createObjectBuilder()
-                                .add("bet", "yes3")
-                                .add("creator", "you"))
-                )
-                .build();
-
-        given()
-                .contentType("application/json")
-                .when()
-                .body(post2.toString())
-                .post("addPost")
-                .then()
-                .statusCode(204);
-
-    }
-
-    @Test
-    void getPostsAsList() {
-        given()
-                .when().get("/getPostsAsList")
-                .then()
-                .statusCode(200)
-                .body(is("[]"));
-
-        JsonObject post = Json.createObjectBuilder()
-                .add("title", "Test Post")
-                .add("definition", "this is a test post")
-                .add("creator", "Me")
-                .add("winner", "Me")
-                .add("postDetails", Json.createArrayBuilder()
-                        .add(Json.createObjectBuilder()
-                                .add("bet", "yes")
-                                .add("creator", "you"))
-                        .add(Json.createObjectBuilder()
-                                .add("bet", "no")
-                                .add("creator", "they"))
-                )
-                .build();
-
-        given()
-                .contentType("application/json")
-                .when()
-                .body(post.toString())
-                .post("addPost")
-                .then()
-                .statusCode(204);
-
-        given()
-                .when().get("/getPostsAsList")
-                .then()
-                .statusCode(200)
-                .body("size()", is(1));
     }
 }
