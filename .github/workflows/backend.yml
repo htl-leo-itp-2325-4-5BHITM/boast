@@ -1,4 +1,4 @@
-name: Build backend
+name: backend
 run-name: building maven project
 on: [push]
 jobs:
@@ -9,7 +9,7 @@ jobs:
       - run: ls -l logic/backend
       - uses: actions/setup-java@v4
         with:
-          distribution: 'temurin' # See 'Supported distributions' for available options
+          distribution: 'temurin'
           java-version: '21'
           cache: 'maven'
       - run: java -version
