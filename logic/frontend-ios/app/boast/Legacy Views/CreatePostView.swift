@@ -35,9 +35,11 @@ struct CreatePostView: View {
                         typeInfo.append("")
                     }
                     Button(action: {
-                        focusedField = nil
-                        if typeInfo.count > 2 {
-                            typeInfo.removeLast()
+                        Task {
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                            if typeInfo.count > 2 {
+                                await typeInfo.removeLast()
+                            }
                         }
                     }) {
                         Text("Remove Answer")

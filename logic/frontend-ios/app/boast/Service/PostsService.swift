@@ -44,7 +44,6 @@ func updateStatus(postId: Int, postStatus: Status) async {
         request.httpMethod = "POST"
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             let statusCode = (response as! HTTPURLResponse).statusCode
-            print(statusCode)
         }
         task.resume()
     }
@@ -105,7 +104,6 @@ func createPost(createdOn: String, title: String, definition: String, creatorId:
     request.httpBody = json
     let task = URLSession.shared.dataTask(with: request) { data, response, error in
         var statusCode = (response as! HTTPURLResponse).statusCode
-        print(statusCode)
     }
     task.resume()
 }

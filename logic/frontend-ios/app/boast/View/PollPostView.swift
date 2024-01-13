@@ -25,7 +25,6 @@ struct PollPostView: View {
                     .onChange(of: postStatus) {
                         Task {
                             do {
-                                print(post.postId, postStatus)
                                 await updateStatus(postId: post.postId, postStatus: postStatus)
                             }
                         }
