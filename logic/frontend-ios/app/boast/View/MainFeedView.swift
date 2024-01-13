@@ -4,6 +4,7 @@ import SwiftUI
 
 struct MainFeedView: View {
     @State var postFeed = [Int]()
+    @ObservedObject var viewModel: PostViewModel
     var body: some View {
         NavigationView{
             ScrollView {
@@ -11,8 +12,7 @@ struct MainFeedView: View {
                     .font(.largeTitle)
                 
                 ForEach(postFeed, id: \.self) { post in
-                    Spacer(minLength: 30)
-                    NavigationLink(destination: PostView(postId: post)) {
+                    NavigationLink(destination: Post(postId: post)) {
                         Post(postId: post)
                     }
                     .buttonStyle(.plain)
@@ -32,5 +32,5 @@ struct MainFeedView: View {
 }
 
 #Preview {
-    MainFeedView()
+    MainFeedView(viewModel: PostViewModel(model: PostModel()))
 }

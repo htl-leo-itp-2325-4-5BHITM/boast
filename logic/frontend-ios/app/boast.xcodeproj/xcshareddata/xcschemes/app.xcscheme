@@ -17,7 +17,7 @@
                BlueprintIdentifier = "1FDB138A2B074DF500AC1089"
                BuildableName = "boast.app"
                BlueprintName = "boast"
-               ReferencedContainer = "container:app.xcodeproj">
+               ReferencedContainer = "container:boast.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,7 +46,7 @@
             BlueprintIdentifier = "1FDB138A2B074DF500AC1089"
             BuildableName = "boast.app"
             BlueprintName = "boast"
-            ReferencedContainer = "container:app.xcodeproj">
+            ReferencedContainer = "container:boast.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -63,7 +63,7 @@
             BlueprintIdentifier = "1FDB138A2B074DF500AC1089"
             BuildableName = "boast.app"
             BlueprintName = "boast"
-            ReferencedContainer = "container:app.xcodeproj">
+            ReferencedContainer = "container:boast.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

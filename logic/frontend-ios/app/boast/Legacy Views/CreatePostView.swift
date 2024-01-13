@@ -10,40 +10,37 @@ struct CreatePostView: View {
     @State var status:Status = .OPEN
     let type:PostType = .POLL
     @State var typeInfo: [String] = ["",""]
+    @FocusState private var focusedField: String?
     
     @State var error = ""
     
     var body: some View {
         VStack{
-            //TODO
             Section(header: Text("Create Bet").font(.largeTitle)) {
                 Form{
-                    /*
-                    Picker("Status: ", selection: $status) {
-                        ForEach(Status.allCases, id: \.self) { val in
-                            Text(val.rawValue)
-                                .tag(val)
-                        }
-                    }
-                     */
-                    
                     TextField("Title", text: $title)
                     TextField("Definition", text: $definition, axis: .vertical)
                         .lineLimit(3, reservesSpace: true)
                     
-                    ForEach(0..<typeInfo.count, id: \.self) { pos in
-                        Section(header: Text("Option \(pos+1): ")) {
-                            TextField("Answer: ", text: $typeInfo[pos])
+                    List {
+                        ForEach(0..<typeInfo.count, id: \.self) { pos in
+                            Section(header: Text("Option \(pos+1): ")) {
+                                TextField("Answer: ", text: $typeInfo[pos])
+                                    .focused($focusedField, equals: "\(pos+1)")
+                            }
                         }
                     }
                     
                     Button("Add Answer") {
                         typeInfo.append("")
                     }
-                    Button("Remove Answer") {
+                    Button(action: {
+                        focusedField = nil
                         if typeInfo.count > 2 {
-                            typeInfo.popLast()
+                            typeInfo.removeLast()
                         }
+                    }) {
+                        Text("Remove Answer")
                     }
                 }
             }

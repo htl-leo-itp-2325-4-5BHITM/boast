@@ -3,7 +3,7 @@ import Foundation
 
 func loadPost(postId: Int) async -> PostModel {
     var post = PostModel()
-    let url = URL(string: "http://www.boast.social/api/posts/\(postId)")!
+    let url = URL(string: "https://www.boast.social/api/posts/\(postId)")!
     if let (data, _) = try? await URLSession.shared.data(from: url) {
             do {
                 let postType = try JSONDecoder().decode(TypeModel.self, from: data)
@@ -11,6 +11,8 @@ func loadPost(postId: Int) async -> PostModel {
                 switch type {
                     case .POLL:
                         post = try JSONDecoder().decode(Poll_PostModel.self, from: data)
+                    case .TEXT:
+                        post = try JSONDecoder().decode(Text_PostModel.self, from: data)
                     default:
                         break
                 }
@@ -26,7 +28,7 @@ func loadPost(postId: Int) async -> PostModel {
 
 func posts() async -> [Int] {
     var postList: [Int] = []
-    let url = URL(string: "http://www.boast.social/api/posts")!
+    let url = URL(string: "https://www.boast.social/api/posts")!
     if let (data, _) = try? await URLSession.shared.data(from: url) {
         postList = try! JSONDecoder().decode([Int].self, from: data)
     } else {
@@ -37,11 +39,12 @@ func posts() async -> [Int] {
 
 func updateStatus(postId: Int, postStatus: Status) async {
     if postId != -1 {
-        let url = URL(string: "http://www.boast.social/api/posts/\(postId)/status/\(postStatus)")!
+        let url = URL(string: "https://www.boast.social/api/posts/\(postId)/status/\(postStatus)")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             let statusCode = (response as! HTTPURLResponse).statusCode
+            print(statusCode)
         }
         task.resume()
     }
@@ -53,7 +56,7 @@ func createPostDetail(creatorId: Int, postId: Int, pollAnswerId: Int) -> Int {
     print("\(postId)")
     print("\(pollAnswerId)")
     if (creatorId != -1 && pollAnswerId != -1) {
-        let url = URL(string: "http://www.boast.social/api/post-details/poll")!
+        let url = URL(string: "https://www.boast.social/api/post-details/poll")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         /*
@@ -96,7 +99,7 @@ func createPost(createdOn: String, title: String, definition: String, creatorId:
     
     
     let json = try? JSONEncoder().encode(post)
-    let url = URL(string: "http://www.boast.social/api/posts/poll")!
+    let url = URL(string: "https://www.boast.social/api/posts/poll")!
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
     request.httpBody = json

@@ -1,10 +1,11 @@
 
+
 import Foundation
 
-class PostViewModel: ObservableObject {
-    @Published private(set) var model: PostModel
+class TextPostViewModel: ObservableObject {
+    @Published private(set) var model: Text_PostModel
     
-    init(model: PostModel) {
+    init(model: Text_PostModel) {
         self.model = model
     }
     
@@ -46,11 +47,10 @@ class PostViewModel: ObservableObject {
             model.status!
         }
     }
-    
-    var type: PostType {
+ 
+    var postDetails: [Poll_PostDetailModel] {
         get {
-            model.type!
+            model.postDetails!
         }
     }
-    
 }

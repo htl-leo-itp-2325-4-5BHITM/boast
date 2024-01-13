@@ -4,54 +4,29 @@ import SwiftUI
 
 struct Post: View {
     var postId: Int
-    
-    @State var post: PollPostViewModel?
-    @State var dict = [Int:String]()
+    @State var data: PostModel?
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(post?.creatorName ?? "")
-                    Text(post?.createdOn ?? "")
-                }
-                Spacer()
-                Text("\((post?.status ?? .OPEN).rawValue)")
-            }
-            //.background(Color.green.opacity(0.1))
-            
-            VStack(alignment: .leading) {
-                Text(post?.title ?? "")
-                Text(post?.definiton ?? "")
-            }
-            //.background(Color.red.opacity(0.1))
-
-            VStack(alignment: .leading) {
-                ForEach(post?.postDetails ?? [Poll_PostDetailModel](), id: \.postDetailsId) { detail in
-                    HStack {
-                        Text(detail.createdOn ?? "")
-                        Text("\(detail.creatorName ?? "") :")
-                        Text("\(dict[detail.poll_answerId ?? 0] ?? "")")
-                    }
-                }
-            }
-            //.background(Color.yellow.opacity(0.1))
-        }.task {
-            do {
-                post = try await PollPostViewModel(model: loadPost(postId: postId) as! Poll_PostModel)
-                for answer in post?.typeInfo.pollAnswers ?? [Poll_PostAnswerModel]() {
-                    dict.updateValue(answer.title ?? "", forKey: answer.poll_answerId ?? 0)
-                }
-            }catch {
-                print("too fast")
+        VStack {
+            switch data?.type {
+                case .TEXT:
+                    let post = TextPostViewModel(model: data as! Text_PostModel)
+                    TextPostView(post: post)
+                case .POLL:
+                    let post = PollPostViewModel(model: data as! Poll_PostModel)
+                    PollPostView(post: post)
+                default:
+                    Text("oof")
             }
         }
-        .frame(width: UIScreen.main.bounds.width - 20)
-        //.background(Color.black.opacity(0.1))
-
+        .task {
+            do {
+                data = await loadPost(postId: postId)
+            }
+        }
     }
+    
 }
 
 #Preview {
-    Post(postId: 100)
+    Post(postId: 1)
 }
-

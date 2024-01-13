@@ -2,7 +2,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @ObservedObject var viewModel = UserViewModel(model: UserModel())
+    @ObservedObject var viewModel: UserViewModel
     @State var userId: Int = -1
     @State var goNext: Bool = false
     var body: some View {
@@ -21,19 +21,6 @@ struct LoginView: View {
                             }
                         ))
                     }
-                    /*
-                    Section(header: Text("Email:")) {
-                        TextField("Email", text: Binding(
-                            get: {
-                                viewModel.email
-                            },
-                            set: {
-                                if $0 != viewModel.email {
-                                    viewModel.dataChanged(username: $0)
-                                }
-                            }
-                        ))
-                    }*/
                 }
                 Button("Submit", action: {
                     Task {
@@ -52,5 +39,5 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView()
+    LoginView(viewModel: UserViewModel(model: UserModel()))
 }
