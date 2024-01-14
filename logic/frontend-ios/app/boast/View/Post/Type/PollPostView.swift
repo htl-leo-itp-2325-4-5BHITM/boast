@@ -7,6 +7,8 @@ struct PollPostView: View {
     @State var postStatus:Status = .OPEN
     @State var answerOption = ""
     @State var dict = [Int:String]()
+    @State var answerCreatorIds = [Int]()
+
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -52,9 +54,35 @@ struct PollPostView: View {
             }
             //.background(Color.yellow.opacity(0.1))
 
+            
+            VStack(alignment: .trailing) {
+                if(post.creatorId != UserDefaults.standard.integer(forKey: "userId") && !answerCreatorIds.contains(UserDefaults.standard.integer(forKey: "userId")) && post.status == .OPEN){
+                    Picker("answers", selection: $answerOption) {
+                        Text("No Answer")
+                            .tag(-1)
+                        ForEach(Array(dict.values), id: \.self) { val in
+                            Text("\(val)")
+                                .tag(val)
+                        }
+                    }
+                    .onChange(of: answerOption) {
+                        Task {
+                            print(answerOption)
+                            do {
+                                let key = dict.first(where: { $0.value == answerOption})?.key
+                                let status = await createPostDetail(creatorId: UserDefaults.standard.integer(forKey: "userId"), postId: post.postId , pollAnswerId: key ?? -1)
+                            }
+                        }
+                    }
+                }
+            }
+            
         }.task {
             for answer in post.typeInfo.pollAnswers ?? [Poll_PostAnswerModel]() {
                 dict.updateValue(answer.title ?? "", forKey: answer.poll_answerId ?? 0)
+            }
+            for detail in post.postDetails {
+                answerCreatorIds.append(detail.creatorId ?? -1)
             }
             postStatus = post.status
         }

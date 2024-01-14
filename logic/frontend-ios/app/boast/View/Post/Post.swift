@@ -15,7 +15,7 @@ struct Post: View {
                     let post = PollPostViewModel(model: data as! Poll_PostModel)
                     PollPostView(post: post)
                 default:
-                    Text("oof")
+                    Text("loading...")
             }
         }
         .task {
@@ -28,5 +28,5 @@ struct Post: View {
 }
 
 #Preview {
-    Post(postId: 1)
+    Post(postId: 100)
 }

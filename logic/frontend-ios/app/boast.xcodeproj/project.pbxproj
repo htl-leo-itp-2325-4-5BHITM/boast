@@ -15,7 +15,8 @@
 		1F0809982B2DE852007131F8 /* Poll_PostDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0809972B2DE852007131F8 /* Poll_PostDetailModel.swift */; };
 		1F08099A2B2DE868007131F8 /* Poll_PostAnswerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0809992B2DE868007131F8 /* Poll_PostAnswerModel.swift */; };
 		1F08099C2B2DE873007131F8 /* Poll_TypeInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F08099B2B2DE873007131F8 /* Poll_TypeInfoModel.swift */; };
-		1F66776D2B331FE70082CA15 /* CreatePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F66776C2B331FE70082CA15 /* CreatePostView.swift */; };
+		1F0816622B535C1E006D735B /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0816612B535C1E006D735B /* Create.swift */; };
+		1F66776D2B331FE70082CA15 /* CreatePollPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F66776C2B331FE70082CA15 /* CreatePollPost.swift */; };
 		1F6AFF922B2E07C0007BDB48 /* PollPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6AFF912B2E07C0007BDB48 /* PollPostViewModel.swift */; };
 		1F6AFF962B2E0CF8007BDB48 /* MainFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6AFF952B2E0CF8007BDB48 /* MainFeedView.swift */; };
 		1F6AFF982B2E0D68007BDB48 /* PostsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6AFF972B2E0D68007BDB48 /* PostsService.swift */; };
@@ -31,7 +32,6 @@
 		1FDB13932B074DF600AC1089 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FDB13922B074DF600AC1089 /* Assets.xcassets */; };
 		1FDB13962B074DF600AC1089 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FDB13952B074DF600AC1089 /* Preview Assets.xcassets */; };
 		1FDD244D2B0BC0DD0062DC3E /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDD244C2B0BC0DD0062DC3E /* UserModel.swift */; };
-		1FF080DC2B308643000E33AE /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF080DB2B308643000E33AE /* PostView.swift */; };
 		1FF080DE2B3086A7000E33AE /* PollPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF080DD2B3086A7000E33AE /* PollPostView.swift */; };
 		1FF8F69F2B52E19600F82B3E /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF8F69E2B52E19600F82B3E /* Post.swift */; };
 		1FF8F6A22B5339A400F82B3E /* TextPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF8F6A12B5339A400F82B3E /* TextPostView.swift */; };
@@ -47,7 +47,8 @@
 		1F0809972B2DE852007131F8 /* Poll_PostDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Poll_PostDetailModel.swift; sourceTree = "<group>"; };
 		1F0809992B2DE868007131F8 /* Poll_PostAnswerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Poll_PostAnswerModel.swift; sourceTree = "<group>"; };
 		1F08099B2B2DE873007131F8 /* Poll_TypeInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Poll_TypeInfoModel.swift; sourceTree = "<group>"; };
-		1F66776C2B331FE70082CA15 /* CreatePostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostView.swift; sourceTree = "<group>"; };
+		1F0816612B535C1E006D735B /* Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
+		1F66776C2B331FE70082CA15 /* CreatePollPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePollPost.swift; sourceTree = "<group>"; };
 		1F6AFF912B2E07C0007BDB48 /* PollPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollPostViewModel.swift; sourceTree = "<group>"; };
 		1F6AFF952B2E0CF8007BDB48 /* MainFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeedView.swift; sourceTree = "<group>"; };
 		1F6AFF972B2E0D68007BDB48 /* PostsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsService.swift; sourceTree = "<group>"; };
@@ -65,7 +66,6 @@
 		1FDB13922B074DF600AC1089 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1FDB13952B074DF600AC1089 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1FDD244C2B0BC0DD0062DC3E /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
-		1FF080DB2B308643000E33AE /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		1FF080DD2B3086A7000E33AE /* PollPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollPostView.swift; sourceTree = "<group>"; };
 		1FF8F69E2B52E19600F82B3E /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		1FF8F6A12B5339A400F82B3E /* TextPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPostView.swift; sourceTree = "<group>"; };
@@ -133,13 +133,24 @@
 			path = Poll;
 			sourceTree = "<group>";
 		};
-		1F6AFF902B2DEDAC007BDB48 /* Legacy Views */ = {
+		1F08165F2B535BDB006D735B /* Post */ = {
 			isa = PBXGroup;
 			children = (
-				1FF080DB2B308643000E33AE /* PostView.swift */,
-				1F66776C2B331FE70082CA15 /* CreatePostView.swift */,
+				1FF8F69E2B52E19600F82B3E /* Post.swift */,
+				1F0816612B535C1E006D735B /* Create.swift */,
+				1F0816602B535BE5006D735B /* Type */,
 			);
-			path = "Legacy Views";
+			path = Post;
+			sourceTree = "<group>";
+		};
+		1F0816602B535BE5006D735B /* Type */ = {
+			isa = PBXGroup;
+			children = (
+				1F66776C2B331FE70082CA15 /* CreatePollPost.swift */,
+				1FF080DD2B3086A7000E33AE /* PollPostView.swift */,
+				1FF8F6A12B5339A400F82B3E /* TextPostView.swift */,
+			);
+			path = Type;
 			sourceTree = "<group>";
 		};
 		1F72C7B82B4FCC49000415C2 /* Text */ = {
@@ -173,7 +184,6 @@
 				1F0809852B2DE305007131F8 /* Model */,
 				1FDF87882B2DECA3004F298C /* ViewModel */,
 				1FDF87892B2DECC0004F298C /* Service */,
-				1F6AFF902B2DEDAC007BDB48 /* Legacy Views */,
 				1FF8F6A02B531CF100F82B3E /* View */,
 				1FDB138E2B074DF500AC1089 /* BoastApp.swift */,
 				1FDB13922B074DF600AC1089 /* Assets.xcassets */,
@@ -214,12 +224,10 @@
 		1FF8F6A02B531CF100F82B3E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1F08165F2B535BDB006D735B /* Post */,
 				1FB05C7A2B30AB4000B3BD02 /* LoginView.swift */,
 				1FBCA2C52B33A6AE00548070 /* AllViews.swift */,
 				1F6AFF952B2E0CF8007BDB48 /* MainFeedView.swift */,
-				1FF8F69E2B52E19600F82B3E /* Post.swift */,
-				1FF080DD2B3086A7000E33AE /* PollPostView.swift */,
-				1FF8F6A12B5339A400F82B3E /* TextPostView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -305,14 +313,14 @@
 				1F0809932B2DE741007131F8 /* PostType.swift in Sources */,
 				1FF8F69F2B52E19600F82B3E /* Post.swift in Sources */,
 				1F08099C2B2DE873007131F8 /* Poll_TypeInfoModel.swift in Sources */,
-				1F66776D2B331FE70082CA15 /* CreatePostView.swift in Sources */,
+				1F66776D2B331FE70082CA15 /* CreatePollPost.swift in Sources */,
 				1F08098B2B2DE4FF007131F8 /* PostDetailModel.swift in Sources */,
 				1FDB138F2B074DF500AC1089 /* BoastApp.swift in Sources */,
 				1F72C7BA2B4FCC93000415C2 /* Text_PostModel.swift in Sources */,
 				1FB88F792B2F89B100F9D8F2 /* PostViewModel.swift in Sources */,
-				1FF080DC2B308643000E33AE /* PostView.swift in Sources */,
 				1FB05C7B2B30AB4000B3BD02 /* LoginView.swift in Sources */,
 				1FB05C7F2B30AC4C00B3BD02 /* UserViewModel.swift in Sources */,
+				1F0816622B535C1E006D735B /* Create.swift in Sources */,
 				1F08098F2B2DE5C8007131F8 /* Status.swift in Sources */,
 				1FF8F6A42B533A3A00F82B3E /* TextPostViewModel.swift in Sources */,
 				1F6AFF982B2E0D68007BDB48 /* PostsService.swift in Sources */,

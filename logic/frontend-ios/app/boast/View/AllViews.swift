@@ -12,7 +12,7 @@ struct AllViews: View {
                 .tabItem {
                     Image(systemName: "house")
                 }
-            CreatePostView()
+            Create()
                 .tabItem {
                     Image(systemName: "plus")
                 }

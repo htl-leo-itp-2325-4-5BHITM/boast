@@ -1,9 +1,7 @@
 
 import SwiftUI
 
-struct CreatePostView: View {
-    
-    @State var createdOn: String = ""
+struct CreatePollPost: View {
     @State var title: String = ""
     @State var definition: String = ""
     let creatorId = UserDefaults.standard.integer(forKey: "userId")
@@ -64,20 +62,16 @@ struct CreatePostView: View {
                                 error = ""
                             }
                         }
-                        await createPost(createdOn: createdOn, title: title, definition: definition, creatorId: creatorId, status: status, type: type, typeInfo: typeInfo)
+                        await createPost(title: title, definition: definition, creatorId: creatorId, status: status, type: type, typeInfo: typeInfo)
                     }else {
                         error = "TextFields must not be empty."
                     }
                 }
             })
-        }.task {
-            let datef = DateFormatter()
-            datef.dateFormat = "yyyy-MM-dd"
-            createdOn = datef.string(from: Date.now)
         }
     }
 }
 
 #Preview {
-    CreatePostView()
+    CreatePollPost()
 }

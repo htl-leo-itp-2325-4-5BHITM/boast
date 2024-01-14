@@ -5,21 +5,21 @@ func loadPost(postId: Int) async -> PostModel {
     var post = PostModel()
     let url = URL(string: "https://www.boast.social/api/posts/\(postId)")!
     if let (data, _) = try? await URLSession.shared.data(from: url) {
-            do {
-                let postType = try JSONDecoder().decode(TypeModel.self, from: data)
-                let type = PostType(rawValue: postType.type!)
-                switch type {
-                    case .POLL:
-                        post = try JSONDecoder().decode(Poll_PostModel.self, from: data)
-                    case .TEXT:
-                        post = try JSONDecoder().decode(Text_PostModel.self, from: data)
-                    default:
-                        break
-                }
-            } catch {
-                print(error)
-                print("failed to decode")
+        do {
+            let postType = try JSONDecoder().decode(TypeModel.self, from: data)
+            let type = PostType(rawValue: postType.type!)
+            switch type {
+            case .POLL:
+                post = try JSONDecoder().decode(Poll_PostModel.self, from: data)
+            case .TEXT:
+                post = try JSONDecoder().decode(Text_PostModel.self, from: data)
+            default:
+                break
             }
+        } catch {
+            print(error)
+            print("failed to decode")
+        }
     } else {
         print("failed to load url")
     }
@@ -49,28 +49,25 @@ func updateStatus(postId: Int, postStatus: Status) async {
     }
 }
 
+//TODO
+
 func createPostDetail(creatorId: Int, postId: Int, pollAnswerId: Int) -> Int {
     var statusCode: Int?
-    print("\(creatorId)")
-    print("\(postId)")
-    print("\(pollAnswerId)")
+    print(creatorId, postId, pollAnswerId)
     if (creatorId != -1 && pollAnswerId != -1) {
         let url = URL(string: "https://www.boast.social/api/post-details/poll")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        /*
-         Sehr geehrter Herr Professor,
-         
-         das gesamte Boast-Team entschuldigt sich hiermit aufrichtig für diese unten angeführte Zeile Code.
-         Wir hoffen Sie hatten schöne Ferien und ein frohes neues Jahr!
-         Falls wir Ihre Ferien durch diesen Anblick zerstört haben tut uns das herzlich Leid... wir hoffen auf baldige Besserung.
-         
-         Mit freundlichen Grüßen
-         Ihr Boast-Team
-         */
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.httpBody = Data("{\"creator\": \(creatorId),\"postId\": \(postId),\"pollAnswerId\": \(pollAnswerId)}".utf8) // :(
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            statusCode = (response as! HTTPURLResponse).statusCode
+            print((response as! HTTPURLResponse).statusCode)
+            statusCode = (response as! HTTPURLResponse).statusCode 
+            if let error = error {
+                print(error)
+                return
+            }
         }
         task.resume()
     }
@@ -78,9 +75,8 @@ func createPostDetail(creatorId: Int, postId: Int, pollAnswerId: Int) -> Int {
 }
 
 // DRINGENST DTO KLASSEN IMPLEMENTIEREN
-func createPost(createdOn: String, title: String, definition: String, creatorId: Int, status: Status, type: PostType, typeInfo: [String]) async {
+func createPost(title: String, definition: String, creatorId: Int, status: Status, type: PostType, typeInfo: [String]) async {
     let post = Poll_PostModel()
-    post.createdOn = createdOn
     post.title = title
     post.definition = definition
     post.creatorId = creatorId
