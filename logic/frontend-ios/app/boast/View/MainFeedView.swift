@@ -2,7 +2,7 @@
 
 import SwiftUI
 
-var reloadSingleView: Int = 0
+
 
 struct MainFeedView: View {
     @State var postFeed = [Int]()
@@ -15,13 +15,16 @@ struct MainFeedView: View {
                 
                 ForEach(postFeed, id: \.self) { post in
                     NavigationLink(destination: Post(postId: post)) {
-                        Post(postId: post)
+                        PostPreview(postId: post)
                     }
                     .buttonStyle(.plain)
                     Spacer(minLength: 30)
                 }
             }
             Spacer(minLength: 40)
+        }
+        .refreshable {
+            postFeed = await posts()
         }
         .task{
             do {

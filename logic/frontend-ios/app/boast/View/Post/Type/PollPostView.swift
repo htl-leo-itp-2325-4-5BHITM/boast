@@ -28,7 +28,7 @@ struct PollPostView: View {
                     .onChange(of: postStatus) {
                         Task {
                             do {
-                                await updateStatus(postId: post.postId, postStatus: postStatus)
+                                postStatus = await updateStatus(postId: post.postId, postStatus: postStatus)
                                 post.dataChanged(status: postStatus)
                             }
                         }
@@ -89,8 +89,7 @@ struct PollPostView: View {
             postStatus = post.status
         }
         .frame(width: UIScreen.main.bounds.width - 20)
-        
-        //.background(Color.black.opacity(0.1))
-        
+    
     }
 }
+

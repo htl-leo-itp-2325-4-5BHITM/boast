@@ -30,7 +30,9 @@ func posts() async -> [Int] {
     var postList: [Int] = []
     let url = URL(string: "https://www.boast.social/api/posts")!
     if let (data, _) = try? await URLSession.shared.data(from: url) {
-        postList = try! JSONDecoder().decode([Int].self, from: data)
+        do {
+            postList = try JSONDecoder().decode([Int].self, from: data)
+        }catch{}
     } else {
         print("failed to load url")
     }
@@ -94,12 +96,13 @@ func createPost(title: String, definition: String, creatorId: Int, status: Statu
     let typeInfo = Poll_TypeInfoModel()
     typeInfo.pollAnswers = pollAnswers
     post.typeInfo = typeInfo
-    
-    
+        
     let json = try? JSONEncoder().encode(post)
     let url = URL(string: "https://www.boast.social/api/posts/poll")!
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
+    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.addValue("application/json", forHTTPHeaderField: "Accept")
     request.httpBody = json
     let task = URLSession.shared.dataTask(with: request) { data, response, error in
         var statusCode = (response as! HTTPURLResponse).statusCode

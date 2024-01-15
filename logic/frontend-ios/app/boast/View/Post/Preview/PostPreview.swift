@@ -2,18 +2,16 @@
 
 import SwiftUI
 
-struct Post: View {
+struct PostPreview: View {
     var postId: Int
     @State var data: PostModel?
     var body: some View {
         VStack {
             switch data?.type {
                 case .TEXT:
-                    var post = TextPostViewModel(model: data as! Text_PostModel)
-                    TextPostView(post: post)
+                    TextPostPreview(post: data as? Text_PostModel)
                 case .POLL:
-                    var post = PollPostViewModel(model: data as! Poll_PostModel)
-                    PollPostView(post: post)
+                    PollPostPreview(post: data as? Poll_PostModel)
                 default:
                     Text("loading...")
             }
@@ -25,5 +23,5 @@ struct Post: View {
 }
 
 #Preview {
-    Post(postId: 110)
+    PostPreview(postId: 110)
 }
