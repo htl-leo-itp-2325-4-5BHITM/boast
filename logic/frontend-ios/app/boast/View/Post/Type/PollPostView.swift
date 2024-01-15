@@ -3,7 +3,7 @@
 import SwiftUI
 
 struct PollPostView: View {
-    var post: PollPostViewModel
+    @ObservedObject var post: PollPostViewModel
     @State var postStatus:Status = .OPEN
     @State var answerOption = ""
     @State var dict = [Int:String]()
@@ -17,6 +17,7 @@ struct PollPostView: View {
                     Text(post.createdOn)
                 }
                 Spacer()
+                
                 if(post.creatorId == UserDefaults.standard.integer(forKey: "userId")){
                     Picker("Status", selection: $postStatus) {
                         ForEach(Status.allCases, id: \.self) { val in
@@ -28,6 +29,7 @@ struct PollPostView: View {
                         Task {
                             do {
                                 await updateStatus(postId: post.postId, postStatus: postStatus)
+                                post.dataChanged(status: postStatus)
                             }
                         }
                     }
@@ -67,10 +69,10 @@ struct PollPostView: View {
                     }
                     .onChange(of: answerOption) {
                         Task {
-                            print(answerOption)
                             do {
                                 let key = dict.first(where: { $0.value == answerOption})?.key
                                 let status = await createPostDetail(creatorId: UserDefaults.standard.integer(forKey: "userId"), postId: post.postId , pollAnswerId: key ?? -1)
+                                answerCreatorIds.append(UserDefaults.standard.integer(forKey: "userId"))
                             }
                         }
                     }
@@ -87,6 +89,7 @@ struct PollPostView: View {
             postStatus = post.status
         }
         .frame(width: UIScreen.main.bounds.width - 20)
+        
         //.background(Color.black.opacity(0.1))
         
     }

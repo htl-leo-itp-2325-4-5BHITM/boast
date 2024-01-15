@@ -37,7 +37,8 @@ func posts() async -> [Int] {
     return postList
 }
 
-func updateStatus(postId: Int, postStatus: Status) async {
+func updateStatus(postId: Int, postStatus: Status) async -> Status {
+    var status: Status?
     if postId != -1 {
         let url = URL(string: "https://www.boast.social/api/posts/\(postId)/status/\(postStatus)")!
         var request = URLRequest(url: url)
@@ -46,7 +47,9 @@ func updateStatus(postId: Int, postStatus: Status) async {
             let statusCode = (response as! HTTPURLResponse).statusCode
         }
         task.resume()
+        status = postStatus
     }
+    return status ?? .CANCELED
 }
 
 //TODO

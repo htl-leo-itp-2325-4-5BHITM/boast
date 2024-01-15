@@ -2,6 +2,8 @@
 
 import SwiftUI
 
+var reloadSingleView: Int = 0
+
 struct MainFeedView: View {
     @State var postFeed = [Int]()
     @ObservedObject var viewModel: PostViewModel
@@ -23,9 +25,7 @@ struct MainFeedView: View {
         }
         .task{
             do {
-                try postFeed = try await posts()
-            } catch{
-                print("error")
+                postFeed = await posts()
             }
         }
     }
