@@ -12,7 +12,6 @@ struct MainFeedView: View {
             ScrollView {
                 Text("Main Feed")
                     .font(.largeTitle)
-                
                 ForEach(postFeed, id: \.self) { post in
                     NavigationLink(destination: Post(postId: post)) {
                         PostPreview(postId: post)

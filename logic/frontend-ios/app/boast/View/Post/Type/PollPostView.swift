@@ -8,6 +8,7 @@ struct PollPostView: View {
     @State var answerOption = ""
     @State var dict = [Int:String]()
     @State var answerCreatorIds = [Int]()
+    @State var betEntry = ""
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -46,16 +47,17 @@ struct PollPostView: View {
             //.background(Color.red.opacity(0.1))
             
             VStack(alignment: .leading) {
-                ForEach(post.postDetails, id: \.postDetailsId) { detail in
+                ForEach(post.postDetails, id: \.creatorId) { detail in
                     HStack {
                         Text(detail.createdOn ?? "")
                         Text("\(detail.creatorName ?? "") :")
                         Text("\(dict[detail.poll_answerId ?? 0] ?? "")")
                     }
                 }
+                HStack {
+                    Text(betEntry)
+                }
             }
-            //.background(Color.yellow.opacity(0.1))
-
             
             VStack(alignment: .trailing) {
                 if(post.creatorId != UserDefaults.standard.integer(forKey: "userId") && !answerCreatorIds.contains(UserDefaults.standard.integer(forKey: "userId")) && post.status == .OPEN){
@@ -72,6 +74,10 @@ struct PollPostView: View {
                             do {
                                 let key = dict.first(where: { $0.value == answerOption})?.key
                                 let status = await createPostDetail(creatorId: UserDefaults.standard.integer(forKey: "userId"), postId: post.postId , pollAnswerId: key ?? -1)
+                                let df = DateFormatter()
+                                df.dateFormat = "dd.MM.yyyy"
+                                betEntry = "\(df.string(from: Date.now))  \(UserDefaults.standard.string(forKey: "userName") ?? "") : \(answerOption)"
+                                                                
                                 answerCreatorIds.append(UserDefaults.standard.integer(forKey: "userId"))
                             }
                         }

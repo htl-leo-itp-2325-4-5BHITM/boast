@@ -27,6 +27,7 @@ struct LoginView: View {
                         userId = try await userLogin(userName: viewModel.username)
                         if userId != -1 {
                             UserDefaults.standard.set(userId, forKey: "userId")
+                            UserDefaults.standard.set(viewModel.username, forKey: "userName")
                             goNext = true
                         }
                     }
