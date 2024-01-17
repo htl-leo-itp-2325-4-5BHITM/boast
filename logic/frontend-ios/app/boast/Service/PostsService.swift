@@ -79,8 +79,31 @@ func createPostDetail(creatorId: Int, postId: Int, pollAnswerId: Int) -> Int {
     return statusCode ?? -1
 }
 
+func createTextPostDetail(creatorId: Int, postId: Int, text: String) -> Int {
+    var statusCode: Int?
+    print(creatorId, postId, text)
+    if (creatorId != -1 && text != "") {
+        let url = URL(string: "https://www.boast.social/api/post-details/text")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.httpBody = Data("{\"creatorId\": \(creatorId), \"postId\": \(postId),\"text\": \"\(text)\"}".utf8) // :(
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            statusCode = (response as! HTTPURLResponse).statusCode
+            if let error = error {
+                print(error)
+                return
+            }
+        }
+        task.resume()
+    }
+    return statusCode ?? -1
+}
+
 // DRINGENST DTO KLASSEN IMPLEMENTIEREN
-func createPollPost(title: String, definition: String, creatorId: Int, status: Status, type: PostType, typeInfo: [String]) async {
+func createPollPost(title: String, definition: String, creatorId: Int, status: Status, type: PostType, typeInfo: [String]) async -> Int {
+    var statuscode: Int?
     let post = Poll_PostModel()
     post.title = title
     post.definition = definition
@@ -105,9 +128,10 @@ func createPollPost(title: String, definition: String, creatorId: Int, status: S
     request.addValue("application/json", forHTTPHeaderField: "Accept")
     request.httpBody = json
     let task = URLSession.shared.dataTask(with: request) { data, response, error in
-        var statusCode = (response as! HTTPURLResponse).statusCode
+        statuscode = (response as! HTTPURLResponse).statusCode
     }
     task.resume()
+    return statuscode ?? -1
 }
 
 func createTextPost(title: String, definition: String, creatorId: Int) async {

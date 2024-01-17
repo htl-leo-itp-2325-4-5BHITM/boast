@@ -3,7 +3,7 @@
 import Foundation
 
 class Text_PostModel: PostModel {
-    var postDetails: [Poll_PostDetailModel]?
+    var postDetails: [Text_PostDetailModel]?
     
     private enum CodingKeys: CodingKey {
         case postDetails
@@ -11,7 +11,7 @@ class Text_PostModel: PostModel {
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        postDetails = try container.decode([Poll_PostDetailModel].self, forKey: .postDetails)
+        postDetails = try container.decode([Text_PostDetailModel].self, forKey: .postDetails)
         try super.init(from: decoder)
     }
     

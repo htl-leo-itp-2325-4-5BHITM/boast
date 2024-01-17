@@ -14,7 +14,7 @@ struct AllViews: View {
                 }
             Create()
                 .tabItem {
-                    Image(systemName: "plus")
+                    Image(systemName: "plus.app")
                 }
         }
     }

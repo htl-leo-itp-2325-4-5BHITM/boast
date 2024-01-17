@@ -12,11 +12,14 @@ struct PollPostView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
+            Spacer()
             HStack {
                 VStack(alignment: .leading) {
                     Text(post.creatorName)
+                        .font(.title)
                     Text(post.createdOn)
                 }
+                
                 Spacer()
                 
                 if(post.creatorId == UserDefaults.standard.integer(forKey: "userId")){
@@ -38,13 +41,18 @@ struct PollPostView: View {
                     Text((post.status).rawValue)
                 }
             }
-            //.background(Color.green.opacity(0.1))
+
             
             VStack(alignment: .leading) {
                 Text(post.title)
+                    .font(.largeTitle)
+                    .bold()
                 Text(post.definiton)
+                    .font(.title2)
             }
-            //.background(Color.red.opacity(0.1))
+            .padding(.top)
+            .padding(.bottom)
+
             
             VStack(alignment: .leading) {
                 ForEach(post.postDetails, id: \.creatorId) { detail in
@@ -59,7 +67,7 @@ struct PollPostView: View {
                 }
             }
             
-            VStack(alignment: .trailing) {
+            VStack {
                 if(post.creatorId != UserDefaults.standard.integer(forKey: "userId") && !answerCreatorIds.contains(UserDefaults.standard.integer(forKey: "userId")) && post.status == .OPEN){
                     Picker("answers", selection: $answerOption) {
                         Text("No Answer")
@@ -69,6 +77,7 @@ struct PollPostView: View {
                                 .tag(val)
                         }
                     }
+                    .buttonStyle(.borderedProminent)
                     .onChange(of: answerOption) {
                         Task {
                             do {
@@ -84,6 +93,8 @@ struct PollPostView: View {
                     }
                 }
             }
+            
+            Spacer()
             
         }.task {
             for answer in post.typeInfo.pollAnswers ?? [Poll_PostAnswerModel]() {

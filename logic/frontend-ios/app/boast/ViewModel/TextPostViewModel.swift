@@ -48,7 +48,7 @@ class TextPostViewModel: ObservableObject {
         }
     }
  
-    var postDetails: [Poll_PostDetailModel] {
+    var postDetails: [Text_PostDetailModel] {
         get {
             model.postDetails!
         }

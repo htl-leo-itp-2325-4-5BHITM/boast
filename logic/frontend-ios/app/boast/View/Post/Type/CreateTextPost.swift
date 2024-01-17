@@ -38,11 +38,8 @@ struct CreateTextPost: View {
                     }
                 })
             }
-            NavigationLink(destination: Create(), isActive: $goNext) {}
-                .hidden()
-                .navigationBarBackButtonHidden()
+            NavigationLink(destination: Create().toolbar(.hidden, for: .automatic), isActive: $goNext){}
         }
-        .navigationBarBackButtonHidden()
     }
 }
 

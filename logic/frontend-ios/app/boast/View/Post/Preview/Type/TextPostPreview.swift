@@ -9,6 +9,7 @@ struct TextPostPreview: View {
             HStack {
                 VStack(alignment: .leading) {
                     Text(post?.creatorName ?? "")
+                        .font(.title3)
                     Text(post?.createdOn ?? "")
                 }
                 Spacer()
@@ -16,16 +17,10 @@ struct TextPostPreview: View {
             
             VStack(alignment: .leading) {
                 Text(post?.title ?? "")
+                    .bold()
+                    .font(.title)
                 Text(post?.definition ?? "")
-            }
-            
-            VStack(alignment: .leading) {
-                ForEach(post?.postDetails ?? [Text_PostDetailModel](), id: \.postDetailsId) { detail in
-                    HStack {
-                        Text(detail.createdOn ?? "")
-                        Text("\(detail.creatorName ?? "") :")
-                    }
-                }
+                    .font(.title2)
             }
         }
         .frame(width: UIScreen.main.bounds.width - 20)

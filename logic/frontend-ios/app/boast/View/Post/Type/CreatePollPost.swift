@@ -9,8 +9,8 @@ struct CreatePollPost: View {
     let type:PostType = .POLL
     @State var typeInfo: [String] = ["",""]
     @FocusState private var focusedField: String?
-    @State var goNext = false
     @State var error = ""
+    @State var goNext = false
     
     var body: some View {
         NavigationStack {
@@ -63,19 +63,17 @@ struct CreatePollPost: View {
                                     error = ""
                                 }
                             }
-                            await createPollPost(title: title, definition: definition, creatorId: creatorId, status: status, type: type, typeInfo: typeInfo)
+                            let status = await createPollPost(title: title, definition: definition, creatorId: creatorId, status: status, type: type, typeInfo: typeInfo)
                             goNext = true
                         }else {
                             error = "TextFields must not be empty."
                         }
                     }
                 })
+                
+                NavigationLink(destination: Create().toolbar(.hidden, for: .automatic), isActive: $goNext){}
             }
-            NavigationLink(destination: Create(), isActive: $goNext) {}
-                .hidden()
-                .navigationBarBackButtonHidden()
         }
-        .navigationBarBackButtonHidden()
     }
 }
 
