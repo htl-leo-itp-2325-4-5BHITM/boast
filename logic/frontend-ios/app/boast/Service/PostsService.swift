@@ -80,7 +80,7 @@ func createPostDetail(creatorId: Int, postId: Int, pollAnswerId: Int) -> Int {
 }
 
 // DRINGENST DTO KLASSEN IMPLEMENTIEREN
-func createPost(title: String, definition: String, creatorId: Int, status: Status, type: PostType, typeInfo: [String]) async {
+func createPollPost(title: String, definition: String, creatorId: Int, status: Status, type: PostType, typeInfo: [String]) async {
     let post = Poll_PostModel()
     post.title = title
     post.definition = definition
@@ -104,6 +104,22 @@ func createPost(title: String, definition: String, creatorId: Int, status: Statu
     request.addValue("application/json", forHTTPHeaderField: "Content-Type")
     request.addValue("application/json", forHTTPHeaderField: "Accept")
     request.httpBody = json
+    let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        var statusCode = (response as! HTTPURLResponse).statusCode
+    }
+    task.resume()
+}
+
+func createTextPost(title: String, definition: String, creatorId: Int) async {
+    let str = "{\"title\": \"\(title)\", \"definition\": \"\(definition)\", \"creatorId\": \(creatorId), \"status\": \"OPEN\", \"type\": \"TEXT\"}"// :(
+    let data = str.data(using: .utf8)
+    
+    let url = URL(string: "https://boast.social/api/posts/text")!
+    var request = URLRequest(url: url)
+    request.httpMethod = "POST"
+    request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+    request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Accept")
+    request.httpBody = data
     let task = URLSession.shared.dataTask(with: request) { data, response, error in
         var statusCode = (response as! HTTPURLResponse).statusCode
     }

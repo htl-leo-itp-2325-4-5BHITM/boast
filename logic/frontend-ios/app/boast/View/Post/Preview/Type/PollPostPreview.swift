@@ -14,6 +14,7 @@ struct PollPostPreview: View {
             HStack {
                 VStack(alignment: .leading) {
                     Text(post?.creatorName ?? "")
+                        .font(.title2)
                     Text(post?.createdOn ?? "")
                 }
                 Spacer()
@@ -21,7 +22,10 @@ struct PollPostPreview: View {
             
             VStack(alignment: .leading) {
                 Text(post?.title ?? "")
+                    .bold()
+                    .font(.largeTitle)
                 Text(post?.definition ?? "")
+                    .font(.headline)
             }
         }
         .frame(width: UIScreen.main.bounds.width - 20)
