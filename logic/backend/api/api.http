@@ -59,7 +59,6 @@ POST http://localhost:8080/api/posts/text
   "status": "OPEN",
   "type": "TEXT"
 }
-
 ###
 
 GET http://localhost:8080/api/posts/100

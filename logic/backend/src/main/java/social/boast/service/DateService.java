@@ -6,14 +6,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateService {
+
+    public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+
     public static String formatDate(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        return dateFormat.format(date);
+        return simpleDateFormat.format(date);
     }
 
     public static Date toDate(String date) {
         try {
-            return new SimpleDateFormat("dd.MM.yyyy").parse(date);
+            return simpleDateFormat.parse(date);
         } catch (ParseException e) {
             throw new IllegalArgumentException(e);
         }
