@@ -4,10 +4,12 @@ on: [push]
 jobs:
   build:
     # permissions: write-all
+    env:
+      working-directory: ./logic/backend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: ls -l logic/backend
+      - run: ls -l ${{env.working-directory}}
       - uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
@@ -15,7 +17,7 @@ jobs:
           cache: 'maven'
       - run: java -version
       - name: build java backend
-        working-directory: ./logic/backend
+        working-directory: ${{env.working-directory}}
         run: | 
           mvn -B package
           ls -l target
@@ -23,8 +25,8 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: logic/backend/target/boast_backend-1.0-SNAPSHOT-runner.jar
-          asset_name: boast_backend
+          file: ${{env.working-directory}}/target/boast_backend-1.0-SNAPSHOT-runner.jar
+          asset_name: boast_backend.jar
           tag: ${{ github.ref }}
           overwrite: true
           body: "This is the boast backend"
