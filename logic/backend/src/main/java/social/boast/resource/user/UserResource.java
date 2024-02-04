@@ -1,10 +1,10 @@
-package social.boast.resource;
+package social.boast.resource.user;
 
-import io.smallrye.openapi.runtime.io.mediatype.MediaTypeWriter;
 import jakarta.ws.rs.*;
 import social.boast.dto.user.RelationDTO;
 import social.boast.dto.user.UserDTO;
-import social.boast.repository.UserRepository;
+import social.boast.repository.user.RelationRepository;
+import social.boast.repository.user.UserRepository;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.MediaType;
@@ -35,7 +35,7 @@ public class UserResource {
     @Transactional
     public Response getUser(@PathParam("id") Long id) {
         try {
-            return Response.ok(userRepository.getUser(id)).status(200).build();
+            return Response.ok(userRepository.getUserDTO(id)).status(200).build();
         } catch (Exception e) {
             return Response.status(404).build();
         }
@@ -50,20 +50,6 @@ public class UserResource {
             return Response.ok(userRepository.loginUser(username)).status(200).build();
         } catch (Exception e) {
             return Response.status(404).build();
-        }
-    }
-
-    // RELATIONS
-    @POST
-    @Path("/relations")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Transactional
-    public Response relation (RelationDTO relationDTO) {
-        try {
-            userRepository.relation(relationDTO);
-            return Response.ok().build();
-        } catch (Exception e) {
-            return Response.status(422).build();
         }
     }
 }

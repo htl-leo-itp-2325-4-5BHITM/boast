@@ -3,9 +3,9 @@
 POST http://localhost:8080/api/post-details/poll
 
 {
-    "creatorId": 101,
-    "postId": 101,
-    "pollAnswerId": 1001
+    "creatorId": 102,
+    "postId": 1,
+    "pollAnswerId": 2
 }
 
 ###
@@ -14,7 +14,7 @@ POST http://localhost:8080/api/post-details/text
 
 {
     "creatorId": 101,
-    "postId": 1,
+    "postId": 2,
     "text": "test"
 }
 
@@ -61,15 +61,15 @@ POST http://localhost:8080/api/posts/text
 }
 ###
 
-GET http://localhost:8080/api/posts/100
+GET http://localhost:8080/api/posts/1
 
 ###
 
-DELETE http://localhost:8080/api/posts/100
+DELETE http://localhost:8080/api/posts/1
 
 ###
 
-POST http://localhost:8080/api/posts/100/status/OPEN
+POST http://localhost:8080/api/posts/1/status/CLOSED
 
 ### USER
 
@@ -77,7 +77,7 @@ POST http://localhost:8080/api/users
 
 {
   "username": "Felix",
-  "email": "derbeste@gmx.at"
+  "email": "test@gmx.at"
 }
 
 ###
@@ -89,3 +89,13 @@ Accept: application/json
 
 GET http://localhost:8080/api/users/100
 Accept: application/json
+
+### RELATION
+
+POST http://localhost:8080/api/relations
+
+{
+  "reqUserId": 100,
+  "targetUserId": 101,
+  "relationStatus": "REQUEST"
+}

@@ -1,4 +1,4 @@
-package social.boast.resource;
+package social.boast.resource.post;
 
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -9,7 +9,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import social.boast.dto.post.type.poll.Poll_PostDetailDTO;
 import social.boast.dto.post.type.text.Text_PostDetailDTO;
-import social.boast.repository.PostDetailRepository;
+import social.boast.repository.post.PostDetailRepository;
 
 @Path("/post-details")
 public class PostDetailResource {

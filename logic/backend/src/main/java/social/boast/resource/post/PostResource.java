@@ -1,9 +1,9 @@
-package social.boast.resource;
+package social.boast.resource.post;
 
 import social.boast.dto.post.type.poll.Poll_PostDTO;
 import social.boast.dto.post.type.text.Text_PostDTO;
 import social.boast.model.post.PostStatus;
-import social.boast.repository.PostRepository;
+import social.boast.repository.post.PostRepository;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
@@ -23,7 +23,7 @@ public class PostResource {
     @Transactional
     public Response getPost(@PathParam("id") Long id) {
         try {
-            return Response.ok(postRepository.getPost(id)).build();
+            return Response.ok(postRepository.getPostDTO(id)).build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.status(404).build();

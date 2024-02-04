@@ -1,5 +1,6 @@
-package social.boast.repository;
+package social.boast.repository.post;
 
+import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import social.boast.dto.post.PostDTO;
 import social.boast.dto.post.type.poll.Poll_PostAnswerDTO;
 import social.boast.dto.post.type.poll.Poll_PostDTO;
@@ -18,24 +19,20 @@ import social.boast.model.post.type.text.Text_PostDetail;
 import social.boast.model.user.BoastUser;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.persistence.EntityManager;
+import social.boast.repository.user.UserRepository;
 
 import java.util.LinkedList;
 import java.util.List;
 
 @ApplicationScoped
-public class PostRepository {
+public class PostRepository implements PanacheRepository<Post> {
 
     @Inject
-    EntityManager entityManager;
-
-    public PostRepository(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
+    UserRepository userRepository;
 
     public void removePost(Long postId) {
         try {
-            entityManager.remove(entityManager.find(Post.class, postId));
+            deleteById(postId);
         } catch (Exception e) {
             e.printStackTrace();
             throw new IllegalArgumentException();
@@ -43,8 +40,12 @@ public class PostRepository {
 
     }
 
-    public PostDTO getPost(Long postId) {
-        Post post = entityManager.find(Post.class, postId);
+    public Post getPost(Long id) {
+        return findById(id);
+    }
+
+    public PostDTO getPostDTO(Long postId) {
+        Post post = findById(postId);
         if (post != null) {
             switch (post.getPostType()) {
                 case POLL -> {
@@ -103,50 +104,36 @@ public class PostRepository {
     }
 
     public List<Long> getPostIds() {
-        return entityManager.createQuery("select p.id from Post p", Long.class).getResultList().stream().toList();
-    }
-
-    public List<PostDTO> getPostsAsList() {
-        try {
-            List<Long> postIds = entityManager.createQuery("select p.id from Post p", Long.class).getResultList().stream().toList();
-            List<PostDTO> posts = new LinkedList<>();
-            for (Long id : postIds) {
-                posts.add(this.getPost(id));
-            }
-            return posts;
-        } catch (Exception e) {
-            throw new IllegalArgumentException();
-        }
-
+        return listAll().stream().map(Post::getPostId).toList();
     }
 
     public void updateStatus(Long id, PostStatus status) {
-        Post post = entityManager.find(Post.class, id);
+        Post post = findById(id);
         if (post == null) throw new IllegalArgumentException();
         post.setStatus(status);
     }
 
     //<editor-fold desc="POLL">
     public void createPollPost(Poll_PostDTO postDTO) {
-        BoastUser user = entityManager.find(BoastUser.class, postDTO.getCreatorId());
+        BoastUser user = userRepository.getUser(postDTO.getCreatorId());
         if (user == null) throw new IllegalArgumentException();
 
         Poll_Post post = new Poll_Post(postDTO, user);
         for (Poll_PostAnswerDTO postAnswerDTO : postDTO.getTypeInfo().getPollAnswers()) {
             Poll_PostAnswer postAnswer = new Poll_PostAnswer(post, postAnswerDTO.getTitle());
-            entityManager.persist(postAnswer);
+            getEntityManager().persist(postAnswer);
         }
-        entityManager.persist(post);
+        persist(post);
     }
     //</editor-fold>
 
     //<editor-fold desc="TEXT">
     public void createTextPost(Text_PostDTO postDTO) {
-        BoastUser user = entityManager.find(BoastUser.class, postDTO.getCreatorId());
+        BoastUser user = userRepository.getUser(postDTO.getCreatorId());
         if (user == null) throw new IllegalArgumentException();
 
         Text_Post post = new Text_Post(postDTO, user);
-        entityManager.persist(post);
+        persist(post);
     }
     //</editor-fold>
 }
