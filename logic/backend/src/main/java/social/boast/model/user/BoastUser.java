@@ -35,15 +35,15 @@ public class BoastUser extends PanacheEntityBase {
     }
 
     public BoastUser(UserDTO userDTO) {
-        this.email = userDTO.getEmail();
-        this.username = userDTO.getUsername();
-        this.createdOn = (userDTO.getCreatedOn() != null) ? userDTO.getCreatedOn() : new Date();
+        this.email = userDTO.email();
+        this.username = userDTO.username();
+        this.createdOn = (userDTO.createdOn() != null) ? userDTO.createdOn() : new Date();
     }
 
-    public static BoastUser createUser(UserDTO userDTO) {
+    public static UserDTO createUser(UserDTO userDTO) {
         BoastUser user = new BoastUser(userDTO);
         persist(user);
-        return user;
+        return new UserDTO(user.userId, user.createdOn, user.username, user.email);
     }
 
     public static UserDTO getUserDTO(Long id) {

@@ -10,10 +10,10 @@ import java.util.Objects;
 @Embeddable
 public class RelationId extends PanacheEntityBase implements Serializable {
     @ManyToOne
-    private BoastUser reqUser;
+    public BoastUser reqUser;
 
     @ManyToOne
-    private BoastUser targetUser;
+    public BoastUser targetUser;
 
     public RelationId(BoastUser user1, BoastUser user2) {
         this.reqUser = user1;
@@ -21,22 +21,6 @@ public class RelationId extends PanacheEntityBase implements Serializable {
     }
 
     public RelationId() {
-    }
-
-    public BoastUser getReqUser() {
-        return reqUser;
-    }
-
-    public void setReqUser(BoastUser user1) {
-        this.reqUser = user1;
-    }
-
-    public BoastUser getTargetUser() {
-        return targetUser;
-    }
-
-    public void setTargetUser(BoastUser user2) {
-        this.targetUser = user2;
     }
 
     @Override

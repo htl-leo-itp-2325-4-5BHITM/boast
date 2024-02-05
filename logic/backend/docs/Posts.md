@@ -26,7 +26,7 @@
 }
 ```
 
-# Develop New Post Type
+# Develop New Post Type (outdated)
 
 ## Steps to build new Post Type and fully implement it (only backend):
 

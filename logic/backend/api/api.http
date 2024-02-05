@@ -96,6 +96,14 @@ POST http://localhost:8080/api/relations
 
 {
   "reqUserId": 100,
-  "targetUserId": 101,
-  "relationStatus": "REQUEST"
+  "targetUserId": 102,
+  "relationStatus": "FRIEND"
 }
+
+###
+
+GET http://localhost:8080/api/relations/follows/100
+
+###
+
+GET http://localhost:8080/api/relations/friends/102
