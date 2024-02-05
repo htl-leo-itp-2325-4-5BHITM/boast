@@ -5,19 +5,19 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import social.boast.dto.post.type.text.Text_PostDetailDTO;
+import social.boast.model.post.Post;
 import social.boast.model.post.PostDetail;
-import social.boast.model.post.type.PostDetailType_Interface;
 import social.boast.model.user.BoastUser;
 
 @Entity
-public class Text_PostDetail extends PostDetail implements PostDetailType_Interface<Text_Post> {
+public class Text_PostDetail extends PostDetail {
 
     @Column(length = 255, nullable = false)
-    private String text;
+    public  String text;
 
     @ManyToOne
     @JoinColumn(name = "postId")
-    Text_Post post;
+    public Text_Post post;
 
     public Text_PostDetail(Text_PostDetailDTO postDetailDTO, BoastUser user, Text_Post post, String text) {
         super(postDetailDTO.createdOnDate(), user);
@@ -27,21 +27,15 @@ public class Text_PostDetail extends PostDetail implements PostDetailType_Interf
 
     public Text_PostDetail() {}
 
-    @Override
-    public Text_Post getPost() {
-        return post;
-    }
+    public static void addTextPostDetails(Text_PostDetailDTO postDetailDTO) {
+        BoastUser user = BoastUser.findById(postDetailDTO.getCreatorId());
+        Text_Post post = (Text_Post) Post.getPost(postDetailDTO.getPostId());
+        if (user == null || post == null) throw new IllegalArgumentException();
 
-    @Override
-    public void setPost(Text_Post post) {
-            this.post = post;
-    }
+        Text_PostDetail postDetail = new Text_PostDetail(postDetailDTO, user, post, postDetailDTO.getText());
 
-    public String getText() {
-        return text;
-    }
+        post.addPostDetail(postDetail);
 
-    public void setText(String text) {
-        this.text = text;
+        persist(postDetail);
     }
 }

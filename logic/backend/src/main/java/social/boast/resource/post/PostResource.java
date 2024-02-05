@@ -2,9 +2,10 @@ package social.boast.resource.post;
 
 import social.boast.dto.post.type.poll.Poll_PostDTO;
 import social.boast.dto.post.type.text.Text_PostDTO;
+import social.boast.model.post.Post;
 import social.boast.model.post.PostStatus;
-import social.boast.repository.post.PostRepository;
-import jakarta.inject.Inject;
+import social.boast.model.post.type.poll.Poll_Post;
+import social.boast.model.post.type.text.Text_Post;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -15,15 +16,12 @@ import java.util.List;
 @Path("/posts")
 public class PostResource {
 
-    @Inject
-    PostRepository postRepository;
-
     @GET
     @Path("/{id}")
     @Transactional
     public Response getPost(@PathParam("id") Long id) {
         try {
-            return Response.ok(postRepository.getPostDTO(id)).build();
+            return Response.ok(Post.getPostDTO(id)).build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.status(404).build();
@@ -35,7 +33,7 @@ public class PostResource {
     @Transactional
     public Response removePost(@PathParam("id") Long id) {
         try {
-            postRepository.removePost(id);
+            Post.removePost(id);
             return Response.ok().build();
         } catch (Exception e) {
             e.printStackTrace();
@@ -49,7 +47,7 @@ public class PostResource {
     public Response updateStatus(@PathParam("id") Long id, @PathParam("status") PostStatus status) {
         System.out.printf("update Status: " + id + " Set: " + status.name());
         try {
-            postRepository.updateStatus(id, status);
+            Post.updateStatus(id, status);
             return Response.ok().build();
         } catch (Exception e) {
             e.printStackTrace();
@@ -62,7 +60,7 @@ public class PostResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public List<Long> getPostIds() {
-        return postRepository.getPostIds();
+        return Post.getPostIds();
     }
 
     //<editor-fold desc="POLL">
@@ -72,7 +70,7 @@ public class PostResource {
     @Transactional
     public Response createPollPost(Poll_PostDTO postDTO) {
         try {
-            postRepository.createPollPost(postDTO);
+            Poll_Post.createPollPost(postDTO);
             return Response.status(200).build();
         } catch (Exception e) {
             e.printStackTrace();
@@ -88,7 +86,7 @@ public class PostResource {
     @Transactional
     public Response createTextPost(Text_PostDTO postDTO) {
         try {
-            postRepository.createTextPost(postDTO);
+            Text_Post.createTextPost(postDTO);
             return Response.status(200).build();
         } catch (Exception e) {
             e.printStackTrace();

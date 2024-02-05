@@ -1,22 +1,22 @@
 package social.boast.model.post.type.poll;
 
 import social.boast.dto.post.type.poll.Poll_PostDetailDTO;
+import social.boast.model.post.Post;
 import social.boast.model.post.PostDetail;
-import social.boast.model.post.type.PostDetailType_Interface;
 import social.boast.model.user.BoastUser;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Poll_PostDetail extends PostDetail implements PostDetailType_Interface<Poll_Post> {
+public class Poll_PostDetail extends PostDetail {
 
     @ManyToOne
-    Poll_PostAnswer pollAnswer;
+    public Poll_PostAnswer pollAnswer;
 
     @ManyToOne
     @JoinColumn(name = "postId")
-    Poll_Post post;
+    public Poll_Post post;
 
     public Poll_PostDetail(Poll_PostDetailDTO postDetailDTO, BoastUser user, Poll_Post post, Poll_PostAnswer postAnswer) {
         super(postDetailDTO.createdOnDate(), user);
@@ -27,21 +27,16 @@ public class Poll_PostDetail extends PostDetail implements PostDetailType_Interf
     public Poll_PostDetail() {
     }
 
-    @Override
-    public Poll_Post getPost() {
-        return this.post;
-    }
+    public static void addPollPostDetails(Poll_PostDetailDTO postDetailDTO) {
+        BoastUser user = BoastUser.findById(postDetailDTO.getCreatorId());
+        Poll_Post post = (Poll_Post) Post.getPost(postDetailDTO.getPostId());
+        Poll_PostAnswer postAnswer = getEntityManager().find(Poll_PostAnswer.class, postDetailDTO.getPoll_answerId());
+        if (user == null || post == null || postAnswer == null) throw new IllegalArgumentException();
 
-    @Override
-    public void setPost(Poll_Post post) {
-        this.post = post;
-    }
+        Poll_PostDetail postDetail = new Poll_PostDetail(postDetailDTO, user, post, postAnswer);
 
-    public Poll_PostAnswer getPollAnswer() {
-        return pollAnswer;
-    }
+        post.addPostDetail(postDetail);
 
-    public void setPollAnswer(Poll_PostAnswer pollAnswer) {
-        this.pollAnswer = pollAnswer;
+        persist(postDetail);
     }
 }

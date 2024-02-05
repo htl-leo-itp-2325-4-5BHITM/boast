@@ -1,5 +1,6 @@
 package social.boast.model.user;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.ManyToOne;
 
@@ -7,7 +8,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class RelationId implements Serializable {
+public class RelationId extends PanacheEntityBase implements Serializable {
     @ManyToOne
     private BoastUser reqUser;
 

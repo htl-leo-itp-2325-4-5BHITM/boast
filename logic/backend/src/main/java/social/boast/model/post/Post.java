@@ -1,35 +1,39 @@
 package social.boast.model.post;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import social.boast.dto.post.PostDTO;
+import social.boast.model.post.type.poll.Poll_Post;
+import social.boast.model.post.type.text.Text_Post;
 import social.boast.model.user.BoastUser;
 import jakarta.persistence.*;
 
-import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Post implements Serializable {
+public class Post extends PanacheEntityBase {
     @Id
     @GeneratedValue
-    private Long postId;
+    public Long postId;
 
-    private Date createdOn;
+    public Date createdOn;
 
     @Column(length = 80, nullable = false)
-    private String title;
+    public String title;
 
     @Column(length = 150, nullable = true)
-    private String definition;
+    public String definition;
 
     @ManyToOne
     @JoinColumn(name = "creator_userId")
-    private BoastUser creator;
+    public BoastUser creator;
 
     @Enumerated(EnumType.STRING)
-    private PostStatus status;
+    public PostStatus status;
 
     @Enumerated(EnumType.STRING)
-    private PostType postType;
+    public PostType postType;
 
     public Post(Date createdOn, String title, String definition, BoastUser creator, PostStatus status, PostType postType) {
         this.createdOn = (createdOn != null) ? createdOn : new Date();
@@ -44,63 +48,42 @@ public class Post implements Serializable {
 
     }
 
-    //<editor-fold desc="getter & setter">
-
-    public Long getPostId() {
-        return postId;
+    public static List<Long> getPostIds() {
+        List<Post> posts = listAll();
+        return posts.stream().map(p -> p.postId).toList();
     }
 
-    public void setPostId(Long postId) {
-        this.postId = postId;
+    public static void updateStatus(Long id, PostStatus status) {
+        Post post = findById(id);
+        if (post == null) throw new IllegalArgumentException();
+        post.status = status;
     }
 
-    public String getTitle() {
-        return title;
+    public static void removePost(Long postId) {
+        try {
+            deleteById(postId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new IllegalArgumentException();
+        }
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public static Post getPost(Long id) {
+        return findById(id);
     }
 
-    public String getDefinition() {
-        return definition;
+    public static PostDTO getPostDTO(Long postId) {
+        Post post = findById(postId);
+        if (post != null) {
+            switch (post.postType) {
+                case POLL -> {
+                    return Poll_Post.getPostDTO((Poll_Post) post);
+                }
+                case TEXT -> {
+                    return Text_Post.getPostDTO((Text_Post) post);
+                }
+            }
+        }
+        throw new IllegalArgumentException();
     }
-
-    public void setDefinition(String definition) {
-        this.definition = definition;
-    }
-
-    public BoastUser getCreator() {
-        return creator;
-    }
-
-    public void setCreator(BoastUser creator) {
-        this.creator = creator;
-    }
-
-    public Date getCreatedOn() {
-        return createdOn;
-    }
-
-    public void setCreatedOn(Date createdOn) {
-        this.createdOn = createdOn;
-    }
-
-    public PostStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(PostStatus status) {
-        this.status = status;
-    }
-
-    public PostType getPostType() {
-        return postType;
-    }
-
-    public void setPostType(PostType postType) {
-        this.postType = postType;
-    }
-
-    //</editor-fold>
 }

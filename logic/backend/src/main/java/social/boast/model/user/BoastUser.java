@@ -1,34 +1,34 @@
 package social.boast.model.user;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import social.boast.dto.user.UserDTO;
 import social.boast.model.post.Post;
 import social.boast.model.post.PostDetail;
 import jakarta.persistence.*;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-public class BoastUser implements Serializable {
+public class BoastUser extends PanacheEntityBase {
 
     @Id
     @GeneratedValue
-    private Long userId;
+    public Long userId;
 
-    private Date createdOn;
+    public Date createdOn;
 
     @Column(length = 50)
-    private String username;
+    public String username;
 
     @Column(length = 320)
-    private String email;
+    public String email;
 
     @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
-    List<Post> posts;
+    public List<Post> posts;
 
     @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
-    List<PostDetail> postDetails;
+    public List<PostDetail> postDetails;
 
     public BoastUser () {
 
@@ -40,54 +40,21 @@ public class BoastUser implements Serializable {
         this.createdOn = (userDTO.getCreatedOn() != null) ? userDTO.getCreatedOn() : new Date();
     }
 
-    //<editor-fold desc="getter & setter">
-    public Long getUserId() {
-        return userId;
+    public static BoastUser createUser(UserDTO userDTO) {
+        BoastUser user = new BoastUser(userDTO);
+        persist(user);
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public static UserDTO getUserDTO(Long id) {
+        BoastUser user = findById(id);
+        if (user == null) throw new IllegalArgumentException();
+        return new UserDTO(user.userId, user.createdOn, user.username, user.email);
     }
 
-    public Date getCreatedOn() {
-        return createdOn;
+    public static UserDTO loginUser(String username) {
+        BoastUser user = find("username", username).firstResult();
+        if (user == null) throw new IllegalArgumentException();
+        return new UserDTO(user.userId, user.createdOn, user.username, user.email);
     }
-
-    public void setCreatedOn(Date createdOn) {
-        this.createdOn = createdOn;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public List<Post> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(List<Post> posts) {
-        this.posts = posts;
-    }
-
-    public List<PostDetail> getPostDetails() {
-        return postDetails;
-    }
-
-    public void setPostDetails(List<PostDetail> postDetails) {
-        this.postDetails = postDetails;
-    }
-
-    //</editor-fold>
 }

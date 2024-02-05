@@ -3,9 +3,9 @@
 POST http://localhost:8080/api/post-details/poll
 
 {
-    "creatorId": 102,
+    "creatorId": 101,
     "postId": 1,
-    "pollAnswerId": 2
+    "pollAnswerId": 1
 }
 
 ###
@@ -87,7 +87,7 @@ Accept: application/json
 
 ###
 
-GET http://localhost:8080/api/users/100
+GET http://localhost:8080/api/users/101
 Accept: application/json
 
 ### RELATION

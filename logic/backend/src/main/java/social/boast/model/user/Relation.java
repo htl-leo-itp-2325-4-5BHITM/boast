@@ -1,17 +1,17 @@
 package social.boast.model.user;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
-
-import java.io.Serializable;
+import social.boast.dto.user.RelationDTO;
 
 @Entity
-public class Relation implements Serializable {
+public class Relation extends PanacheEntityBase {
 
     @EmbeddedId
-    private RelationId id;
+    public RelationId id;
 
     @Enumerated(EnumType.STRING)
-    private RelationStatus relationStatus;
+    public RelationStatus relationStatus;
 
     public Relation(RelationId relationId, RelationStatus relationStatus) {
         this.id = relationId;
@@ -21,20 +21,21 @@ public class Relation implements Serializable {
     public Relation() {
     }
 
-    public RelationId getId() {
-        return id;
-    }
+    public static void createRelation(RelationDTO relationDTO) {
+        if (relationDTO.getReqUserId().equals(relationDTO.getTargetUserId())) throw new IllegalArgumentException();
+        BoastUser reqUser = BoastUser.findById(relationDTO.getReqUserId());
+        BoastUser targetUser = BoastUser.findById(relationDTO.getTargetUserId());
+        if (reqUser == null || targetUser == null) throw new IllegalArgumentException();
+        RelationId relationId = new RelationId(reqUser, targetUser);
+        Relation relation = find("id", relationId).firstResult();
+        RelationStatus status = RelationStatus.valueOf(relationDTO.getRelationStatus());
 
-    public void setId(RelationId id) {
-        this.id = id;
-    }
-
-    public RelationStatus getRelationStatus() {
-        return relationStatus;
-    }
-
-    public void setRelationStatus(RelationStatus relationStatus) {
-        this.relationStatus = relationStatus;
+        if (relation == null) {
+            relation = new Relation(relationId, status);
+            persist(relation);
+        } else {
+            relation.relationStatus = status;
+        }
     }
 
 }
