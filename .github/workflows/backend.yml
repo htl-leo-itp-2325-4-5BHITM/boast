@@ -25,7 +25,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{env.working-directory}}/target/boast_backend-dev.jar
+          file: ${{env.working-directory}}/target/boast_backend-1.0-SNAPSHOT-runner.jar
           asset_name: boast_backend.jar
           tag: ${{ github.ref }}
           overwrite: true
