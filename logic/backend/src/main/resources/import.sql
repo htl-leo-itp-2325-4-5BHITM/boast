@@ -66,7 +66,7 @@ insert into BOASTUSER (CREATEDON, USERID, USERNAME, EMAIL)
 VALUES (current_timestamp, 121, 'Leon', 'leon.steinhuber@gmail.com');
 
 insert into BOASTUSER (CREATEDON, USERID, USERNAME, EMAIL)
-VALUES (current_timestamp, 122, 'Heiko', 'heiko.vichtbauer@gmail.com');
+VALUES (current_timestamp, 122, 'Hugo', 'heiko.vichtbauer@gmail.com');
 
 insert into BOASTUSER (CREATEDON, USERID, USERNAME, EMAIL)
 VALUES (current_timestamp, 123, 'Janine', 'janine.wenninger@gmail.com');
