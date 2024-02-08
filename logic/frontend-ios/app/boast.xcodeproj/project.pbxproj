@@ -190,6 +190,15 @@
 			path = Text;
 			sourceTree = "<group>";
 		};
+		1F915C312B75059A008938FF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1FB05C7A2B30AB4000B3BD02 /* LoginView.swift */,
+				1F6AFF952B2E0CF8007BDB48 /* MainFeedView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		1FDB13822B074DF500AC1089 = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +222,7 @@
 				1FDF87882B2DECA3004F298C /* ViewModel */,
 				1FDF87892B2DECC0004F298C /* Service */,
 				1FF8F6A02B531CF100F82B3E /* View */,
+				1FBCA2C52B33A6AE00548070 /* AllViews.swift */,
 				1FDB138E2B074DF500AC1089 /* BoastApp.swift */,
 				1FDB13922B074DF600AC1089 /* Assets.xcassets */,
 				1F6AFF992B2E17EE007BDB48 /* Info.plist */,
@@ -252,10 +262,8 @@
 		1FF8F6A02B531CF100F82B3E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1F915C312B75059A008938FF /* Views */,
 				1F08165F2B535BDB006D735B /* Post */,
-				1FB05C7A2B30AB4000B3BD02 /* LoginView.swift */,
-				1FBCA2C52B33A6AE00548070 /* AllViews.swift */,
-				1F6AFF952B2E0CF8007BDB48 /* MainFeedView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

@@ -9,9 +9,12 @@ struct BoastApp: App {
     var body: some Scene {
         var userViewModel = UserViewModel(model: userModel)
         WindowGroup {
-            VStack{
+            if UserDefaults.standard.string(forKey: "userId") != nil {
+                AllViews()
+            }else {
                 LoginView(viewModel: userViewModel)
             }
+            
         }
     }
 }
