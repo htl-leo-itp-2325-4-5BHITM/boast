@@ -1,8 +1,5 @@
 
-
 import SwiftUI
-
-
 
 struct MainFeedView: View {
     @State var postFeed = [Int]()

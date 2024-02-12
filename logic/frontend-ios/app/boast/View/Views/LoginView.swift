@@ -8,7 +8,7 @@ struct LoginView: View {
     @State var userId: Int = -1
     @State var goNext: Bool = false
     var body: some View {
-        NavigationView{
+        NavigationStack{
             VStack {
                 Form {
                     Section(header: Text("Name:")) {

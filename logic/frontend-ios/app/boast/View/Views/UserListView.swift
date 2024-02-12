@@ -14,13 +14,14 @@ struct UserListView: View {
     @State var name = "error loading"
     var body: some View {
         NavigationStack {
-            List {
+            List{
                 ForEach(userData, id: \.self) { userId in
                     NavigationLink(destination: UserProfileView(userId: userId)) {
                         UserPreviewView(userId: userId)
                     }
                 }
             }
+            .navigationTitle(relationType)
             .task {
                 userData = await userList(userId: userId, userType: relationType) ?? [Int()]
             }

@@ -11,16 +11,16 @@ struct UserProfileView: View {
     var userId: Int
     @State var userData: ProfileModel? = nil
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 HStack {
                     NavigationLink(destination: UserListView(userId: userId, relationType: "friends")) {
-                        Text("Friends: \(userData?.friends ?? 0)")
+                        Text("friends: \(userData?.friends ?? 0)")
                     }
                     NavigationLink(destination: UserListView(userId: userId, relationType: "follows")) {
-                        Text("Follows: \(userData?.follows ?? 0)")
+                        Text("follows: \(userData?.follows ?? 0)")
                     }
-                    Text("Posts: \(userData?.posts?.count ?? 0)")
+                    Text("posts: \(userData?.posts?.count ?? 0)")
                 }
                 
                 Spacer()
