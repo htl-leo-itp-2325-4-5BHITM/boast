@@ -12,3 +12,17 @@ func userLogin(userName: String) async -> Int{
     }
     return userId ?? -1
 }
+
+func userInfo(userId: Int) async -> ProfileModel?{
+    let url = URL(string: "https://www.boast.social/api/users/profile/\(userId)")!
+    if let (data, _) = try? await URLSession.shared.data(from: url) {
+        print(data)
+        let userData = try? JSONDecoder().decode(ProfileModel.self, from: data)
+            print(userData?.posts)
+            return userData
+    } else {
+        print("failed to load url")
+    }
+    return nil
+}
+
