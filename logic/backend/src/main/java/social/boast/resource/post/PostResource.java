@@ -63,6 +63,14 @@ public class PostResource {
         return Post.getPostIds();
     }
 
+    @GET
+    @Path("/friends/{userId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public List<Long> getFriendPostIds(@PathParam("userId") Long userId) {
+        return Post.getFriendPostIds(userId);
+    }
+
     //<editor-fold desc="POLL">
     @POST
     @Path("/poll")

@@ -26,10 +26,14 @@ Accept: application/json
 
 ###
 
+GET http://localhost:8080/api/posts/friends/100
+Accept: application/json
+
+###
+
 POST http://localhost:8080/api/posts/poll
 
 {
-  "createdOn": "2024-01-01",
   "title": "Can we do it???",
   "definition": "???",
   "creatorId": 100,
@@ -52,7 +56,6 @@ POST http://localhost:8080/api/posts/poll
 POST http://localhost:8080/api/posts/text
 
 {
-  "createdOn": "2024-01-01",
   "title": "Can we do it???",
   "definition": "???",
   "creatorId": 100,
@@ -90,13 +93,24 @@ Accept: application/json
 GET http://localhost:8080/api/users/101
 Accept: application/json
 
+###
+
+GET http://localhost:8080/api/users/preview/100
+Accept: application/json
+
+###
+
+GET http://localhost:8080/api/users/profile/100
+Accept: application/json
+
+
 ### RELATION
 
 POST http://localhost:8080/api/relations
 
 {
-  "reqUserId": 100,
-  "targetUserId": 102,
+  "reqUserId": 102,
+  "targetUserId": 100,
   "relationStatus": "FRIEND"
 }
 
@@ -106,4 +120,4 @@ GET http://localhost:8080/api/relations/follows/100
 
 ###
 
-GET http://localhost:8080/api/relations/friends/102
+GET http://localhost:8080/api/relations/friends/100

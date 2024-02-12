@@ -6,6 +6,7 @@ import social.boast.model.post.type.poll.Poll_Post;
 import social.boast.model.post.type.text.Text_Post;
 import social.boast.model.user.BoastUser;
 import jakarta.persistence.*;
+import social.boast.model.user.RelationStatus;
 
 import java.util.Date;
 import java.util.List;
@@ -51,6 +52,19 @@ public class Post extends PanacheEntityBase {
     public static List<Long> getPostIds() {
         List<Post> posts = listAll();
         return posts.stream().map(p -> p.postId).toList();
+    }
+
+    public static List<Long> getFriendPostIds(Long userId) {
+        return getEntityManager()
+                        .createQuery("select p.id from Post p \n" +
+                                        "join Relation r on p.creator.id = r.id.targetUser.id \n" +
+                                        "where r.id.reqUser.id = :userId \n" +
+                                        "and r.relationStatus = :status \n" +
+                                        "order by p.createdOn desc",
+                                Long.class)
+                        .setParameter("userId", userId)
+                        .setParameter("status", RelationStatus.FRIEND)
+                        .getResultList();
     }
 
     public static void updateStatus(Long id, PostStatus status) {

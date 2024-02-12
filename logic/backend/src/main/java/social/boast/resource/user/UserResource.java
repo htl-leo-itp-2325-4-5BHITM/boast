@@ -36,6 +36,30 @@ public class UserResource {
     }
 
     @GET
+    @Path("/preview/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response getUserPreview(@PathParam("id") Long id) {
+        try {
+            return Response.ok(BoastUser.getUserPreviewDTO(id)).status(200).build();
+        } catch (Exception e) {
+            return Response.status(404).build();
+        }
+    }
+
+    @GET
+    @Path("/profile/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response getUserProfile(@PathParam("id") Long id) {
+        try {
+            return Response.ok(BoastUser.getUserProfileDTO(id)).status(200).build();
+        } catch (Exception e) {
+            return Response.status(404).build();
+        }
+    }
+
+    @GET
     @Path("/login/{username}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional

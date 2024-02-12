@@ -35,6 +35,8 @@ public class Relation extends PanacheEntityBase {
 
         if (relation == null) {
             relation = new Relation(relationId, status);
+            reqUser.addReqRelation(relation);
+            targetUser.addTargetRelation(relation);
             persist(relation);
         } else {
             relation.relationStatus = status;
