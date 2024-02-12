@@ -15,8 +15,10 @@ struct PollPostView: View {
             Spacer()
             HStack {
                 VStack(alignment: .leading) {
-                    Text(post.creatorName)
-                        .font(.title)
+                    NavigationLink(destination: UserProfileView(userId: post.creatorId)) {
+                        Text(post.creatorName)
+                            .font(.title)
+                    }
                     Text(post.createdOn)
                 }
                 

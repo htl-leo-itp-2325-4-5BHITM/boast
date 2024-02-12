@@ -5,14 +5,18 @@ struct ProfileView: View {
     @State var userData: ProfileModel? = nil
     @State var logout = false
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 NavigationLink("", destination: LoginView(viewModel: UserViewModel(model: UserModel())).navigationBarBackButtonHidden().toolbar(.hidden, for: .tabBar)
-, isActive: $logout)
-                    .hidden()
+                               , isActive: $logout)
+                .hidden()
                 HStack {
-                    Text("Friends: \(userData?.friends ?? 0)")
-                    Text("Follower: \(userData?.follows ?? 0)")
+                    NavigationLink(destination: UserListView(userId: UserDefaults.standard.integer(forKey: "userId"), relationType: "friends")) {
+                        Text("Friends: \(userData?.friends ?? 0)")
+                    }
+                    NavigationLink(destination: UserListView(userId: UserDefaults.standard.integer(forKey: "userId"), relationType: "follows")) {
+                        Text("Follows: \(userData?.follows ?? 0)")
+                    }
                     Text("Posts: \(userData?.posts?.count ?? 0)")
                 }
                 
@@ -31,15 +35,15 @@ struct ProfileView: View {
             .navigationTitle(userData?.username ?? "")
             .toolbarTitleDisplayMode(.inlineLarge)
             .toolbar {
-                    Button {
-                        Task{
-                            UserDefaults.standard.removeObject(forKey: "userId")
-                            UserDefaults.standard.removeObject(forKey: "userName")
-                            logout = true
-                        }
-                    } label: {
-                        Image(systemName:  "rectangle.portrait.and.arrow.right")
+                Button {
+                    Task{
+                        UserDefaults.standard.removeObject(forKey: "userId")
+                        UserDefaults.standard.removeObject(forKey: "userName")
+                        logout = true
                     }
+                } label: {
+                    Image(systemName:  "rectangle.portrait.and.arrow.right")
+                }
             }
         }
         .task {

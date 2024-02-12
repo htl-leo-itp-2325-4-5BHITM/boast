@@ -10,3 +10,9 @@ class ProfileModel: Codable {
     var follows: Int?
     var posts: [Int]?
 }
+
+class PreviewModel: Codable {
+    var userId: Int?
+    var name: String?
+    var username: String?
+}

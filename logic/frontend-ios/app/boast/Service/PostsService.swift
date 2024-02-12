@@ -39,6 +39,19 @@ func posts() async -> [Int] {
     return postList
 }
 
+func postsFriends(userId: Int) async -> [Int] {
+    var postList: [Int] = []
+    let url = URL(string: "https://www.boast.social/api/posts/friends/\(userId)")!
+    if let (data, _) = try? await URLSession.shared.data(from: url) {
+        do {
+            postList = try JSONDecoder().decode([Int].self, from: data)
+        }catch{}
+    } else {
+        print("failed to load url")
+    }
+    return postList
+}
+
 func updateStatus(postId: Int, postStatus: Status) async -> Status {
     var status: Status?
     if postId != -1 {
