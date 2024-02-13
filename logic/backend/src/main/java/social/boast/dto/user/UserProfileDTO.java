@@ -8,8 +8,9 @@ public record UserProfileDTO(
         Date createdOn,
         String name,
         String username,
-        int friends,
-        int follows,
+        int follower,
+        int following,
+        String relationStatus,
         List<Long> posts
 ) {
 }

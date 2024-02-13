@@ -2,8 +2,6 @@ package social.boast.model.user;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
-import social.boast.dto.user.RelationDTO;
-import social.boast.dto.user.UserDTO;
 
 import java.util.List;
 
@@ -24,23 +22,37 @@ public class Relation extends PanacheEntityBase {
     public Relation() {
     }
 
-    public static void createRelation(RelationDTO relationDTO) {
-        if (relationDTO.reqUserId().equals(relationDTO.targetUserId())) throw new IllegalArgumentException();
-        BoastUser reqUser = BoastUser.findById(relationDTO.reqUserId());
-        BoastUser targetUser = BoastUser.findById(relationDTO.targetUserId());
+    public static RelationStatus getRelationStatus (Long reqUserId, Long targetUserId) {
+        BoastUser reqUser = BoastUser.findById(reqUserId);
+        BoastUser targetUser = BoastUser.findById(targetUserId);
         if (reqUser == null || targetUser == null) throw new IllegalArgumentException();
         RelationId relationId = new RelationId(reqUser, targetUser);
         Relation relation = find("id", relationId).firstResult();
-        RelationStatus status = RelationStatus.valueOf(relationDTO.relationStatus());
+        if (relation == null) return RelationStatus.NO_RELATION;
+        return relation.relationStatus;
+    }
+
+    public static RelationStatus createRelation(Long reqUserId, Long targetUserId, RelationStatus relationStatus) {
+        if (reqUserId.equals(targetUserId)) throw new IllegalArgumentException();
+        BoastUser reqUser = BoastUser.findById(reqUserId);
+        BoastUser targetUser = BoastUser.findById(targetUserId);
+        if (reqUser == null || targetUser == null) throw new IllegalArgumentException();
+        RelationId relationId = new RelationId(reqUser, targetUser);
+        Relation relation = find("id", relationId).firstResult();
+
+        if (relationStatus == RelationStatus.FRIEND && !targetUser.isPublic) {
+            relationStatus = RelationStatus.REQUEST;
+        }
 
         if (relation == null) {
-            relation = new Relation(relationId, status);
+            relation = new Relation(relationId, relationStatus);
             reqUser.addReqRelation(relation);
             targetUser.addTargetRelation(relation);
             persist(relation);
         } else {
-            relation.relationStatus = status;
+            relation.relationStatus = relationStatus;
         }
+        return relationStatus;
     }
 
     public static List<Relation> getRelationsToReqUser(Long reqUserId) {
@@ -51,17 +63,22 @@ public class Relation extends PanacheEntityBase {
         return list("id.targetUser.id", targetUserId);
     }
 
-    public static List<Long> getFriends(Long userId) {
+    public static List<Long> getFollower(Long userId) {
         return getRelationsToTargetUser(userId).stream()
                 .filter(r -> r.relationStatus == RelationStatus.FRIEND)
                 .map(r -> r.id.reqUser.userId).toList();
                 //.map(r -> BoastUser.getUserDTO(r.id.reqUser.userId)).toList(); // for possible future use
     }
 
-    public static List<Long> getFollows(Long userId) {
+    public static List<Long> getFollowing(Long userId) {
         return getRelationsToReqUser(userId).stream()
                 .filter(r -> r.relationStatus == RelationStatus.FRIEND)
                 .map(r -> r.id.targetUser.userId).toList();
     }
 
+    public static List<Long> getRequests(Long userId) {
+        return getRelationsToReqUser(userId).stream()
+                .filter(r -> r.relationStatus == RelationStatus.REQUEST)
+                .map(r -> r.id.reqUser.userId).toList();
+    }
 }

@@ -5,6 +5,7 @@ import java.util.Date;
 public record UserPreviewDTO(
         Long userId,
         String name,
-        String username
+        String username,
+        String relationStatus
 ) {
 }

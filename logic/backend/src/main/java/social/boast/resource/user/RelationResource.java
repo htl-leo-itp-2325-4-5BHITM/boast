@@ -6,6 +6,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import social.boast.dto.user.RelationDTO;
 import social.boast.model.user.Relation;
+import social.boast.model.user.RelationStatus;
 
 @Path("/relations")
 public class RelationResource {
@@ -16,26 +17,56 @@ public class RelationResource {
     @Transactional
     public Response createRelation(RelationDTO relationDTO) {
         try {
-            Relation.createRelation(relationDTO);
-            return Response.ok().build();
+            return Response.ok(Relation.createRelation(relationDTO.reqUserId(), relationDTO.targetUserId(), RelationStatus.valueOf(relationDTO.relationStatus()))).build();
         } catch (Exception e) {
             return Response.status(422).build();
         }
     }
 
     @GET
-    @Path("/friends/{userId}")
+    @Path("/followers")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response getFriends(@PathParam("userId") Long userId) {
-        return Response.ok(Relation.getFriends(userId)).build();
+    public Response getFollower(@HeaderParam("reqUserId") Long reqUserId) {
+        return Response.ok(Relation.getFollower(reqUserId)).build();
     }
 
     @GET
-    @Path("/follows/{userId}")
+    @Path("/following")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response getFollows(@PathParam("userId") Long userId) {
-        return Response.ok(Relation.getFollows(userId)).build();
+    public Response getFollows(@HeaderParam("reqUserId") Long reqUserId) {
+        return Response.ok(Relation.getFollowing(reqUserId)).build();
+    }
+
+    @POST
+    @Path("/follow/{targetUserId}")
+    @Transactional
+    public Response followUser(@HeaderParam("reqUserId") Long reqUserId, @PathParam("targetUserId") Long targetUserId) {
+        System.out.println(targetUserId);
+        try {
+            return Response.ok(Relation.createRelation(reqUserId, targetUserId, RelationStatus.FRIEND)).build();
+        } catch (Exception e) {
+            return Response.status(422).build();
+        }
+    }
+
+    @POST
+    @Path("/block/{targetUserId}")
+    @Transactional
+    public Response blockUser(@HeaderParam("reqUserId") Long reqUserId, @PathParam("targetUserId") Long targetUserId) {
+        try {
+            return Response.ok(Relation.createRelation(reqUserId, targetUserId, RelationStatus.BLOCK)).build();
+        } catch (Exception e) {
+            return Response.status(422).build();
+        }
+    }
+
+    @GET
+    @Path("/requests")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response getRequests(@HeaderParam("reqUserId") Long reqUserId) {
+        return Response.ok(Relation.getRequests(reqUserId)).build();
     }
 }

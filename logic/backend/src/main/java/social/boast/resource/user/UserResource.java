@@ -39,9 +39,9 @@ public class UserResource {
     @Path("/preview/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response getUserPreview(@PathParam("id") Long id) {
+    public Response getUserPreview(@HeaderParam("reqUserId") Long reqUserId, @PathParam("id") Long id) {
         try {
-            return Response.ok(BoastUser.getUserPreviewDTO(id)).status(200).build();
+            return Response.ok(BoastUser.getUserPreviewDTO(reqUserId, id)).status(200).build();
         } catch (Exception e) {
             return Response.status(404).build();
         }
@@ -51,9 +51,9 @@ public class UserResource {
     @Path("/profile/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response getUserProfile(@PathParam("id") Long id) {
+    public Response getUserProfile(@HeaderParam("reqUserId") Long reqUserId, @PathParam("id") Long id) {
         try {
-            return Response.ok(BoastUser.getUserProfileDTO(id)).status(200).build();
+            return Response.ok(BoastUser.getUserProfileDTO(reqUserId, id)).status(200).build();
         } catch (Exception e) {
             return Response.status(404).build();
         }
@@ -66,6 +66,18 @@ public class UserResource {
     public Response getUser(@PathParam("username") String username) {
         try {
             return Response.ok(BoastUser.loginUser(username)).status(200).build();
+        } catch (Exception e) {
+            return Response.status(404).build();
+        }
+    }
+
+    @GET
+    @Path("/search/{searchParam}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response searchUser(@HeaderParam("reqUserId") Long reqUserId, @PathParam("searchParam") String searchParam) {
+        try {
+            return Response.ok(BoastUser.searchUsers(reqUserId, searchParam)).status(200).build();
         } catch (Exception e) {
             return Response.status(404).build();
         }

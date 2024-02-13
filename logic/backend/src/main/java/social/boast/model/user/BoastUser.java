@@ -20,6 +20,9 @@ public class BoastUser extends PanacheEntityBase {
 
     public Date createdOn;
 
+    @Column(columnDefinition = "boolean default true")
+    public Boolean isPublic;
+
     @Column(length = 50)
     public String name;
 
@@ -81,36 +84,68 @@ public class BoastUser extends PanacheEntityBase {
         this.email = userDTO.email();
         this.name = userDTO.name();
         this.username = userDTO.username();
+        this.isPublic = userDTO.isPublic();
         this.createdOn = (userDTO.createdOn() != null) ? userDTO.createdOn() : new Date();
     }
 
     public static UserDTO createUser(UserDTO userDTO) {
         BoastUser user = new BoastUser(userDTO);
         persist(user);
-        return new UserDTO(user.userId, user.createdOn, user.name, user.username, user.email);
+        return new UserDTO(user.userId, user.createdOn, user.isPublic, user.name, user.username, user.email);
     }
 
     public static UserDTO getUserDTO(Long id) {
         BoastUser user = findById(id);
         if (user == null) throw new IllegalArgumentException();
-        return new UserDTO(user.userId, user.createdOn, user.name, user.username, user.email);
+        return new UserDTO(user.userId, user.createdOn, user.isPublic, user.name, user.username, user.email);
     }
 
-    public static UserPreviewDTO getUserPreviewDTO(Long id) {
-        BoastUser user = findById(id);
+    public static UserPreviewDTO getUserPreviewDTO(Long reqUserId, Long id) {
+        BoastUser reqUser = BoastUser.findById(reqUserId);
+        BoastUser user = BoastUser.findById(id);
+        if (reqUser == null || user == null) throw new IllegalArgumentException();
+        RelationId relationId = new RelationId(reqUser, user);
+        Relation relation = Relation.find("id", relationId).firstResult();
+
         if (user == null) throw new IllegalArgumentException();
-        return new UserPreviewDTO(user.userId, user.name, user.username);
+        return new UserPreviewDTO(user.userId,
+                user.name,
+                user.username,
+                (relation == null ? RelationStatus.NO_RELATION.toString() : relation.relationStatus.toString()));
     }
 
-    public static UserProfileDTO getUserProfileDTO(Long id) {
-        BoastUser user = findById(id);
+    public static UserProfileDTO getUserProfileDTO(Long reqUserId, Long id) {
+        BoastUser reqUser = BoastUser.findById(reqUserId);
+        BoastUser user = BoastUser.findById(id);
+        if (reqUser == null || user == null) throw new IllegalArgumentException();
+        RelationId relationId = new RelationId(reqUser, user);
+        Relation relation = Relation.find("id", relationId).firstResult();
+
         if (user == null) throw new IllegalArgumentException();
-        return new UserProfileDTO(user.userId, user.createdOn, user.name, user.username, user.targetRelations.size(), user.reqRelations.size(),user.posts.stream().map(p -> p.postId).toList());
+        return new UserProfileDTO(user.userId,
+                user.createdOn,
+                user.name,
+                user.username,
+                user.targetRelations.size(),
+                user.reqRelations.size(),
+                (relation == null ? RelationStatus.NO_RELATION.toString() : relation.relationStatus.toString()),
+                user.posts.stream().map(p -> p.postId).toList());
     }
 
     public static UserDTO loginUser(String username) {
         BoastUser user = find("username", username).firstResult();
         if (user == null) throw new IllegalArgumentException();
-        return new UserDTO(user.userId, user.createdOn, user.name, user.username, user.email);
+        return new UserDTO(user.userId, user.createdOn, user.isPublic, user.name, user.username, user.email);
+    }
+
+    public static List<UserPreviewDTO> searchUsers (Long reqUserId, String searchParam) {
+        System.out.println(searchParam);
+        return getEntityManager()
+                .createQuery("select u.id \n" +
+                        "from BoastUser u \n" +
+                        "where u.username like :searchParam or u.name like :searchParam \n" +
+                        " order by u.username limit 10", Long.class)
+                .setParameter("searchParam", "%" + searchParam + "%")
+                .getResultList().stream().map(i -> getUserPreviewDTO(reqUserId, i)).toList();
     }
 }
