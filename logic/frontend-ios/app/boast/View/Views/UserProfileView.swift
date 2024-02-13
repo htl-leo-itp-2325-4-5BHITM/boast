@@ -14,11 +14,28 @@ struct UserProfileView: View {
         NavigationStack {
             VStack {
                 HStack {
+                    Text(UserDefaults.standard.string(forKey: "userName") ?? userData?.username ?? "")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                    Button {
+                        Task{
+                            print("unlucky")
+                        }
+                    } label: {
+                        Text("Follow")
+                    }
+                    .buttonStyle(.borderedProminent)
+                    
+                }
+                .frame(width: UIScreen.main.bounds.width - 20, alignment: .leading)
+                .padding()
+                
+                HStack {
                     NavigationLink(destination: UserListView(userId: userId, relationType: "friends")) {
-                        Text("friends: \(userData?.friends ?? 0)")
+                        Text("following: \(userData?.follower ?? 0)")
                     }
                     NavigationLink(destination: UserListView(userId: userId, relationType: "follows")) {
-                        Text("follows: \(userData?.follows ?? 0)")
+                        Text("followers: \(userData?.following ?? 0)")
                     }
                     Text("posts: \(userData?.posts?.count ?? 0)")
                 }
@@ -35,8 +52,6 @@ struct UserProfileView: View {
                     }
                 }
             }
-            .navigationTitle(userData?.username ?? "")
-            .toolbarTitleDisplayMode(.inlineLarge)
             
         }
         .task {
@@ -46,5 +61,5 @@ struct UserProfileView: View {
 }
 
 #Preview {
-    UserProfileView(userId: 100)
+    UserProfileView(userId: 102)
 }

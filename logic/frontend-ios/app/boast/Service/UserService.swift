@@ -1,51 +1,53 @@
 
 import Foundation
 
-func userLogin(userName: String) async -> Int{
-    var userId: Int?
-    let url = URL(string: "http://www.boast.social/api/users/login/\(userName)")!
-    if let (data, _) = try? await URLSession.shared.data(from: url) {
-        let user = try? JSONDecoder().decode(UserModel.self, from: data)
-        userId = user?.userId
-    } else {
-        print("failed to load url")
+func templateRequest(method: String, reqURL: String, postBody: String? = nil) async -> Data? {
+    var request = URLRequest(url: URL(string: "https://boast.social/api/\(reqURL)")!)
+    var responseData: Data?
+    request.addValue("\(UserDefaults.standard.integer(forKey: "userId"))", forHTTPHeaderField: "reqUserId")
+    request.httpMethod = method
+    if let postBody {
+        request.httpBody = postBody.data(using: .utf8)
     }
-    return userId ?? -1
+    let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        guard let responseData = data else {
+            print(String(describing: error))
+            return
+        }
+        print(String(data: responseData, encoding: .utf8)!)
+    }
+    task.resume()
+    return responseData
 }
 
-func userInfo(userId: Int) async -> ProfileModel?{
-    let url = URL(string: "https://www.boast.social/api/users/profile/\(userId)")!
-    if let (data, _) = try? await URLSession.shared.data(from: url) {
-        print(data)
-        let userData = try? JSONDecoder().decode(ProfileModel.self, from: data)
-            print(userData?.posts)
-            return userData
-    } else {
-        print("failed to load url")
+func userLogin(userName: String) async -> Int {
+    if let data =  await templateRequest(method: "GET", reqURL: "users/login/\(userName)") {
+        let user = try? JSONDecoder().decode(UserModel.self, from: data)
+        return user?.userId ?? -1
+    }
+    return -1
+}
+
+func userInfo(userId: Int) async -> ProfileModel? {
+    if let data =  await templateRequest(method: "GET", reqURL: "users/profile/\(userId)") {
+        let user = try? JSONDecoder().decode(ProfileModel.self, from: data)
+        return user
     }
     return nil
 }
 
-func userList(userId: Int, userType: String) async -> [Int]?{
-    let url = URL(string: "https://www.boast.social/api/relations/\(userType)/\(userId)")!
-    if let (data, _) = try? await URLSession.shared.data(from: url) {
-        print(data)
+func userList(userId: Int, userType: String) async -> [Int]? {
+    if let data =  await templateRequest(method: "GET", reqURL: "relations/\(userType)/\(userId)") {
         let userList = try? JSONDecoder().decode([Int].self, from: data)
-            return userList
-    } else {
-        print("failed to load url")
+        return userList
     }
     return nil
 }
 
 func userPreview(userId: Int) async -> PreviewModel? {
-    let url = URL(string: "https://www.boast.social/api/users/preview/\(userId)")!
-    if let (data, _) = try? await URLSession.shared.data(from: url) {
+    if let data =  await templateRequest(method: "GET", reqURL: "users/preview/\(userId)") {
         let userPreview = try? JSONDecoder().decode(PreviewModel.self, from: data)
-            return userPreview
-    } else {
-        print("failed to load url")
+        return userPreview
     }
     return nil
 }
-
