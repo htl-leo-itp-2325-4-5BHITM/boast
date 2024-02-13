@@ -10,6 +10,24 @@ struct ProfileView: View {
                 NavigationLink("", destination: LoginView(viewModel: UserViewModel(model: UserModel())).navigationBarBackButtonHidden().toolbar(.hidden, for: .tabBar)
                                , isActive: $logout)
                 .hidden()
+                
+                HStack {
+                    Text(UserDefaults.standard.string(forKey: "userName") ?? userData?.username ?? "")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                    Spacer()
+                    Button {
+                        Task{
+                            UserDefaults.standard.removeObject(forKey: "userId")
+                            UserDefaults.standard.removeObject(forKey: "userName")
+                            logout = true
+                        }
+                    } label: {
+                        Image(systemName:  "rectangle.portrait.and.arrow.right")
+                    }
+                }
+                .padding()
+                
                 HStack {
                     NavigationLink(destination: UserListView(userId: UserDefaults.standard.integer(forKey: "userId"), relationType: "friends")) {
                         Text("Friends: \(userData?.friends ?? 0)")
@@ -32,23 +50,13 @@ struct ProfileView: View {
                     }
                 }
             }
-            .navigationTitle(userData?.username ?? "")
-            .toolbarTitleDisplayMode(.inlineLarge)
-            .toolbar {
-                Button {
-                    Task{
-                        UserDefaults.standard.removeObject(forKey: "userId")
-                        UserDefaults.standard.removeObject(forKey: "userName")
-                        logout = true
-                    }
-                } label: {
-                    Image(systemName:  "rectangle.portrait.and.arrow.right")
-                }
+            .task {
+                userData = await userInfo(userId: UserDefaults().integer(forKey: "userId"))
+                print(userData?.username)
+                print(UserDefaults().string(forKey: "userName"))
             }
         }
-        .task {
-            userData = await userInfo(userId: UserDefaults().integer(forKey: "userId"))
-        }
+        
     }
 }
 
