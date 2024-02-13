@@ -30,10 +30,10 @@ struct ProfileView: View {
                 
                 HStack {
                     NavigationLink(destination: UserListView(userId: UserDefaults.standard.integer(forKey: "userId"), relationType: "friends")) {
-                        Text("Friends: \(userData?.friends ?? 0)")
+                        Text("Friends: \(userData?.follower ?? 0)")
                     }
                     NavigationLink(destination: UserListView(userId: UserDefaults.standard.integer(forKey: "userId"), relationType: "follows")) {
-                        Text("Follows: \(userData?.follows ?? 0)")
+                        Text("Follows: \(userData?.following ?? 0)")
                     }
                     Text("Posts: \(userData?.posts?.count ?? 0)")
                 }

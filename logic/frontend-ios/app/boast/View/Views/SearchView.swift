@@ -17,6 +17,11 @@ struct SearchView: View {
                         .navigationTitle("Find your friends")
                 }
                 .searchable(text: $searchText, isPresented: $searchIsActive)
+                
+                Button(action: {
+                }, label: {
+                    Text("Button")
+                })
             }
         }
 }

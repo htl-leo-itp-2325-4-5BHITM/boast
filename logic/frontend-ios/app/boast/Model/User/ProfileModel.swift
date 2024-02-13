@@ -6,8 +6,9 @@ class ProfileModel: Codable {
     var createdOn: String?
     var name: String?
     var username: String?
-    var friends: Int?
-    var follows: Int?
+    var follower: Int?
+    var following: Int?
+    var relationStatus: RelationStatus?
     var posts: [Int]?
 }
 

@@ -5,6 +5,7 @@ class UserModel: Codable {
     var createdOn: String?
     var username: String?
     var email: String?
+    var isPublic: Bool?
     
     func dataChanged(userId: Int?, createdOn: String?, username: String?, email: String?) {
         if let val = userId {
