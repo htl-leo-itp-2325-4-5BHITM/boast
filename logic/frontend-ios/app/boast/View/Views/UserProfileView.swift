@@ -31,10 +31,11 @@ struct UserProfileView: View {
                 .padding()
                 
                 HStack {
-                    NavigationLink(destination: UserListView(userId: userId, relationType: "friends")) {
+                    NavigationLink(destination: UserListView(userId: userId, relationType: "following")) {
+                        
                         Text("following: \(userData?.follower ?? 0)")
                     }
-                    NavigationLink(destination: UserListView(userId: userId, relationType: "follows")) {
+                    NavigationLink(destination: UserListView(userId: userId, relationType: "following")) {
                         Text("followers: \(userData?.following ?? 0)")
                     }
                     Text("posts: \(userData?.posts?.count ?? 0)")
@@ -43,12 +44,14 @@ struct UserProfileView: View {
                 Spacer()
                 
                 ScrollView {
-                    ForEach(userData?.posts ?? [0], id:\.self) { postId in
-                        NavigationLink(destination: Post(postId: postId)) {
-                            PostPreview(postId: postId)
+                    ForEach(userData?.posts ?? [-1], id:\.self) { postId in
+                        if postId != -1 {
+                            NavigationLink(destination: Post(postId: postId)) {
+                                PostPreview(postId: postId)
+                            }
+                            .buttonStyle(.plain)
+                            Spacer(minLength: 30)
                         }
-                        .buttonStyle(.plain)
-                        Spacer(minLength: 30)
                     }
                 }
             }

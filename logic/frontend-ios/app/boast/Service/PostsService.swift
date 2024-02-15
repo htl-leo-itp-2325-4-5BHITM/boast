@@ -18,7 +18,7 @@ func loadPost(postId: Int) async -> PostModel {
             }
         } catch {
             print(error)
-            print("failed to decode")
+            print("failed to decode2")
         }
     } else {
         print("failed to load url")
