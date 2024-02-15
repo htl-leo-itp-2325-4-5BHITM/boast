@@ -24,19 +24,19 @@ public class RelationResource {
     }
 
     @GET
-    @Path("/followers")
+    @Path("/followers/{targetUserId}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response getFollower(@HeaderParam("reqUserId") Long reqUserId) {
-        return Response.ok(Relation.getFollower(reqUserId)).build();
+    public Response getFollower(@HeaderParam("reqUserId") Long reqUserId, @PathParam("targetUserId") Long targetUserId) {
+        return Response.ok(Relation.getFollower(targetUserId)).build();
     }
 
     @GET
-    @Path("/following")
+    @Path("/following/{targetUserId}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response getFollows(@HeaderParam("reqUserId") Long reqUserId) {
-        return Response.ok(Relation.getFollowing(reqUserId)).build();
+    public Response getFollows(@HeaderParam("reqUserId") Long reqUserId, @PathParam("targetUserId") Long targetUserId) {
+        return Response.ok(Relation.getFollowing(targetUserId)).build();
     }
 
     @POST
