@@ -22,7 +22,7 @@ public class Relation extends PanacheEntityBase {
     public Relation() {
     }
 
-    public static RelationStatus getRelationStatus (Long reqUserId, Long targetUserId) {
+    public static RelationStatus getRelationStatus(Long reqUserId, Long targetUserId) {
         BoastUser reqUser = BoastUser.findById(reqUserId);
         BoastUser targetUser = BoastUser.findById(targetUserId);
         if (reqUser == null || targetUser == null) throw new IllegalArgumentException();
@@ -55,6 +55,14 @@ public class Relation extends PanacheEntityBase {
         return relationStatus;
     }
 
+    public static void acceptRelation(Long reqUserId, Long targetUserId) {
+        BoastUser reqUser = BoastUser.findById(reqUserId);
+        BoastUser targetUser = BoastUser.findById(targetUserId);
+        RelationId relationId = new RelationId(reqUser, targetUser);
+        Relation relation = find("id", relationId).firstResult();
+        if (relation.relationStatus == RelationStatus.REQUEST) relation.relationStatus = RelationStatus.FRIEND;
+    }
+
     public static List<Relation> getRelationsToReqUser(Long reqUserId) {
         return list("id.reqUser.id", reqUserId);
     }
@@ -67,7 +75,7 @@ public class Relation extends PanacheEntityBase {
         return getRelationsToTargetUser(userId).stream()
                 .filter(r -> r.relationStatus == RelationStatus.FRIEND)
                 .map(r -> r.id.reqUser.userId).toList();
-                //.map(r -> BoastUser.getUserDTO(r.id.reqUser.userId)).toList(); // for possible future use
+        //.map(r -> BoastUser.getUserDTO(r.id.reqUser.userId)).toList(); // for possible future use
     }
 
     public static List<Long> getFollowing(Long userId) {

@@ -118,9 +118,11 @@ public class BoastUser extends PanacheEntityBase {
         BoastUser reqUser = BoastUser.findById(reqUserId);
         BoastUser user = BoastUser.findById(id);
         if (reqUser == null || user == null) throw new IllegalArgumentException();
-        RelationId relationId = new RelationId(reqUser, user);
-        Relation relation = Relation.find("id", relationId).firstResult();
-
+        Relation relation = null;
+        if (!reqUserId.equals(id)) {
+            RelationId relationId = new RelationId(reqUser, user);
+            relation = Relation.find("id", relationId).firstResult();
+        }
         if (user == null) throw new IllegalArgumentException();
         return new UserProfileDTO(user.userId,
                 user.createdOn,

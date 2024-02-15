@@ -2,29 +2,30 @@
 import Foundation
 
 func templateRequest(method: String, reqURL: String, postBody: String? = nil) async -> Data? {
+    print("=== REQ ===: \(reqURL)")
     var request = URLRequest(url: URL(string: "https://boast.social/api/\(reqURL)")!)
-    var responseData: Data?
     request.addValue("\(UserDefaults.standard.integer(forKey: "userId"))", forHTTPHeaderField: "reqUserId")
     request.httpMethod = method
     if let postBody {
         request.httpBody = postBody.data(using: .utf8)
+    }    
+    
+    let response = try? await URLSession.shared.data(for: request)
+    print("DATA: \(String(data: response!.0, encoding: .utf8)!)")
+    print("REQUEST - STATUS: \((response!.1 as! HTTPURLResponse).statusCode)")
+    if (response!.1 as! HTTPURLResponse).statusCode != 200 {
+        return nil
     }
-    let task = URLSession.shared.dataTask(with: request) { data, response, error in
-        guard let responseData = data else {
-            print(String(describing: error))
-            return
-        }
-        print(String(data: responseData, encoding: .utf8)!)
-    }
-    task.resume()
-    return responseData
+    return response!.0
 }
 
 func userLogin(userName: String) async -> Int {
-    if let data =  await templateRequest(method: "GET", reqURL: "users/login/\(userName)") {
+    if let data = await templateRequest(method: "GET", reqURL: "users/login/\(userName)") {
+        print(data)
         let user = try? JSONDecoder().decode(UserModel.self, from: data)
         return user?.userId ?? -1
     }
+    print("du hu")
     return -1
 }
 
