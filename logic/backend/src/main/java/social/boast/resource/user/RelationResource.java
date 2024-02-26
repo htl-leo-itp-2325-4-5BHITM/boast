@@ -62,6 +62,29 @@ public class RelationResource {
         }
     }
 
+    @POST
+    @Path("/unfollow/{targetUserId}")
+    @Transactional
+    public Response unfollowUser(@HeaderParam("reqUserId") Long reqUserId, @PathParam("targetUserId") Long targetUserId) {
+        System.out.println(targetUserId);
+        try {
+            return Response.ok(Relation.createRelation(reqUserId, targetUserId, RelationStatus.NO_RELATION)).build();
+        } catch (Exception e) {
+            return Response.status(422).build();
+        }
+    }
+
+    @POST
+    @Path("/unblock/{targetUserId}")
+    @Transactional
+    public Response unblockUser(@HeaderParam("reqUserId") Long reqUserId, @PathParam("targetUserId") Long targetUserId) {
+        try {
+            return Response.ok(Relation.createRelation(reqUserId, targetUserId, RelationStatus.NO_RELATION)).build();
+        } catch (Exception e) {
+            return Response.status(422).build();
+        }
+    }
+
     @GET
     @Path("/requests")
     @Produces(MediaType.APPLICATION_JSON)
