@@ -40,6 +40,11 @@ public class Relation extends PanacheEntityBase {
         RelationId relationId = new RelationId(reqUser, targetUser);
         Relation relation = find("id", relationId).firstResult();
 
+        if (relationStatus == RelationStatus.NO_RELATION) {
+            deleteById(relationId);
+            return RelationStatus.NO_RELATION;
+        }
+
         if (relationStatus == RelationStatus.FRIEND && !targetUser.isPublic) {
             relationStatus = RelationStatus.REQUEST;
         }
@@ -52,6 +57,7 @@ public class Relation extends PanacheEntityBase {
         } else {
             relation.relationStatus = relationStatus;
         }
+        deleteById(relationId);
         return relationStatus;
     }
 

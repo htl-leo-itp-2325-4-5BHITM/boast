@@ -128,8 +128,8 @@ public class BoastUser extends PanacheEntityBase {
                 user.createdOn,
                 user.name,
                 user.username,
-                user.targetRelations.size(),
-                user.reqRelations.size(),
+                Relation.getFollower(user.userId).size(),
+                Relation.getFollowing(user.userId).size(),
                 (relation == null ? RelationStatus.NO_RELATION.toString() : relation.relationStatus.toString()),
                 user.posts.stream().map(p -> p.postId).toList());
     }
