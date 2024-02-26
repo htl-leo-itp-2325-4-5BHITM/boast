@@ -17,6 +17,7 @@
 		1F08099C2B2DE873007131F8 /* Poll_TypeInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F08099B2B2DE873007131F8 /* Poll_TypeInfoModel.swift */; };
 		1F0816622B535C1E006D735B /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0816612B535C1E006D735B /* Create.swift */; };
 		1F20663E2B7512ED00FCF405 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F20663D2B7512ED00FCF405 /* ProfileView.swift */; };
+		1F26A2A52B8CFF3B00CC21B0 /* RelationButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F26A2A42B8CFF3B00CC21B0 /* RelationButtonView.swift */; };
 		1F280B522B558F24006A0F32 /* PostPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F280B512B558F24006A0F32 /* PostPreview.swift */; };
 		1F280B552B558F64006A0F32 /* PollPostPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F280B542B558F64006A0F32 /* PollPostPreview.swift */; };
 		1F280B572B5591F9006A0F32 /* TextPostPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F280B562B5591F9006A0F32 /* TextPostPreview.swift */; };
@@ -60,6 +61,7 @@
 		1F08099B2B2DE873007131F8 /* Poll_TypeInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Poll_TypeInfoModel.swift; sourceTree = "<group>"; };
 		1F0816612B535C1E006D735B /* Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
 		1F20663D2B7512ED00FCF405 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		1F26A2A42B8CFF3B00CC21B0 /* RelationButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationButtonView.swift; sourceTree = "<group>"; };
 		1F280B512B558F24006A0F32 /* PostPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPreview.swift; sourceTree = "<group>"; };
 		1F280B542B558F64006A0F32 /* PollPostPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollPostPreview.swift; sourceTree = "<group>"; };
 		1F280B562B5591F9006A0F32 /* TextPostPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPostPreview.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				1FA187382B7A8EB800C2B86B /* UserProfileView.swift */,
 				1FD8B2362B7AA2A800290C58 /* SearchView.swift */,
 				1F6AFF952B2E0CF8007BDB48 /* MainFeedView.swift */,
+				1F26A2A42B8CFF3B00CC21B0 /* RelationButtonView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -394,6 +397,7 @@
 				1F280B522B558F24006A0F32 /* PostPreview.swift in Sources */,
 				1FA187372B7A8DAA00C2B86B /* UserPreviewView.swift in Sources */,
 				1F565D032B57DD31000D058F /* CreateTextPost.swift in Sources */,
+				1F26A2A52B8CFF3B00CC21B0 /* RelationButtonView.swift in Sources */,
 				1F6AFF962B2E0CF8007BDB48 /* MainFeedView.swift in Sources */,
 				1F08099A2B2DE868007131F8 /* Poll_PostAnswerModel.swift in Sources */,
 				1FDD244D2B0BC0DD0062DC3E /* UserModel.swift in Sources */,

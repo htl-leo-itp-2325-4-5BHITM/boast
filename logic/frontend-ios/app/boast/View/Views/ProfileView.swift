@@ -29,11 +29,11 @@ struct ProfileView: View {
                 .padding()
                 
                 HStack {
-                    NavigationLink(destination: UserListView(userId: UserDefaults.standard.integer(forKey: "userId"), relationType: "friends")) {
-                        Text("Friends: \(userData?.follower ?? 0)")
+                    NavigationLink(destination: UserListView(userId: UserDefaults.standard.integer(forKey: "userId"), relationType: "following")) {
+                        Text("following: \(userData?.following ?? 0)")
                     }
-                    NavigationLink(destination: UserListView(userId: UserDefaults.standard.integer(forKey: "userId"), relationType: "follows")) {
-                        Text("Follows: \(userData?.following ?? 0)")
+                    NavigationLink(destination: UserListView(userId: UserDefaults.standard.integer(forKey: "userId"), relationType: "followers")) {
+                        Text("followers: \(userData?.follower ?? 0)")
                     }
                     Text("Posts: \(userData?.posts?.count ?? 0)")
                 }
@@ -52,8 +52,6 @@ struct ProfileView: View {
             }
             .task {
                 userData = await userInfo(userId: UserDefaults().integer(forKey: "userId"))
-                print(userData?.username)
-                print(UserDefaults().string(forKey: "userName"))
             }
         }
         

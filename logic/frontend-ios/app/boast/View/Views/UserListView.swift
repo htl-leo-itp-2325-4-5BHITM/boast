@@ -29,14 +29,15 @@ struct UserListView: View {
                     }
                 }
                 .navigationTitle(relationType)
-                .task {
-                    userData = await userList(userId: userId, userType: relationType) ?? [-1]
-                }
             }else {
                 VStack {
                     Text("Error")
                 }
             }
+        }
+        .task {
+            userData = await userList(userId: userId, userType: relationType) ?? [-1]
+            print(userData)
         }
     }
 }

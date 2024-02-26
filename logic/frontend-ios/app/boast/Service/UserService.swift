@@ -36,7 +36,6 @@ func userInfo(userId: Int) async -> ProfileModel? {
 func userList(userId: Int, userType: String) async -> [Int]? {
     if let data =  await templateRequest(method: "GET", reqURL: "relations/\(userType)/\(userId)") {
         let userList = try? JSONDecoder().decode([Int].self, from: data)
-        print(userList)
         return userList
     }
     return nil
@@ -46,6 +45,22 @@ func userPreview(userId: Int) async -> PreviewModel? {
     if let data =  await templateRequest(method: "GET", reqURL: "users/preview/\(userId)") {
         let userPreview = try? JSONDecoder().decode(PreviewModel.self, from: data)
         return userPreview
+    }
+    return nil
+}
+
+func followUser(targetId: Int) async -> RelationStatus? {
+    if let data =  await templateRequest(method: "POST", reqURL: "relations/follow/\(targetId)") {
+        let changedRelation = try? JSONDecoder().decode(RelationStatus.self, from: data)
+        return changedRelation
+    }
+    return nil
+}
+
+func unfollowUser(targetId: Int) async -> RelationStatus? {
+    if let data =  await templateRequest(method: "POST", reqURL: "relations/unfollow/\(targetId)") {
+        let changedRelation = try? JSONDecoder().decode(RelationStatus.self, from: data)
+        return changedRelation
     }
     return nil
 }
