@@ -9,7 +9,7 @@ struct CreatePollPost: View {
     let type:PostType = .POLL
     @State var typeInfo: [String] = ["",""]
     @FocusState private var focusedField: String?
-    @State var error = ""
+    @State var error = false
     @State var goNext = false
     
     var body: some View {
@@ -23,55 +23,56 @@ struct CreatePollPost: View {
                         
                         List {
                             ForEach(0..<typeInfo.count, id: \.self) { pos in
-                                Section(header: Text("Option \(pos+1): ")) {
-                                    TextField("Answer: ", text: $typeInfo[pos])
-                                        .focused($focusedField, equals: "\(pos+1)")
-                                }
+                                TextField("Option \(pos+1)", text: $typeInfo[pos])
+                                    .focused($focusedField, equals: "\(pos+1)")
                             }
                         }
                         
-                        Button("Add Answer") {
-                            typeInfo.append("")
-                        }
-                        Button(action: {
-                            Task {
-                                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                                if typeInfo.count > 2 {
-                                    await typeInfo.removeLast()
+                        Section {
+                            HStack {
+                                Button("Add Answer") {
+                                    typeInfo.append("")
                                 }
+                                .buttonStyle(.borderedProminent)
+                                Spacer()
+                                Button(action: {
+                                    Task {
+                                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                                        if typeInfo.count > 2 {
+                                            typeInfo.removeLast()
+                                        }
+                                    }
+                                }) {
+                                    Text("Remove Answer")
+                                }
+                                .buttonStyle(.borderedProminent)
                             }
-                        }) {
-                            Text("Remove Answer")
                         }
+                        .listRowBackground(Color.clear)
+                        
+                        Button("Submit", action: {
+                            Task {
+                                if title != "" && definition != "" {
+                                    for i in 0..<typeInfo.count {
+                                        if typeInfo[i] == "" {
+                                            return
+                                        }
+                                    }
+                                    _ = await createPollPost(title: title, definition: definition, creatorId: creatorId, status: status, type: type, typeInfo: typeInfo)
+                                    goNext = true
+                                }
+                                error = true
+                            }
+                        })
                     }
                 }
-                
-                Text(error)
-                    .foregroundStyle(Color.red)
-                
-                Spacer(minLength: 40)
-                
-                Button("Submit", action: {
-                    Task {
-                        if title != "" && definition != "" {
-                            error = ""
-                            for i in 0..<typeInfo.count {
-                                if typeInfo[i] == "" {
-                                    error = "TextFields must not be empty."
-                                    return
-                                } else {
-                                    error = ""
-                                }
-                            }
-                            let status = await createPollPost(title: title, definition: definition, creatorId: creatorId, status: status, type: type, typeInfo: typeInfo)
-                            goNext = true
-                        }else {
-                            error = "TextFields must not be empty."
-                        }
-                    }
-                })
-                
                 NavigationLink(destination: Create().toolbar(.hidden, for: .automatic), isActive: $goNext){}
+            }
+            .overlay(alignment: .bottom) {
+                if error == true {
+                    ErrorOverlayView()
+                        .padding(.bottom)
+                }
             }
         }
     }
