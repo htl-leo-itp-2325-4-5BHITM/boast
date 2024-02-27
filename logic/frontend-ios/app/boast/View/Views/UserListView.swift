@@ -37,7 +37,6 @@ struct UserListView: View {
         }
         .task {
             userData = await userList(userId: userId, userType: relationType) ?? [-1]
-            print(userData)
         }
     }
 }

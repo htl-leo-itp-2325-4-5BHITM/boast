@@ -16,6 +16,10 @@ struct AllViews: View {
                 .tabItem {
                     Image(systemName: "plus.app")
                 }
+            SearchView()
+                .tabItem {
+                    Image(systemName: "magnifyingglass")
+                }
             ProfileView()
                 .tabItem {
                     Image(systemName: "person.circle")

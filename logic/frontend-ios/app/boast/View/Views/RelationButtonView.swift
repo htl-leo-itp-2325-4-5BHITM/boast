@@ -9,13 +9,13 @@ import SwiftUI
 
 struct RelationButtonView: View {
     var targetId: Int
-    var relationType: RelationStatus
+    @State var relationType: RelationStatus?
     var body: some View {
         if UserDefaults().integer(forKey: "userId") != targetId {
             if relationType == .FRIEND {
                 Button {
                     Task{
-                        await unfollowUser(targetId: targetId)
+                        relationType = await unfollowUser(targetId: targetId) ?? .NO_RELATION
                     }
                 } label: {
                     Text("Unfollow")
@@ -24,7 +24,7 @@ struct RelationButtonView: View {
             }else if relationType == .NO_RELATION {
                 Button {
                     Task{
-                        await followUser(targetId: targetId)
+                        relationType = await followUser(targetId: targetId) ?? .NO_RELATION
                     }
                 } label: {
                     Text("Follow")
@@ -33,7 +33,7 @@ struct RelationButtonView: View {
             }else if relationType == .REQUEST {
                 Button {
                     Task{
-                        await unfollowUser(targetId: targetId)
+                        relationType = await unfollowUser(targetId: targetId) ?? .NO_RELATION
                     }
                 } label: {
                     Text("Requested")
@@ -50,6 +50,7 @@ struct RelationButtonView: View {
                 .buttonStyle(.borderedProminent)
             }
         }
+        
     }
 }
 

@@ -64,3 +64,11 @@ func unfollowUser(targetId: Int) async -> RelationStatus? {
     }
     return nil
 }
+
+func searchForUsers(searchText: String) async -> [PreviewModel] {
+    if let data =  await templateRequest(method: "GET", reqURL: "users/search/\(searchText)") {
+        let userList = try? JSONDecoder().decode([PreviewModel].self, from: data)
+        return userList ?? [PreviewModel]()
+    }
+    return [PreviewModel]()
+}

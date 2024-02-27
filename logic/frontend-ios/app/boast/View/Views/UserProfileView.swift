@@ -17,7 +17,9 @@ struct UserProfileView: View {
                     Text(userData?.username ?? "")
                         .font(.largeTitle)
                         .fontWeight(.bold)
-                    RelationButtonView(targetId: userData?.userId ?? -1, relationType: userData?.relationStatus ?? .NO_RELATION)
+                    if userData != nil {
+                        RelationButtonView(targetId: userData?.userId ?? -1, relationType: userData?.relationStatus)
+                    }
                 }
                 .frame(width: UIScreen.main.bounds.width - 20, alignment: .leading)
                 .padding()
