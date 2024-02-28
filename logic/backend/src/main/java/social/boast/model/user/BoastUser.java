@@ -145,7 +145,7 @@ public class BoastUser extends PanacheEntityBase {
         return getEntityManager()
                 .createQuery("select u.id \n" +
                         "from BoastUser u \n" +
-                        "where u.username like :searchParam or u.name like :searchParam \n" +
+                        "where lower(u.username) like lower(:searchParam) or lower(u.name) like lower(:searchParam) \n" +
                         " order by u.username limit 10", Long.class)
                 .setParameter("searchParam", "%" + searchParam + "%")
                 .getResultList().stream().map(i -> getUserPreviewDTO(reqUserId, i)).toList();
