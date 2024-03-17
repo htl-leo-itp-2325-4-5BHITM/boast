@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import {Observable} from "rxjs";
+import { HttpClient} from '@angular/common/http';
 
 export interface PostModel {
   _id: number
@@ -9,16 +9,17 @@ export interface PostModel {
   providedIn: 'root'
 })
 export class PostService {
-  static _urlPostIds: string = 'https://www.boast.social/api/posts';
-  static _urlPost: string = 'https://www.boast.social/api/posts/';
+  private _urlPostIds: string = 'https://www.boast.social/api/posts';
+  private _urlPost: string = 'https://www.boast.social/api/posts/';
 
   constructor(private http: HttpClient) {}
 
-  getIds():Observable<number[]> {
-    return this.http.get<number[]>(PostService._urlPostIds);
+  public getIds(): Observable<number[]> {
+    console.log(this.http.get<number[]>(this._urlPostIds));
+    return this.http.get<number[]>(this._urlPostIds);
   }
-  getPost(_id:number):Observable<PostModel[]> {
-    return this.http.get<PostModel[]>(`${PostService._urlPost}${_id}`);
+  public getPost(_id:number):Observable<PostModel[]> {
+    return this.http.get<PostModel[]>(`${this._urlPost}${_id}`);
   }
 
 

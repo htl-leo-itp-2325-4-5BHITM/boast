@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {PostService} from "../service/post.service";
 
 @Component({
   selector: 'app-log-in-page',
@@ -9,4 +10,6 @@ import { Component } from '@angular/core';
 })
 export class LogInPageComponent {
 
+  constructor(protected postServic: PostService) {
+  }
 }
