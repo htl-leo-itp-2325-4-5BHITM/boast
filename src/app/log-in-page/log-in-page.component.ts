@@ -10,6 +10,6 @@ import {PostService} from "../service/post.service";
 })
 export class LogInPageComponent {
 
-  constructor(protected postServic: PostService) {
+  constructor(protected postService: PostService) {
   }
 }

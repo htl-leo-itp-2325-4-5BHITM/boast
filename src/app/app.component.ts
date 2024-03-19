@@ -4,11 +4,12 @@ import {NavbarComponent} from "./navbar/navbar.component";
 import {LogInPageComponent} from "./log-in-page/log-in-page.component";
 import {PostModel, PostService} from "./service/post.service";
 import {Observable} from "rxjs";
+import {PostComponent} from "./post/post.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, LogInPageComponent],
+  imports: [RouterOutlet, NavbarComponent, LogInPageComponent, PostComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   providers: [PostService]
