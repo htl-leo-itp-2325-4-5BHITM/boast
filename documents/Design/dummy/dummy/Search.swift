@@ -1,15 +1,17 @@
-//
-//  Search.swift
-//  dummy
-//
-//  Created by Jannis Sideras on 19.03.24.
-//
 
 import SwiftUI
 
 struct Search: View {
+    @State var searchText = ""
+    @State var searchIsActive = false
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            NavigationStack {
+                Text("")
+                    .navigationTitle("Find your friends")
+            }
+            .searchable(text: $searchText, isPresented: $searchIsActive)
+        }
     }
 }
 
