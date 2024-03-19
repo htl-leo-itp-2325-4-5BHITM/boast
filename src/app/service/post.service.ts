@@ -19,7 +19,7 @@ export interface PostModel {
 })
 export class PostService {
 
-  posts:Array<any>
+  posts:PostModel [];
   ids:Array<any>
 
   constructor(private http: HttpClient) {
@@ -37,22 +37,27 @@ export class PostService {
     return this.http.get<any>(url)
   }
 
-  getIdsFromAPI() {
-    this.getIds().subscribe((posts) => {
-      console.log(posts)
+  getPosts() {
+    this.getIds().subscribe((ids) => {
+      this.ids = ids;
+
+      let createdPost:PostModel;
+      for(let i = 0; i < this.ids.length; i++) {
+        this.getPost(i+1).subscribe((post) => {
+          let createdPost: PostModel = {
+            creatorName: post.creatorName,
+            id: post.id,
+            status: post.status,
+            createdOn: post.createdOn,
+            title: post.title,
+            definition: post.definition
+          };
+          this.posts[i] = createdPost;
+        })
+      }
 
     })
+    console.log(this.posts);
+    return this.posts;
   }
-
-  /*
-  public getIds(): Observable<number[]> {
-    console.log(this.http.get(this._urlPostIds).pipe());
-    return this.http.get<number[]>(this._urlPostIds);
-  }
-  public getPost(_id:number):Observable<PostModel[]> {
-    console.log(this.http.get<PostModel[]>(`${this._urlPost}${_id}`));
-    return this.http.get<PostModel[]>(`${this._urlPost}${_id}`);
-  }
-*/
-
 }

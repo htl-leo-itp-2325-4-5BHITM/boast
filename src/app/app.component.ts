@@ -15,10 +15,7 @@ import {PostComponent} from "./post/post.component";
   providers: [PostService]
 })
 export class AppComponent{
-  title = 'Webpage';
-
-  postIds: Observable<number[]> | undefined;
-  post: Observable<PostModel[]> | undefined;
+  title = 'Boast';
 
 constructor(private postService:PostService) {
 }
