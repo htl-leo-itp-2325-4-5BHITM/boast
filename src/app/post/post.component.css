@@ -1,0 +1,58 @@
+
+.postHeader {
+  border-radius: 12px;
+  border-style: solid;
+  border-color: #1E1F26;
+  border-width: 1px;
+  display: flexbox;
+  background-color: #30323D;
+  padding:0;
+  padding-top: 0.5vw;
+  padding-left: 0.5vw;
+  padding-right: 0.3VW;
+  color: #fff;
+}
+
+.postBody {
+  width: 20vw;
+  border-radius: 12px;
+  border-style: solid;
+  border-color: #1E1F26;
+  border-width: 1px;
+  color: #fff;
+  margin:0;
+  background-color: #24262E;
+}
+
+.creatorName {
+  display: inline;
+  font-size: 1.3vw;
+  margin-right: 30%;
+  padding: 0.5vw;
+
+}
+
+.status {
+  display:inline;
+  font-size: 1.1vw;
+  margin-left: 30%;
+}
+
+.createdOn {
+  position: relative;
+  bottom: 0.7vw;
+  left: 0.6vw;
+  color: #3FB4FF;
+  font-size: 0.7vw;
+
+}
+
+.title {
+  font-size: 1.5vw;
+
+}
+
+.definition {
+  font-size: 0.9vw;
+
+}

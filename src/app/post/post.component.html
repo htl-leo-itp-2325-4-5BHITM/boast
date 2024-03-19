@@ -1,0 +1,21 @@
+<ul>
+  <li *ngFor="let post of postService.getPost(2)">
+  <div class="postBody">
+    <div class="postHeader">
+      <p class="creatorName">{{post.title}}</p>                       <!--creatorName-->
+      <p class="status">{{post.status}}</p>                              <!--status -->
+      <p class="createdOn">{{post.createdOn}}</p>                     <!--createdOn -->
+      <h1 class="title">Balloon-In-Air Challenge</h1>         <!--title-->
+      <p class="definition">Each person gets a balloon filled up with Radon [Rn 86]. Try keeping the balloon airborne by blowing against it.	</p> <!--definition-->
+
+    </div>
+    <p>bla bla bla</p>
+    <p></p>
+  </div>
+  </li>
+</ul>
+
+
+<!--
+<li *ngFor="let picture of pictureService.getPictures(); let i = index" class="box-item">
+-->
