@@ -9,7 +9,6 @@ export interface PostModel {
   createdOn: string,
   title: string,
   definition: string;
-
 }
 
 @Injectable({
@@ -31,7 +30,7 @@ export class PostService {
     return this.http.get<any>('https://www.boast.social/api/posts/' + id);
   }
 
-
+//todo: #5 Bestehende Posts werden durch getPosts() abgerufen und angezeigt, wenn .html eingebunden ist. Aber noch keine Optionen einer Wette (Details)
   getPosts(): PostModel[] {
     this.posts = [];
     this.getAllPosts().subscribe(ids => {
