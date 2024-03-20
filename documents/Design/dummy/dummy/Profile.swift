@@ -11,19 +11,21 @@ struct Profile: View {
                         .scaledToFit()
                     VStack(alignment: .leading) {
                         Text("Name")
-                            .font(.title2)
+                            .font(.title)
                         Text("@Username")
-                            .font(.subheadline)
+                            .font(.caption)
                     }
                     Spacer()
                 }
             }
             .padding(.bottom, 10)
-            .frame(height: 40)
+            .frame(height: 75)
             
-            Text("Biography Biography Biography Biography Biography Biography Biography Biography Biography Biography Biography Biography")
+            Text("This is the Biography\nThis is the Biography")
                 .font(.caption)
                 .padding(.bottom, 10)
+                .padding(.top,4)
+            
             
             HStack {
                 VStack {
@@ -58,22 +60,6 @@ struct Profile: View {
                 .overlay(.white)
             
             VStack(alignment: .leading) {
-                // USER
-                HStack {
-                    HStack {
-                        Image(systemName: "person.circle")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(height: 30)
-                        VStack(alignment: .leading) {
-                            Text("Name")
-                                .font(.title3)
-                            Text("@Username")
-                                .font(.caption)
-                        }
-                        Spacer()
-                    }
-                }
                 
                 // BET
                 Text("I bet we will get an A+")
