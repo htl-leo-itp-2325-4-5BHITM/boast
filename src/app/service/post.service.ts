@@ -34,8 +34,11 @@ export class PostService {
   getPosts(): PostModel[] {
     this.posts = [];
     this.getAllPosts().subscribe(ids => {
+      console.log(ids)
+      console.log("req all")
       ids.forEach((id: number) => {
         this.getPostById(id).subscribe(post => {
+          console.log("req one")
           this.posts.push(post);
         });
       });

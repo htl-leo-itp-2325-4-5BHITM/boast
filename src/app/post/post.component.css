@@ -54,5 +54,11 @@
 
 .definition {
   font-size: 0.9vw;
+}
 
+ul {
+  list-style-type: none;
+  margin-left: auto;
+  margin-right: auto;
+  width: 25%;
 }
