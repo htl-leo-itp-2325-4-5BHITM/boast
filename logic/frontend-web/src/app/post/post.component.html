@@ -1,0 +1,19 @@
+<h1>Posts</h1>
+
+<ul>
+  <li *ngFor="let post of this.posts">
+    <div class="postBody">
+      <div class="postHeader">
+        <p class="creatorName">{{post.creatorName}}</p>
+        <p class="status">{{post.status}}</p>
+        <p class="createdOn">{{post.createdOn}}</p>
+        <h1 class="title">{{post.title}}</h1>
+        <p class="definition">{{post.definition}}</p>
+
+      </div>
+      <p> Options </p>
+      <p></p>
+    </div>
+    <br>
+  </li>
+</ul>

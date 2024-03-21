@@ -1,0 +1,107 @@
+#leftBox {
+  position: relative;
+  top:7vw;
+  right: 2vw;
+  width: 374px;
+  height: 517px;
+  margin: 0;
+  padding: 0;
+}
+
+#leftBox p {
+  position: relative;
+  bottom: 2vw;
+  right:2vw;
+  width: 40vw;
+  font-size: 2.4vw;
+  text-align: center;
+  font-style:italic;
+}
+
+#rightBox {
+  position: relative;
+  top: 7vw;
+  width: 17vw;
+  height: 72vw;
+  margin: 0;
+  height: 517px;
+  border-radius: 15px;
+  border: 2px solid rgba(30, 31, 38, 0.00);
+  background: #30323D;
+  padding: 3vw;
+  box-shadow: 2px 2px 2px #1E1F26;
+}
+
+h2 {
+  text-align: center;
+  font-size: 1.5vw;
+
+}
+
+h3 {
+  font-size: 0.9vw;
+  margin-bottom: 5px;
+}
+
+p {
+  height: 15px;
+  color: #FFF;
+  font-size: 0.9vw;
+}
+
+button {
+  justify-content: end;
+  color: #FFF;
+  font-size: 1vw;
+  line-height: normal;
+  border-radius: 5px;
+  background: #3FB4FF;
+  width: 87px;
+  height: 24px;
+  border: none;
+  opacity: 0.8;
+  transition: 0.3s;
+}
+
+button:hover {
+  opacity: 1;
+}
+
+
+
+input {
+  background-color: #1E1F26;
+  color: #fff;
+  border: none;
+  padding: 0.2vw;
+  font-size: 0.8vw;
+  border-radius: 5px;
+  height: 1.7vw;
+  width: 97%;
+}
+
+
+
+#logIn {
+  margin: 0;
+  padding: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 17vw;
+}
+
+#submitButton {
+  text-align: right;
+  margin-right: 3px;
+}
+
+#container {
+  display: flex;
+  justify-content:space-evenly;
+  align-items:flex-start;
+}
+
+#error {
+  color: red;
+  opacity: 0;
+}

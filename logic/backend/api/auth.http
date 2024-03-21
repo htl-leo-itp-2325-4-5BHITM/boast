@@ -1,0 +1,5 @@
+@BASE=https://boast.social/auth
+###
+GET {{BASE}}/realms/boast/.well-known/openid-configuration
+###
+
