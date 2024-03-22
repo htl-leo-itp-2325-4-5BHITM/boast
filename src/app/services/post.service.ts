@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
-import {HttpClient} from '@angular/common/http';
+import {RequestService} from "./request.service";
+
 
 export interface PostModel {
   id: number,
@@ -11,7 +11,6 @@ export interface PostModel {
   definition: string;
   postDetails:Array<PostDetailModel>;
 }
-
 export interface PostDetailModel {
   createdOn: Date,
   creatorId: number,
@@ -27,25 +26,16 @@ export interface PostDetailModel {
 })
 export class PostService {
 
-  constructor(private http: HttpClient) {
-  }
-
   posts: PostModel[] = [];
 
-
-  getAllPosts(): Observable<any> {
-    return this.http.get<any>('https://www.boast.social/api/posts/');
-  }
-
-  getPostById(id: number): Observable<any> {
-    return this.http.get<any>('https://www.boast.social/api/posts/' + id);
+  constructor(private requestService:RequestService) {
   }
 
   getPosts(): PostModel[] {
     this.posts = [];
-    this.getAllPosts().subscribe(ids => {
+    this.requestService.getAllPosts().subscribe(ids => {
       ids.forEach((id: number) => {
-        this.getPostById(id).subscribe(post => {
+        this.requestService.getPostById(id).subscribe(post => {
           this.posts.push(post);
         });
       });
