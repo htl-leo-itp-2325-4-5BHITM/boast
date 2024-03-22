@@ -65,7 +65,7 @@ ul {
 .bets {
   display: flex;
   align-self: center;
-  justify-content: space-between;
+  justify-content: left;
   padding-left: 1vw;
 }
 
@@ -80,11 +80,11 @@ ul {
 
 .betCreator {
   position: relative;
-  right: 5.7vw;
+
 
 }
 
 .betText {
   position: relative;
-  right: 11.5vw;
+
 }
