@@ -9,6 +9,17 @@ export interface PostModel {
   createdOn: string,
   title: string,
   definition: string;
+  postDetails:Array<PostDetailModel>;
+}
+
+export interface PostDetailModel {
+  createdOn: Date,
+  creatorId: number,
+  creatorName: string,
+  postDetailsId: number,
+  postId: number,
+  text: string,
+  poll_answerId: number;
 }
 
 @Injectable({
@@ -30,15 +41,11 @@ export class PostService {
     return this.http.get<any>('https://www.boast.social/api/posts/' + id);
   }
 
-//todo: #5 Bestehende Posts werden durch getPosts() abgerufen und angezeigt, wenn .html eingebunden ist. Aber noch keine Optionen einer Wette (Details)
   getPosts(): PostModel[] {
     this.posts = [];
     this.getAllPosts().subscribe(ids => {
-      console.log(ids)
-      console.log("req all")
       ids.forEach((id: number) => {
         this.getPostById(id).subscribe(post => {
-          console.log("req one")
           this.posts.push(post);
         });
       });

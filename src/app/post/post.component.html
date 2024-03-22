@@ -1,9 +1,5 @@
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<br><br><br><br><br><br>
+
 <ul>
   <li *ngFor="let post of this.posts">
     <div class="postBody">
@@ -13,10 +9,14 @@
         <p class="createdOn">{{post.createdOn}}</p>
         <h1 class="title">{{post.title}}</h1>
         <p class="definition">{{post.definition}}</p>
-
       </div>
-      <p> Options </p>
-      <p></p>
+      <br>
+          <div class="bets" *ngFor="let detail of post.postDetails">
+            <p class="betDate"> {{detail.createdOn}}</p>
+            <p class="betCreator"> {{detail.creatorName + ': '}} </p>
+            <p class="betText"> {{detail.text}}</p>
+          </div>
+      <br>
     </div>
     <br>
   </li>

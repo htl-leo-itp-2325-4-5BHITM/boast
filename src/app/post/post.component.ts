@@ -19,6 +19,7 @@ export class PostComponent {
 
   constructor(public postservice: PostService) {
     this._posts = postservice.getPosts();
+    console.log(this._posts)
   }
 
 

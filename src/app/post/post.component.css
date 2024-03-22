@@ -4,7 +4,6 @@
   border-style: solid;
   border-color: #1E1F26;
   border-width: 1px;
-  display: flexbox;
   background-color: #30323D;
   padding:0;
   padding-top: 0.5vw;
@@ -61,4 +60,31 @@ ul {
   margin-left: auto;
   margin-right: auto;
   width: 25%;
+}
+
+.bets {
+  display: flex;
+  align-self: center;
+  justify-content: space-between;
+  padding-left: 1vw;
+}
+
+.bets p {
+  margin: 0;
+}
+
+.betDate {
+  color: #3FB4FF;
+  font-size: 0.7vw;
+}
+
+.betCreator {
+  position: relative;
+  right: 5.7vw;
+
+}
+
+.betText {
+  position: relative;
+  right: 11.5vw;
 }

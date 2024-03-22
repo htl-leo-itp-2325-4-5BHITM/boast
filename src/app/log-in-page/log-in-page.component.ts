@@ -24,7 +24,6 @@ export class LogInPageComponent {
   }
 
   logIn(username: string){
-    //todo: #1 logIn() wird im html aufgerufen und prüft ob es den gegebenen User gibt. Dafür muss in dieser Methode auf user.service zugegriffen werden.
     this.userService.checkLogIn(username);
   }
 }
