@@ -9,12 +9,14 @@
         <p class="createdOn">{{post.createdOn}}</p>
         <h1 class="title">{{post.title}}</h1>
         <p class="definition">{{post.definition}}</p>
+        <p>{{post.typeInfo}}</p>
       </div>
       <br>
           <div class="bets" *ngFor="let detail of post.postDetails">
             <p class="betDate"> {{detail.createdOn}}</p>
             <p class="betCreator"> {{detail.creatorName + ': '}} </p>
             <p class="betText"> {{detail.text}}</p>
+            <p class="betText"></p>
           </div>
       <br><br>
     </div>

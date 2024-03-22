@@ -90,7 +90,7 @@ input {
   width: 17vw;
 }
 
-#submitButton {
+.button {
   text-align: right;
   margin-right: 3px;
 }
@@ -104,4 +104,8 @@ input {
 #error {
   color: red;
   opacity: 0;
+}
+
+a {
+  color:#3FB4FF;
 }

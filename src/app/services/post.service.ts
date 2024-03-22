@@ -8,8 +8,10 @@ export interface PostModel {
   status: string,
   createdOn: string,
   title: string,
-  definition: string;
-  postDetails:Array<PostDetailModel>;
+  definition: string,
+  type: string,
+  postDetails:Array<PostDetailModel>,
+  typeInfo:Array<PollAnswer>;
 }
 export interface PostDetailModel {
   createdOn: Date,
@@ -19,6 +21,10 @@ export interface PostDetailModel {
   postId: number,
   text: string,
   poll_answerId: number;
+}
+export interface PollAnswer {
+  poll_answerId: number,
+  title: string;
 }
 
 @Injectable({
@@ -37,6 +43,7 @@ export class PostService {
       ids.forEach((id: number) => {
         this.requestService.getPostById(id).subscribe(post => {
           this.posts.push(post);
+          console.log(post.typeInfo.title);
         });
       });
     });
