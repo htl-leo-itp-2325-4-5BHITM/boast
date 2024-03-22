@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {PostModel, PostService} from "../service/post.service";
-import {NgFor, NgForOf} from "@angular/common";
+import {PostModel, PostService} from "../services/post.service";
+import {NgForOf} from "@angular/common";
 import {NavbarComponent} from "../navbar/navbar.component";
 
 @Component({
@@ -17,11 +17,11 @@ export class PostComponent {
 
   private _posts: PostModel[]
 
-  constructor(public postservice: PostService) {
-    this._posts = postservice.getPosts();
+  constructor(public postService: PostService) {
+    this._posts = postService.getPosts();
     console.log(this._posts)
+    console.log(sessionStorage)
   }
-
 
   get posts(): PostModel[] {
     return this._posts;
