@@ -12,9 +12,18 @@ struct ProfileView: View {
                 .hidden()
                 
                 HStack {
-                    Text(UserDefaults.standard.string(forKey: "userName") ?? userData?.username ?? "")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
+                    Image(systemName: "person.circle")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 50)
+                    VStack(alignment: .leading) {
+                        Text(UserDefaults.standard.string(forKey: "userName") ?? userData?.username ?? "")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                        Text("@\(UserDefaults.standard.string(forKey: "userName") ?? userData?.username ?? "")")
+                            .font(.callout)
+                            .fontWeight(.bold)
+                    }
                     Spacer()
                     Button {
                         Task{
@@ -38,6 +47,9 @@ struct ProfileView: View {
                     Text("Posts: \(userData?.posts?.count ?? 0)")
                 }
                 
+                Divider()
+                    .frame(height: 0.5)
+                    .overlay(.blackAndWhite)
                 Spacer()
                 
                 ScrollView {

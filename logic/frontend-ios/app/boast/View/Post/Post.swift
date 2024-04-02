@@ -25,5 +25,5 @@ struct Post: View {
 }
 
 #Preview {
-    Post(postId: 110)
+    Post(postId: 100)
 }

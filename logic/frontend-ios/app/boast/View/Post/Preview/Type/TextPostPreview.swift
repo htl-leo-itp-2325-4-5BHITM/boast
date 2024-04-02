@@ -8,22 +8,34 @@ struct TextPostPreview: View {
         VStack(alignment: .leading) {
             HStack {
                 VStack(alignment: .leading) {
-                    NavigationLink(destination: UserProfileView(userId: post?.creatorId ?? -1)) {
-                        Text(post?.creatorName ?? "")
-                            .font(.title)
-                    }
-                    Text(post?.createdOn ?? "")
+                    Text(post?.title ?? "")
+                        .font(.system(size: 30, weight: .semibold))
                 }
                 Spacer()
-            }
-            
-            VStack(alignment: .leading) {
-                Text(post?.title ?? "")
-                    .bold()
+                Text("") // TODO!
                     .font(.title)
-                Text(post?.definition ?? "")
-                    .font(.title2)
+                    .bold()
+                    .padding()
+                    //.background(.gray)
+                    .clipShape(.buttonBorder)
+                    //.border(.blackAndWhite)
             }
+            VStack(alignment: .leading) {
+                Text(post?.definition ?? "")
+                    .font(.system(size: 20))
+            }
+            .padding(.bottom, 1)
+            
+            HStack {
+                Text("@\(post?.creatorName ?? "")")
+                Text("|")
+                Text("\(post?.postDetails?.count ?? 0) vote")
+                Text("|")
+                Text("10 minutes left")
+                Spacer()
+            }
+            .font(.system(size: 14))
+            .foregroundColor(.gray)
         }
         .frame(width: UIScreen.main.bounds.width - 20)
     }

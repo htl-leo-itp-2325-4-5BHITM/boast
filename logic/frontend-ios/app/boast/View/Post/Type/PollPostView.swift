@@ -9,90 +9,47 @@ struct PollPostView: View {
     @State var dict = [Int:String]()
     @State var answerCreatorIds = [Int]()
     @State var betEntry = ""
-
+    
     var body: some View {
         VStack(alignment: .leading) {
-            Spacer()
             HStack {
                 VStack(alignment: .leading) {
-                    NavigationLink(destination: UserProfileView(userId: post.creatorId)) {
-                        Text(post.creatorName)
-                            .font(.title)
-                    }
-                    Text(post.createdOn)
+                    Text(post.title)
+                        .font(.system(size: 30, weight: .semibold))
+                    Text("@\(post.creatorName)")
+                        .font(.system(size: 20))
+                    
+                        .foregroundColor(.blackAndWhite)
                 }
-                
                 Spacer()
-                
-                if(post.creatorId == UserDefaults.standard.integer(forKey: "userId")){
-                    Picker("Status", selection: $postStatus) {
-                        ForEach(Status.allCases, id: \.self) { val in
-                            Text(val.rawValue)
-                                .tag(val)
-                        }
-                    }
-                    .onChange(of: postStatus) {
-                        Task {
-                            do {
-                                postStatus = await updateStatus(postId: post.postId, postStatus: postStatus)
-                                post.dataChanged(status: postStatus)
-                            }
-                        }
-                    }
-                }else {
-                    Text((post.status).rawValue)
-                }
-            }
-
-            
-            VStack(alignment: .leading) {
-                Text(post.title)
-                    .font(.largeTitle)
+                Text("") // TODO
+                    .font(.title)
                     .bold()
-                Text(post.definiton)
-                    .font(.title2)
+                    .padding()
+                //.background(.gray)
+                    .clipShape(.buttonBorder)
+                //.border(.blackAndWhite)
             }
-            .padding(.top)
-            .padding(.bottom)
-
-            
             VStack(alignment: .leading) {
-                ForEach(post.postDetails, id: \.creatorId) { detail in
-                    HStack {
-                        Text(detail.createdOn ?? "")
-                        Text("\(detail.creatorName ?? "") :")
-                        Text("\(dict[detail.poll_answerId ?? 0] ?? "")")
-                    }
-                }
-                HStack {
-                    Text(betEntry)
-                }
+                Text(post.definiton)
+                    .font(.system(size: 20))
             }
+            
             
             VStack {
-                if(post.creatorId != UserDefaults.standard.integer(forKey: "userId") && !answerCreatorIds.contains(UserDefaults.standard.integer(forKey: "userId")) && post.status == .OPEN){
-                    Picker("answers", selection: $answerOption) {
-                        Text("No Answer")
-                            .tag(-1)
-                        ForEach(Array(dict.values), id: \.self) { val in
-                            Text("\(val)")
-                                .tag(val)
-                        }
+                ForEach(post.typeInfo.pollAnswers ?? [Poll_PostAnswerModel](), id: \.poll_answerId) { answer in
+                    HStack {
+                        Text("\(answer.title ?? "")")
+                            .foregroundStyle(Color.teal)
+                        Spacer()
                     }
-                    .buttonStyle(.borderedProminent)
-                    .onChange(of: answerOption) {
-                        Task {
-                            do {
-                                let key = dict.first(where: { $0.value == answerOption})?.key
-                                let status = await createPostDetail(creatorId: UserDefaults.standard.integer(forKey: "userId"), postId: post.postId , pollAnswerId: key ?? -1)
-                                let df = DateFormatter()
-                                df.dateFormat = "dd.MM.yyyy"
-                                betEntry = "\(df.string(from: Date.now))  \(UserDefaults.standard.string(forKey: "userName") ?? "") : \(answerOption)"
-                                                                
-                                answerCreatorIds.append(UserDefaults.standard.integer(forKey: "userId"))
-                            }
-                        }
-                    }
+                    .padding(10)
+                    .frame(width: UIScreen.main.bounds.width - 20)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 30)
+                            .stroke(Color.teal, lineWidth: 3)
+                            .padding(1)
+                    )
                 }
             }
             
@@ -108,7 +65,7 @@ struct PollPostView: View {
             postStatus = post.status
         }
         .frame(width: UIScreen.main.bounds.width - 20)
-    
+        
     }
 }
 

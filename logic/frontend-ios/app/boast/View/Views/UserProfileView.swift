@@ -14,15 +14,24 @@ struct UserProfileView: View {
         NavigationStack {
             VStack {
                 HStack {
-                    Text(userData?.username ?? "")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
+                    Image(systemName: "person.circle")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 50)
+                    VStack(alignment: .leading) {
+                        Text(userData?.username ?? "")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                        Text("@\(userData?.username ?? "")")
+                            .font(.callout)
+                    }
                     if userData != nil {
                         RelationButtonView(targetId: userData?.userId ?? -1, relationType: userData?.relationStatus)
                     }
                 }
                 .frame(width: UIScreen.main.bounds.width - 20, alignment: .leading)
                 .padding()
+                
                 
                 HStack {
                     NavigationLink(destination: UserListView(userId: userData?.userId ?? -1, relationType: "following")) {
@@ -34,6 +43,10 @@ struct UserProfileView: View {
                     Text("Posts: \(userData?.posts?.count ?? 0)")
                 }
                 
+                Divider()
+                    .frame(height: 0.5)
+                    .overlay(.blackAndWhite)
+
                 Spacer()
                 
                 ScrollView {

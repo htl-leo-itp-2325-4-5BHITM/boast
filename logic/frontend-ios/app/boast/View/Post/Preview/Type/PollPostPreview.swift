@@ -8,29 +8,56 @@ struct PollPostPreview: View {
     @State var answerOption = ""
     @State var dict = [Int:String]()
     @State var answerCreatorIds = [Int]()
-
+    
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
                 VStack(alignment: .leading) {
-                    NavigationLink(destination: UserProfileView(userId: post?.creatorId ?? -1)) {
-                        Text(post?.creatorName ?? "")
-                            .font(.title)
-                    }
-                    Text(post?.createdOn ?? "")
+                    Text(post?.title ?? "")
+                        .font(.system(size: 30, weight: .semibold))
                 }
                 Spacer()
+                Text("") // TODO
+                    .font(.title)
+                    .bold()
+                    .padding()
+                    //.background(.gray)
+                    .clipShape(.buttonBorder)
+                    //.border(.blackAndWhite)
+            }
+            VStack(alignment: .leading) {
+                Text(post?.definition ?? "")
+                    .font(.system(size: 20))
             }
             
-            VStack(alignment: .leading) {
-                Text(post?.title ?? "")
-                    .bold()
-                    .font(.title)
-                Text(post?.definition ?? "")
-                    .font(.title)
+            VStack {
+                ForEach(post?.typeInfo?.pollAnswers ?? [Poll_PostAnswerModel](), id: \.poll_answerId) { answer in
+                    HStack {
+                        Text("\(answer.title ?? "")")
+                        Spacer()
+                    }
+                    .padding(10)
+                    .frame(width: UIScreen.main.bounds.width - 20)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 30)
+                            .stroke(.blackAndWhite, lineWidth: 3)
+                            .padding(1)
+                    )
+                }
+                
+                HStack {
+                    Text("@\(post?.creatorName ?? "")")
+                    Text("|")
+                    Text("\(post?.postDetails?.count ?? 0) vote")
+                    Text("|")
+                    Text("10 minutes left")
+                    Spacer()
+                }
+                .font(.system(size: 14))
+                .foregroundColor(.gray)
             }
         }
         .frame(width: UIScreen.main.bounds.width - 20)
-    
+        
     }
 }
