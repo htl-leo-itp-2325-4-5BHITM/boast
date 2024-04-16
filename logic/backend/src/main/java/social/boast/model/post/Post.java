@@ -76,12 +76,12 @@ public class Post extends PanacheEntityBase {
         post.status = status;
     }
 
-    public static void addWinner(Long id, String name) {
+    public static Long addWinner(Long id, String name) {
         Post post = findById(id);
         BoastUser user = BoastUser.getBoastUserByName(name);
         if (user == null || post == null) throw new IllegalArgumentException();
         post.winner = user;
-
+        return user.userId;
     }
 
     public static void removePost(Long postId) {

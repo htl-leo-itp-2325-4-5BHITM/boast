@@ -62,8 +62,7 @@ public class PostResource {
     public Response addWinner(@PathParam("id") Long id, @PathParam("name") String name) {
         System.out.printf("add Winner: " + id + " Set: " + name);
         try {
-            Post.addWinner(id, name);
-            return Response.ok().build();
+            return Response.ok(Post.addWinner(id, name)).build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.status(404).build();
