@@ -9,8 +9,8 @@ import java.util.List;
 public class Text_PostDTO extends PostDTO implements PostTypeDTO_Interface<Text_PostDetailDTO> {
     List<Text_PostDetailDTO> postDetails;
 
-    public Text_PostDTO(Long postId, Date createdOn, String title, String definition, Long creator, String creatorName, String status, String type, List<Text_PostDetailDTO> postDetails) {
-        super(postId, createdOn, title, definition, creator, creatorName, status, type);
+    public Text_PostDTO(Long postId, Date createdOn, String title, String definition, Long creator, String creatorName, String status, String type, Long winnerId, String winnerName, List<Text_PostDetailDTO> postDetails) {
+        super(postId, createdOn, title, definition, creator, creatorName, status, type, winnerId, winnerName);
         this.postDetails = postDetails;
     }
 

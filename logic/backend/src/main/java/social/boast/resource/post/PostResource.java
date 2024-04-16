@@ -10,6 +10,7 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import social.boast.model.user.BoastUser;
 
 import java.util.List;
 
@@ -48,6 +49,20 @@ public class PostResource {
         System.out.printf("update Status: " + id + " Set: " + status.name());
         try {
             Post.updateStatus(id, status);
+            return Response.ok().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.status(404).build();
+        }
+    }
+
+    @POST
+    @Path("/{id}/winner/{name}")
+    @Transactional
+    public Response addWinner(@PathParam("id") Long id, @PathParam("name") String name) {
+        System.out.printf("add Winner: " + id + " Set: " + name);
+        try {
+            Post.addWinner(id, name);
             return Response.ok().build();
         } catch (Exception e) {
             e.printStackTrace();

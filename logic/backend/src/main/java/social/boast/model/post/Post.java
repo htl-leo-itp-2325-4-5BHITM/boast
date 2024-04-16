@@ -36,6 +36,9 @@ public class Post extends PanacheEntityBase {
     @Enumerated(EnumType.STRING)
     public PostType postType;
 
+    @ManyToOne
+    public BoastUser winner;
+
     public Post(Date createdOn, String title, String definition, BoastUser creator, PostStatus status, PostType postType) {
         this.createdOn = (createdOn != null) ? createdOn : new Date();
         this.title = title;
@@ -71,6 +74,14 @@ public class Post extends PanacheEntityBase {
         Post post = findById(id);
         if (post == null) throw new IllegalArgumentException();
         post.status = status;
+    }
+
+    public static void addWinner(Long id, String name) {
+        Post post = findById(id);
+        BoastUser user = BoastUser.getBoastUserByName(name);
+        if (user == null || post == null) throw new IllegalArgumentException();
+        post.winner = user;
+
     }
 
     public static void removePost(Long postId) {

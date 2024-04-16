@@ -94,6 +94,10 @@ public class BoastUser extends PanacheEntityBase {
         return new UserDTO(user.userId, user.createdOn, user.isPublic, user.name, user.username, user.email);
     }
 
+    public static BoastUser getBoastUserByName(String username) {
+        return find("username", username).firstResult();
+    }
+
     public static UserDTO getUserDTO(Long id) {
         BoastUser user = findById(id);
         if (user == null) throw new IllegalArgumentException();

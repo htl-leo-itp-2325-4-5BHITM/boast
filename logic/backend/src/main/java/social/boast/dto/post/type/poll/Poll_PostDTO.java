@@ -10,8 +10,8 @@ public class Poll_PostDTO extends PostDTO implements PostTypeDTO_Interface<Poll_
     Poll_TypeInfoDTO typeInfo;
     List<Poll_PostDetailDTO> postDetails;
 
-    public Poll_PostDTO(Long postId, Date createdOn, String title, String definition, Long creator, String creatorName, String status, String type, Poll_TypeInfoDTO typeInfo, List<Poll_PostDetailDTO> postDetails) {
-        super(postId, createdOn, title, definition, creator, creatorName, status, type);
+    public Poll_PostDTO(Long postId, Date createdOn, String title, String definition, Long creator, String creatorName, String status, String type, Long winnerId, String winnerName, Poll_TypeInfoDTO typeInfo, List<Poll_PostDetailDTO> postDetails) {
+        super(postId, createdOn, title, definition, creator, creatorName, status, type, winnerId, winnerName);
         this.typeInfo = typeInfo;
         this.postDetails = postDetails;
     }
