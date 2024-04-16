@@ -12,4 +12,6 @@ class PostModel: Codable {
     var creatorName: String?
     var status: Status?
     var type: PostType?
+    var winnerId: Int?
+    var winnerName: String?
 }

@@ -52,6 +52,22 @@ func postsFriends(userId: Int) async -> [Int] {
     return postList
 }
 
+func setWinner(postId: Int, winnerName: String) async -> Int {
+    let url = URL(string: "https://www.boast.social/api/posts/\(postId)/winner/\(winnerName)")!
+    var request = URLRequest(url: url)
+    request.httpMethod = "POST"
+    var winnerId = -200
+    let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        if let data = data {
+            var temp = String(data: data ?? Data(), encoding: .utf8)
+            winnerId =  Int(temp ?? "-1") ?? -100
+            print("winnerid: \(winnerId)")
+        }
+    }
+    task.resume()
+    return winnerId
+}
+
 func updateStatus(postId: Int, postStatus: Status) async -> Status {
     var status: Status?
     if postId != -1 {
@@ -81,7 +97,7 @@ func createPostDetail(creatorId: Int, postId: Int, pollAnswerId: Int) -> Int {
         request.httpBody = Data("{\"creator\": \(creatorId),\"postId\": \(postId),\"pollAnswerId\": \(pollAnswerId)}".utf8) // :(
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             print((response as! HTTPURLResponse).statusCode)
-            statusCode = (response as! HTTPURLResponse).statusCode 
+            statusCode = (response as! HTTPURLResponse).statusCode
             if let error = error {
                 print(error)
                 return
@@ -132,7 +148,7 @@ func createPollPost(title: String, definition: String, creatorId: Int, status: S
     let typeInfo = Poll_TypeInfoModel()
     typeInfo.pollAnswers = pollAnswers
     post.typeInfo = typeInfo
-        
+    
     let json = try? JSONEncoder().encode(post)
     let url = URL(string: "https://www.boast.social/api/posts/poll")!
     var request = URLRequest(url: url)

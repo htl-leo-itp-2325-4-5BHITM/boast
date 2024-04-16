@@ -21,7 +21,7 @@ struct AllViews: View {
                     Image(systemName: "magnifyingglass")
                 }
             ProfileView()
-                .tabItem {
+                .tabItem {  
                     Image(systemName: "person.circle")
                 }
         }

@@ -46,6 +46,10 @@ struct MainFeedView: View {
                             PostPreview(postId: post)
                         }
                         .buttonStyle(.plain)
+                        Divider()
+                            .frame(height: 1)
+                            .overlay(.blackAndWhite)
+                            .opacity(0.2)
                         Spacer(minLength: 30)
                     }
                 }

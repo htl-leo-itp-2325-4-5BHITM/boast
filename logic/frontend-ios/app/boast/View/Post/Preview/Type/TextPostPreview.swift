@@ -11,20 +11,11 @@ struct TextPostPreview: View {
                     Text(post?.title ?? "")
                         .font(.system(size: 30, weight: .semibold))
                 }
-                Spacer()
-                Text("") // TODO!
-                    .font(.title)
-                    .bold()
-                    .padding()
-                    //.background(.gray)
-                    .clipShape(.buttonBorder)
-                    //.border(.blackAndWhite)
             }
             VStack(alignment: .leading) {
                 Text(post?.definition ?? "")
                     .font(.system(size: 20))
             }
-            .padding(.bottom, 1)
             
             HStack {
                 Text("@\(post?.creatorName ?? "")")
