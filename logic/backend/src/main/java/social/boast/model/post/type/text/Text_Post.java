@@ -69,8 +69,8 @@ public class Text_Post extends Post implements PostType_Interface<Text_PostDetai
                 post.creator.username,
                 post.status.name(),
                 PostType.TEXT.name(),
-                post.winner.userId,
-                post.winner.username,
+                (post.winner != null) ? post.winner.userId : null,
+                (post.winner != null) ? post.winner.username : null,
                 postDetailDTOS);
     }
 }
