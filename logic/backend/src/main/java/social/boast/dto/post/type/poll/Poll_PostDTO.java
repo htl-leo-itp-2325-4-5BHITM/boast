@@ -10,10 +10,13 @@ public class Poll_PostDTO extends PostDTO implements PostTypeDTO_Interface<Poll_
     Poll_TypeInfoDTO typeInfo;
     List<Poll_PostDetailDTO> postDetails;
 
-    public Poll_PostDTO(Long postId, Date createdOn, String title, String definition, Long creator, String creatorName, String status, String type, Long winnerId, String winnerName, Poll_TypeInfoDTO typeInfo, List<Poll_PostDetailDTO> postDetails) {
-        super(postId, createdOn, title, definition, creator, creatorName, status, type, winnerId, winnerName);
+    Long winnerPoll;
+
+    public Poll_PostDTO(Long postId, Date createdOn, String title, String definition, Long creator, String creatorName, String status, String type, Long winnerPoll,Poll_TypeInfoDTO typeInfo, List<Poll_PostDetailDTO> postDetails) {
+        super(postId, createdOn, title, definition, creator, creatorName, status, type);
         this.typeInfo = typeInfo;
         this.postDetails = postDetails;
+        this.winnerPoll = winnerPoll;
     }
 
     public Poll_PostDTO() {
@@ -35,5 +38,13 @@ public class Poll_PostDTO extends PostDTO implements PostTypeDTO_Interface<Poll_
     @Override
     public void setPostDetails(List<Poll_PostDetailDTO> postDetails) {
         this.postDetails = postDetails;
+    }
+
+    public Long getWinnerPoll() {
+        return winnerPoll;
+    }
+
+    public void setWinnerPoll(Long winnerPoll) {
+        this.winnerPoll = winnerPoll;
     }
 }

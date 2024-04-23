@@ -1,9 +1,6 @@
 package social.boast.model.post.type.text;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import social.boast.dto.post.type.text.Text_PostDTO;
 import social.boast.dto.post.type.text.Text_PostDetailDTO;
 import social.boast.model.post.PostStatus;
@@ -20,6 +17,9 @@ public class Text_Post extends Post implements PostType_Interface<Text_PostDetai
 
     @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public List<Text_PostDetail> postDetails;
+
+    @OneToMany
+    public List<BoastUser> winners;
 
     public Text_Post(Text_PostDTO postDTO, BoastUser user) {
         super(postDTO.createdOnDate(),
@@ -42,12 +42,40 @@ public class Text_Post extends Post implements PostType_Interface<Text_PostDetai
         this.postDetails.remove(postDetail);
     }
 
+    public void addWinner(BoastUser user) {
+        winners.add(user);
+    }
+
+    public void removeWinner(BoastUser user) {
+        winners.remove(user);
+    }
+
     public static void createTextPost(Text_PostDTO postDTO) {
         BoastUser user = BoastUser.findById(postDTO.getCreatorId());
         if (user == null) throw new IllegalArgumentException();
 
         Text_Post post = new Text_Post(postDTO, user);
         persist(post);
+    }
+
+    public static void addWinners(Long postId, int[] winners) {
+        Text_Post post = Text_Post.findById(postId);
+        if (post == null) throw new IllegalArgumentException();
+        for (int winner: winners) {
+            BoastUser user = BoastUser.findById(winner);
+            if (user == null) throw new IllegalArgumentException();
+            post.addWinner(user);
+        }
+    }
+
+    public static void removeWinners(Long postId, int[] winners) {
+        Text_Post post = Text_Post.findById(postId);
+        if (post == null) throw new IllegalArgumentException();
+        for (int winner: winners) {
+            BoastUser user = BoastUser.findById(winner);
+            if (user == null) throw new IllegalArgumentException();
+            post.removeWinner(user);
+        }
     }
 
     public static Text_PostDTO getPostDTO(Text_Post post) {
@@ -69,8 +97,7 @@ public class Text_Post extends Post implements PostType_Interface<Text_PostDetai
                 post.creator.username,
                 post.status.name(),
                 PostType.TEXT.name(),
-                (post.winner != null) ? post.winner.userId : null,
-                (post.winner != null) ? post.winner.username : null,
+                post.winners.stream().map((BoastUser user) -> user.userId).toList(),
                 postDetailDTOS);
     }
 }

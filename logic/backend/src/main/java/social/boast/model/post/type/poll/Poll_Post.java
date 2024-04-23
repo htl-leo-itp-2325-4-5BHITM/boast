@@ -1,5 +1,6 @@
 package social.boast.model.post.type.poll;
 
+import jakarta.persistence.*;
 import social.boast.dto.post.type.poll.Poll_PostAnswerDTO;
 import social.boast.dto.post.type.poll.Poll_PostDTO;
 import social.boast.dto.post.type.poll.Poll_PostDetailDTO;
@@ -9,10 +10,6 @@ import social.boast.model.post.Post;
 import social.boast.model.post.type.PostType_Interface;
 import social.boast.model.post.PostType;
 import social.boast.model.user.BoastUser;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToMany;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -24,6 +21,9 @@ public class Poll_Post extends Post implements PostType_Interface<Poll_PostDetai
 
     @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public List<Poll_PostDetail> postDetails;
+
+    @ManyToOne
+    public Poll_PostAnswer winnerPoll;
 
     public Poll_Post(Poll_PostDTO postDTO, BoastUser user) {
         super(postDTO.createdOnDate(),
@@ -54,7 +54,17 @@ public class Poll_Post extends Post implements PostType_Interface<Poll_PostDetai
     public void removePostAnswer(Poll_PostAnswer postAnswer) {
         pollAnswers.remove(postAnswer);
     }
+
     //</editor-fold>
+
+
+    public static void addWinnerPoll(Long postId, Long winnerPoll) {
+        Poll_Post post = Poll_Post.findById(postId);
+        if (post == null) throw new IllegalArgumentException();
+        Poll_PostAnswer postAnswer = Poll_PostAnswer.findById(winnerPoll);
+        if (postAnswer == null) throw new IllegalArgumentException();
+        post.winnerPoll = postAnswer;
+    }
 
     public static void createPollPost(Poll_PostDTO postDTO) {
         BoastUser user = BoastUser.findById(postDTO.getCreatorId());
@@ -93,8 +103,7 @@ public class Poll_Post extends Post implements PostType_Interface<Poll_PostDetai
                 post.creator.username,
                 post.status.name(),
                 PostType.POLL.name(),
-                (post.winner != null) ? post.winner.userId : null,
-                (post.winner != null) ? post.winner.username : null,
+                (post.winnerPoll != null) ? post.winnerPoll.poll_answerId : null,
                 typeInfoDTO,
                 postDetailDTOS);
     }

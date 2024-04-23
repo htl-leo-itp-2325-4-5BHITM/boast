@@ -13,10 +13,8 @@ public class PostDTO {
     String creatorName;
     String status;
     String type;
-    Long winnerId;
-    String winnerName;
 
-    public PostDTO(Long postId, Date createdOn, String title, String definition, Long creatorId, String creatorName, String status, String type, Long winnerId, String winnerName) {
+    public PostDTO(Long postId, Date createdOn, String title, String definition, Long creatorId, String creatorName, String status, String type) {
         this.postId = postId;
         this.createdOn = createdOn;
         this.title = title;
@@ -25,8 +23,6 @@ public class PostDTO {
         this.creatorName = creatorName;
         this.status = status;
         this.type = type;
-        this.winnerId = winnerId;
-        this.winnerName = winnerName;
     }
 
     public PostDTO() {
@@ -99,22 +95,6 @@ public class PostDTO {
 
     public void setCreatorName(String creatorName) {
         this.creatorName = creatorName;
-    }
-
-    public Long getWinnerId() {
-        return winnerId;
-    }
-
-    public void setWinnerId(Long winnerId) {
-        this.winnerId = winnerId;
-    }
-
-    public String getWinnerName() {
-        return winnerName;
-    }
-
-    public void setWinnerName(String winnerName) {
-        this.winnerName = winnerName;
     }
 
     //</editor-fold>

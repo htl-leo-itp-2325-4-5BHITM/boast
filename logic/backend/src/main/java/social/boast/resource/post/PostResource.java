@@ -56,19 +56,6 @@ public class PostResource {
         }
     }
 
-    @POST
-    @Path("/{id}/winner/{name}")
-    @Transactional
-    public Response addWinner(@PathParam("id") Long id, @PathParam("name") String name) {
-        System.out.printf("add Winner: " + id + " Set: " + name);
-        try {
-            return Response.ok(Post.addWinner(id, name)).build();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return Response.status(404).build();
-        }
-    }
-
     @GET
     @Path("")
     @Produces(MediaType.APPLICATION_JSON)
@@ -99,6 +86,20 @@ public class PostResource {
             return Response.status(422).build();
         }
     }
+
+    @POST
+    @Path("{id}/poll/winners/{winnerPoll}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response addPollWinners(@PathParam("id") Long postId, @PathParam("winnerPoll") Long winnerPoll) {
+        try {
+            Poll_Post.addWinnerPoll(postId, winnerPoll);
+            return Response.status(200).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.status(422).build();
+        }
+    }
     //</editor-fold>
 
     //<editor-fold desc="TEXT">
@@ -109,6 +110,20 @@ public class PostResource {
     public Response createTextPost(Text_PostDTO postDTO) {
         try {
             Text_Post.createTextPost(postDTO);
+            return Response.status(200).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.status(422).build();
+        }
+    }
+
+    @POST
+    @Path("{id}/text/winners")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response addTextWinners(@PathParam("id") Long postId, int[] winners) {
+        try {
+            Text_Post.addWinners(postId, winners);
             return Response.status(200).build();
         } catch (Exception e) {
             e.printStackTrace();
