@@ -18,7 +18,7 @@ public class Text_Post extends Post implements PostType_Interface<Text_PostDetai
     @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public List<Text_PostDetail> postDetails;
 
-    @OneToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public List<BoastUser> winners;
 
     public Text_Post(Text_PostDTO postDTO, BoastUser user) {
@@ -43,7 +43,7 @@ public class Text_Post extends Post implements PostType_Interface<Text_PostDetai
     }
 
     public void addWinner(BoastUser user) {
-        winners.add(user);
+        if (!winners.contains(user)) winners.add(user);
     }
 
     public void removeWinner(BoastUser user) {
@@ -58,10 +58,10 @@ public class Text_Post extends Post implements PostType_Interface<Text_PostDetai
         persist(post);
     }
 
-    public static void addWinners(Long postId, int[] winners) {
+    public static void addWinners(Long postId, Long[] winners) {
         Text_Post post = Text_Post.findById(postId);
         if (post == null) throw new IllegalArgumentException();
-        for (int winner: winners) {
+        for (Long winner: winners) {
             BoastUser user = BoastUser.findById(winner);
             if (user == null) throw new IllegalArgumentException();
             post.addWinner(user);

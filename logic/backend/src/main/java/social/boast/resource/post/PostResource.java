@@ -121,7 +121,7 @@ public class PostResource {
     @Path("{id}/text/winners")
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response addTextWinners(@PathParam("id") Long postId, int[] winners) {
+    public Response addTextWinners(@PathParam("id") Long postId, Long[] winners) {
         try {
             Text_Post.addWinners(postId, winners);
             return Response.status(200).build();
