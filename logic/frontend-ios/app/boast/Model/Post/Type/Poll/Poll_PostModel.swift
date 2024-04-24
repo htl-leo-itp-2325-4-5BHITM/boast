@@ -4,6 +4,7 @@ import Foundation
 class Poll_PostModel: PostModel {
     var typeInfo: Poll_TypeInfoModel?
     var postDetails: [Poll_PostDetailModel]?
+    var winnerPoll: Int?
 
     
     func dataChanged(
@@ -48,6 +49,7 @@ class Poll_PostModel: PostModel {
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         typeInfo = try container.decode(Poll_TypeInfoModel.self, forKey: .typeInfo)
+
         postDetails = try container.decode([Poll_PostDetailModel].self, forKey: .postDetails)
         try super.init(from: decoder)
     }

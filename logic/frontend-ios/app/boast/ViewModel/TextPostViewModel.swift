@@ -4,7 +4,7 @@ import Foundation
 
 class TextPostViewModel: ObservableObject {
     @Published private(set) var model: Text_PostModel
-    
+        
     init(model: Text_PostModel) {
         self.model = model
     }
