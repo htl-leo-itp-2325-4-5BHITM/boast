@@ -181,3 +181,21 @@ func createTextPost(title: String, definition: String, creatorId: Int) async {
 
 
 
+func setWinner(postId: Int, winners: [Int]) async -> Int {
+    var statusCode: Int?
+    let url = URL(string: "https://www.boast.social/api/posts/\(postId)/text/winners")!
+    var request = URLRequest(url: url)
+    request.httpMethod = "POST"
+    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.addValue("application/json", forHTTPHeaderField: "Accept")
+    request.httpBody = Data(winners.description.utf8) // :(
+    print("\(request), \(postId), \(winners)")
+    print("\(request.httpBody)")
+    do {
+        let (data, response) = try await URLSession.shared.data(for: request)
+        print((response as! HTTPURLResponse).statusCode)
+        return (response as! HTTPURLResponse).statusCode
+    } catch{
+        return statusCode ?? -2
+    }
+}

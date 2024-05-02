@@ -6,123 +6,119 @@ struct TextPostView: View {
     @State var postStatus:Status = .OPEN
     @State var answerCreatorIds = [Int]()
     @State var postAnswers = [String:Int]()
+    @State var creatorAnswers = [Int:String]()
     @State var definition = ""
     @State var comment = ""
     @State var alert = false
-    @State var winner = ""
-    @State var winnerId = -1
     @State var winnerSubmited = false
     
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading) {
-                HStack {
-                    Image(systemName: "person.circle")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 50)
-                    VStack(alignment: .leading) {
-                        NavigationLink(destination: UserProfileView(userId: post.creatorId)) {
-                            Text(post.creatorName)
-                                .font(.title)
-                        }
-                        .foregroundStyle(.blackAndWhite)
-                        Text("@\(post.creatorName)")
-                    }
-                    Spacer()
-                    if(post.creatorId == UserDefaults.standard.integer(forKey: "userId")){
-                        Picker("Status", selection: $postStatus) {
-                            ForEach(Status.allCases, id: \.self) { val in
-                                Text(val.rawValue)
-                                    .tag(val)
-                            }
-                        }
-                        .onChange(of: postStatus) {
-                            Task {
-                                do {
-                                    alert = postStatus == .CLOSED
-                                    _ = await updateStatus(postId: post.postId, postStatus: postStatus)
-                                }
-                            }
-                        }
-                        .alert("Winner", isPresented: $alert, actions: {
-                            TextField("Winner: ", text: $winner)
-                            Button("Submit", action: {
-                                if postAnswers[winner] != nil {
-                                    winnerSubmited = true
-                                    winnerId = postAnswers[winner] ?? -1
-                                }
-                            })
-                        }, message: {
-                            Text("Please pick a winner.")
-                        })
-                    }else {
-                        Text((post.status).rawValue)
-                    }
-                }
-                
+        NavigationStack {
+            ScrollView {
                 VStack(alignment: .leading) {
-                    Text(post.title)
-                        .font(.largeTitle)
-                        .bold()
-                    Text(post.definiton)
-                        .font(.title2)
-                }
-                
-                Divider()
-                    .frame(height: 1)
-                    .overlay(.blackAndWhite)
-                
-                if (postAnswers[winner] != -1 || postAnswers[winner] != nil) && winnerSubmited && postStatus != .OPEN && winner != "" {
-                    Section {
-                        VStack(alignment: .leading){
-                            Text("Winner: ")
-                                .font(.largeTitle)
-                        }
-                        HStack {
-                            Spacer()
-                            Image(systemName: "person.circle")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(height: 60)
-                            VStack{
-                                NavigationLink(destination: UserProfileView(userId: winnerId)) {
-                                    Text(winner)
-                                        .font(.title)
-                                }
-                                .foregroundStyle(.blackAndWhite)
-                                Text("@\(winner)")
+                    HStack {
+                        Image(systemName: "person.circle")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 50)
+                        VStack(alignment: .leading) {
+                            NavigationLink(destination: UserProfileView(userId: post.creatorId)) {
+                                Text(post.creatorName)
+                                    .font(.title)
                             }
-                            Spacer()
+                            .foregroundStyle(.blackAndWhite)
+                            Text("@\(post.creatorName)")
+                        }
+                        Spacer()
+                        if(post.creatorId == UserDefaults.standard.integer(forKey: "userId")){
+                            Picker("Status", selection: $postStatus) {
+                                ForEach(Status.allCases, id: \.self) { val in
+                                    Text(val.rawValue)
+                                        .tag(val)
+                                }
+                            }
+                            .onChange(of: postStatus) {
+                                Task {
+                                    do {
+                                        if postStatus == .CLOSED && post.model.winners == [] {
+                                            alert = true
+                                        }
+                                        _ = await updateStatus(postId: post.postId, postStatus: postStatus)
+                                    }
+                                }
+                            }
+                        }else {
+                            Text((post.status).rawValue)
                         }
                     }
-                    HStack(alignment: .firstTextBaseline) {
-                        Rectangle()
-                            .fill(.yellow)
-                            .frame(height: 30)
-                        Rectangle()
-                            .fill(.yellow)
-                            .frame(height: 100)
-                        Rectangle()
-                            .fill(.yellow)
-                            .frame(height: 60)
+                    
+                    VStack(alignment: .leading) {
+                        Text(post.title)
+                            .font(.largeTitle)
+                            .bold()
+                        Text(post.definiton)
+                            .font(.title2)
                     }
+                    
                     Divider()
                         .frame(height: 1)
                         .overlay(.blackAndWhite)
+                    
+                    if (postStatus == .CLOSED && post.model.winners != []) {
+                        Section {
+                            VStack(alignment: .leading){
+                                Text("Winner: ")
+                                    .font(.largeTitle)
+                            }
+                            
+                            ForEach(post.model.winners ?? [], id: \.self) { winner in
+                                HStack {
+                                    Spacer()
+                                    VStack{
+                                        NavigationLink(destination: UserProfileView(userId: winner)) {
+                                            Text("\(creatorAnswers[winner] ?? "")")
+                                                .font(.title)
+                                        }
+                                        .foregroundStyle(.blackAndWhite)
+                                    }
+                                    .scaleEffect(1.0)
+                                    Spacer()
+                                }
+                             
+                            }
+                        }
+                        
+                            
+                        HStack(alignment: .firstTextBaseline) {
+                            Rectangle()
+                                .fill(.yellow)
+                                .frame(height: 30)
+                            Rectangle()
+                                .fill(.yellow)
+                                .frame(height: 100)
+                            Rectangle()
+                                .fill(.yellow)
+                                .frame(height: 60)
+                        }
+                        Divider()
+                            .frame(height: 1)
+                            .overlay(.blackAndWhite)
+                    }
                 }
                 
-                
-                Text("Bets: ")
-                    .font(.largeTitle)
-                
                 VStack(alignment: .leading) {
-                    Text(comment)
+                    Text("Bets: ")
+                        .font(.largeTitle)
+                    HStack {
+                        Text(comment)
+                        Spacer()
+                    }
                     ForEach(post.postDetails, id: \.postDetailsId) { detail in
                         HStack {
                             Image(systemName: "person.circle")
                             Text("\(detail.creatorName ?? "") :")
                             Text("\(detail.text ?? "")")
+                            Spacer()
                         }
                     }
                 }
@@ -157,16 +153,27 @@ struct TextPostView: View {
                 }
                 
                 Spacer()
-            }.task {
-                postStatus = post.status
-                for detail in post.postDetails {
-                    answerCreatorIds.append(detail.creatorId ?? -1)
-                    postAnswers.updateValue(detail.creatorId ?? -1, forKey: detail.creatorName ?? "")
-                }
-                print(postAnswers)
-                print(postAnswers["cunt"])
             }
-            .frame(width: UIScreen.main.bounds.width - 20)
+        }
+        .frame(width: UIScreen.main.bounds.width - 20)
+        .task {
+            postStatus = post.status
+            for detail in post.postDetails {
+                answerCreatorIds.append(detail.creatorId ?? -1)
+                postAnswers.updateValue(detail.creatorId ?? -1, forKey: detail.creatorName ?? "")
+                creatorAnswers.updateValue(detail.creatorName ?? "", forKey: detail.creatorId ?? 0)
+                print(detail)
+            }
+            print(post.model.winners ?? [])
+            print(creatorAnswers)
+        }
+        .navigationDestination(isPresented: $alert) {
+            PickTextPostWinner(post: post)
         }
     }
+}
+
+
+#Preview {
+    AllViews()
 }
