@@ -1,18 +1,23 @@
-<h1>Posts</h1>
-
 <ul>
   <li *ngFor="let post of this.posts">
     <div class="postBody">
       <div class="postHeader">
+        <img class="userImage" src="../../assets/person.crop.circle.fill.png" alt="userImage" width="40vw">
         <p class="creatorName">{{post.creatorName}}</p>
         <p class="status">{{post.status}}</p>
         <p class="createdOn">{{post.createdOn}}</p>
         <h1 class="title">{{post.title}}</h1>
         <p class="definition">{{post.definition}}</p>
-
+        <p>{{post.typeInfo}}</p>
       </div>
-      <p> Options </p>
-      <p></p>
+      <br>
+          <div class="bets" *ngFor="let detail of post.postDetails">
+            <p class="betDate"> {{detail.createdOn}}</p>
+            <p class="betCreator"> {{detail.creatorName + ': '}} </p>
+            <p class="betText"> {{detail.text}}</p>
+            <p class="betText"></p>
+          </div>
+      <br><br>
     </div>
     <br>
   </li>

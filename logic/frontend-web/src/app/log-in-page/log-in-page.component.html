@@ -1,11 +1,9 @@
 <div id="container">
 
   <div id ="leftBox">
-    <img src="../../assets/logo_white.png" alt="BOAST IMG" width="170%">
+    <img src="../../assets/logo_white_withLine.png" alt="BOAST IMG" width="170%">
     <p>"Every Bet has a Story"</p>
   </div>
-
-
 
   <div id="rightBox">
     <div id="logIn">
@@ -14,15 +12,13 @@
       <br><br>
       <h3> Enter your Name </h3>
       <input type="text" placeholder="Name" [(ngModel)]="this.username">
-      <br>
-      <br>
-      <div id="submitButton">
+      <br><br>
+      <div class="button">
         <button (click)="logIn(this.username)" type="submit"> Sign in </button>
-        <!-- <button (click)="postService.getPost(2)"> GetPost </button> -->
       </div>
 
       <br><br><br>
-      <p>Du kannst auch ohne Konto fortfahren, um mehr über Boast zu erfahren.</p>
+      <p>Du kannst auch ohne Konto <a href="home">fortfahren</a>, um mehr über Boast zu erfahren.</p>
       <br><br>
       <p id="error">Den angegebenen Nutzer gibt es nicht. :(</p>
     </div>

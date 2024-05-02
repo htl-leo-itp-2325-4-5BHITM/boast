@@ -1,0 +1,12 @@
+<app-navbar></app-navbar>
+<br><br><br><br><br><br>
+<div id="postSelection">
+  <p id="forYou" (click)="listing('forYou')" [style.text-decoration]="forYou">For You </p>
+  <p> | </p>
+  <p id="friends" (click)="listing('friends')" [style.text-decoration]="friends"> Friends</p>
+</div>
+<div id="list">
+  <app-post [style.display]="allPosts"></app-post>
+  <app-post [modifier]="'friends'" [style.display]="friendsPosts"></app-post>
+
+</div>

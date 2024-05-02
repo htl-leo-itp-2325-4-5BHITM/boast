@@ -1,10 +1,5 @@
-<p>navbar works!</p>
-
-
-
-
-<style>
-  p{
-  background-color:  red;
-  }
-</style>
+<a id="nav_boast_logo" href="home"><img src="../../assets/logo_white.png" alt="BOAST IMG" width="150vw"></a>
+<a id="nav_home" href="home" [style.color]="homeColor">Home</a>
+<a id="nav_posts" href="posts" [style.color]="postsColor">Posts</a>
+<a id="nav_profile_logo" (click)="isLoggedIn()"><img [src]="profileUrl" alt="BOAST IMG" width="40vw"></a>
+<hr>

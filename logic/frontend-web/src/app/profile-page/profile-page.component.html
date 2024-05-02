@@ -1,0 +1,21 @@
+<app-navbar></app-navbar>
+
+<div id="meBox">
+  <div id="meBoxHeader">
+  <h1>{{username}}</h1>
+  <hr>
+  <div id="postSelection">
+    <p id="following" (click)="listing('following')" [style.text-decoration]="following">following</p>
+    <p> | </p>
+    <p id="follower" (click)="listing('follower')" [style.text-decoration]="follower">follower</p>
+    <p> | </p>
+    <p id="posts" (click)="listing('posts')" [style.text-decoration]="posts">posts</p>
+  </div>
+  </div>
+  <div id="list">
+    <app-post [modifier]="'own'" [style.display]="postsD"></app-post>
+    <app-user [modifier]="'following'" [style.display]="followingD"></app-user>
+    <app-user [modifier]="'follower'" [style.display]="followerD"></app-user>
+  </div>
+
+</div>

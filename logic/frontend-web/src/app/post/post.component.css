@@ -4,17 +4,16 @@
   border-style: solid;
   border-color: #1E1F26;
   border-width: 1px;
-  display: flexbox;
   background-color: #30323D;
   padding:0;
-  padding-top: 0.5vw;
+  padding-top: 0;
   padding-left: 0.5vw;
   padding-right: 0.3VW;
   color: #fff;
 }
 
 .postBody {
-  width: 20vw;
+  width: 21vw;
   border-radius: 12px;
   border-style: solid;
   border-color: #1E1F26;
@@ -24,35 +23,81 @@
   background-color: #24262E;
 }
 
+.userImage {
+display: inline;
+  position: relative;
+  top:2vh;
+}
+
 .creatorName {
-  display: inline;
+  display: inline-block;
   font-size: 1.3vw;
-  margin-right: 30%;
+  margin-right: 20%;
+  margin-top:0;
+  margin-bottom:0.5vh;
+  width: 20%;
   padding: 0.5vw;
 
 }
 
 .status {
-  display:inline;
+  display:inline-block;
   font-size: 1.1vw;
-  margin-left: 30%;
+  margin-left: 10%;
+  margin-bottom:0;
+  width: 34%;
+  text-align: right;
 }
 
 .createdOn {
   position: relative;
   bottom: 0.7vw;
-  left: 0.6vw;
+  left: 2.6vw;
   color: #3FB4FF;
   font-size: 0.7vw;
+  margin:0;
 
 }
 
 .title {
   font-size: 1.5vw;
+  margin:0;
 
 }
 
 .definition {
   font-size: 0.9vw;
+}
+
+ul {
+  list-style-type: none;
+  width: 25%;
+  padding:0;
+}
+
+.bets {
+  display: flex;
+  align-self: center;
+  justify-content: left;
+  padding-left: 1vw;
+}
+
+.bets p {
+  margin: 0;
+}
+
+.betDate {
+  color: #3FB4FF;
+  font-size: 0.7vw;
+}
+
+.betCreator {
+  position: relative;
+
+
+}
+
+.betText {
+  position: relative;
 
 }

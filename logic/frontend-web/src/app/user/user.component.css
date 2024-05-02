@@ -1,0 +1,16 @@
+li {
+  list-style:none;
+}
+
+.userDiv {
+  text-align: center;
+  width: 21vw;
+  border-radius: 12px;
+  border-style: solid;
+  border-color: #1E1F26;
+  border-width: 2px;
+  color: #fff;
+  margin:0;
+  background-color: #24262E;
+  margin-bottom: 2vh;
+}
