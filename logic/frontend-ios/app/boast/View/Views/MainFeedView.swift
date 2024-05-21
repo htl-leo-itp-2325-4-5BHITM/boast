@@ -9,37 +9,6 @@ struct MainFeedView: View {
         NavigationStack{
             VStack {
                 Spacer(minLength: 20)
-                /*
-                HStack {
-                    /*
-                    Button(action: {
-                        Task {
-                            postFeed = await postsFriends(userId: UserDefaults.standard.integer(forKey: "userId"))
-                            feedBool = false
-                        }
-                    }, label: {
-                        Text("Friends")
-                            .underline(!feedBool)
-                    })
-                    Text("|")
-                    Button(action: {
-                        Task {
-                            postFeed = await posts()
-                            feedBool = true
-                        }
-                    }, label: {
-                        Text("For You")
-                            .underline(feedBool)
-                    })
-                     */
-                    Picker("test", selection: $feedBool) {
-                        Text("friends")
-                        Text("for you")
-                    }
-                    Spacer()
-                }
-                Spacer(minLength: 40)
-                 */
                 ScrollView {
                     ForEach(postFeed, id: \.self) { post in
                         NavigationLink(destination: Post(postId: post)) {

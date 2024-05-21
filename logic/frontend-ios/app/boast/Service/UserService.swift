@@ -72,3 +72,19 @@ func searchForUsers(searchText: String) async -> [PreviewModel] {
     }
     return [PreviewModel]()
 }
+
+func getNotification() async -> [Int] {
+    if let data = await templateRequest(method: "GET", reqURL: "notifications") {
+        let notifications = (try? JSONDecoder().decode([Int].self, from: data)) ?? []
+        return notifications
+    }
+    return []
+}
+
+func getNotificationFromId(id: Int) async -> NotificationModel {
+    if let data = await templateRequest(method: "GET", reqURL: "notifications/\(id)") {
+        let notifications = (try? JSONDecoder().decode(NotificationModel.self, from: data)) ?? NotificationModel()
+        return notifications
+    }
+    return NotificationModel()
+}

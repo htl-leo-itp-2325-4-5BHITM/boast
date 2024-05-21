@@ -22,6 +22,10 @@
 		1F280B522B558F24006A0F32 /* PostPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F280B512B558F24006A0F32 /* PostPreview.swift */; };
 		1F280B552B558F64006A0F32 /* PollPostPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F280B542B558F64006A0F32 /* PollPostPreview.swift */; };
 		1F280B572B5591F9006A0F32 /* TextPostPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F280B562B5591F9006A0F32 /* TextPostPreview.swift */; };
+		1F4FD72F2BFD0BA4001E1499 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4FD72E2BFD0BA4001E1499 /* NotificationView.swift */; };
+		1F4FD7322BFD1251001E1499 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4FD7312BFD1251001E1499 /* NotificationModel.swift */; };
+		1F4FD7342BFD1312001E1499 /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4FD7332BFD1312001E1499 /* NotificationType.swift */; };
+		1F4FD7412BFD22A0001E1499 /* NotificationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4FD7402BFD22A0001E1499 /* NotificationDetailView.swift */; };
 		1F565D032B57DD31000D058F /* CreateTextPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F565D022B57DD31000D058F /* CreateTextPost.swift */; };
 		1F66776D2B331FE70082CA15 /* CreatePollPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F66776C2B331FE70082CA15 /* CreatePollPost.swift */; };
 		1F6AC4BD2B7BF4D5001C9781 /* RelationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6AC4BC2B7BF4D5001C9781 /* RelationStatus.swift */; };
@@ -68,6 +72,10 @@
 		1F280B512B558F24006A0F32 /* PostPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPreview.swift; sourceTree = "<group>"; };
 		1F280B542B558F64006A0F32 /* PollPostPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollPostPreview.swift; sourceTree = "<group>"; };
 		1F280B562B5591F9006A0F32 /* TextPostPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPostPreview.swift; sourceTree = "<group>"; };
+		1F4FD72E2BFD0BA4001E1499 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		1F4FD7312BFD1251001E1499 /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
+		1F4FD7332BFD1312001E1499 /* NotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationType.swift; sourceTree = "<group>"; };
+		1F4FD7402BFD22A0001E1499 /* NotificationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDetailView.swift; sourceTree = "<group>"; };
 		1F565D022B57DD31000D058F /* CreateTextPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTextPost.swift; sourceTree = "<group>"; };
 		1F66776C2B331FE70082CA15 /* CreatePollPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePollPost.swift; sourceTree = "<group>"; };
 		1F6AC4BC2B7BF4D5001C9781 /* RelationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationStatus.swift; sourceTree = "<group>"; };
@@ -114,6 +122,7 @@
 		1F0809852B2DE305007131F8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1F4FD7302BFD1239001E1499 /* Notification */,
 				1F0809872B2DE345007131F8 /* Post */,
 				1F0809862B2DE33A007131F8 /* User */,
 				1F08098E2B2DE5C8007131F8 /* Status.swift */,
@@ -205,6 +214,24 @@
 			path = Type;
 			sourceTree = "<group>";
 		};
+		1F4FD7302BFD1239001E1499 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				1F4FD7312BFD1251001E1499 /* NotificationModel.swift */,
+				1F4FD7332BFD1312001E1499 /* NotificationType.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		1F4FD7392BFD1706001E1499 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				1F4FD72E2BFD0BA4001E1499 /* NotificationView.swift */,
+				1F4FD7402BFD22A0001E1499 /* NotificationDetailView.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
 		1F72C7B82B4FCC49000415C2 /* Text */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +244,7 @@
 		1F915C312B75059A008938FF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1F4FD7392BFD1706001E1499 /* Notifications */,
 				1FB05C7A2B30AB4000B3BD02 /* LoginView.swift */,
 				1F20663D2B7512ED00FCF405 /* ProfileView.swift */,
 				1FA187342B7A85A000C2B86B /* UserListView.swift */,
@@ -391,10 +419,13 @@
 				1FB05C7F2B30AC4C00B3BD02 /* UserViewModel.swift in Sources */,
 				1F6AC4BD2B7BF4D5001C9781 /* RelationStatus.swift in Sources */,
 				1F0816622B535C1E006D735B /* Create.swift in Sources */,
+				1F4FD7412BFD22A0001E1499 /* NotificationDetailView.swift in Sources */,
+				1F4FD72F2BFD0BA4001E1499 /* NotificationView.swift in Sources */,
 				1FBD69292B553E570048CA82 /* Post.swift in Sources */,
 				1FD8B2372B7AA2A800290C58 /* SearchView.swift in Sources */,
 				1F08098F2B2DE5C8007131F8 /* Status.swift in Sources */,
 				1FF8F6A42B533A3A00F82B3E /* TextPostViewModel.swift in Sources */,
+				1F4FD7322BFD1251001E1499 /* NotificationModel.swift in Sources */,
 				1F6AFF982B2E0D68007BDB48 /* PostsService.swift in Sources */,
 				1FF8F6A22B5339A400F82B3E /* TextPostView.swift in Sources */,
 				1FABF4522BD83553003B9118 /* PickTextPostWinner.swift in Sources */,
@@ -408,6 +439,7 @@
 				1F26A2A52B8CFF3B00CC21B0 /* RelationButtonView.swift in Sources */,
 				1F6AFF962B2E0CF8007BDB48 /* MainFeedView.swift in Sources */,
 				1F08099A2B2DE868007131F8 /* Poll_PostAnswerModel.swift in Sources */,
+				1F4FD7342BFD1312001E1499 /* NotificationType.swift in Sources */,
 				1FDD244D2B0BC0DD0062DC3E /* UserModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
