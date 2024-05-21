@@ -3,6 +3,7 @@ package social.boast.dto.notification;
 import jakarta.persistence.*;
 import social.boast.model.notification.NotificationType;
 import social.boast.model.user.BoastUser;
+import social.boast.service.DateService;
 
 import java.util.Date;
 
@@ -22,8 +23,8 @@ public class NotificationDTO {
     public NotificationDTO() {
     }
 
-    public Date getCreatedOn() {
-        return createdOn;
+    public String getCreatedOn() {
+        return DateService.formatDate(createdOn);
     }
 
     public void setCreatedOn(Date createdOn) {
