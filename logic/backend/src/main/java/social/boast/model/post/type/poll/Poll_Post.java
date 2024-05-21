@@ -5,6 +5,7 @@ import social.boast.dto.post.type.poll.Poll_PostAnswerDTO;
 import social.boast.dto.post.type.poll.Poll_PostDTO;
 import social.boast.dto.post.type.poll.Poll_PostDetailDTO;
 import social.boast.dto.post.type.poll.Poll_TypeInfoDTO;
+import social.boast.model.notification.type.congratulation.CongratulationNotification;
 import social.boast.model.post.PostStatus;
 import social.boast.model.post.Post;
 import social.boast.model.post.type.PostType_Interface;
@@ -16,6 +17,9 @@ import java.util.List;
 
 @Entity
 public class Poll_Post extends Post implements PostType_Interface<Poll_PostDetail> {
+
+    public static final String WINNING_RESPONSE = "You chose correctly!";
+
     @OneToMany(mappedBy = "pollPost", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public List<Poll_PostAnswer> pollAnswers;
 
@@ -64,6 +68,13 @@ public class Poll_Post extends Post implements PostType_Interface<Poll_PostDetai
         Poll_PostAnswer postAnswer = Poll_PostAnswer.findById(winnerPoll);
         if (postAnswer == null) throw new IllegalArgumentException();
         post.winnerPoll = postAnswer;
+
+        post.postDetails.forEach(postDetail -> {
+            if (postDetail.pollAnswer == postAnswer) {
+                CongratulationNotification.createCongratulationNotification(postDetail.creator, post.title, WINNING_RESPONSE, post);
+            }
+        });
+
     }
 
     public static void createPollPost(Poll_PostDTO postDTO) {

@@ -1,6 +1,7 @@
 package social.boast.model.post.type.poll;
 
 import social.boast.dto.post.type.poll.Poll_PostDetailDTO;
+import social.boast.model.notification.type.user.UserNotification;
 import social.boast.model.post.Post;
 import social.boast.model.post.PostDetail;
 import social.boast.model.user.BoastUser;
@@ -36,6 +37,8 @@ public class Poll_PostDetail extends PostDetail {
         Poll_PostDetail postDetail = new Poll_PostDetail(postDetailDTO, user, post, postAnswer);
 
         post.addPostDetail(postDetail);
+
+        UserNotification.createUserNotification(post.creator, post.title + ": " + postAnswer.title, user);
 
         persist(postDetail);
     }

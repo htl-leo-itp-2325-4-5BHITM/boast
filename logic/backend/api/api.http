@@ -131,3 +131,18 @@ GET http://localhost:8080/api/relations/follows/100
 ###
 
 GET http://localhost:8080/api/relations/friends/100
+
+### NOTIFICATIONS
+
+GET http://localhost:8080/api/notifications
+
+###
+
+POST http://localhost:8080/api/notifications
+
+{
+  "receivingUserId": 100,
+  "title": "TEST",
+  "notificationType": "USER",
+  "sendingUserId": 101
+}

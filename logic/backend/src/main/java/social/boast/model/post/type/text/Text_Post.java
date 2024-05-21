@@ -3,6 +3,7 @@ package social.boast.model.post.type.text;
 import jakarta.persistence.*;
 import social.boast.dto.post.type.text.Text_PostDTO;
 import social.boast.dto.post.type.text.Text_PostDetailDTO;
+import social.boast.model.notification.type.congratulation.CongratulationNotification;
 import social.boast.model.post.PostStatus;
 import social.boast.model.post.Post;
 import social.boast.model.post.PostType;
@@ -14,6 +15,8 @@ import java.util.List;
 
 @Entity
 public class Text_Post extends Post implements PostType_Interface<Text_PostDetail> {
+
+    public static final String WINNING_RESPONSE = "You won!";
 
     @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public List<Text_PostDetail> postDetails;
@@ -65,6 +68,7 @@ public class Text_Post extends Post implements PostType_Interface<Text_PostDetai
             BoastUser user = BoastUser.findById(winner);
             if (user == null) throw new IllegalArgumentException();
             post.addWinner(user);
+            CongratulationNotification.createCongratulationNotification(user, post.title, WINNING_RESPONSE, post);
         }
     }
 

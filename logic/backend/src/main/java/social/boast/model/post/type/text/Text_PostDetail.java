@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import social.boast.dto.post.type.text.Text_PostDetailDTO;
+import social.boast.model.notification.type.user.UserNotification;
 import social.boast.model.post.Post;
 import social.boast.model.post.PostDetail;
 import social.boast.model.user.BoastUser;
@@ -35,6 +36,8 @@ public class Text_PostDetail extends PostDetail {
         Text_PostDetail postDetail = new Text_PostDetail(postDetailDTO, user, post, postDetailDTO.getText());
 
         post.addPostDetail(postDetail);
+
+        UserNotification.createUserNotification(post.creator, post.title + ": " + postDetail.text, user);
 
         persist(postDetail);
     }
