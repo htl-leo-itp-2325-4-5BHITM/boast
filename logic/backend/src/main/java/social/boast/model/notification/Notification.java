@@ -41,7 +41,7 @@ public class Notification extends PanacheEntityBase {
     }
 
     public static List<Long> getNotificationIds(Long reqUserId) {
-        return getEntityManager().createQuery("select notificationId from Notification where receivingUser.id = :reqUserId").setParameter("reqUserId", reqUserId).getResultList();
+        return getEntityManager().createQuery("select notificationId from Notification where receivingUser.id = :reqUserId order by createdOn desc").setParameter("reqUserId", reqUserId).getResultList();
     }
 
     public static NotificationDTO getNotificationDTO(Long id, Long reqUserId) {
