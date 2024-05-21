@@ -2,11 +2,8 @@ package social.boast.resource.notification;
 
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import social.boast.dto.notification.type.congratulation.UserNotificationDTO;
 import social.boast.model.notification.Notification;
-import social.boast.model.notification.type.user.UserNotification;
 
 @Path("/notifications")
 public class NotificationResource {

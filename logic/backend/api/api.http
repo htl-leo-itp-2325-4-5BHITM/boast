@@ -76,7 +76,7 @@ POST http://localhost:8080/api/posts/1/status/CLOSED
 
 ###
 
-POST http://localhost:8080/api/posts/1/poll/winners/1
+POST http://localhost:8080/api/posts/2/poll/winners/1
 
 ###
 

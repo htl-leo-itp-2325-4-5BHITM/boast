@@ -5,7 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import social.boast.dto.notification.type.congratulation.CongratulationNotificationDTO;
-import social.boast.dto.notification.type.congratulation.UserNotificationDTO;
 import social.boast.model.notification.Notification;
 import social.boast.model.notification.NotificationType;
 import social.boast.model.post.Post;

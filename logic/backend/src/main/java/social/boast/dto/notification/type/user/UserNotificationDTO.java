@@ -1,4 +1,4 @@
-package social.boast.dto.notification.type.congratulation;
+package social.boast.dto.notification.type.user;
 
 import social.boast.dto.notification.NotificationDTO;
 

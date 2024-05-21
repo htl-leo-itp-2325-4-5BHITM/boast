@@ -9,8 +9,6 @@ import java.util.Date;
 public class NotificationDTO {
     Long notificationId;
     Date createdOn;
-    Long receivingUserId;
-    String receivingUserName;
     String description;
     String notificationType;
 
@@ -24,14 +22,6 @@ public class NotificationDTO {
     public NotificationDTO() {
     }
 
-    public Long getNotificationId() {
-        return notificationId;
-    }
-
-    public void setNotificationId(Long notificationId) {
-        this.notificationId = notificationId;
-    }
-
     public Date getCreatedOn() {
         return createdOn;
     }
@@ -39,7 +29,6 @@ public class NotificationDTO {
     public void setCreatedOn(Date createdOn) {
         this.createdOn = createdOn;
     }
-
 
     public String getDescription() {
         return description;
