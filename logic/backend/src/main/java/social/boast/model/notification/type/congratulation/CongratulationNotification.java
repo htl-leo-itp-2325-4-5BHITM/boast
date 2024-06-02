@@ -36,6 +36,7 @@ public class CongratulationNotification extends Notification {
                 notification.createdOn,
                 notification.description,
                 notification.notificationType.name(),
+                notification.read,
                 notification.header,
                 notification.post.postId);
     }

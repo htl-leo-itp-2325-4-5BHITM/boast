@@ -37,6 +37,7 @@ public class UserNotification extends Notification {
                 notification.createdOn,
                 notification.description,
                 notification.notificationType.name(),
+                notification.read,
                 notification.sendingUser.userId,
                 notification.sendingUser.username);
     }

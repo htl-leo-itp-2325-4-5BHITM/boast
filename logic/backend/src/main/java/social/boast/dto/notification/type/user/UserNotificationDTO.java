@@ -8,8 +8,8 @@ public class UserNotificationDTO extends NotificationDTO{
     Long sendingUserId;
     String sendingUserName;
 
-    public UserNotificationDTO(Long notificationId, Date createdOn, String description, String notificationType, Long sendingUserId, String sendingUserName) {
-        super(notificationId, createdOn, description, notificationType);
+    public UserNotificationDTO(Long notificationId, Date createdOn, String description, String notificationType, boolean read,Long sendingUserId, String sendingUserName) {
+        super(notificationId, createdOn, description, notificationType, read);
         this.sendingUserId = sendingUserId;
         this.sendingUserName = sendingUserName;
     }

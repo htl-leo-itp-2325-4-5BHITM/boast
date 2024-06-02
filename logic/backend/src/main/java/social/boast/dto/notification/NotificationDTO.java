@@ -12,12 +12,14 @@ public class NotificationDTO {
     Date createdOn;
     String description;
     String notificationType;
+    boolean read;
 
-    public NotificationDTO(Long notificationId, Date createdOn, String description, String notificationType) {
+    public NotificationDTO(Long notificationId, Date createdOn, String description, String notificationType, boolean read) {
         this.notificationId = notificationId;
         this.createdOn = createdOn;
         this.description = description;
         this.notificationType = notificationType;
+        this.read = read;
     }
 
     public NotificationDTO() {
@@ -45,5 +47,13 @@ public class NotificationDTO {
 
     public void setNotificationType(String notificationType) {
         this.notificationType = notificationType;
+    }
+
+    public boolean isRead() {
+        return read;
+    }
+
+    public void setRead(boolean read) {
+        this.read = read;
     }
 }

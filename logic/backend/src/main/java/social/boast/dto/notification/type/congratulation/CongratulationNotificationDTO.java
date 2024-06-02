@@ -8,8 +8,8 @@ public class CongratulationNotificationDTO extends NotificationDTO {
     String header;
     Long postId;
 
-    public CongratulationNotificationDTO(Long notificationId, Date createdOn, String title, String notificationType, String header, Long postId) {
-        super(notificationId, createdOn, title, notificationType);
+    public CongratulationNotificationDTO(Long notificationId, Date createdOn, String title, String notificationType, boolean read,String header, Long postId) {
+        super(notificationId, createdOn, title, notificationType, read);
         this.header = header;
         this.postId = postId;
     }
