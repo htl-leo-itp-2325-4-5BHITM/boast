@@ -6,6 +6,7 @@ import social.boast.dto.post.type.poll.Poll_PostDTO;
 import social.boast.dto.post.type.poll.Poll_PostDetailDTO;
 import social.boast.dto.post.type.poll.Poll_TypeInfoDTO;
 import social.boast.model.notification.type.congratulation.CongratulationNotification;
+import social.boast.model.notification.type.loser.LoserNotification;
 import social.boast.model.post.PostStatus;
 import social.boast.model.post.Post;
 import social.boast.model.post.type.PostType_Interface;
@@ -19,6 +20,7 @@ import java.util.List;
 public class Poll_Post extends Post implements PostType_Interface<Poll_PostDetail> {
 
     public static final String WINNING_RESPONSE = "You chose correctly!";
+    public static final String LOOSING_RESPONSE = "You lost!";
 
     @OneToMany(mappedBy = "pollPost", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public List<Poll_PostAnswer> pollAnswers;
@@ -72,6 +74,8 @@ public class Poll_Post extends Post implements PostType_Interface<Poll_PostDetai
         post.postDetails.forEach(postDetail -> {
             if (postDetail.pollAnswer == postAnswer) {
                 CongratulationNotification.createCongratulationNotification(postDetail.creator, post.title, WINNING_RESPONSE, post);
+            } else {
+                LoserNotification.createLoserNotification(postDetail.creator, post.title, LOOSING_RESPONSE, post);
             }
         });
 

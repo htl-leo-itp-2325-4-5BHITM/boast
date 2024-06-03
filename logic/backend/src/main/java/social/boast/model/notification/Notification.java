@@ -4,6 +4,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 import social.boast.dto.notification.NotificationDTO;
 import social.boast.model.notification.type.congratulation.CongratulationNotification;
+import social.boast.model.notification.type.loser.LoserNotification;
 import social.boast.model.notification.type.user.UserNotification;
 import social.boast.model.user.BoastUser;
 
@@ -57,6 +58,9 @@ public class Notification extends PanacheEntityBase {
             }
             case CONGRATULATION -> {
                 tmp = CongratulationNotification.getNotificationDTO((CongratulationNotification) notification);
+            }
+            case LOSER -> {
+                tmp = LoserNotification.getNotificationDTO((LoserNotification) notification);
             }
         }
         if (tmp == null) throw new IllegalArgumentException();

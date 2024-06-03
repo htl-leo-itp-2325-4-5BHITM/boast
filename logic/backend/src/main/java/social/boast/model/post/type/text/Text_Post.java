@@ -1,12 +1,13 @@
 package social.boast.model.post.type.text;
 
 import jakarta.persistence.*;
+import social.boast.dto.post.WinnerRankingDTO;
 import social.boast.dto.post.type.text.Text_PostDTO;
 import social.boast.dto.post.type.text.Text_PostDetailDTO;
-import social.boast.model.notification.type.congratulation.CongratulationNotification;
+import social.boast.model.notification.type.loser.LoserNotification;
 import social.boast.model.post.PostStatus;
-import social.boast.model.post.Post;
 import social.boast.model.post.PostType;
+import social.boast.model.post.RankingPost;
 import social.boast.model.post.type.PostType_Interface;
 import social.boast.model.user.BoastUser;
 
@@ -14,9 +15,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Entity
-public class Text_Post extends Post implements PostType_Interface<Text_PostDetail> {
+public class Text_Post extends RankingPost implements PostType_Interface<Text_PostDetail> {
 
-    public static final String WINNING_RESPONSE = "You won!";
+    public static final String LOOSING_RESPONSE = "You lost!";
 
     @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public List<Text_PostDetail> postDetails;
@@ -61,25 +62,22 @@ public class Text_Post extends Post implements PostType_Interface<Text_PostDetai
         persist(post);
     }
 
-    public static void addWinners(Long postId, Long[] winners) {
+    public static List<Long> addWinners(Long postId, WinnerRankingDTO winnerRankingDTO) {
+        List<Long> ids = RankingPost.addWinners(postId, winnerRankingDTO);
         Text_Post post = Text_Post.findById(postId);
-        if (post == null) throw new IllegalArgumentException();
-        for (Long winner: winners) {
-            BoastUser user = BoastUser.findById(winner);
-            if (user == null) throw new IllegalArgumentException();
-            post.addWinner(user);
-            CongratulationNotification.createCongratulationNotification(user, post.title, WINNING_RESPONSE, post);
+        for (Text_PostDetail postDetail : post.postDetails) {
+            boolean isWinner = false;
+            for (Long id : ids) {
+                if (postDetail.creator.userId.equals(id)) {
+                    isWinner = true;
+                    break;
+                }
+            }
+            if (!isWinner) {
+                LoserNotification.createLoserNotification(postDetail.creator, post.title, LOOSING_RESPONSE, post);
+            }
         }
-    }
-
-    public static void removeWinners(Long postId, int[] winners) {
-        Text_Post post = Text_Post.findById(postId);
-        if (post == null) throw new IllegalArgumentException();
-        for (int winner: winners) {
-            BoastUser user = BoastUser.findById(winner);
-            if (user == null) throw new IllegalArgumentException();
-            post.removeWinner(user);
-        }
+        return ids;
     }
 
     public static Text_PostDTO getPostDTO(Text_Post post) {
@@ -101,7 +99,7 @@ public class Text_Post extends Post implements PostType_Interface<Text_PostDetai
                 post.creator.username,
                 post.status.name(),
                 PostType.TEXT.name(),
-                post.winners.stream().map((BoastUser user) -> user.userId).toList(),
+                post.getWinnerRankingDTO(),
                 postDetailDTOS);
     }
 }

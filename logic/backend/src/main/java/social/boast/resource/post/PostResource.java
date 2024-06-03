@@ -1,9 +1,11 @@
 package social.boast.resource.post;
 
+import social.boast.dto.post.WinnerRankingDTO;
 import social.boast.dto.post.type.poll.Poll_PostDTO;
 import social.boast.dto.post.type.text.Text_PostDTO;
 import social.boast.model.post.Post;
 import social.boast.model.post.PostStatus;
+import social.boast.model.post.RankingPost;
 import social.boast.model.post.type.poll.Poll_Post;
 import social.boast.model.post.type.text.Text_Post;
 import jakarta.transaction.Transactional;
@@ -121,7 +123,7 @@ public class PostResource {
     @Path("{id}/text/winners")
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response addTextWinners(@PathParam("id") Long postId, Long[] winners) {
+    public Response addTextWinners(@PathParam("id") Long postId, WinnerRankingDTO winners) {
         try {
             Text_Post.addWinners(postId, winners);
             return Response.status(200).build();
