@@ -30,25 +30,37 @@ struct TextPostView: View {
                             Text("@\(post.creatorName)")
                         }
                         Spacer()
-                        if(post.creatorId == UserDefaults.standard.integer(forKey: "userId")){
-                            Picker("Status", selection: $postStatus) {
-                                ForEach(Status.allCases, id: \.self) { val in
-                                    Text(val.rawValue)
-                                        .tag(val)
-                                }
-                            }
-                            .onChange(of: postStatus) {
-                                Task {
-                                    do {
-                                        if postStatus == .CLOSED && post.model.winners == [] {
-                                            alert = true
-                                        }
-                                        _ = await updateStatus(postId: post.postId, postStatus: postStatus)
+                        VStack {
+                            if(post.creatorId == UserDefaults.standard.integer(forKey: "userId")){
+                                Picker("Status", selection: $postStatus) {
+                                    ForEach(Status.allCases, id: \.self) { val in
+                                        Text(val.rawValue)
+                                            .tag(val)
                                     }
                                 }
+                                .buttonStyle(BorderedButtonStyle())
+                                .onChange(of: postStatus) {
+                                    Task {
+                                        do {
+                                            if postStatus == .CLOSED && post.model.winners == [] {
+                                                alert = true
+                                            }
+                                            _ = await updateStatus(postId: post.postId, postStatus: postStatus)
+                                        }
+                                    }
+                                }
+                            }else {
+                                Text((post.status).rawValue)
                             }
-                        }else {
-                            Text((post.status).rawValue)
+                            if postStatus == .CLOSED {
+                                NavigationLink(destination: PickTextPostWinner(post: post)) {
+                                    Text("Pick a winner!")
+                                        .padding(5)
+                                        .background(.blue)
+                                        .foregroundStyle(.white)
+                                        .buttonStyle(BorderedButtonStyle())
+                                }
+                            }
                         }
                     }
                     
@@ -84,11 +96,11 @@ struct TextPostView: View {
                                     .scaleEffect(1.0)
                                     Spacer()
                                 }
-                             
+                                
                             }
                         }
                         
-                            
+                        
                         HStack(alignment: .firstTextBaseline) {
                             Rectangle()
                                 .fill(.yellow)
@@ -166,9 +178,6 @@ struct TextPostView: View {
             }
             print(post.model.winners ?? [])
             print(creatorAnswers)
-        }
-        .navigationDestination(isPresented: $alert) {
-            PickTextPostWinner(post: post)
         }
     }
 }

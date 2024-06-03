@@ -28,6 +28,7 @@
 		1F4FD7412BFD22A0001E1499 /* NotificationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4FD7402BFD22A0001E1499 /* NotificationDetailView.swift */; };
 		1F565D032B57DD31000D058F /* CreateTextPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F565D022B57DD31000D058F /* CreateTextPost.swift */; };
 		1F66776D2B331FE70082CA15 /* CreatePollPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F66776C2B331FE70082CA15 /* CreatePollPost.swift */; };
+		1F690F152C0DBFC5004E56C4 /* PickPollPostWinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F690F142C0DBFC5004E56C4 /* PickPollPostWinner.swift */; };
 		1F6AC4BD2B7BF4D5001C9781 /* RelationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6AC4BC2B7BF4D5001C9781 /* RelationStatus.swift */; };
 		1F6AFF922B2E07C0007BDB48 /* PollPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6AFF912B2E07C0007BDB48 /* PollPostViewModel.swift */; };
 		1F6AFF962B2E0CF8007BDB48 /* MainFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6AFF952B2E0CF8007BDB48 /* MainFeedView.swift */; };
@@ -78,6 +79,7 @@
 		1F4FD7402BFD22A0001E1499 /* NotificationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDetailView.swift; sourceTree = "<group>"; };
 		1F565D022B57DD31000D058F /* CreateTextPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTextPost.swift; sourceTree = "<group>"; };
 		1F66776C2B331FE70082CA15 /* CreatePollPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePollPost.swift; sourceTree = "<group>"; };
+		1F690F142C0DBFC5004E56C4 /* PickPollPostWinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickPollPostWinner.swift; sourceTree = "<group>"; };
 		1F6AC4BC2B7BF4D5001C9781 /* RelationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationStatus.swift; sourceTree = "<group>"; };
 		1F6AFF912B2E07C0007BDB48 /* PollPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollPostViewModel.swift; sourceTree = "<group>"; };
 		1F6AFF952B2E0CF8007BDB48 /* MainFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeedView.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				1FF080DD2B3086A7000E33AE /* PollPostView.swift */,
 				1FF8F6A12B5339A400F82B3E /* TextPostView.swift */,
 				1FABF4512BD83553003B9118 /* PickTextPostWinner.swift */,
+				1F690F142C0DBFC5004E56C4 /* PickPollPostWinner.swift */,
 				1F66776C2B331FE70082CA15 /* CreatePollPost.swift */,
 				1F565D022B57DD31000D058F /* CreateTextPost.swift */,
 			);
@@ -420,6 +423,7 @@
 				1F6AC4BD2B7BF4D5001C9781 /* RelationStatus.swift in Sources */,
 				1F0816622B535C1E006D735B /* Create.swift in Sources */,
 				1F4FD7412BFD22A0001E1499 /* NotificationDetailView.swift in Sources */,
+				1F690F152C0DBFC5004E56C4 /* PickPollPostWinner.swift in Sources */,
 				1F4FD72F2BFD0BA4001E1499 /* NotificationView.swift in Sources */,
 				1FBD69292B553E570048CA82 /* Post.swift in Sources */,
 				1FD8B2372B7AA2A800290C58 /* SearchView.swift in Sources */,

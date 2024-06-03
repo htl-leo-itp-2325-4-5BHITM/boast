@@ -30,32 +30,34 @@ struct PollPostView: View {
                         Text("@\(post.creatorName)")
                     }
                     Spacer()
-                    if(post.creatorId == UserDefaults.standard.integer(forKey: "userId")){
-                        Picker("Status", selection: $postStatus) {
-                            ForEach(Status.allCases, id: \.self) { val in
-                                Text(val.rawValue)
-                                    .tag(val)
-                            }
-                        }
-                        .onChange(of: postStatus) {
-                            Task {
-                                do {
-                                    alert = postStatus == .CLOSED
-                                    await updateStatus(postId: post.postId, postStatus: postStatus)
+                    VStack {
+                        if(post.creatorId == UserDefaults.standard.integer(forKey: "userId")){
+                            Picker("Status", selection: $postStatus) {
+                                ForEach(Status.allCases, id: \.self) { val in
+                                    Text(val.rawValue)
+                                        .tag(val)
                                 }
                             }
+                            .onChange(of: postStatus) {
+                                Task {
+                                    do {
+                                        alert = postStatus == .CLOSED
+                                        await updateStatus(postId: post.postId, postStatus: postStatus)
+                                    }
+                                }
+                            }
+                        }else {
+                            Text((post.status).rawValue)
                         }
-                        .alert("Winner", isPresented: $alert, actions: {
-                            TextField("Winning Option: ", text: $winner)
-                                .keyboardType(.numberPad)
-                            Button("Submit", action: {
-                                // implement route
-                            })
-                        }, message: {
-                            Text("Please pick a winning option")
-                        })
-                    }else {
-                        Text((post.status).rawValue)
+                    }
+                    if alert {
+                        NavigationLink(destination: PickPollPostWinner(post: post)) {
+                            Text("Pick a winner!")
+                                .padding(5)
+                                .background(.blue)
+                                .foregroundStyle(.white)
+                                .buttonStyle(BorderedButtonStyle())
+                        }
                     }
                 }
                 Text("\(post.title)")

@@ -10,4 +10,5 @@ class NotificationModel: Codable {
     var sendingUserName: String?
     var header: String?
     var postId: Int?
+    var read: Bool?
 }

@@ -50,7 +50,8 @@ struct PickTextPostWinner: View {
         }
         .task {
             for detail in post.postDetails {
-                answers.append(postAnswers(creatorID: detail.creatorId ?? -1, creatorName: detail.creatorName ?? ""))
+                answers.append(postAnswers(creatorID: detail.creatorId ?? -1, creatorName: detail.text ?? ""))
+                print(answers)
             }
         }
     }
