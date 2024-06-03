@@ -53,4 +53,10 @@ class TextPostViewModel: ObservableObject {
             model.postDetails!
         }
     }
+    
+    var winnerRanking: WinnerRanking {
+        get {
+            model.winnerRanking!
+        }
+    }
 }
