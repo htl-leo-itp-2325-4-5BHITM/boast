@@ -43,6 +43,23 @@ struct NotificationDetailView: View {
                         Spacer()
 
                     }
+                case .LOSER:
+                    HStack {
+                        Image(systemName: "xmark.circle")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 40)
+                            .foregroundStyle(Color.red)
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text("You lost!")
+                                    .bold()
+                                Text(notification?.description ?? "")
+                            }
+                            Spacer()
+                        }
+                        Spacer()
+                    }
                 default:
                     Text("loading...")
             }
