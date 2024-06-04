@@ -38,6 +38,11 @@ struct LoginView: View {
                 NavigationLink(destination: AllViews().navigationBarBackButtonHidden(), isActive: $goNext){}.hidden()
             }
         }
+        .task {
+            UNUserNotificationCenter.current().requestAuthorization(options: [.badge]) { (success, error) in
+                print("Success")
+            }
+        }
     }
 }
 

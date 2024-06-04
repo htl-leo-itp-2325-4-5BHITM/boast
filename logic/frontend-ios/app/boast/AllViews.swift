@@ -48,6 +48,7 @@ struct AllViews: View {
             Task {
                 try await UNUserNotificationCenter.current().setBadgeCount(notification.count)
             }
+
         }
     }
 }
