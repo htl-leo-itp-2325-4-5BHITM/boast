@@ -56,6 +56,11 @@ class PollPostViewModel: ObservableObject {
             model.postDetails!
         }
     }
+    var winnerPoll: Int? {
+        get {
+            model.winnerPoll
+        }
+    }
     
     func dataChanged(
         postId: Int? = nil,
@@ -66,7 +71,8 @@ class PollPostViewModel: ObservableObject {
         creatorName: String? = nil,
         status: Status? = nil,
         typeInfo: Poll_TypeInfoModel? = nil,
-        postDetails: [Poll_PostDetailModel]? = nil
+        postDetails: [Poll_PostDetailModel]? = nil,
+        winnerPoll: Int? = nil
     ){
         model.dataChanged(
             postId: postId,
@@ -77,7 +83,8 @@ class PollPostViewModel: ObservableObject {
             creatorName: creatorName,
             status: status,
             typeInfo: typeInfo,
-            postDetails: postDetails
+            postDetails: postDetails,
+            winnerPoll: winnerPoll
         )
     }
     

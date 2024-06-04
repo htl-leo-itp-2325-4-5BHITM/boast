@@ -18,39 +18,43 @@ struct PollPostView: View {
     @State var playerHasNotVoted = true
     
     var body: some View {
+        
         VStack(alignment: .leading) {
             
-            Section {
-                HStack {
-                    VStack(alignment: .leading) {
-                        NavigationLink(destination: UserProfileView(userId: post.creatorId)) {
-                            Text(post.creatorName)
-                                .font(.title)
-                        }
-                        Text("@\(post.creatorName)")
+            HStack {
+                Image(systemName: "person.circle")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 50)
+                VStack(alignment: .leading) {
+                    NavigationLink(destination: UserProfileView(userId: post.creatorId)) {
+                        Text(post.creatorName)
+                            .font(.title)
                     }
-                    Spacer()
-                    VStack {
-                        if(post.creatorId == UserDefaults.standard.integer(forKey: "userId")){
-                            Picker("Status", selection: $postStatus) {
-                                ForEach(Status.allCases, id: \.self) { val in
-                                    Text(val.rawValue)
-                                        .tag(val)
-                                }
+                    .foregroundStyle(.blackAndWhite)
+                    Text("@\(post.creatorName)")
+                }
+                Spacer()
+                VStack {
+                    if(post.creatorId == UserDefaults.standard.integer(forKey: "userId")){
+                        Picker("Status", selection: $postStatus) {
+                            ForEach(Status.allCases, id: \.self) { val in
+                                Text(val.rawValue)
+                                    .tag(val)
                             }
-                            .onChange(of: postStatus) {
-                                Task {
-                                    do {
-                                        alert = postStatus == .CLOSED
-                                        await updateStatus(postId: post.postId, postStatus: postStatus)
-                                    }
-                                }
-                            }
-                        }else {
-                            Text((post.status).rawValue)
                         }
+                        .buttonStyle(BorderedButtonStyle())
+                        .onChange(of: postStatus) {
+                            
+                            Task {
+                                await updateStatus(postId: post.postId, postStatus: postStatus)
+                            }
+                            
+                        }
+                    }else {
+                        Text((post.status).rawValue)
                     }
-                    if alert {
+                    if postStatus == .CLOSED && post.winnerPoll == -1 {
                         NavigationLink(destination: PickPollPostWinner(post: post)) {
                             Text("Pick a winner!")
                                 .padding(5)
@@ -60,9 +64,19 @@ struct PollPostView: View {
                         }
                     }
                 }
-                Text("\(post.title)")
-                Text("\(post.definiton)")
             }
+            Divider()
+                .frame(height: 1)
+                .overlay(.blackAndWhite)
+            
+            VStack(alignment: .leading) {
+                Text(post.title)
+                    .font(.largeTitle)
+                    .bold()
+                Text(post.definiton)
+                    .font(.title2)
+            }
+            
             Section {
                 VStack {
                     ForEach(post.typeInfo.pollAnswers ?? [Poll_PostAnswerModel](), id: \.poll_answerId) { answer in
@@ -94,7 +108,7 @@ struct PollPostView: View {
                                         .frame(width: (Double(bets[answer.poll_answerId ?? 0] ?? 0) * voteLength), alignment: .leading)
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 30)
-                                                .fill(Color.teal)
+                                                .fill(Color(answer.poll_answerId ?? -1 == post.winnerPoll ? .green : .teal))
                                                 .padding(1)
                                         )
                                 }
@@ -109,7 +123,7 @@ struct PollPostView: View {
                                 .frame(width: barLength)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 30)
-                                        .stroke(Color.teal, lineWidth: 3)
+                                        .stroke(Color(answer.poll_answerId ?? -1 == post.winnerPoll ? .green : .teal), lineWidth: 3)
                                         .padding(1)
                                 )
                             }
@@ -130,6 +144,7 @@ struct PollPostView: View {
                 bets.updateValue(detail.postDetailsId ?? -1, forKey: detail.poll_answerId ?? -1)
                 answerCreatorIds.append(detail.creatorId ?? -1)
             }
+            print(post.winnerPoll ?? 0)
             calcVisualShit()
         }
         .frame(width: UIScreen.main.bounds.width - 20)
@@ -141,4 +156,8 @@ struct PollPostView: View {
         voteLength = barLength/Double(validVotes)
         postStatus = post.status
     }
+}
+
+#Preview {
+    AllViews()
 }

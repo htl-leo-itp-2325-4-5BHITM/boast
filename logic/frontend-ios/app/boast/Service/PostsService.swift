@@ -9,12 +9,12 @@ func loadPost(postId: Int) async -> PostModel {
             let postType = try JSONDecoder().decode(TypeModel.self, from: data)
             let type = PostType(rawValue: postType.type!)
             switch type {
-            case .POLL:
-                post = try JSONDecoder().decode(Poll_PostModel.self, from: data)
-            case .TEXT:
-                post = try JSONDecoder().decode(Text_PostModel.self, from: data)
-            default:
-                break
+                case .POLL:
+                    post = try JSONDecoder().decode(Poll_PostModel.self, from: data)
+                case .TEXT:
+                    post = try JSONDecoder().decode(Text_PostModel.self, from: data)
+                default:
+                    break
             }
         } catch {
             print(error)
@@ -191,6 +191,20 @@ func setTextPostWinner(postId: Int, winners: WinnerRanking) async -> Int {
     request.httpBody = try? JSONEncoder().encode(winners)
     do {
         let (data, response) = try await URLSession.shared.data(for: request)
+        return (response as! HTTPURLResponse).statusCode
+    } catch{
+        return statusCode ?? -2
+    }
+}
+
+func setPollPostWinner(postId: Int, pollId: Int) async -> Int {
+    var statusCode: Int?
+    let url = URL(string: "https://www.boast.social/api/posts/\(postId)/poll/winners/\(pollId)")!
+    var request = URLRequest(url: url)
+    request.httpMethod = "POST"
+    do {
+        let (data, response) = try await URLSession.shared.data(for: request)
+        print(response)
         return (response as! HTTPURLResponse).statusCode
     } catch{
         return statusCode ?? -2

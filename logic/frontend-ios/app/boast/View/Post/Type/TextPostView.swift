@@ -116,7 +116,6 @@ struct TextPostView: View {
                                 }
                             })
                             .buttonStyle(.borderedProminent)
-                            
                         }
                     }
                 }
