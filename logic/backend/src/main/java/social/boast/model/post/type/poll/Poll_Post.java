@@ -118,7 +118,7 @@ public class Poll_Post extends Post implements PostType_Interface<Poll_PostDetai
                 post.creator.username,
                 post.status.name(),
                 PostType.POLL.name(),
-                (post.winnerPoll != null) ? post.winnerPoll.poll_answerId : null,
+                (post.winnerPoll != null) ? post.winnerPoll.poll_answerId : -1,
                 typeInfoDTO,
                 postDetailDTOS);
     }
