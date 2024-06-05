@@ -34,7 +34,7 @@ struct NotificationDetailView: View {
                             .foregroundStyle(Color.green)
                         HStack {
                             VStack(alignment: .leading) {
-                                Text("Congratulations you've won the bet: ")
+                                Text(notification?.header ?? "")
                                     .bold()
                                 Text(notification?.description ?? "")
                             }
@@ -52,7 +52,7 @@ struct NotificationDetailView: View {
                             .foregroundStyle(Color.red)
                         HStack {
                             VStack(alignment: .leading) {
-                                Text("You lost!")
+                                Text(notification?.header ?? "")
                                     .bold()
                                 Text(notification?.description ?? "")
                             }
