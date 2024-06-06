@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
 import {RequestService} from "./request.service";
+import {HttpResponse} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 export interface PostModel {
   postId: number,
@@ -21,6 +23,15 @@ export interface PostDetailModel {
   postId: number,
   text: string,
   poll_answerId: number;
+}
+
+export interface PostDetailDTO {
+  postDetailsId: number,
+  createdOn: Date,
+  creatorId: number,
+  creatorName: string,
+  postId: number,
+  text: string
 }
 
 export interface PollAnswer {
@@ -85,6 +96,13 @@ export class PostService {
 
     });
     return this.friendsPosts;
+  }
+
+  createNewTextAnswer(userId: number, postId: number, answer: String): void {
+    response: HttpResponse
+    this.requestService.createNewTextAnswer(postId, userId, answer).subscribe(response => {
+      console.log(response)
+    })
   }
 
 }

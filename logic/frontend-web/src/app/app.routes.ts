@@ -4,7 +4,6 @@ import {PostsPageComponent} from "./posts-page/posts-page.component";
 import {HomeComponent} from "./home/home.component";
 import {ProfilePageComponent} from "./profile-page/profile-page.component";
 import {DetailPageComponent} from "./detail-page/detail-page.component";
-import {TestComponent} from "./test/test.component";
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -12,6 +11,5 @@ export const routes: Routes = [
   { path: 'login', component: LogInPageComponent },
   { path: 'posts', component: PostsPageComponent },
   { path: 'profile', component: ProfilePageComponent},
-  { path: 'detail/:id', component: DetailPageComponent},
-  { path: 'test/:id', component: TestComponent}
+  { path: 'detail/:id', component: DetailPageComponent}
 ];

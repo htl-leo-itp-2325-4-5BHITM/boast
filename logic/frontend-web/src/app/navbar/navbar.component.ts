@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 
 @Component({
@@ -10,10 +10,10 @@ import {Router} from "@angular/router";
 })
 export class NavbarComponent {
 
-  activeColor:String = '#fff';
-  notactiveColor:String = '#a3a3a3';
-  homeColor:String = '#fff';
-  postsColor:String = '#fff';
+  activeColor: String = '#fff';
+  notactiveColor: String = '#a3a3a3';
+  homeColor: String = '#fff';
+  postsColor: String = '#fff';
   profileUrl: String = '../../assets/person.crop.circle.fill.png';
   imageWidth: String = '40vw';
 
@@ -22,31 +22,30 @@ export class NavbarComponent {
   }
 
   isLoggedIn() {
-    if(this.router.url == '/profile') {
+    if (this.router.url == '/profile') {
       sessionStorage.removeItem('userId');
       sessionStorage.removeItem('userName');
       this.router.navigateByUrl('login');
     }
-    if(sessionStorage.getItem('userId') != null && sessionStorage.getItem('userName') != null) {
+    if (sessionStorage.getItem('userId') != null && sessionStorage.getItem('userName') != null) {
       this.router.navigateByUrl("profile");
-    }else {
+    } else {
       this.router.navigateByUrl("login");
     }
   }
 
   activePage() {
-
-    if(this.router.url == "/home") {
+    if (this.router.url == "/home") {
       this.homeColor = '#fff';
       this.postsColor = '#a3a3a3';
-    } else if(this.router.url == "/posts"){
+    } else if (this.router.url == "/posts") {
       this.homeColor = '#a3a3a3';
       this.postsColor = '#fff';
-    } else if(this.router.url == "/profile") {
+    } else if (this.router.url == "/profile") {
       this.postsColor = '#a3a3a3';
       this.homeColor = '#a3a3a3';
     }
-    if(this.router.url == "/profile") {
+    if (this.router.url == "/profile") {
       this.profileUrl = '../../assets/logout.svg';
       this.imageWidth = '35vw';
     } else {

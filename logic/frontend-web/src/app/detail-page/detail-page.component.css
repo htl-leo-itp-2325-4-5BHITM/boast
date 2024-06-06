@@ -10,6 +10,32 @@
   flex: 1;
 }
 
+.bets {
+  display: flex;
+  align-self: center;
+  justify-content: left;
+  padding-left: 1vw;
+}
+
+.bets p {
+  margin: 0;
+}
+
+.betDate {
+  color: #3FB4FF;
+  font-size: 0.95vw;
+}
+
+.betCreator {
+  position: relative;
+  font-size: 0.95vw;
+}
+
+.betText {
+  position: relative;
+  font-size: 0.95vw;
+}
+
 .action-buttons {
   display: flex;
   justify-content: flex-end;

@@ -7,14 +7,23 @@
     <p class="createdOn">{{ post.createdOn }}</p>
     <h1 class="title">{{ post.title }}</h1>
     <p class="definition">{{ post.definition }}</p>
-    <input *ngIf="showTextField" type="text" placeholder="Enter your text here">
+    <div class="bets" *ngFor="let detail of post.postDetails">
+      <p class="betDate"> {{ detail.createdOn + ': ' }} </p>
+      <p class="betCreator"> {{ detail.creatorName + ': ' }} </p>
+      <p class="betText"> {{ detail.text }}</p>
+      <p class="betText"></p>
+    </div>
+    <input *ngIf="showTextField" type="text" placeholder="Enter your text here" [(ngModel)]="this.userTextAnswer">
+    <button *ngIf="showTextField" (click)="submitAnswer()">sumbit</button>
+    <p *ngIf="showErrorNoValidInput" [ngStyle]="{'background-color': '#bb133a'}" style="border: 0.093vh solid #bb133a;">
+      Your bet must not be empty!</p>
   </div>
   <div class="action-buttons">
     <button class="button-37" [ngStyle]="{'background-color': '#13aa52'}" style="border: 0.093vh solid #13aa52;"
             role="button" (click)="joinPost()">Join
     </button>
     <button class="button-37" [ngStyle]="{'background-color': '#bb133a'}" style="border: 0.093vh solid #bb133a;"
-            role="button" (click)="ignorePost()">Ignore
+            role="button" (click)="ignorePost()">Back to Posts
     </button>
   </div>
 
