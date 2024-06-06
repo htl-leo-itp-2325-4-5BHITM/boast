@@ -1,18 +1,18 @@
 import {Injectable} from '@angular/core';
 import {RequestService} from "./request.service";
 
-
 export interface PostModel {
-  id: number,
+  postId: number,
   creatorName: string,
   status: string,
   createdOn: string,
   title: string,
   definition: string,
   type: string,
-  postDetails:Array<PostDetailModel>,
-  typeInfo:Array<PollAnswer>;
+  postDetails: Array<PostDetailModel>,
+  typeInfo: Array<PollAnswer>;
 }
+
 export interface PostDetailModel {
   createdOn: Date,
   creatorId: number,
@@ -22,6 +22,7 @@ export interface PostDetailModel {
   text: string,
   poll_answerId: number;
 }
+
 export interface PollAnswer {
   poll_answerId: number,
   title: string;
@@ -37,7 +38,7 @@ export class PostService {
   friendsPosts: PostModel[] = [];
   ids: number[] = [];
 
-  constructor(private requestService:RequestService) {
+  constructor(private requestService: RequestService) {
   }
 
   getPosts(): PostModel[] {
@@ -67,6 +68,17 @@ export class PostService {
     return this.usersPosts;
   }
 
+  getSinglePost(id: number): PostModel {
+    let currentPost: PostModel = {} as PostModel;
+    this.requestService.getPostById(id).subscribe(post => {
+      console.log(post)
+      currentPost = post;
+    })
+    console.log(currentPost)
+    return currentPost;
+  }
+
+
 //todo: get posts of friends muss noch gefixed werden.
   getPostsOfFriends(id: number): PostModel[] {
     this.friendsPosts = [];
@@ -85,4 +97,3 @@ export class PostService {
     });
     return this.friendsPosts;
   }
-}

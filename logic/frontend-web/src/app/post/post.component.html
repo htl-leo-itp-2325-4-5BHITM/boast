@@ -3,20 +3,25 @@
     <div class="postBody">
       <div class="postHeader">
         <img class="userImage" src="../../assets/person.crop.circle.fill.png" alt="userImage" width="40vw">
-        <p class="creatorName">{{post.creatorName}}</p>
-        <p class="status">{{post.status}}</p>
-        <p class="createdOn">{{post.createdOn}}</p>
-        <h1 class="title">{{post.title}}</h1>
-        <p class="definition">{{post.definition}}</p>
-        <p>{{post.typeInfo}}</p>
+        <p class="creatorName">{{ post.creatorName }}</p>
+        <p class="status">{{ post.status }}</p>
+        <p class="createdOn">{{ post.createdOn }}</p>
+        <h1 class="title">{{ post.title }}</h1>
+        <p class="definition">{{ post.definition }}</p>
+        <!--<p>{{ post.typeInfo }}</p> -->
       </div>
       <br>
-          <div class="bets" *ngFor="let detail of post.postDetails">
-            <p class="betDate"> {{detail.createdOn}}</p>
-            <p class="betCreator"> {{detail.creatorName + ': '}} </p>
-            <p class="betText"> {{detail.text}}</p>
-            <p class="betText"></p>
-          </div>
+      <div class="bets" *ngFor="let detail of post.postDetails">
+        <p class="betDate"> {{ detail.createdOn + ': ' }} </p>
+        <p class="betCreator"> {{ detail.creatorName + ': ' }} </p>
+        <p class="betText"> {{ detail.text }}</p>
+        <p class="betText"></p>
+      </div>
+      <div class="action-button">
+        <button class="button-6" [ngStyle]="{'background-color': '#1E1F26'}" style="border: 0.093vh solid #1E1F26;"
+                role="button" (click)="viewDetails(post)">>
+        </button>
+      </div>
       <br><br>
     </div>
     <br>

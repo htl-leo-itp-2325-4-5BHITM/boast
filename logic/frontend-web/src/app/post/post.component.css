@@ -1,50 +1,46 @@
 
 .postHeader {
-  border-radius: 12px;
+  border-radius: 1.111vh;
   border-style: solid;
   border-color: #1E1F26;
-  border-width: 1px;
+  border-width: 0.093vh;
   background-color: #30323D;
-  padding:0;
-  padding-top: 0;
-  padding-left: 0.5vw;
-  padding-right: 0.3VW;
+  padding: 0 0.3VW 0 0.5vw;
   color: #fff;
 }
 
 .postBody {
   width: 21vw;
-  border-radius: 12px;
+  border-radius: 1.111vh;
   border-style: solid;
   border-color: #1E1F26;
-  border-width: 1px;
+  border-width: 0.093vh;
   color: #fff;
-  margin:0;
+  margin: 0;
   background-color: #24262E;
 }
 
 .userImage {
-display: inline;
+  display: inline;
   position: relative;
-  top:2vh;
+  top: 2vh;
 }
 
 .creatorName {
   display: inline-block;
   font-size: 1.3vw;
   margin-right: 20%;
-  margin-top:0;
-  margin-bottom:0.5vh;
+  margin-top: 0;
+  margin-bottom: 0.5vh;
   width: 20%;
   padding: 0.5vw;
-
 }
 
 .status {
-  display:inline-block;
+  display: inline-block;
   font-size: 1.1vw;
   margin-left: 10%;
-  margin-bottom:0;
+  margin-bottom: 0;
   width: 34%;
   text-align: right;
 }
@@ -55,13 +51,13 @@ display: inline;
   left: 2.6vw;
   color: #3FB4FF;
   font-size: 0.7vw;
-  margin:0;
+  margin: 0;
 
 }
 
 .title {
   font-size: 1.5vw;
-  margin:0;
+  margin: 0;
 
 }
 
@@ -72,7 +68,7 @@ display: inline;
 ul {
   list-style-type: none;
   width: 25%;
-  padding:0;
+  padding: 0;
 }
 
 .bets {
@@ -88,16 +84,67 @@ ul {
 
 .betDate {
   color: #3FB4FF;
-  font-size: 0.7vw;
+  font-size: 0.95vw;
 }
 
 .betCreator {
   position: relative;
-
-
+  font-size: 0.95vw;
 }
 
 .betText {
   position: relative;
+  font-size: 0.95vw;
+}
 
+.action-button {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 15px;
+}
+
+.button-6 {
+  align-items: center;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 3rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+}
+
+.button-6:hover, .button-6:focus {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  color: white;
+}
+
+.button-6:hover {
+  transform: translateY(-1px);
+}
+
+.button-6:active {
+  background-color: #F0F0F1;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  color: white;
+  transform: translateY(0);
 }

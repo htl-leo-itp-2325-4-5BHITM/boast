@@ -1,0 +1,23 @@
+<app-navbar></app-navbar>
+
+<div class="post-detail-container">
+  <div class="post-content">
+    <!-- Hier kommen die Details des Posts -->
+    <h1>{{ post.creatorName }}</h1>
+    <p>{{ post.status }}</p>
+    <h1>creatorName</h1>
+    <p>status</p>
+    <input *ngIf="showTextField" type="text" placeholder="Enter your text here">
+  </div>
+  <div class="action-buttons">
+    <button class="button-37" [ngStyle]="{'background-color': '#13aa52'}" style="border: 0.093vh solid #13aa52;"
+            role="button" (click)="joinPost()">Join
+    </button>
+    <button class="button-37" [ngStyle]="{'background-color': '#bb133a'}" style="border: 0.093vh solid #bb133a;"
+            role="button" (click)="ignorePost()">Ignore
+    </button>
+  </div>
+
+</div>
+
+<router-outlet></router-outlet>

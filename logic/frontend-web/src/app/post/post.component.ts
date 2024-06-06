@@ -1,14 +1,16 @@
 import {Component, Input} from '@angular/core';
 import {PostModel, PostService} from "../services/post.service";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgStyle} from "@angular/common";
 import {NavbarComponent} from "../navbar/navbar.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-post',
   standalone: true,
   imports: [
     NgForOf,
-    NavbarComponent
+    NavbarComponent,
+    NgStyle
   ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.css'
@@ -19,15 +21,15 @@ export class PostComponent {
   private _id: number = 0;
   @Input() modifier: string = '';
 
-  constructor(public postService: PostService) {
+  constructor(private router: Router, public postService: PostService) {
   }
 
   ngOnInit(): void {
     this._id = Number(sessionStorage.getItem('userId'));
 
-    if(this.modifier == 'own') {
+    if (this.modifier == 'own') {
       this._posts = this.postService.getPostsOfUser(this._id);
-    } else if(this.modifier == 'friends') {
+    } else if (this.modifier == 'friends') {
       this._posts = this.postService.getPostsOfFriends(this._id);
     } else {
       this._posts = this.postService.getPosts();
@@ -36,5 +38,9 @@ export class PostComponent {
 
   get posts(): PostModel[] {
     return this._posts;
+  }
+
+  viewDetails(post: PostModel): void {
+    this.router.navigate(['/test', post.postId]);
   }
 }

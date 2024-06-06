@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ProfileModel} from "./user.service";
+import {PostModel} from "./post.service";
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +53,7 @@ export class RequestService {
     return this.http.get<any>('https://www.boast.social/api/posts/friends/' + id);
   }
 
-  getPostById(id: number): Observable<any> {
+  getPostById(id: number): Observable<PostModel> {
     return this.http.get<any>('https://www.boast.social/api/posts/' + id);
   }
 
