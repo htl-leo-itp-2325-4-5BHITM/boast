@@ -60,6 +60,7 @@ export class DetailPageComponent {
     if (sessionStorage.getItem('userId') !== null && sessionStorage.getItem('userName') !== null && this.userTextAnswer !== '') {
       this.showErrorNoValidInput = false;
       //userId: number, postId: number, userName: String, answer: String
+
       this.postService.createNewTextAnswer(
         // @ts-ignore
         sessionStorage.getItem('userId'),
@@ -68,5 +69,6 @@ export class DetailPageComponent {
     } else {
       this.showErrorNoValidInput = true;
     }
+    this.router.navigate(['/posts']);
   }
 }
