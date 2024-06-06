@@ -1,20 +1,45 @@
 .post-detail-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 80vh;
-  padding: 10vh;
+  justify-content: center;
+  height: 70vh;
+  width: 70vw;
+  padding-top: 15vh;
+  padding-left: 25vh;
 }
 
 .post-content {
   flex: 1;
 }
 
+.creatorName {
+  font-size: 1.6vw;
+}
+
+.status {
+  font-size: 1.4vw;
+}
+
+.createdOn {
+  color: #3FB4FF;
+  font-size: 1vw;
+}
+
+.title {
+  font-size: 1.8vw;
+  margin: 0;
+
+}
+
+.definition {
+  font-size: 1.2vw;
+}
+
 .bets {
   display: flex;
   align-self: center;
   justify-content: left;
-  padding-left: 1vw;
+  padding-left: 0.3vw;
 }
 
 .bets p {
@@ -23,28 +48,28 @@
 
 .betDate {
   color: #3FB4FF;
-  font-size: 0.95vw;
+  font-size: 1.25vw;
 }
 
 .betCreator {
   position: relative;
-  font-size: 0.95vw;
+  font-size: 1.25vw;
 }
 
 .betText {
   position: relative;
-  font-size: 0.95vw;
+  font-size: 1.25vw;
 }
 
 .action-buttons {
   display: flex;
   justify-content: flex-end;
-  gap: 0.926vh;
+  gap: 1.226vh;
 }
 
 input {
-  padding: 0.926vh;
-  font-size: 1.481vh;
+  padding: 1.226vh;
+  font-size: 1.781vh;
   width: 100%;
   box-sizing: border-box;
 }
@@ -61,22 +86,35 @@ input {
 .postDetail {
   width: 50vw;
   height: 50vh;
-  padding: 1.852vh;
+  padding: 2.152vh;
   border: 0.3vh solid black;
   align-items: center;
   justify-content: center;
 }
 
+.errorMessage {
+  color: white;
+  background-color: #f44336; /* Red background */
+  padding: 1.226vh 2.152vh;
+  border-radius: 0.763vh;
+  border: 0.093vh solid #d32f2f; /* Slightly darker red border */
+  font-size: 1.781vh;
+  font-weight: bold;
+  margin: 1.226vh 0;
+  text-align: center;
+  box-shadow: 0 0.67vh 0.856vh rgba(0, 0, 0, 0.1);
+}
+
 .eventButtons > button {
   float: right;
-  width: 5vw;
-  height: 5vh;
-  margin: 0.5vh;
+  width: 5.5vw;
+  height: 5.5vh;
+  margin: 0.8vh;
 }
 
 .button-37 {
-  border-radius: 0.37vh;
-  box-shadow: rgba(0, 0, 0, .1) 0 0.185vh 0.37vh 0;
+  border-radius: 0.67vh;
+  box-shadow: rgba(0, 0, 0, .1) 0 0.485vh 0.67vh 0;
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
@@ -84,11 +122,11 @@ input {
   -apple-system,
   BlinkMacSystemFont,
   sans-serif;
-  font-size: 1.55vh;
+  font-size: 1.85vh;
   font-weight: 400;
   outline: none;
   outline: 0;
-  padding: 0.926vh 2.315vh;
+  padding: 1.226vh 2.515vh;
   text-align: center;
   transform: translateY(0);
   transition: transform 150ms, box-shadow 150ms;
@@ -98,12 +136,12 @@ input {
 }
 
 .button-37:hover {
-  box-shadow: rgba(0, 0, 0, .15) 0 0.278vh 0.833vh 0;
-  transform: translateY(-0.185vh);
+  box-shadow: rgba(0, 0, 0, .15) 0 0.578vh 0.833vh 0;
+  transform: translateY(-0.485vh);
 }
 
 @media (min-width: 71.111vh) {
   .button-37 {
-    padding: 0.926vh 2.778vh;
+    padding: 1.226vh 3.078vh;
   }
 }
