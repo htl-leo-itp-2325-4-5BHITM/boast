@@ -97,3 +97,5 @@ export class PostService {
     });
     return this.friendsPosts;
   }
+
+}
