@@ -68,17 +68,6 @@ export class PostService {
     return this.usersPosts;
   }
 
-  getSinglePost(id: number): PostModel {
-    let currentPost: PostModel = {} as PostModel;
-    this.requestService.getPostById(id).subscribe(post => {
-      console.log(post)
-      currentPost = post;
-    })
-    console.log(currentPost)
-    return currentPost;
-  }
-
-
 //todo: get posts of friends muss noch gefixed werden.
   getPostsOfFriends(id: number): PostModel[] {
     this.friendsPosts = [];

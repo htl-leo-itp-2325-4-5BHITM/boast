@@ -100,27 +100,27 @@ ul {
 .action-button {
   display: flex;
   justify-content: flex-end;
-  margin-right: 15px;
+  margin-right: 1.389vh;
 }
 
 .button-6 {
   align-items: center;
   background-color: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 0.093vh solid rgba(0, 0, 0, 0.1);
   border-radius: .25rem;
-  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 0.093vh 0.278vh 0;
   box-sizing: border-box;
   color: white;
   cursor: pointer;
   display: inline-flex;
   font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 16px;
+  font-size: 1.481vh;
   font-weight: 600;
   justify-content: center;
   line-height: 1.25;
   margin: 0;
   min-height: 3rem;
-  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  padding: calc(.875rem - 0.093vh) calc(1.5rem - 0.093vh);
   position: relative;
   text-decoration: none;
   transition: all 250ms;
@@ -133,18 +133,18 @@ ul {
 
 .button-6:hover, .button-6:focus {
   border-color: rgba(0, 0, 0, 0.15);
-  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 0.37vh 1.111vh;
   color: white;
 }
 
 .button-6:hover {
-  transform: translateY(-1px);
+  transform: translateY(-0.093vh);
 }
 
 .button-6:active {
   background-color: #F0F0F1;
   border-color: rgba(0, 0, 0, 0.15);
-  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  box-shadow: rgba(0, 0, 0, 0.06) 0 0.185vh 0.37vh;
   color: white;
   transform: translateY(0);
 }
