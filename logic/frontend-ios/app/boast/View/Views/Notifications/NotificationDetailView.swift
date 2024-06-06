@@ -34,7 +34,7 @@ struct NotificationDetailView: View {
                             .foregroundStyle(Color.green)
                         HStack {
                             VStack(alignment: .leading) {
-                                Text("Congratulations you've won the bet: ")
+                                Text(notification?.header ?? "")
                                     .bold()
                                 Text(notification?.description ?? "")
                             }
@@ -42,6 +42,23 @@ struct NotificationDetailView: View {
                         }
                         Spacer()
 
+                    }
+                case .LOSER:
+                    HStack {
+                        Image(systemName: "xmark.circle")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 40)
+                            .foregroundStyle(Color.red)
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(notification?.header ?? "")
+                                    .bold()
+                                Text(notification?.description ?? "")
+                            }
+                            Spacer()
+                        }
+                        Spacer()
                     }
                 default:
                     Text("loading...")

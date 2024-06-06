@@ -40,19 +40,16 @@ struct TextPostView: View {
                                 }
                                 .buttonStyle(BorderedButtonStyle())
                                 .onChange(of: postStatus) {
+                                    
                                     Task {
-                                        do {
-                                            if postStatus == .CLOSED && post.model.winners == [] {
-                                                alert = true
-                                            }
-                                            _ = await updateStatus(postId: post.postId, postStatus: postStatus)
-                                        }
+                                        await updateStatus(postId: post.postId, postStatus: postStatus)
                                     }
+                                    
                                 }
                             }else {
                                 Text((post.status).rawValue)
                             }
-                            if postStatus == .CLOSED {
+                            if postStatus == .CLOSED && (post.winnerRanking.first == [] || post.winnerRanking.second == [] || post.winnerRanking.third == []) {
                                 NavigationLink(destination: PickTextPostWinner(post: post)) {
                                     Text("Pick a winner!")
                                         .padding(5)
@@ -76,46 +73,6 @@ struct TextPostView: View {
                         .frame(height: 1)
                         .overlay(.blackAndWhite)
                     
-                    if (postStatus == .CLOSED && post.model.winners != []) {
-                        Section {
-                            VStack(alignment: .leading){
-                                Text("Winner: ")
-                                    .font(.largeTitle)
-                            }
-                            
-                            ForEach(post.model.winners ?? [], id: \.self) { winner in
-                                HStack {
-                                    Spacer()
-                                    VStack{
-                                        NavigationLink(destination: UserProfileView(userId: winner)) {
-                                            Text("\(creatorAnswers[winner] ?? "")")
-                                                .font(.title)
-                                        }
-                                        .foregroundStyle(.blackAndWhite)
-                                    }
-                                    .scaleEffect(1.0)
-                                    Spacer()
-                                }
-                                
-                            }
-                        }
-                        
-                        
-                        HStack(alignment: .firstTextBaseline) {
-                            Rectangle()
-                                .fill(.yellow)
-                                .frame(height: 30)
-                            Rectangle()
-                                .fill(.yellow)
-                                .frame(height: 100)
-                            Rectangle()
-                                .fill(.yellow)
-                                .frame(height: 60)
-                        }
-                        Divider()
-                            .frame(height: 1)
-                            .overlay(.blackAndWhite)
-                    }
                 }
                 
                 VStack(alignment: .leading) {
@@ -159,12 +116,46 @@ struct TextPostView: View {
                                 }
                             })
                             .buttonStyle(.borderedProminent)
-                            
                         }
                     }
                 }
                 
-                Spacer()
+                Spacer(minLength: 20)
+                if post.winnerRanking.first != [] {
+                    VStack(alignment: .leading) {
+                        Text("Winners: ")
+                            .font(.largeTitle)
+                        HStack(alignment: .bottom) {
+                            VStack {
+                                NavigationLink(destination: UserProfileView(userId: post.winnerRanking.third?.first ?? -1)) {
+                                    Text("\(creatorAnswers[post.winnerRanking.third?.first ?? 0] ?? "")")
+                                        .font(.title)
+                                }
+                                Rectangle()
+                                    .fill(.yellow)
+                                    .frame(height: 30)
+                            }
+                            VStack {
+                                NavigationLink(destination: UserProfileView(userId: post.winnerRanking.first?.first ?? -1)) {
+                                    Text("\(creatorAnswers[post.winnerRanking.first?.first ?? 0] ?? "")")
+                                        .font(.title)
+                                }
+                                Rectangle()
+                                    .fill(.yellow)
+                                    .frame(height: 100)
+                            }
+                            VStack {
+                                NavigationLink(destination: UserProfileView(userId: post.winnerRanking.second?.first ?? -1)) {
+                                    Text("\(creatorAnswers[post.winnerRanking.second?.first ?? 0] ?? "")")
+                                        .font(.title)
+                                }
+                                Rectangle()
+                                    .fill(.yellow)
+                                    .frame(height: 60)
+                            }
+                        }
+                    }
+                }
             }
         }
         .frame(width: UIScreen.main.bounds.width - 20)
@@ -174,9 +165,8 @@ struct TextPostView: View {
                 answerCreatorIds.append(detail.creatorId ?? -1)
                 postAnswers.updateValue(detail.creatorId ?? -1, forKey: detail.creatorName ?? "")
                 creatorAnswers.updateValue(detail.creatorName ?? "", forKey: detail.creatorId ?? 0)
-                print(detail)
             }
-            print(post.model.winners ?? [])
+            print("agoinübinq+ripnhqnigoaeinrgon")
             print(creatorAnswers)
         }
     }
