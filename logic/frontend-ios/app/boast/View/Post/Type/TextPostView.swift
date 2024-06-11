@@ -131,27 +131,45 @@ struct TextPostView: View {
                                     Text("\(creatorAnswers[post.winnerRanking.third?.first ?? 0] ?? "")")
                                         .font(.title)
                                 }
-                                Rectangle()
-                                    .fill(.yellow)
-                                    .frame(height: 30)
+                                ZStack {
+                                    Rectangle()
+                                        .fill(.yellow)
+                                        .frame(height: 30)
+                                    Rectangle()
+                                        .fill(.whiteAndBlack)
+                                        .frame(height: 20)
+                                        .padding(.top)
+                                }
                             }
                             VStack {
                                 NavigationLink(destination: UserProfileView(userId: post.winnerRanking.first?.first ?? -1)) {
-                                    Text("\(creatorAnswers[post.winnerRanking.first?.first ?? 0] ?? "")")
+                                    Text("👑 \(creatorAnswers[post.winnerRanking.first?.first ?? 0] ?? "")")
                                         .font(.title)
                                 }
-                                Rectangle()
-                                    .fill(.yellow)
-                                    .frame(height: 100)
+                                ZStack {
+                                    Rectangle()
+                                        .fill(.yellow)
+                                        .frame(height: 80)
+                                    Rectangle()
+                                        .fill(.whiteAndBlack)
+                                        .frame(height: 70)
+                                        .padding(.top)
+                                }
                             }
                             VStack {
                                 NavigationLink(destination: UserProfileView(userId: post.winnerRanking.second?.first ?? -1)) {
                                     Text("\(creatorAnswers[post.winnerRanking.second?.first ?? 0] ?? "")")
                                         .font(.title)
                                 }
-                                Rectangle()
-                                    .fill(.yellow)
-                                    .frame(height: 60)
+                                ZStack {
+                                    Rectangle()
+                                        .fill(.yellow)
+                                        .frame(height: 55)
+                                    Rectangle()
+                                        .fill(.whiteAndBlack)
+                                        .frame(height: 45)
+                                        .padding(.top)
+                                }
                             }
                         }
                     }
@@ -166,8 +184,6 @@ struct TextPostView: View {
                 postAnswers.updateValue(detail.creatorId ?? -1, forKey: detail.creatorName ?? "")
                 creatorAnswers.updateValue(detail.creatorName ?? "", forKey: detail.creatorId ?? 0)
             }
-            print("agoinübinq+ripnhqnigoaeinrgon")
-            print(creatorAnswers)
         }
     }
 }
