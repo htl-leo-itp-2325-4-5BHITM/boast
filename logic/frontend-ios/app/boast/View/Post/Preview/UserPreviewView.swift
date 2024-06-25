@@ -12,7 +12,7 @@ struct UserPreviewView: View {
     @State var user: PreviewModel?
     var body: some View {
         VStack {
-            Text(user?.username ?? "error")
+            Text(user?.username ?? "loading... ")
         }
         .task {
             user = await userPreview(userId: userId)

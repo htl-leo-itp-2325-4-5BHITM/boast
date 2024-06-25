@@ -11,7 +11,7 @@ struct LoginView: View {
         NavigationStack{
             VStack {
                 Form {
-                    Section(header: Text("Name:")) {
+                    Section(header: Text("Login:")) {
                         TextField("Name", text: Binding(
                             get: {
                                 viewModel.username
@@ -22,18 +22,18 @@ struct LoginView: View {
                                 }
                             }
                         ))
+                        Button("Submit", action: {
+                            Task {
+                                userId = try await userLogin(userName: viewModel.username)
+                                if userId != -1 {
+                                    UserDefaults.standard.set(userId, forKey: "userId")
+                                    UserDefaults.standard.set(viewModel.username, forKey: "userName")
+                                    goNext = true
+                                }
+                            }
+                        })
                     }
                 }
-                Button("Submit", action: {
-                    Task {
-                        userId = try await userLogin(userName: viewModel.username)
-                        if userId != -1 {
-                            UserDefaults.standard.set(userId, forKey: "userId")
-                            UserDefaults.standard.set(viewModel.username, forKey: "userName")
-                            goNext = true
-                        }
-                    }
-                })
                 
                 NavigationLink(destination: AllViews().navigationBarBackButtonHidden(), isActive: $goNext){}.hidden()
             }

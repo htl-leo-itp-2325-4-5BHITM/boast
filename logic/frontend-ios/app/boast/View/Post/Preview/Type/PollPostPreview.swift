@@ -49,8 +49,6 @@ struct PollPostPreview: View {
                     Text("@\(post?.creatorName ?? "")")
                     Text("|")
                     Text("\(post?.postDetails?.count ?? 0) vote")
-                    Text("|")
-                    Text("10 minutes left")
                     Spacer()
                 }
                 .font(.system(size: 14))

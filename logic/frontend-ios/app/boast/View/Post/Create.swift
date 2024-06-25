@@ -10,6 +10,8 @@ struct Create: View {
     @State var text = false
     @State var typeInfo: [String] = ["",""]
     @FocusState private var focusedField: String?
+    @State var navigateToPost = false
+    @State var postId = -1
     
     var body: some View {
         NavigationStack {
@@ -62,9 +64,30 @@ struct Create: View {
                                             return
                                         }
                                     }
-                                    await createPollPost(title: title, definition: definition, creatorId: creatorId, status: .OPEN, type: .POLL, typeInfo: typeInfo)
+                                    postId = await createPollPost(title: title, definition: definition, creatorId: creatorId, status: .OPEN, type: .POLL, typeInfo: typeInfo)
+                                    title = ""
+                                    definition = ""
+                                    poll = false
+                                    text = false
+                                    typeInfo = ["",""]
+                                    
+                                    print("\(postId) adfasdfasd")
+                                    
+                                    if postId != -1 {
+                                        navigateToPost = true
+                                    }
+
                                 } else {
-                                    await createTextPost(title: title, definition: definition, creatorId: creatorId)
+                                     postId = await createTextPost(title: title, definition: definition, creatorId: creatorId)
+                                    title = ""
+                                    definition = ""
+                                    poll = false
+                                    text = false
+                                    typeInfo = ["",""]
+                                    print("\(postId) adfasdfasd")
+                                    if postId != -1 {
+                                        navigateToPost = true
+                                    }
                                 }
                             }
                         }
@@ -73,6 +96,9 @@ struct Create: View {
             }
             
             Spacer()
+                .navigationDestination(isPresented: $navigateToPost) {
+                    Post(postId: postId)
+                }
             
             if isFocused || focusedField != nil {
                 HStack {
@@ -84,17 +110,7 @@ struct Create: View {
                             .scaledToFit()
                             .foregroundStyle(.blackAndWhite)
                     })
-                    /*
-                     Button(action: {
-                     poll = false
-                     text = true
-                     }, label: {
-                     Image(systemName: "character.cursor.ibeam")
-                     .resizable()
-                     .scaledToFit()
-                     .foregroundStyle(.blackAndWhite)
-                     })
-                     */
+                    
                     Spacer()
                 }
                 .padding(.leading)

@@ -11,6 +11,8 @@ struct TextPostView: View {
     @State var comment = ""
     @State var alert = false
     @State var winnerSubmited = false
+    @State var hideComment = true
+    
     
     var body: some View {
         NavigationStack {
@@ -79,9 +81,14 @@ struct TextPostView: View {
                     Text("Bets: ")
                         .font(.largeTitle)
                     HStack {
+                        Image(systemName: "person.circle")
                         Text(comment)
                         Spacer()
                     }
+                    .opacity(hideComment ? 0 : 1)
+                    
+                    
+                    
                     ForEach(post.postDetails, id: \.postDetailsId) { detail in
                         HStack {
                             Image(systemName: "person.circle")
@@ -112,6 +119,7 @@ struct TextPostView: View {
                                         let df = DateFormatter()
                                         df.dateFormat = "dd.MM.yyyy"
                                         comment = "\(UserDefaults.standard.string(forKey: "userName") ?? "") : \(definition)"
+                                        hideComment = false
                                     }
                                 }
                             })
@@ -134,12 +142,13 @@ struct TextPostView: View {
                                 ZStack {
                                     Rectangle()
                                         .fill(.yellow)
-                                        .frame(height: 30)
+                                        .frame(height: 55)
                                     Rectangle()
                                         .fill(.whiteAndBlack)
-                                        .frame(height: 20)
+                                        .frame(height: 45)
                                         .padding(.top)
                                 }
+                                
                             }
                             VStack {
                                 NavigationLink(destination: UserProfileView(userId: post.winnerRanking.first?.first ?? -1)) {
@@ -164,10 +173,10 @@ struct TextPostView: View {
                                 ZStack {
                                     Rectangle()
                                         .fill(.yellow)
-                                        .frame(height: 55)
+                                        .frame(height: 30)
                                     Rectangle()
                                         .fill(.whiteAndBlack)
-                                        .frame(height: 45)
+                                        .frame(height: 20)
                                         .padding(.top)
                                 }
                             }

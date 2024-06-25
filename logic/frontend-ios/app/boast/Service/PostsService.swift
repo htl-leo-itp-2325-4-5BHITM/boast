@@ -9,12 +9,12 @@ func loadPost(postId: Int) async -> PostModel {
             let postType = try JSONDecoder().decode(TypeModel.self, from: data)
             let type = PostType(rawValue: postType.type!)
             switch type {
-                case .POLL:
-                    post = try JSONDecoder().decode(Poll_PostModel.self, from: data)
-                case .TEXT:
-                    post = try JSONDecoder().decode(Text_PostModel.self, from: data)
-                default:
-                    break
+            case .POLL:
+                post = try JSONDecoder().decode(Poll_PostModel.self, from: data)
+            case .TEXT:
+                post = try JSONDecoder().decode(Text_PostModel.self, from: data)
+            default:
+                break
             }
         } catch {
             print(error)
@@ -130,10 +130,21 @@ func createTextPostDetail(creatorId: Int, postId: Int, text: String) -> Int {
     return statusCode ?? -1
 }
 
+
+
+
+
+
+
+
+
+
+
 // DRINGENST DTO KLASSEN IMPLEMENTIEREN
 func createPollPost(title: String, definition: String, creatorId: Int, status: Status, type: PostType, typeInfo: [String]) async -> Int {
     var statuscode: Int?
     let post = Poll_PostModel()
+    var postId: Int?
     post.title = title
     post.definition = definition
     post.creatorId = creatorId
@@ -156,28 +167,46 @@ func createPollPost(title: String, definition: String, creatorId: Int, status: S
     request.addValue("application/json", forHTTPHeaderField: "Content-Type")
     request.addValue("application/json", forHTTPHeaderField: "Accept")
     request.httpBody = json
-    let task = URLSession.shared.dataTask(with: request) { data, response, error in
-        statuscode = (response as! HTTPURLResponse).statusCode
-    }
-    task.resume()
-    return statuscode ?? -1
+    do {
+        let (data, _) = try await URLSession.shared.data(for: request)
+        let temp = String(data: data, encoding: .utf8)
+        postId = Int(temp ?? "-1") ?? -1
+        print("postID:  \(postId)")
+    } catch {}
+    
+    return postId ?? -1
 }
 
-func createTextPost(title: String, definition: String, creatorId: Int) async {
+func createTextPost(title: String, definition: String, creatorId: Int) async -> Int {
     let str = "{\"title\": \"\(title)\", \"definition\": \"\(definition)\", \"creatorId\": \(creatorId), \"status\": \"OPEN\", \"type\": \"TEXT\"}"// :(
     let data = str.data(using: .utf8)
-    
     let url = URL(string: "https://boast.social/api/posts/text")!
     var request = URLRequest(url: url)
+    var postId: Int?
     request.httpMethod = "POST"
     request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
     request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Accept")
     request.httpBody = data
-    let task = URLSession.shared.dataTask(with: request) { data, response, error in
-        var statusCode = (response as! HTTPURLResponse).statusCode
-    }
-    task.resume()
+
+    do {
+        let (data, _) = try await URLSession.shared.data(for: request)
+        let temp = String(data: data, encoding: .utf8)
+        postId = Int(temp ?? "-1") ?? -1
+        print("postID:  \(postId)")
+    } catch {}
+    
+    return postId ?? -1
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
