@@ -81,7 +81,7 @@ public class Poll_Post extends Post implements PostType_Interface<Poll_PostDetai
 
     }
 
-    public static void createPollPost(Poll_PostDTO postDTO) {
+    public static Long createPollPost(Poll_PostDTO postDTO) {
         BoastUser user = BoastUser.findById(postDTO.getCreatorId());
         if (user == null) throw new IllegalArgumentException();
 
@@ -91,6 +91,7 @@ public class Poll_Post extends Post implements PostType_Interface<Poll_PostDetai
             getEntityManager().persist(postAnswer);
         }
         persist(post);
+        return post.postId;
     }
 
     public static Poll_PostDTO getPostDTO(Poll_Post post) {

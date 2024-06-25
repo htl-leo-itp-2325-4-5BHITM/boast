@@ -54,12 +54,13 @@ public class Text_Post extends RankingPost implements PostType_Interface<Text_Po
         winners.remove(user);
     }
 
-    public static void createTextPost(Text_PostDTO postDTO) {
+    public static Long createTextPost(Text_PostDTO postDTO) {
         BoastUser user = BoastUser.findById(postDTO.getCreatorId());
         if (user == null) throw new IllegalArgumentException();
 
         Text_Post post = new Text_Post(postDTO, user);
         persist(post);
+        return post.postId;
     }
 
     public static List<Long> addWinners(Long postId, WinnerRankingDTO winnerRankingDTO) {

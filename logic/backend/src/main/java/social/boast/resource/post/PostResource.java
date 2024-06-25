@@ -81,8 +81,7 @@ public class PostResource {
     @Transactional
     public Response createPollPost(Poll_PostDTO postDTO) {
         try {
-            Poll_Post.createPollPost(postDTO);
-            return Response.status(200).build();
+            return Response.status(200).entity(Poll_Post.createPollPost(postDTO)).build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.status(422).build();
@@ -111,8 +110,7 @@ public class PostResource {
     @Transactional
     public Response createTextPost(Text_PostDTO postDTO) {
         try {
-            Text_Post.createTextPost(postDTO);
-            return Response.status(200).build();
+            return Response.status(200).entity(Text_Post.createTextPost(postDTO)).build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.status(422).build();
