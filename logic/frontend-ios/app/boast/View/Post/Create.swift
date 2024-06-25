@@ -55,44 +55,50 @@ struct Create: View {
                 }
                 
                 Section {
-                    Button("Submit", action: {
-                        Task {
-                            if title != "" && definition != "" {
-                                if poll {
-                                    for i in 0..<typeInfo.count {
-                                        if typeInfo[i] == "" {
-                                            return
+                    Text("Submit")
+                        .onTapGesture {
+                            Task {
+                                if title != "" && definition != "" {
+                                    if poll {
+                                        for i in 0..<typeInfo.count {
+                                            if typeInfo[i] == "" {
+                                                return
+                                            }
                                         }
-                                    }
-                                    postId = await createPollPost(title: title, definition: definition, creatorId: creatorId, status: .OPEN, type: .POLL, typeInfo: typeInfo)
-                                    title = ""
-                                    definition = ""
-                                    poll = false
-                                    text = false
-                                    typeInfo = ["",""]
-                                    
-                                    print("\(postId) adfasdfasd")
-                                    
-                                    if postId != -1 {
-                                        navigateToPost = true
-                                    }
-
-                                } else {
-                                     postId = await createTextPost(title: title, definition: definition, creatorId: creatorId)
-                                    title = ""
-                                    definition = ""
-                                    poll = false
-                                    text = false
-                                    typeInfo = ["",""]
-                                    print("\(postId) adfasdfasd")
-                                    if postId != -1 {
-                                        navigateToPost = true
+                                        postId = await createPollPost(title: title, definition: definition, creatorId: creatorId, status: .OPEN, type: .POLL, typeInfo: typeInfo)
+                                        title = ""
+                                        definition = ""
+                                        poll = false
+                                        text = false
+                                        typeInfo = ["",""]
+                                        
+                                        print("\(postId) adfasdfasd")
+                                        
+                                        if postId != -1 {
+                                            navigateToPost = true
+                                        }
+                                        
+                                    } else {
+                                        postId = await createTextPost(title: title, definition: definition, creatorId: creatorId)
+                                        title = ""
+                                        definition = ""
+                                        poll = false
+                                        text = false
+                                        typeInfo = ["",""]
+                                        print("\(postId) adfasdfasd")
+                                        if postId != -1 {
+                                            navigateToPost = true
+                                        }
                                     }
                                 }
                             }
                         }
-                    }).padding(1)
+                        .padding(1)
+                        .foregroundStyle(.blue)
                 }
+            }
+            .onTapGesture {
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
             }
             
             Spacer()
@@ -121,6 +127,7 @@ struct Create: View {
         }
     }
 }
+
 
 #Preview {
     Create()
