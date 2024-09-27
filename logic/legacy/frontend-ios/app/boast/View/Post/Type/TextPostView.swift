@@ -135,8 +135,8 @@ struct TextPostView: View {
                             .font(.largeTitle)
                         HStack(alignment: .bottom) {
                             VStack {
-                                NavigationLink(destination: UserProfileView(userId: post.winnerRanking.third?.first ?? -1)) {
-                                    Text("\(creatorAnswers[post.winnerRanking.third?.first ?? 0] ?? "")")
+                                NavigationLink(destination: UserProfileView(userId: post.winnerRanking.second?.first ?? -1)) {
+                                    Text("\(creatorAnswers[post.winnerRanking.second?.first ?? 0] ?? "")")
                                         .font(.title)
                                 }
                                 ZStack {
@@ -166,8 +166,8 @@ struct TextPostView: View {
                                 }
                             }
                             VStack {
-                                NavigationLink(destination: UserProfileView(userId: post.winnerRanking.second?.first ?? -1)) {
-                                    Text("\(creatorAnswers[post.winnerRanking.second?.first ?? 0] ?? "")")
+                                NavigationLink(destination: UserProfileView(userId: post.winnerRanking.third?.first ?? -1)) {
+                                    Text("\(creatorAnswers[post.winnerRanking.third?.first ?? 0] ?? "")")
                                         .font(.title)
                                 }
                                 ZStack {

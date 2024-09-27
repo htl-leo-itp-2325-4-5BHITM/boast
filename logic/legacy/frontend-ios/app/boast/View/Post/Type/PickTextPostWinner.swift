@@ -26,18 +26,19 @@ struct PickTextPostWinner: View {
                 Spacer()
                 HStack(alignment: .bottom) {
                     VStack {
-                        Picker("", selection: $thirdPlace) {
+                        Picker("Choose second place!", selection: $secondPlace) {
                             Text("").tag(-1)
                             ForEach(answers, id: \.creatorID) { answer in
-                                Text(answer.answer).tag(answer.creatorID)
+                                Text(answer.answer)
+                                    .tag(answer.creatorID)
                             }
                         }
                         .buttonStyle(BorderedProminentButtonStyle())
                         ZStack {
                             Rectangle()
                                 .fill(.yellow)
-                                .frame(height: 30)
-                            Text("3rd")
+                                .frame(height: 60)
+                            Text("2nd")
                         }
                     }
                     
@@ -61,20 +62,20 @@ struct PickTextPostWinner: View {
                         }
                     }
                     
+                    
                     VStack {
-                        Picker("Choose second place!", selection: $secondPlace) {
+                        Picker("", selection: $thirdPlace) {
                             Text("").tag(-1)
                             ForEach(answers, id: \.creatorID) { answer in
-                                Text(answer.answer)
-                                    .tag(answer.creatorID)
+                                Text(answer.answer).tag(answer.creatorID)
                             }
                         }
                         .buttonStyle(BorderedProminentButtonStyle())
                         ZStack {
                             Rectangle()
                                 .fill(.yellow)
-                                .frame(height: 60)
-                            Text("2nd")
+                                .frame(height: 30)
+                            Text("3rd")
                         }
                     }
                 }
