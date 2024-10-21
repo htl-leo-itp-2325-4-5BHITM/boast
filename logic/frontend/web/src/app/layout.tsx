@@ -1,30 +1,26 @@
-"use client"
-import SideBarComponent from "@/component/SideBarComponent";
-import { CssBaseline } from "@mui/material";
-import Grid from '@mui/material/Grid2';
+import { Box, CssBaseline } from "@mui/material";
 import HeaderComponent from "@/component/HeaderComponent";
-import React, { useState } from "react";
-import {UserProvider} from "@/service/UserContext";
+import React from "react";
+import SideBarComponent from "@/component/SideBarComponent";
+import Grid from "@mui/material/Grid2";
+import { UserProvider } from "@/provider/UserProvider";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-    const [user, setUser] = useState({ username: "username", email: "email" });
-
     return (
         <html>
-        <body>
+        <body style={{ backgroundColor: "#1A1C40" }}>
         <UserProvider>
-            <CssBaseline />
-            <Grid container height="100vh" overflow="hidden" bgcolor="#1A1C40">
-                <Grid size={12}>
-                    <HeaderComponent username={user.username} email={user.email} />
+            <Box sx={{ height: "100vh", width: "100vw", overflow: "hidden", backgroundColor: "#1A1C40" }}>
+                <CssBaseline />
+                <HeaderComponent />
+                <SideBarComponent />
+                <Grid container sx={{ height: "100vh" }}>
+                    <Grid size={2}><Box></Box></Grid>
+                    <Grid size={10} bgcolor="#1A1C40">
+                        {children}
+                    </Grid>
                 </Grid>
-                <Grid size={2}>
-                    <SideBarComponent />
-                </Grid>
-                <Grid size={10} sx={{ overflow: "auto", height: "100vh" }}>
-                    {React.cloneElement(children as React.ReactElement, { setUser })}
-                </Grid>
-            </Grid>
+            </Box>
         </UserProvider>
         </body>
         </html>

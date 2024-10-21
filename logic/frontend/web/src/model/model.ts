@@ -1,14 +1,17 @@
 
 export interface PostModel {
-    postId: number,
-    creatorName: string,
-    status: string,
-    createdOn: string,
-    title: string,
-    definition: string,
-    type: string,
-    postDetails: Array<PostDetailModel>,
-    typeInfo: Array<PollAnswer>;
+    postId: number;
+    creatorName: string;
+    status: string;
+    createdOn: string;
+    title: string;
+    definition: string;
+    type: string;
+    postDetails: Array<PostDetailModel>;
+    typeInfo: {
+        pollAnswers: Array<PollAnswer>;
+    };
+    winnerPoll: number;
 }
 
 export interface PostDetailModel {
