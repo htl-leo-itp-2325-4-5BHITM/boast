@@ -1,6 +1,7 @@
 "use client";
 import React, {useEffect, useState} from 'react';
 import {AppBar, Autocomplete, Box, TextField, Toolbar, Typography} from "@mui/material";
+import Image from "next/image";
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useUser } from '@/provider/UserProvider';
 import axios from "axios";
@@ -12,25 +13,25 @@ const HeaderComponent = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [options, setOptions] = useState<UserModel[]>([]);
 
-    useEffect(() => {
-        const fetchUsers = async () => {
-            if (searchTerm.length > 2) {
-                try {
-                    const response = await axios.get(`https://www.boast.social/api/users/search/${searchTerm}`, {
-                        headers: {
-                            'accept': '*/*',
-                            'reqUserId': '100'
-                        }
-                    });
-                    setOptions(response.data);
-                } catch (error) {
-                    console.error('Error fetching users:', error);
-                }
-            } else {
-                setOptions([]);
+    const fetchUsers = async () => {
+        if (searchTerm.length > 1) {
+            try {
+                const response = await axios.get(`https://www.boast.social/api/users/search/${searchTerm}`, {
+                    headers: {
+                        'accept': '*/*',
+                        'reqUserId': user?.userId || '100',
+                    }
+                });
+                setOptions(response.data);
+            } catch (error) {
+                console.error('Error fetching users:', error);
             }
-        };
+        } else {
+            setOptions([]);
+        }
+    };
 
+    useEffect(() => {
         fetchUsers();
     }, [searchTerm]);
 
@@ -38,17 +39,32 @@ const HeaderComponent = () => {
     return (
         <AppBar position="static" sx={{ bgcolor: "#1C2357" }}>
             <Toolbar sx={{ mx: 3 }} disableGutters>
-                <Typography variant="h6" component="div">
-                    boast
-                </Typography>
-
-
+                <Image src={"/boast_white.png"} alt={"boast"} width={120} height={10}
+                       priority={true} style={{objectFit: "contain", width: "auto", height: "auto"}}/>
                 <Autocomplete
+                    sx={{
+                        width: 300,
+                        ml: 4,
+                        '& .MuiInputBase-root': {
+                            color: '#fff',
+                        },
+                        '& .MuiInputLabel-root': {
+                            color: '#fff',
+                        },
+                        '& .MuiAutocomplete-popupIndicator': {
+                            color: '#fff',
+                        },
+                        '& .MuiAutocomplete-clearIndicator': {
+                            color: '#fff',
+                        },
+                    }}
                     freeSolo
                     options={options}
-                    getOptionLabel={(option) => option.username}
+                    getOptionLabel={(option: UserModel | string ) => (typeof option === "string") ? option : option.username}
                     renderOption={(props, option) => (
-                        <Link href={`/profile/${option.username}`} passHref>
+                        <Link onClick={() => {
+                            setSearchTerm('')
+                        }} href={`/profile/${option.username}`} passHref>
                             <Box component="li" {...props}>
                                 {option.username}
                             </Box>
@@ -57,12 +73,14 @@ const HeaderComponent = () => {
                     renderInput={(params) => (
                         <TextField
                             {...params}
+                            InputLabelProps={{
+                                style: {color: '#fff'},
+                            }}
                             label="Search Users"
                             variant="outlined"
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
                     )}
-                    sx={{ width: 300, mx: 2}}
                 />
 
                 <Box sx={{flexGrow: 1}}></Box>

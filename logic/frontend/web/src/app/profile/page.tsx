@@ -110,14 +110,17 @@ export default function Page() {
                     Posts
                 </Typography>
 
-                <Grid container spacing={2}>
+                <Grid container spacing={2} sx={{
+                    height: "71vh",
+                    overflowY: "scroll"
+                }}>
                     {posts.length === 0 ? (
                         <Typography variant="body2" sx={{color: "#C20B4E", textAlign: 'center', width: '100%'}}>
                             No posts yet.
                         </Typography>
                     ) : (
                         posts.map((post, index) => (
-                            <Grid item xs={12} key={index}>
+                            <Grid item p={0} xs={12} key={index}>
                                 <Card sx={{bgcolor: "#2E2F55", color: "#fff"}}>
                                     <CardContent>
                                         <Typography variant="h6">{post.title}</Typography>
@@ -141,6 +144,7 @@ export default function Page() {
                             </Grid>
                         ))
                     )}
+                    <br/><br/>
                 </Grid>
             </Box>
         </Box>

@@ -110,6 +110,7 @@ export default function ForYouComponent({ setShowPostComponent, setSelectedPost 
             <Grid container spacing={4}
                   sx={{
                       width: "100%",
+                      overflowY: "scroll",
                       margin: "auto",
                   }}
             >

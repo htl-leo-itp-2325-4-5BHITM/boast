@@ -1,11 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Grid from "@mui/material/Grid2";
 import ForYouComponent from "./ForYouComponent";
 import CreateComponent from "@/app/FYP/CreateComponent";
 import PostComponent from "@/app/FYP/PostComponent";
-import { PostModel } from "@/model/model";
-import { Box } from "@mui/material";
+import {PostModel} from "@/model/model";
+import {Box} from "@mui/material";
 
 export default function Page() {
     const [showPostComponent, setShowPostComponent] = useState(false);
@@ -22,7 +22,7 @@ export default function Page() {
                 <Box
                     sx={{
                         width: "100%",
-                        height: "100%",
+                        height: "80%",
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
@@ -31,18 +31,16 @@ export default function Page() {
                     <Box
                         sx={{
                             width: "90%",
-                            height: "80%",
-                            overflowY: "scroll",
+                            height: "90%",
                             backgroundColor: "#22264B",
-                            borderRadius: "8px",
-                            marginTop: "-4rem",
+                            borderRadius: "1em",
                         }}
                     >
-                        {showPostComponent && selectedPost ? (
-                            <PostComponent post={selectedPost} onGoBack={handleGoBack} />
-                        ) : (
-                            <ForYouComponent setShowPostComponent={setShowPostComponent} setSelectedPost={setSelectedPost} />
-                        )}
+                        {
+                            showPostComponent && selectedPost &&
+                            <PostComponent post={selectedPost} onGoBack={handleGoBack}/>
+                        }
+                        <ForYouComponent setShowPostComponent={setShowPostComponent} setSelectedPost={setSelectedPost}/>
                     </Box>
                 </Box>
             </Grid>
@@ -55,7 +53,7 @@ export default function Page() {
                         mt: "4em",
                     }}
                 >
-                    <CreateComponent />
+                    <CreateComponent/>
                 </Box>
             </Grid>
         </Grid>

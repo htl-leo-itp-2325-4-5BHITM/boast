@@ -5,7 +5,7 @@ import axios from "axios";
 import {useUser} from "@/provider/UserProvider";
 import {ProfileModel, PostModel} from "@/model/model";
 
-export default function Page({ params }: { params: { slug: string } }) {
+export default function Page({params}: { params: { slug: string } }) {
     const [profile, setProfile] = useState<ProfileModel | null>(null);
     const [posts, setPosts] = useState<Array<PostModel>>([]);
     const [loading, setLoading] = useState(true);
@@ -54,7 +54,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     }, [user?.userId, params.slug]);
 
     if (loading) {
-        return <CircularProgress />;
+        return <CircularProgress/>;
     }
 
     if (!profile) {
@@ -116,7 +116,10 @@ export default function Page({ params }: { params: { slug: string } }) {
                     Posts
                 </Typography>
 
-                <Grid container spacing={2}>
+                <Grid container spacing={2} sx={{
+                    height: "71vh",
+                    overflowY: "scroll"
+                }}>
                     {posts.length === 0 ? (
                         <Typography variant="body2" sx={{color: "#C20B4E", textAlign: 'center', width: '100%'}}>
                             No posts yet.
@@ -147,6 +150,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                             </Grid>
                         ))
                     )}
+                    <br/><br/>
                 </Grid>
             </Box>
         </Box>

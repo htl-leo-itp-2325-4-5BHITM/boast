@@ -1,10 +1,17 @@
+"use client";
+
 import { Drawer, Typography, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { RocketLaunch, Person, Logout } from "@mui/icons-material";
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Link from "next/link";
 import React from "react";
+import {usePathname} from "next/navigation";
 
 export default function SideBarComponent() {
+    const pathname = usePathname();
+
+    console.log(pathname)
+
     return (
         <Drawer
             sx={{
@@ -32,7 +39,7 @@ export default function SideBarComponent() {
                         </ListItemIcon>
                         <ListItemText>
                             <Typography
-                                sx={{ color: "#8691C3", fontWeight: "500", fontSize: "16px" }}
+                                sx={{ color: pathname === "/FYP" ? "#fff" : "#8691C3", fontWeight: "500", fontSize: "16px" }}
                             >
                                 For You
                             </Typography>
@@ -50,7 +57,7 @@ export default function SideBarComponent() {
                         </ListItemIcon>
                         <ListItemText>
                             <Typography
-                                sx={{ color: "#8691C3", fontWeight: "500", fontSize: "16px" }}
+                                sx={{ color: pathname === "/notification" ? "#fff" : "#8691C3", fontWeight: "500", fontSize: "16px" }}
                             >
                                 Notifications
                             </Typography>
@@ -68,7 +75,7 @@ export default function SideBarComponent() {
                         </ListItemIcon>
                         <ListItemText>
                             <Typography
-                                sx={{ color: "#8691C3", fontWeight: "500", fontSize: "16px" }}
+                                sx={{ color: pathname === "/profile" ? "#fff" : "#8691C3", fontWeight: "500", fontSize: "16px" }}
                             >
                                 Profile
                             </Typography>
