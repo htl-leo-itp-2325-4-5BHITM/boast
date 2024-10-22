@@ -79,7 +79,7 @@ export default function SideBarComponent() {
 
 
             {/* Logout Section */}
-            <Link href="/" style={{ textDecoration: 'none', marginTop: "auto", marginLeft: "2rem" }}>
+            <Link href="/logout" style={{ textDecoration: 'none', marginTop: "auto", marginLeft: "2rem" }}>
                 <List>
                     <ListItem>
                         <ListItemIcon sx={{ color: "#8691C3" }}>

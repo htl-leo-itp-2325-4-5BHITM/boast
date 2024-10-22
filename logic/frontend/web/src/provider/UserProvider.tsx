@@ -51,6 +51,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     };
 
     const logout = () => {
+        console.log("logout")
         setUser(null);
         localStorage.removeItem('user');
         router.push('/login');

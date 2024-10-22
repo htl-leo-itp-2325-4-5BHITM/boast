@@ -27,6 +27,8 @@ export default function Page() {
                     axios.get(`https://www.boast.social/api/posts/${postId}`)
                 ));
 
+                console.log(postResponses)
+
                 setPosts(postResponses.map(res => res.data));
             } catch (error) {
                 console.error("Error fetching profile or posts:", error);
@@ -64,10 +66,10 @@ export default function Page() {
             bgcolor="#1A1C40"
             color="white"
             sx={{
-                minHeight: "100vh",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                overflowY: "scroll",
             }}
         >
             <Grid container spacing={2} justifyContent="center" alignItems="center" sx={{mb: 4, width: '100%'}}>
@@ -116,13 +118,13 @@ export default function Page() {
                     ) : (
                         posts.map((post, index) => (
                             <Grid item xs={12} key={index}>
-                                <Card sx={{bgcolor: "#2E2F55"}}>
+                                <Card sx={{bgcolor: "#2E2F55", color: "#fff"}}>
                                     <CardContent>
                                         <Typography variant="h6">{post.title}</Typography>
                                         <Typography variant="body2">{post.definition}</Typography>
                                         <Box display="flex" justifyContent="space-between" alignItems="center" mt={2}>
                                             <Typography variant="caption" sx={{color: "#C0C0C0"}}>
-                                                {new Date(post.createdOn).toLocaleString()}
+                                                {post.createdOn}
                                             </Typography>
                                             <Button
                                                 variant="outlined"

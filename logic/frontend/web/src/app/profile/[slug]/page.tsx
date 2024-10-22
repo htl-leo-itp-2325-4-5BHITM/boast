@@ -75,6 +75,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                overflowY: "scroll",
             }}
         >
             <Grid container spacing={2} justifyContent="center" alignItems="center" sx={{mb: 4, width: '100%'}}>
@@ -123,13 +124,13 @@ export default function Page({ params }: { params: { slug: string } }) {
                     ) : (
                         posts.map((post, index) => (
                             <Grid item xs={12} key={index}>
-                                <Card sx={{bgcolor: "#2E2F55"}}>
+                                <Card sx={{bgcolor: "#2E2F55", color: "#fff"}}>
                                     <CardContent>
                                         <Typography variant="h6">{post.title}</Typography>
                                         <Typography variant="body2">{post.definition}</Typography>
                                         <Box display="flex" justifyContent="space-between" alignItems="center" mt={2}>
                                             <Typography variant="caption" sx={{color: "#C0C0C0"}}>
-                                                {new Date(post.createdOn).toLocaleDateString()}
+                                                {post.createdOn}
                                             </Typography>
                                             <Button
                                                 variant="outlined"
