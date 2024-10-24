@@ -4,34 +4,46 @@ import { Box, Button, TextField, Typography, ToggleButton, ToggleButtonGroup, Di
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from "axios";
-import {useUser} from "@/provider/UserProvider";
+import { useUser } from "@/provider/UserProvider";
 
-export default function CreateComponent() {
+interface CreateComponentProps {
+    fetchPosts: () => void;
+}
+
+export default function CreateComponent({ fetchPosts }: CreateComponentProps) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [betType, setBetType] = useState("TEXT");
     const [pollOptions, setPollOptions] = useState([{ id: 1, title: "" }, { id: 2, title: "" }]);
     const [pollDialogOpen, setPollDialogOpen] = useState(false);
-    const {user} = useUser()
+    const { user } = useUser();
 
+    const resetForm = () => {
+        setTitle("");
+        setDescription("");
+        setBetType("TEXT");
+        setPollOptions([{ id: 1, title: "" }, { id: 2, title: "" }]);
+    };
 
     const handleCreate = async () => {
         const newBet = {
             createdOn: new Date().toISOString(),
             title,
             definition: description,
-            creatorId: user?.userId, // Replace with actual creatorId
-            creatorName: user?.username, // Replace with actual creatorName
+            creatorId: user?.userId,
+            creatorName: user?.username,
             status: "OPEN",
             type: betType,
             typeInfo: betType === "POLL" ? { pollAnswers: pollOptions.map(option => ({ title: option.title })) } : undefined,
         };
-        console.log(newBet)
+        console.log(newBet);
 
         try {
             const url = betType === "POLL" ? "https://www.boast.social/api/posts/poll" : "https://www.boast.social/api/posts/text";
             await axios.post(url, newBet);
             console.log("Bet created successfully:", newBet);
+            resetForm(); // Clear the form after successful creation
+            fetchPosts(); // Fetch the latest posts
         } catch (error) {
             console.error("Error creating bet:", error);
         }

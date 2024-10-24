@@ -40,7 +40,7 @@ export default function PostComponent({ post, onGoBack }: { post: PostModel, onG
     };
 
     return (
-        <Box p={3} bgcolor="#1A1C40" color="white" borderRadius="8px">
+        <Box p={3} bgcolor="#22264B" color="white" borderRadius="8px">
             <Button variant="contained" color="primary" onClick={onGoBack} sx={{ mb: 2, position: "relative", top: 0 }}>
                 Go Back
             </Button>
@@ -50,7 +50,7 @@ export default function PostComponent({ post, onGoBack }: { post: PostModel, onG
             <Typography variant="subtitle2" mb={2}>{post.postDetails?.length} participants</Typography>
             <List>
                 {post.type === "POLL" && post.typeInfo.pollAnswers.map((answer) => (
-                    <ListItem key={answer.poll_answerId} sx={{ bgcolor: "#22264B", mb: 1, borderRadius: "8px" }}>
+                    <ListItem key={answer.poll_answerId} sx={{ bgcolor: "#1d1e40", mb: 1, borderRadius: "8px" }}>
                         <ListItemText
                             primary={answer.title}
                             primaryTypographyProps={{ color: "white", fontWeight: "bold" }}
@@ -62,15 +62,16 @@ export default function PostComponent({ post, onGoBack }: { post: PostModel, onG
                         )}
                     </ListItem>
                 ))}
+                <Box mt={4} />
                 {post.postDetails?.map((detail) => (
-                    <ListItem key={detail.postDetailsId} sx={{ bgcolor: "#22264B", mb: 1, borderRadius: "8px" }}>
+                    <ListItem key={detail.postDetailsId} sx={{ bgcolor: "#282e63", mb: 1, borderRadius: "8px" }}>
                         <ListItemText
                             primary={detail.creatorName}
                             secondary={detail.text || post?.typeInfo.pollAnswers.find((answer) => answer?.poll_answerId === detail.poll_answerId)?.title}
                             primaryTypographyProps={{ color: "white", fontWeight: "bold" }}
                             secondaryTypographyProps={{ color: "white" }}
                         />
-                        {post.creatorName === user?.username && (
+                        {post.creatorName === user?.username && post.type === "TEXT" && (
                             <Button variant="contained" color="secondary" onClick={() => handleSelectAnswer(detail.creatorId)}>
                                 Select as Best Answer
                             </Button>

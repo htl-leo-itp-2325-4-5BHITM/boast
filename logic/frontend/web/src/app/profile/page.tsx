@@ -1,6 +1,6 @@
 "use client";
 import {useEffect, useState} from "react";
-import {Box, Typography, CircularProgress, Avatar, Grid, Button, Card, CardContent} from "@mui/material";
+import {Box, Typography, CircularProgress, Avatar, Grid, Card, CardContent} from "@mui/material";
 import axios from "axios";
 import {useUser} from "@/provider/UserProvider";
 import {ProfileModel, PostModel} from "@/model/model";

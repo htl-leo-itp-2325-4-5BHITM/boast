@@ -3,23 +3,18 @@ import { Box, Button, Dialog, DialogContent, DialogTitle, TextField, Typography 
 import Grid from "@mui/material/Grid2";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { getPost, getPosts } from "@/service/post";
 import { PostModel } from "@/model/model";
 import { useUser } from "@/provider/UserProvider";
 
-const colors = ["#C20B4E", "#3656FF", "#4ECA31"];
-
-function getRandomColor() {
-    return colors[Math.floor(Math.random() * colors.length)];
-}
 
 interface ForYouComponentProps {
+    posts: PostModel[];
+    fetchPosts: () => void;
     setShowPostComponent: (show: boolean) => void;
     setSelectedPost: (post: PostModel | null) => void;
 }
 
-export default function ForYouComponent({ setShowPostComponent, setSelectedPost }: ForYouComponentProps) {
-    const [posts, setPosts] = useState<PostModel[]>([]);
+export default function ForYouComponent({ setShowPostComponent, setSelectedPost, posts}: ForYouComponentProps) {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [textInput, setTextInput] = useState("");
     const [selectedPollAnswer, setSelectedPollAnswer] = useState("1");
@@ -79,17 +74,6 @@ export default function ForYouComponent({ setShowPostComponent, setSelectedPost 
     };
 
     useEffect(() => {
-        async function fetchPosts() {
-            try {
-                const postIds = await getPosts();
-                const postDetails = await Promise.all(postIds.map(id => getPost(id)));
-                setPosts(postDetails);
-            } catch (error) {
-                console.error('Error fetching posts:', error);
-            }
-        }
-
-        fetchPosts();
     }, []);
 
     return (
@@ -102,6 +86,7 @@ export default function ForYouComponent({ setShowPostComponent, setSelectedPost 
                     position: "sticky",
                     top: 0,
                     zIndex: 1,
+                    bgcolor: "#22264B",
                 }}
             >
                 For you
@@ -120,7 +105,7 @@ export default function ForYouComponent({ setShowPostComponent, setSelectedPost 
                           }}
                     >
                         <Box
-                            bgcolor={getRandomColor()}
+                            bgcolor={post.type === "TEXT" ? "#C20B4E" : "#4ECA31"}
                             height="12rem"
                             width="12rem"
                             display="flex"
