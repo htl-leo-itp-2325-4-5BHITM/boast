@@ -43,7 +43,6 @@ public class RelationResource {
     @Path("/follow/{targetUserId}")
     @Transactional
     public Response followUser(@HeaderParam("reqUserId") Long reqUserId, @PathParam("targetUserId") Long targetUserId) {
-        System.out.println(targetUserId);
         try {
             return Response.ok(Relation.createRelation(reqUserId, targetUserId, RelationStatus.FRIEND)).build();
         } catch (Exception e) {

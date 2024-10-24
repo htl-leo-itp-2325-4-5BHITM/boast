@@ -1,5 +1,5 @@
 "use client";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Box, Typography, CircularProgress, Avatar, Grid, Button, Card, CardContent} from "@mui/material";
 import axios from "axios";
 import {useUser} from "@/provider/UserProvider";
@@ -11,45 +11,47 @@ export default function Page({params}: { params: { slug: string } }) {
     const [loading, setLoading] = useState(true);
     const {user} = useUser();
 
-    useEffect(() => {
-        async function fetchProfile() {
-            try {
-                // First request to get the user ID
-                const searchResponse = await axios.get(`https://www.boast.social/api/users/search/${params.slug}`, {
-                    headers: {
-                        'reqUserId': user?.userId.toString(),
-                        'accept': '*/*'
-                    }
-                });
-
-                const userId = searchResponse.data[0]?.userId;
-                if (!userId) {
-                    throw new Error("User ID not found");
+    async function fetchProfile() {
+        try {
+            // First request to get the user ID
+            const searchResponse = await axios.get(`https://www.boast.social/api/users/search/${params.slug}`, {
+                headers: {
+                    'reqUserId': user?.userId.toString(),
+                    'accept': '*/*'
                 }
+            });
 
-                // Second request to get the profile details
-                const profileResponse = await axios.get(`https://www.boast.social/api/users/profile/${userId}`, {
-                    headers: {
-                        'reqUserId': user?.userId.toString(),
-                        'accept': '*/*'
-                    }
-                });
-
-                const postIds = profileResponse.data.posts;
-                const postResponses = await Promise.all(postIds.map((postId: number) =>
-                    axios.get(`https://www.boast.social/api/posts/${postId}`)
-                ));
-
-                setPosts(postResponses.map(res => res.data));
-
-                setProfile(profileResponse.data);
-            } catch (error) {
-                console.error("Error fetching profile:", error);
-            } finally {
-                setLoading(false);
+            const userId = searchResponse.data[0]?.userId;
+            if (!userId) {
+                throw new Error("User ID not found");
             }
-        }
 
+            // Second request to get the profile details
+            const profileResponse = await axios.get(`https://www.boast.social/api/users/profile/${userId}`, {
+                headers: {
+                    'reqUserId': user?.userId.toString(),
+                    'accept': '*/*'
+                }
+            });
+
+            console.log(profileResponse.data)
+
+            const postIds = profileResponse.data.posts;
+            const postResponses = await Promise.all(postIds.map((postId: number) =>
+                axios.get(`https://www.boast.social/api/posts/${postId}`)
+            ));
+
+            setPosts(postResponses.map(res => res.data));
+
+            setProfile(profileResponse.data);
+        } catch (error) {
+            console.error("Error fetching profile:", error);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
         fetchProfile();
     }, [user?.userId, params.slug]);
 
@@ -62,7 +64,17 @@ export default function Page({params}: { params: { slug: string } }) {
     }
 
     const followToggle = () => {
-        console.log(profile.relationStatus === 'NO_RELATION' ? 'Following user' : 'Unfollowing user');
+        axios.post(`https://www.boast.social/api/relations/${profile.relationStatus === "NO_RELATION" ? "follow" : "unfollow"}/${profile.userId}`, {}, {
+            headers: {
+                'reqUserId': user?.userId.toString(),
+                'accept': '*/*'
+            }
+        }).then(() => {
+            console.log("User followed/unfollowed successfully");
+            fetchProfile()
+        }).catch(error => {
+            console.error("Error following user:", error);
+        })
     };
 
     return (
@@ -97,17 +109,21 @@ export default function Page({params}: { params: { slug: string } }) {
                         · {profile.following} following</Typography>
                     <Typography variant="body2">{profile.name}</Typography>
 
-                    <Button
-                        variant="contained"
-                        onClick={followToggle}
-                        sx={{
-                            mt: 2,
-                            bgcolor: profile.relationStatus === 'NO_RELATION' ? "#4ECA31" : "#C20B4E",
-                            ":hover": {bgcolor: profile.relationStatus === 'NO_RELATION' ? "#4ECA31" : "#C20B4E"},
-                        }}
-                    >
-                        {profile.relationStatus === 'NO_RELATION' ? "Follow" : "Unfollow"}
-                    </Button>
+                    {
+                        profile.userId !== user?.userId && (
+                            <Button
+                                variant="contained"
+                                onClick={followToggle}
+                                sx={{
+                                    mt: 2,
+                                    bgcolor: profile.relationStatus === 'NO_RELATION' ? "#4ECA31" : "#C20B4E",
+                                    ":hover": {bgcolor: profile.relationStatus === 'NO_RELATION' ? "#4ECA31" : "#C20B4E"},
+                                }}
+                            >
+                                {profile.relationStatus === 'NO_RELATION' ? "Follow" : "Unfollow"}
+                            </Button>
+                        )
+                    }
                 </Grid>
             </Grid>
 

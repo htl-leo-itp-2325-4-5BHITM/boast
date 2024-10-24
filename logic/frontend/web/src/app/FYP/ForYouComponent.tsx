@@ -100,7 +100,6 @@ export default function ForYouComponent({ setShowPostComponent, setSelectedPost 
                 sx={{
                     padding: "20px",
                     position: "sticky",
-                    backgroundColor: "#22264B",
                     top: 0,
                     zIndex: 1,
                 }}
@@ -110,7 +109,6 @@ export default function ForYouComponent({ setShowPostComponent, setSelectedPost 
             <Grid container spacing={4}
                   sx={{
                       width: "100%",
-                      overflowY: "scroll",
                       margin: "auto",
                   }}
             >
@@ -130,6 +128,9 @@ export default function ForYouComponent({ setShowPostComponent, setSelectedPost 
                             alignItems="center"
                             borderRadius="13px"
                             padding="10px"
+                            sx={{
+                                cursor: "pointer"
+                            }}
                             onClick={() => handleGridItemClick(post)}
                         >
                             <Typography color="#ffffff" fontWeight={700}>

@@ -21,27 +21,23 @@ export default function Page() {
             <Grid size={8} component="div">
                 <Box
                     sx={{
-                        width: "100%",
-                        height: "80%",
-                        display: "flex",
+                        width: "90%",
+                        height: "80vh",
                         justifyContent: "center",
                         alignItems: "center",
+                        margin: "4em 5% 0 5%",
+                        backgroundColor: "#22264B",
+                        borderRadius: "1em",
+                        overflow: "scroll"
                     }}
                 >
-                    <Box
-                        sx={{
-                            width: "90%",
-                            height: "90%",
-                            backgroundColor: "#22264B",
-                            borderRadius: "1em",
-                        }}
-                    >
-                        {
-                            showPostComponent && selectedPost &&
+                    {
+                        showPostComponent && selectedPost ?
                             <PostComponent post={selectedPost} onGoBack={handleGoBack}/>
-                        }
-                        <ForYouComponent setShowPostComponent={setShowPostComponent} setSelectedPost={setSelectedPost}/>
-                    </Box>
+                            :
+                            <ForYouComponent setShowPostComponent={setShowPostComponent}
+                                             setSelectedPost={setSelectedPost}/>
+                    }
                 </Box>
             </Grid>
             <Grid size={4}>

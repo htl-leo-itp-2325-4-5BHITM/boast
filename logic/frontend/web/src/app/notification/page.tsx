@@ -57,6 +57,14 @@ export default function Page() {
         <Box p={3} bgcolor="#1A1C40" color="white" borderRadius="8px">
             <Typography variant="h4" mb={2}>Notifications</Typography>
             <List>
+                {
+                    notifications.length === 0 && (
+                        <Typography component="span" color="grey">
+                            No notifications yet
+                        </Typography>
+                    )
+                }
+
                 {notifications.map((notification) => (
                     <ListItem key={notification.id} sx={{ bgcolor: "#22264B", mb: 1, borderRadius: "8px" }}>
                         <ListItemText

@@ -56,10 +56,6 @@ export default function Page() {
         );
     }
 
-    const followToggle = () => {
-        console.log(profile.relationStatus === 'NO_RELATION' ? 'Following user' : 'Unfollowing user');
-    };
-
     return (
         <Box
             p={3}
@@ -90,18 +86,6 @@ export default function Page() {
                     <Typography variant="body2">{profile.follower} followers
                         · {profile.following} following</Typography>
                     <Typography variant="body2">{profile.name}</Typography>
-
-                    <Button
-                        variant="contained"
-                        onClick={followToggle}
-                        sx={{
-                            mt: 2,
-                            bgcolor: profile.relationStatus === 'NO_RELATION' ? "#4ECA31" : "#C20B4E",
-                            ":hover": {bgcolor: profile.relationStatus === 'NO_RELATION' ? "#4ECA31" : "#C20B4E"},
-                        }}
-                    >
-                        {profile.relationStatus === 'NO_RELATION' ? "Follow" : "Unfollow"}
-                    </Button>
                 </Grid>
             </Grid>
 
@@ -129,15 +113,6 @@ export default function Page() {
                                             <Typography variant="caption" sx={{color: "#C0C0C0"}}>
                                                 {post.createdOn}
                                             </Typography>
-                                            <Button
-                                                variant="outlined"
-                                                sx={{
-                                                    borderColor: post.status === "ACTIVE" ? "#4ECA31" : "#C20B4E",
-                                                    color: post.status === "ACTIVE" ? "#4ECA31" : "#C20B4E",
-                                                }}
-                                            >
-                                                {post.status === "ACTIVE" ? "Active" : "Inactive"}
-                                            </Button>
                                         </Box>
                                     </CardContent>
                                 </Card>
