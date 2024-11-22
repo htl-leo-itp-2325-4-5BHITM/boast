@@ -56,7 +56,8 @@ export default function Page() {
     }, [user]);
 
     return (
-        <Box color={"white"} margin={5} mt={12} borderRadius={2} position={"absolute"} sx={{bgcolor: "#22264B", zIndex: "100"}}>
+        <Box color={"white"} margin={5} mt={12} borderRadius={2} position={"absolute"}
+             sx={{bgcolor: "#22264B", zIndex: "100"}}>
             <Typography variant="h4" margin={3}>{notifications.length} Notifications</Typography>
             <Box overflow={"auto"} sx={{bgcolor: "#22264B", width: "78vw", height: "75vh"}} p={3}>
 
@@ -83,7 +84,7 @@ export default function Page() {
                             }}>
                                 <Typography fontWeight={"bold"}>{notification.description.split(":")[0]}</Typography>
                                 <Box display="flex" justifyContent="space-between">
-                                    <Typography>{notification.description.split(":")[1]}</Typography>
+                                        <Typography>{notification.sendingUserName} voted: {notification.description.split(":")[1]}</Typography>
                                     <Typography align={"right"}>
                                         {notification.createdOn}
                                     </Typography>
