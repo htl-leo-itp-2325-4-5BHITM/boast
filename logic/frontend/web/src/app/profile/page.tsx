@@ -59,6 +59,7 @@ export default function Page() {
     return (
         <Box
             p={3}
+            mt={12}
             bgcolor="#1A1C40"
             color="white"
             sx={{
@@ -68,34 +69,43 @@ export default function Page() {
                 overflowY: "scroll",
             }}
         >
-            <Grid container spacing={2} justifyContent="center" alignItems="center" sx={{mb: 4, width: '100%'}}>
-                <Grid item xs={12} sm={3} display="flex" justifyContent="center">
-                    <Avatar
-                        sx={{
-                            width: 100,
-                            height: 100,
-                            bgcolor: "#4ECA31",
-                            fontSize: "3rem",
-                        }}
-                    >
-                        {profile.username[0]}
-                    </Avatar>
-                </Grid>
-                <Grid item xs={12} sm={9}>
-                    <Typography variant="h5">{profile.username}</Typography>
-                    <Typography variant="body2">{profile.follower} followers
-                        · {profile.following} following</Typography>
-                    <Typography variant="body2">{profile.name}</Typography>
-                </Grid>
-            </Grid>
 
-            <Box sx={{width: "100%", maxWidth: "800px"}}>
-                <Typography variant="h6" sx={{mb: 2}}>
+
+            <Box sx={{
+                width: "100%",
+                borderRadius: "5px",
+                padding: "3%",
+                backgroundColor: "#22264B",
+                display: "flex",
+                marginBottom: "5vh"
+            }}>
+                <Avatar
+                    sx={{
+                        width: 100,
+                        height: 100,
+                        bgcolor: "#4ECA31",
+                        fontSize: "3rem",
+                        margin: "2%",
+                    }}>
+                    {profile.username[0]}
+                </Avatar>
+                <Box sx={{margin: "2%"}}>
+                    <Typography variant="h5">{profile.username}</Typography>
+                    <Box display="flex">
+                        <Typography m={1} ml={0} mr={3}>{profile.posts.length} posts</Typography>
+                        <Typography m={1} ml={0} mr={3}>{profile.follower} followers</Typography>
+                        <Typography m={1} ml={0} mr={3}>{profile.following} following</Typography>
+                    </Box>
+                    <Typography>{profile.name}</Typography>
+                </Box>
+            </Box>
+
+            <Box sx={{width: "100%", borderRadius: "5px", padding: "3%", backgroundColor: "#22264B"}}>
+                <Typography variant="h6" sx={{mb: 2, fontWeight: "bold"}}>
                     Posts
                 </Typography>
 
                 <Grid container spacing={2} sx={{
-                    height: "71vh",
                     overflowY: "scroll"
                 }}>
                     {posts.length === 0 ? (
@@ -105,15 +115,21 @@ export default function Page() {
                     ) : (
                         posts.map((post, index) => (
                             <Grid item p={0} xs={12} key={index}>
-                                <Card sx={{bgcolor: "#2E2F55", color: "#fff"}}>
+                                <Card sx={{bgcolor: "#51588a", color: "#fff"}}>
                                     <CardContent>
-                                        <Typography variant="h6">{post.title}</Typography>
-                                        <Typography variant="body2">{post.definition}</Typography>
-                                        <Box display="flex" justifyContent="space-between" alignItems="center" mt={2}>
-                                            <Typography variant="caption" sx={{color: "#C0C0C0"}}>
-                                                {post.createdOn}
-                                            </Typography>
+                                        <Box display={"flex"}>
+                                            <Typography variant="h6" fontWeight={"bold"} sx={{width: "92%"}}>{post.title}</Typography>
+                                            <Box sx={{justifyContent: "right", width: "8%"}} position={"static"} alignItems={"right"} textAlign={"center"}>
+                                                <Typography variant="caption" sx={{color: "#C0C0C0"}}>
+                                                    {post.createdOn}
+                                                </Typography>
+                                                <Box bgcolor={post.status == "OPEN" ? "#4ECA31" : "#C20B4E"}
+                                                     sx={{borderRadius: "5px", paddingLeft: "5%", paddingRight: "5%", textAlign: "center"}}>
+                                                    <Typography>{post.status}</Typography>
+                                                </Box>
+                                            </Box>
                                         </Box>
+                                        <Typography variant="body2">{post.definition}</Typography>
                                     </CardContent>
                                 </Card>
                             </Grid>

@@ -37,7 +37,7 @@ const HeaderComponent = () => {
 
 
     return (
-        <AppBar position="static" sx={{ bgcolor: "#1C2357" }}>
+        <AppBar position="fixed" sx={{ bgcolor: "#1C2357", zIndex: "100" }}>
             <Toolbar sx={{ mx: 3 }} disableGutters>
                 <Image src={"/boast_white.png"} alt={"boast"} width={120} height={10}
                        priority={true} style={{objectFit: "contain", width: "auto", height: "auto"}}/>

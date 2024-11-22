@@ -86,6 +86,7 @@ export default function ForYouComponent({ setShowPostComponent, setSelectedPost,
                     position: "sticky",
                     top: 0,
                     zIndex: 1,
+                    fontWeight: "bold",
                     bgcolor: "#22264B",
                 }}
             >
@@ -105,7 +106,8 @@ export default function ForYouComponent({ setShowPostComponent, setSelectedPost,
                           }}
                     >
                         <Box
-                            bgcolor={post.type === "TEXT" ? "#C20B4E" : "#4ECA31"}
+                            border={"solid 3px"}
+                            borderColor={post.type === "TEXT" ? "#C20B4E" : "#4ECA31"}
                             height="12rem"
                             width="12rem"
                             display="flex"
@@ -114,6 +116,7 @@ export default function ForYouComponent({ setShowPostComponent, setSelectedPost,
                             borderRadius="13px"
                             padding="10px"
                             sx={{
+                                backgroundColor: "#1a1c40",
                                 cursor: "pointer"
                             }}
                             onClick={() => handleGridItemClick(post)}

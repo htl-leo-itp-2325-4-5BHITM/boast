@@ -31,7 +31,7 @@ export default function SideBarComponent() {
         >
 
             {/* For You Section */}
-            <Link href="/FYP" style={{ textDecoration: 'none', marginLeft: "2rem"}} >
+            <Link href="/FYP" style={{ textDecoration: 'none', marginLeft: "2rem", cursor: "pointer"}} >
                 <List>
                     <ListItem>
                         <ListItemIcon sx={{ color: "#8691C3" }}>
@@ -49,7 +49,7 @@ export default function SideBarComponent() {
             </Link>
 
             {/* Notification Section */}
-            <Link href="/notification" style={{ textDecoration: 'none', marginLeft: "2rem" }}>
+            <Link href="/notification" style={{ textDecoration: 'none', marginLeft: "2rem", cursor: "pointer" }}>
                 <List>
                     <ListItem>
                         <ListItemIcon sx={{ color: "#8691C3" }}>
@@ -67,7 +67,7 @@ export default function SideBarComponent() {
             </Link>
 
             {/* Profile Section */}
-            <Link href="/profile" style={{ textDecoration: 'none', marginLeft: "2rem" }}>
+            <Link href="/profile" style={{ textDecoration: 'none', marginLeft: "2rem", cursor: "pointer" }}>
                 <List>
                     <ListItem>
                         <ListItemIcon sx={{ color: "#8691C3" }}>

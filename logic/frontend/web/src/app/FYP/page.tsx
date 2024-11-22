@@ -33,7 +33,7 @@ export default function Page() {
     }, []);
 
     return (
-        <Grid container height="100%">
+        <Grid container height="100%" mt={8}>
             <Grid size={8} component="div">
                 <Box
                     sx={{
