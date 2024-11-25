@@ -1,17 +1,18 @@
 "use client";
-import React, {useEffect, useState} from 'react';
-import {AppBar, Autocomplete, Box, TextField, Toolbar, Typography} from "@mui/material";
+import React, { useEffect, useState } from 'react';
+import { AppBar, Autocomplete, Box, TextField, Toolbar, Typography, useMediaQuery } from "@mui/material";
 import Image from "next/image";
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useUser } from '@/provider/UserProvider';
 import axios from "axios";
-import {UserModel} from "@/model/model";
+import { UserModel } from "@/model/model";
 import Link from "next/link";
 
 const HeaderComponent = () => {
     const { user } = useUser();
     const [searchTerm, setSearchTerm] = useState('');
     const [options, setOptions] = useState<UserModel[]>([]);
+    const isMobile = useMediaQuery('(max-width: 600px)'); // Detects small screens
 
     const fetchUsers = async () => {
         if (searchTerm.length > 1) {
@@ -35,36 +36,28 @@ const HeaderComponent = () => {
         fetchUsers();
     }, [searchTerm]);
 
-
     return (
         <AppBar position="fixed" sx={{ bgcolor: "#1C2357", zIndex: "100" }}>
             <Toolbar sx={{ mx: 3 }} disableGutters>
+                {/* Logo */}
                 <Image src={"/boast_white.png"} alt={"boast"} width={120} height={10}
-                       priority={true} style={{objectFit: "contain", width: "auto", height: "auto"}}/>
+                       priority={true} style={{ objectFit: "contain", width: "auto", height: "auto" }} />
+
+                {/* Search Bar */}
                 <Autocomplete
                     sx={{
                         width: 300,
                         ml: 4,
-                        '& .MuiInputBase-root': {
-                            color: '#fff',
-                        },
-                        '& .MuiInputLabel-root': {
-                            color: '#fff',
-                        },
-                        '& .MuiAutocomplete-popupIndicator': {
-                            color: '#fff',
-                        },
-                        '& .MuiAutocomplete-clearIndicator': {
-                            color: '#fff',
-                        },
+                        '& .MuiInputBase-root': { color: '#fff' },
+                        '& .MuiInputLabel-root': { color: '#fff' },
+                        '& .MuiAutocomplete-popupIndicator': { color: '#fff' },
+                        '& .MuiAutocomplete-clearIndicator': { color: '#fff' },
                     }}
                     freeSolo
                     options={options}
-                    getOptionLabel={(option: UserModel | string ) => (typeof option === "string") ? option : option.username}
+                    getOptionLabel={(option: UserModel | string) => (typeof option === "string") ? option : option.username}
                     renderOption={(props, option) => (
-                        <Link onClick={() => {
-                            setSearchTerm('')
-                        }} href={`/profile/${option.username}`} passHref>
+                        <Link onClick={() => setSearchTerm('')} href={`/profile/${option.username}`} passHref>
                             <Box component="li" {...props}>
                                 {option.username}
                             </Box>
@@ -73,9 +66,7 @@ const HeaderComponent = () => {
                     renderInput={(params) => (
                         <TextField
                             {...params}
-                            InputLabelProps={{
-                                style: {color: '#fff'},
-                            }}
+                            InputLabelProps={{ style: { color: '#fff' } }}
                             label="Search Users"
                             variant="outlined"
                             onChange={(e) => setSearchTerm(e.target.value)}
@@ -83,18 +74,21 @@ const HeaderComponent = () => {
                     )}
                 />
 
-                <Box sx={{flexGrow: 1}}></Box>
+                <Box sx={{ flexGrow: 1 }}></Box>
 
-                <Box sx={{ display: "flex", flexDirection: "row" }}>
-                    <AccountCircle sx={{ fontSize: 50, my: "auto", mx: 1 }} />
-                    <Box>
-                        <Typography variant="h6" component="div">
-                            {user?.username || 'Guest'}
-                        </Typography>
-                        <Typography variant="h6" component="div">
-                            {user?.email || 'guest@example.com'}
-                        </Typography>
-                    </Box>
+                {/* Profile Section */}
+                <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+                    <AccountCircle sx={{ fontSize: 50, mx: 1 }} />
+                    {!isMobile && (
+                        <Box>
+                            <Typography variant="h6" component="div">
+                                {user?.username || 'Guest'}
+                            </Typography>
+                            <Typography variant="h6" component="div">
+                                {user?.email || 'guest@example.com'}
+                            </Typography>
+                        </Box>
+                    )}
                 </Box>
             </Toolbar>
         </AppBar>
