@@ -23,8 +23,9 @@ export default function ForYouComponent({ setShowPostComponent, setSelectedPost,
 
 
     const handleGridItemClick = (post: PostModel) => {
-        setCurrentPost(post);
-        setDialogOpen(true);
+        setSelectedPost(post);
+        setShowPostComponent(true);
+        //setDialogOpen(true);
     };
 
     const handleClose = () => {
@@ -73,9 +74,6 @@ export default function ForYouComponent({ setShowPostComponent, setSelectedPost,
         handleClose();
     };
 
-    useEffect(() => {
-    }, []);
-
     return (
         <>
             <Typography
@@ -96,6 +94,7 @@ export default function ForYouComponent({ setShowPostComponent, setSelectedPost,
                   sx={{
                       width: "100%",
                       margin: "auto",
+                      py: 4,
                   }}
             >
                 {posts.map(post => (

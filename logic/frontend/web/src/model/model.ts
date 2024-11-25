@@ -60,3 +60,8 @@ export interface ProfileModel {
     relationStatus: string,
     posts: Array<number>
 }
+
+export interface PollOption {
+    id: number,
+    title: string
+}

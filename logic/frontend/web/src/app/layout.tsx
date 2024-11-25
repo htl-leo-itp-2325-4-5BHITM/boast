@@ -10,7 +10,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html>
         <body style={{ backgroundColor: "#1A1C40" }}>
         <UserProvider>
-            <Box sx={{ height: "100vh", width: "100vw", overflowX: "hidden", backgroundColor: "#1A1C40" }}>
+            <Box sx={{ height: "100vh", width: "100vw", overflow: "hidden", backgroundColor: "#1A1C40" }}>
                 <CssBaseline />
                 <HeaderComponent />
                 <SideBarComponent />

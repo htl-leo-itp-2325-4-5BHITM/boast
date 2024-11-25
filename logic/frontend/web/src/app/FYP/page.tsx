@@ -33,23 +33,24 @@ export default function Page() {
     }, []);
 
     return (
-        <Grid container height="100%" mt={8}>
+        <Grid container height="100%" mt={8} sx={{overflow: "hidden"}}>
             <Grid size={8} component="div">
                 <Box
                     sx={{
-                        width: "90%",
+                        width: "85%",
                         height: "80vh",
                         justifyContent: "center",
                         alignItems: "center",
                         margin: "4em 5% 0 5%",
                         backgroundColor: "#22264B",
                         borderRadius: "1em",
-                        overflow: "scroll"
+                        mx: "auto",
+                        overflowY: "scroll"
                     }}
                 >
                     {
                         showPostComponent && selectedPost ?
-                            <PostComponent post={selectedPost} onGoBack={handleGoBack}/>
+                            <PostComponent postData={selectedPost} onGoBack={handleGoBack}/>
                             :
                             <ForYouComponent setShowPostComponent={setShowPostComponent}
                                              setSelectedPost={setSelectedPost} posts={posts} fetchPosts={fetchPosts}/>
@@ -59,10 +60,8 @@ export default function Page() {
             <Grid size={4}>
                 <Box
                     sx={{
-                        width: "90%",
-                        justifySelf: "center",
-                        alignSelf: "center",
                         mt: "4em",
+                        mx: "auto",
                     }}
                 >
                     <CreateComponent fetchPosts={fetchPosts} />
