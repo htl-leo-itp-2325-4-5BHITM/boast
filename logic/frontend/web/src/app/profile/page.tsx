@@ -105,8 +105,9 @@ export default function Page() {
                     Posts
                 </Typography>
 
-                <Grid container spacing={2} sx={{
-                    overflowY: "scroll"
+                <Box sx={{
+                    overflowY: "scroll",
+                    height: "40vh",
                 }}>
                     {posts.length === 0 ? (
                         <Typography variant="body2" sx={{color: "#C20B4E", textAlign: 'center', width: '100%'}}>
@@ -114,29 +115,34 @@ export default function Page() {
                         </Typography>
                     ) : (
                         posts.map((post, index) => (
-                            <Grid item p={0} xs={12} key={index}>
-                                <Card sx={{bgcolor: "#51588a", color: "#fff"}}>
-                                    <CardContent>
-                                        <Box display={"flex"}>
-                                            <Typography variant="h6" fontWeight={"bold"} sx={{width: "92%"}}>{post.title}</Typography>
-                                            <Box sx={{justifyContent: "right", width: "8%"}} position={"static"} alignItems={"right"} textAlign={"center"}>
-                                                <Typography variant="caption" sx={{color: "#C0C0C0"}}>
-                                                    {post.createdOn}
-                                                </Typography>
-                                                <Box bgcolor={post.status == "OPEN" ? "#4ECA31" : "#C20B4E"}
-                                                     sx={{borderRadius: "5px", paddingLeft: "5%", paddingRight: "5%", textAlign: "center"}}>
-                                                    <Typography>{post.status}</Typography>
-                                                </Box>
+                            <Card key={index} sx={{bgcolor: "#51588a", color: "#fff", marginBottom: "2%"}}>
+                                <CardContent>
+                                    <Box display={"flex"}>
+                                        <Typography variant="h6" fontWeight={"bold"}
+                                                    sx={{width: "92%"}}>{post.title}</Typography>
+                                        <Box sx={{justifyContent: "right", width: "8%"}} position={"static"}
+                                             alignItems={"right"} textAlign={"center"}>
+                                            <Typography variant="caption" sx={{color: "#C0C0C0"}}>
+                                                {post.createdOn}
+                                            </Typography>
+                                            <Box bgcolor={post.status == "OPEN" ? "#4ECA31" : "#C20B4E"}
+                                                 sx={{
+                                                     borderRadius: "5px",
+                                                     paddingLeft: "5%",
+                                                     paddingRight: "5%",
+                                                     textAlign: "center"
+                                                 }}>
+                                                <Typography>{post.status}</Typography>
                                             </Box>
                                         </Box>
-                                        <Typography variant="body2">{post.definition}</Typography>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
+                                    </Box>
+                                    <Typography variant="body2">{post.definition}</Typography>
+                                </CardContent>
+                            </Card>
                         ))
                     )}
                     <br/><br/>
-                </Grid>
+                </Box>
             </Box>
         </Box>
     );
