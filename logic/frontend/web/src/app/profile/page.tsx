@@ -70,9 +70,7 @@ export default function Page() {
                 alignItems: "center",
                 overflowY: "scroll",
                 marginTop: {sm: 12, xs: 8}
-            }}
-        >
-
+            }}>
 
             <Box sx={{
                 width: "100%",
