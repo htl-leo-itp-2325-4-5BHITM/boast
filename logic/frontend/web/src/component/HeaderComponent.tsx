@@ -7,6 +7,7 @@ import { useUser } from '@/provider/UserProvider';
 import axios from "axios";
 import { UserModel } from "@/model/model";
 import Link from "next/link";
+import {height} from "@mui/system";
 
 const HeaderComponent = () => {
     const { user } = useUser();
@@ -48,7 +49,7 @@ const HeaderComponent = () => {
                     sx={{
                         width: 300,
                         ml: 4,
-                        '& .MuiInputBase-root': { color: '#fff' },
+                        '& .MuiInputBase-root': { color: '#fff', height: '40px' },
                         '& .MuiInputLabel-root': { color: '#fff' },
                         '& .MuiAutocomplete-popupIndicator': { color: '#fff' },
                         '& .MuiAutocomplete-clearIndicator': { color: '#fff' },

@@ -4,6 +4,7 @@ import {Box, Typography, CircularProgress, Avatar, Grid, Button, Card, CardConte
 import axios from "axios";
 import {useUser} from "@/provider/UserProvider";
 import {ProfileModel, PostModel} from "@/model/model";
+import Link from "next/link";
 
 export default function Page({params}: { params: { slug: string } }) {
     const [profile, setProfile] = useState<ProfileModel | null>(null);
@@ -80,7 +81,6 @@ export default function Page({params}: { params: { slug: string } }) {
     return (
             <Box
             p={3}
-            mt={12}
             bgcolor="#1A1C40"
             color="white"
             sx={{
@@ -88,6 +88,7 @@ export default function Page({params}: { params: { slug: string } }) {
                 flexDirection: "column",
                 alignItems: "center",
                 overflowY: "scroll",
+                marginTop: {sm: 12, xs: 8}
             }}
         >
 
@@ -98,14 +99,14 @@ export default function Page({params}: { params: { slug: string } }) {
                 padding: "3%",
                 backgroundColor: "#22264B",
                 display: "flex",
-                marginBottom: "5vh"
+                marginBottom: "5vh",
             }}>
                 <Avatar
                     sx={{
-                        width: 100,
-                        height: 100,
+                        width: {sm: 100, xs: 50},
+                        height: {sm: 100, xs: 50},
                         bgcolor: "#4ECA31",
-                        fontSize: "3rem",
+                        fontSize: {sm: "3rem", xs: "2rem"},
                         margin: "2%",
                     }}>
                     {profile.username[0]}
@@ -113,9 +114,37 @@ export default function Page({params}: { params: { slug: string } }) {
                 <Box sx={{margin: "2%"}}>
                     <Typography variant="h5">{profile.username}</Typography>
                     <Box display="flex">
-                        <Typography m={1} ml={0} mr={3}>{profile.posts.length} posts</Typography>
-                        <Typography m={1} ml={0} mr={3}>{profile.follower} followers</Typography>
-                        <Typography m={1} ml={0} mr={3}>{profile.following} following</Typography>
+                        <Typography sx={{
+                            fontSize: {sm: "1rem", xs: "0.7rem"},
+                            margin: 1,
+                            marginLeft: 0,
+                            marginRight: {sm: 3, xs: 1.5},
+                        }}>
+                            {profile.posts.length} posts
+                        </Typography>
+                        <Link href={`/follower/${profile.username}`} passHref style={{textDecoration: "none"}}>
+                            <Typography sx={{
+                                fontSize: {sm: "1rem", xs: "0.7rem"},
+                                margin: 1,
+                                marginLeft: 0,
+                                marginRight: {sm: 3, xs: 1.5},
+                                color: "white",
+                                textDecoration: "none",
+                            }}>
+                                {profile.follower} follower
+                            </Typography>
+                        </Link>
+                        <Link href={`/following/${profile.username}`} style={{textDecoration: "none"}}>
+                            <Typography sx={{
+                                fontSize: {sm: "1rem", xs: "0.7rem"},
+                                margin: 1,
+                                marginLeft: 0,
+                                marginRight: {sm: 3, xs: 1.5},
+                                color: "white",
+                                textDecoration: "none",
+                            }}>
+                                {profile.following} following
+                            </Typography></Link>
                     </Box>
                     <Typography>{profile.name}</Typography>
                     {
@@ -141,39 +170,51 @@ export default function Page({params}: { params: { slug: string } }) {
                     Posts
                 </Typography>
 
-                <Grid container spacing={2} sx={{
-                    overflowY: "scroll"
+                <Box sx={{
+                    overflowY: "scroll",
+                    height: {sm: "40vh", xs: "52vh"},
                 }}>
                     {posts.length === 0 ? (
                         <Typography variant="body2" sx={{color: "#C20B4E", textAlign: 'center', width: '100%'}}>
                             No posts yet.
                         </Typography>
                     ) : (
-
                         posts.map((post, index) => (
-                            <Grid item p={0} xs={12} key={index}>
-                                <Card sx={{bgcolor: "#51588a", color: "#fff"}}>
-                                    <CardContent>
-                                        <Box display={"flex"}>
-                                            <Typography variant="h6" fontWeight={"bold"} sx={{width: "92%"}}>{post.title}</Typography>
-                                            <Box sx={{justifyContent: "right", width: "8%"}} position={"static"} alignItems={"right"} textAlign={"center"}>
-                                                <Typography variant="caption" sx={{color: "#C0C0C0"}}>
-                                                    {post.createdOn}
-                                                </Typography>
-                                                <Box bgcolor={post.status == "OPEN" ? "#4ECA31" : "#C20B4E"}
-                                                     sx={{borderRadius: "5px", paddingLeft: "5%", paddingRight: "5%", textAlign: "center"}}>
-                                                    <Typography>{post.status}</Typography>
-                                                </Box>
+                            <Card key={index} sx={{bgcolor: "#51588a", color: "#fff", marginBottom: "2%"}}>
+                                <CardContent>
+                                    <Box display={"flex"}>
+                                        <Typography variant="h6" fontWeight={"bold"}
+                                                    sx={{width: {sm: "92%", xs: "72%"}}}>
+                                            {post.title}
+                                        </Typography>
+                                        <Box
+                                            sx={{
+                                                justifyContent: "right",
+                                                width: {sm: "8%", xs: "28%"}
+                                            }}
+                                            position={"static"}
+                                            alignItems={"right"} textAlign={"center"}>
+                                            <Typography variant="caption" sx={{color: "#C0C0C0"}}>
+                                                {post.createdOn}
+                                            </Typography>
+                                            <Box bgcolor={post.status == "OPEN" ? "#4ECA31" : "#C20B4E"}
+                                                 sx={{
+                                                     borderRadius: "5px",
+                                                     paddingLeft: "5%",
+                                                     paddingRight: "5%",
+                                                     textAlign: "center"
+                                                 }}>
+                                                <Typography>{post.status}</Typography>
                                             </Box>
                                         </Box>
-                                        <Typography variant="body2">{post.definition}</Typography>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
+                                    </Box>
+                                    <Typography variant="body2">{post.definition}</Typography>
+                                </CardContent>
+                            </Card>
                         ))
                     )}
                     <br/><br/>
-                </Grid>
+                </Box>
             </Box>
         </Box>
     );

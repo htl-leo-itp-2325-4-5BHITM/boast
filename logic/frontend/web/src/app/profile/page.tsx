@@ -1,9 +1,12 @@
 "use client";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Box, Typography, CircularProgress, Avatar, Grid, Card, CardContent} from "@mui/material";
 import axios from "axios";
 import {useUser} from "@/provider/UserProvider";
 import {ProfileModel, PostModel} from "@/model/model";
+import {fontSize} from "@mui/system";
+import Link from "next/link";
+
 
 export default function Page() {
     const [profile, setProfile] = useState<ProfileModel | null>(null);
@@ -59,7 +62,6 @@ export default function Page() {
     return (
         <Box
             p={3}
-            mt={12}
             bgcolor="#1A1C40"
             color="white"
             sx={{
@@ -67,6 +69,7 @@ export default function Page() {
                 flexDirection: "column",
                 alignItems: "center",
                 overflowY: "scroll",
+                marginTop: {sm: 12, xs: 8}
             }}
         >
 
@@ -77,14 +80,14 @@ export default function Page() {
                 padding: "3%",
                 backgroundColor: "#22264B",
                 display: "flex",
-                marginBottom: "5vh"
+                marginBottom: "5vh",
             }}>
                 <Avatar
                     sx={{
-                        width: 100,
-                        height: 100,
+                        width: {sm: 100, xs: 50},
+                        height: {sm: 100, xs: 50},
                         bgcolor: "#4ECA31",
-                        fontSize: "3rem",
+                        fontSize: {sm: "3rem", xs: "2rem"},
                         margin: "2%",
                     }}>
                     {profile.username[0]}
@@ -92,9 +95,37 @@ export default function Page() {
                 <Box sx={{margin: "2%"}}>
                     <Typography variant="h5">{profile.username}</Typography>
                     <Box display="flex">
-                        <Typography m={1} ml={0} mr={3}>{profile.posts.length} posts</Typography>
-                        <Typography m={1} ml={0} mr={3}>{profile.follower} followers</Typography>
-                        <Typography m={1} ml={0} mr={3}>{profile.following} following</Typography>
+                        <Typography sx={{
+                            fontSize: {sm: "1rem", xs: "0.7rem"},
+                            margin: 1,
+                            marginLeft: 0,
+                            marginRight: {sm: 3, xs: 1.5},
+                        }}>
+                            {profile.posts.length} posts
+                        </Typography>
+                        <Link href={`/follower/${profile.username}`} passHref style={{textDecoration: "none"}}>
+                            <Typography sx={{
+                                fontSize: {sm: "1rem", xs: "0.7rem"},
+                                margin: 1,
+                                marginLeft: 0,
+                                marginRight: {sm: 3, xs: 1.5},
+                                color: "white",
+                                textDecoration: "none",
+                            }}>
+                                {profile.follower} follower
+                            </Typography>
+                        </Link>
+                        <Link href={`/following/${profile.username}`} style={{textDecoration: "none"}}>
+                            <Typography sx={{
+                                fontSize: {sm: "1rem", xs: "0.7rem"},
+                                margin: 1,
+                                marginLeft: 0,
+                                marginRight: {sm: 3, xs: 1.5},
+                                color: "white",
+                                textDecoration: "none",
+                            }}>
+                                {profile.following} following
+                            </Typography></Link>
                     </Box>
                     <Typography>{profile.name}</Typography>
                 </Box>
@@ -107,7 +138,7 @@ export default function Page() {
 
                 <Box sx={{
                     overflowY: "scroll",
-                    height: "40vh",
+                    height: {sm: "40vh", xs: "57vh"},
                 }}>
                     {posts.length === 0 ? (
                         <Typography variant="body2" sx={{color: "#C20B4E", textAlign: 'center', width: '100%'}}>
@@ -119,9 +150,16 @@ export default function Page() {
                                 <CardContent>
                                     <Box display={"flex"}>
                                         <Typography variant="h6" fontWeight={"bold"}
-                                                    sx={{width: "92%"}}>{post.title}</Typography>
-                                        <Box sx={{justifyContent: "right", width: "8%"}} position={"static"}
-                                             alignItems={"right"} textAlign={"center"}>
+                                                    sx={{width: {sm: "92%", xs: "72%"}}}>
+                                            {post.title}
+                                        </Typography>
+                                        <Box
+                                            sx={{
+                                                justifyContent: "right",
+                                                width: {sm: "8%", xs: "28%"}
+                                            }}
+                                            position={"static"}
+                                            alignItems={"right"} textAlign={"center"}>
                                             <Typography variant="caption" sx={{color: "#C0C0C0"}}>
                                                 {post.createdOn}
                                             </Typography>

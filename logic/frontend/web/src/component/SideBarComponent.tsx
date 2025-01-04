@@ -29,9 +29,9 @@ export default function SideBarComponent() {
             anchor="bottom"
             PaperProps={{ sx: { width: isMobile ? "60px" : "calc((100vw/12)*2)" } }}
         >
-            <Link href="/FYP" style={{ textDecoration: 'none', marginLeft: isMobile ? "0" : "2rem", cursor: "pointer" }}>
+            <Link href="/FYP" style={{ textDecoration: 'none', marginLeft: isMobile ? "0" : "2rem" }}>
                 <List>
-                    <ListItem>
+                    <ListItem sx={{ cursor: "pointer"}}>
                         <ListItemIcon sx={{ color: "#8691C3" }}>
                             <RocketLaunch />
                         </ListItemIcon>

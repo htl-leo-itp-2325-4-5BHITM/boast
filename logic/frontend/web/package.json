@@ -20,12 +20,14 @@
     "next": "14.2.13",
     "react": "^18",
     "react-confetti": "^6.1.0",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-router-dom": "^7.1.1"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-router-dom": "^5.3.3",
     "eslint": "^8",
     "eslint-config-next": "14.2.13",
     "postcss": "^8",
