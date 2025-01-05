@@ -1,11 +1,11 @@
-import { useState, useRef, useEffect } from "react";
-import { Box, Button, TextField, Typography, Dialog, DialogTitle, DialogContent, IconButton } from "@mui/material";
+import {useState, useRef, useEffect} from "react";
+import {Box, Button, TextField, Typography, Dialog, DialogTitle, DialogContent, IconButton} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from "axios";
-import { useUser } from "@/provider/UserProvider";
-import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import {useUser} from "@/provider/UserProvider";
+import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import Confetti from "react-confetti";
 
@@ -13,17 +13,17 @@ interface CreateComponentProps {
     fetchPosts: () => void;
 }
 
-export default function CreateComponent({ fetchPosts }: CreateComponentProps) {
+export default function CreateComponent({fetchPosts}: CreateComponentProps) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [pollOptions, setPollOptions] = useState([{ id: 1, title: "" }, { id: 2, title: "" }]);
+    const [pollOptions, setPollOptions] = useState([{id: 1, title: ""}, {id: 2, title: ""}]);
     const [pollDialogOpen, setPollDialogOpen] = useState(false);
-    const { user } = useUser();
+    const {user} = useUser();
     const [betType, setBetType] = useState<string | null>("text");
     const [showConfetti, setShowConfetti] = useState(false);
     const [showThankYou, setShowThankYou] = useState(false);
     const boxRef = useRef<HTMLDivElement>(null);
-    const [boxDimensions, setBoxDimensions] = useState({ width: 0, height: 0 });
+    const [boxDimensions, setBoxDimensions] = useState({width: 0, height: 0});
 
     useEffect(() => {
         if (boxRef.current) {
@@ -44,7 +44,7 @@ export default function CreateComponent({ fetchPosts }: CreateComponentProps) {
     const resetForm = () => {
         setTitle("");
         setDescription("");
-        setPollOptions([{ id: 1, title: "" }, { id: 2, title: "" }]);
+        setPollOptions([{id: 1, title: ""}, {id: 2, title: ""}]);
     };
 
     const handleCreate = async () => {
@@ -58,7 +58,7 @@ export default function CreateComponent({ fetchPosts }: CreateComponentProps) {
             creatorName: user?.username,
             status: "OPEN",
             type: betType,
-            typeInfo: betType === "POLL" ? { pollAnswers: pollOptions.map(option => ({ title: option.title })) } : undefined,
+            typeInfo: betType === "POLL" ? {pollAnswers: pollOptions.map(option => ({title: option.title}))} : undefined,
         };
         console.log(newBet);
 
@@ -80,11 +80,11 @@ export default function CreateComponent({ fetchPosts }: CreateComponentProps) {
     };
 
     const handlePollOptionChange = (id: number, value: string) => {
-        setPollOptions(pollOptions.map(option => option.id === id ? { ...option, title: value } : option));
+        setPollOptions(pollOptions.map(option => option.id === id ? {...option, title: value} : option));
     };
 
     const addPollOption = () => {
-        setPollOptions([...pollOptions, { id: pollOptions.length + 1, title: "" }]);
+        setPollOptions([...pollOptions, {id: pollOptions.length + 1, title: ""}]);
     };
 
     const removePollOption = (id: number) => {
@@ -94,11 +94,26 @@ export default function CreateComponent({ fetchPosts }: CreateComponentProps) {
     };
 
     return (
-        <Box ref={boxRef} p={3} bgcolor="#22264B" color="white" borderRadius="8px" sx={{ height: "50vh", width: "22vw", position: "relative"}}>
-            {showConfetti && <Confetti width={boxDimensions.width} height={boxDimensions.height} style={{ position: "absolute", top: 0, left: 0 }} />}
+        <Box ref={boxRef} p={3}
+             sx={{
+                 height: "100%",
+                 width: "100%",
+                 bgcolor: "#22264B",
+                 color: "white",
+                 borderRadius: "1vw"
+             }}>
+            {showConfetti && <Confetti width={boxDimensions.width} height={boxDimensions.height}
+                                       style={{position: "absolute", top: 0, left: 0}}/>}
             {showThankYou ? (
-                <Box p={2} borderRadius="8px" sx={{ height: "100%", width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <Typography variant="h4" fontWeight={"bold"} color="white" textAlign="center">Thank you for creating a bet!</Typography>
+                <Box p={2} borderRadius="8px" sx={{
+                    height: "100%",
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center"
+                }}>
+                    <Typography variant="h4" fontWeight={"bold"} color="white" textAlign="center">Thank you for creating
+                        a bet!</Typography>
                 </Box>
             ) : (
                 <Box>
@@ -145,20 +160,22 @@ export default function CreateComponent({ fetchPosts }: CreateComponentProps) {
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DatePicker
                                 defaultValue={dayjs(Date.now() + 7 * 24 * 60 * 60 * 1000)} // 7 days from now
-                                sx={{ width: "100%", '& input': { color: 'white' }, my: "auto", svg: { color: 'white' } }}
+                                sx={{width: "100%", '& input': {color: 'white'}, my: "auto", svg: {color: 'white'}}}
                             />
                         </LocalizationProvider>
                     </Box>
 
                     <Box my={1}>
                         <Typography fontWeight="bold">Options</Typography>
-                        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                            <Button sx={{ py: 1.5, width: "40%", bgcolor: betType === "text" ? "#3656FF" : "#39426D" }} variant="contained" onClick={toggleBetType("text")}>
+                        <Box sx={{display: "flex", justifyContent: "space-between"}}>
+                            <Button sx={{py: 1.5, width: "40%", bgcolor: betType === "text" ? "#3656FF" : "#39426D"}}
+                                    variant="contained" onClick={toggleBetType("text")}>
                                 <Typography fontWeight="bold">
                                     Text
                                 </Typography>
                             </Button>
-                            <Button sx={{ py: 1.5, width: "40%", bgcolor: betType === "POLL" ? "#3656FF" : "#39426D" }} variant="contained" onClick={toggleBetType("POLL")}>
+                            <Button sx={{py: 1.5, width: "40%", bgcolor: betType === "POLL" ? "#3656FF" : "#39426D"}}
+                                    variant="contained" onClick={toggleBetType("POLL")}>
                                 <Typography fontWeight="bold">
                                     Stats
                                 </Typography>
@@ -167,7 +184,8 @@ export default function CreateComponent({ fetchPosts }: CreateComponentProps) {
                     </Box>
 
                     <Box mt={2}>
-                        <Button sx={{ py: 1.5, bgcolor: "#3656FF" }} variant="contained" fullWidth disabled={title === "" || description === ""} onClick={handleCreate}>
+                        <Button sx={{py: 1.5, bgcolor: "#3656FF"}} variant="contained" fullWidth
+                                disabled={title === "" || description === ""} onClick={handleCreate}>
                             <Typography fontWeight="bold">
                                 Create
                             </Typography>
@@ -187,11 +205,11 @@ export default function CreateComponent({ fetchPosts }: CreateComponentProps) {
                                         onChange={(e) => handlePollOptionChange(option.id, e.target.value)}
                                     />
                                     <IconButton onClick={() => removePollOption(option.id)} color="secondary">
-                                        <DeleteIcon />
+                                        <DeleteIcon/>
                                     </IconButton>
                                 </Box>
                             ))}
-                            <Button startIcon={<AddIcon />} onClick={addPollOption} color="primary">
+                            <Button startIcon={<AddIcon/>} onClick={addPollOption} color="primary">
                                 Add Option
                             </Button>
                             <Box display="flex" justifyContent="flex-end" mt={2}>

@@ -5,10 +5,11 @@ import ForYouComponent from "./ForYouComponent";
 import CreateComponent from "@/app/FYP/CreateComponent";
 import PostComponent from "@/app/FYP/PostComponent";
 import {PostModel} from "@/model/model";
-import {Box} from "@mui/material";
+import {Box, useMediaQuery} from "@mui/material";
 import {getPost, getPosts} from "@/service/post";
 
 export default function Page() {
+    const isMobile = useMediaQuery("(max-width: 991px)");
     const [showPostComponent, setShowPostComponent] = useState(false);
     const [selectedPost, setSelectedPost] = useState<PostModel | null>(null);
     const [posts, setPosts] = useState<PostModel[]>([]);
@@ -33,18 +34,16 @@ export default function Page() {
     }, []);
 
     return (
-        <Grid container height="100%" mt={8} sx={{overflow: "hidden"}}>
-            <Grid size={8} component="div">
+        <Grid container height="100%" width="100%" m={3} sx={{overflow: "hidden"}}>
+            <Grid size={isMobile ? 12 : 8} component="div">
                 <Box
                     sx={{
-                        width: "85%",
-                        height: "80vh",
+                        width: "100%",
+                        height: isMobile ? "calc(95vh - 64px - 60px)" : "calc(95vh - 64px)",
                         justifyContent: "center",
                         alignItems: "center",
-                        margin: "4em 5% 0 5%",
                         backgroundColor: "#22264B",
                         borderRadius: "1em",
-                        mx: "auto",
                         overflowY: "scroll"
                     }}
                 >
@@ -53,20 +52,26 @@ export default function Page() {
                             <PostComponent postData={selectedPost} onGoBack={handleGoBack}/>
                             :
                             <ForYouComponent setShowPostComponent={setShowPostComponent}
-                                             setSelectedPost={setSelectedPost} posts={posts} fetchPosts={fetchPosts}/>
+                                             setSelectedPost={setSelectedPost} posts={posts} fetchPosts={fetchPosts}
+                                             showCreate={isMobile}/>
                     }
                 </Box>
             </Grid>
-            <Grid size={4}>
-                <Box
-                    sx={{
-                        mt: "4em",
-                        mx: "auto",
-                    }}
-                >
-                    <CreateComponent fetchPosts={fetchPosts} />
-                </Box>
-            </Grid>
+            {
+                !isMobile && (
+                    <Grid size={4}>
+                        <Box
+                            sx={{
+                                paddingLeft: "1vw",
+                                width: "100%",
+                                height: isMobile ? "calc(95vh - 64px - 60px)" : "calc(95vh - 64px)",
+                            }}
+                        >
+                            <CreateComponent fetchPosts={fetchPosts}/>
+                        </Box>
+                    </Grid>
+                )
+            }
         </Grid>
     );
 }

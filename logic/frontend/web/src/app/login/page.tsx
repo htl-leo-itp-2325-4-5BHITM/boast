@@ -14,7 +14,7 @@ export default function Page() {
     };
 
     return (
-        <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" height="100vh" bgcolor="#1A1C40">
+        <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" height="100vh" width="100%" bgcolor="#1A1C40">
             <form onSubmit={handleSubmit}>
                 <TextField
                     label="Name"

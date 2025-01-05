@@ -1,7 +1,7 @@
 "use client";
 import { Box, Button, Dialog, DialogContent, DialogTitle, TextField, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { PostModel } from "@/model/model";
 import { useUser } from "@/provider/UserProvider";
@@ -12,9 +12,10 @@ interface ForYouComponentProps {
     fetchPosts: () => void;
     setShowPostComponent: (show: boolean) => void;
     setSelectedPost: (post: PostModel | null) => void;
+    showCreate: boolean;
 }
 
-export default function ForYouComponent({ setShowPostComponent, setSelectedPost, posts}: ForYouComponentProps) {
+export default function ForYouComponent({ setShowPostComponent, setSelectedPost, posts, showCreate}: ForYouComponentProps) {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [textInput, setTextInput] = useState("");
     const [selectedPollAnswer, setSelectedPollAnswer] = useState("1");
@@ -76,20 +77,41 @@ export default function ForYouComponent({ setShowPostComponent, setSelectedPost,
 
     return (
         <>
-            <Typography
-                variant="h6"
-                color="white"
-                sx={{
-                    padding: "20px",
-                    position: "sticky",
-                    top: 0,
-                    zIndex: 1,
-                    fontWeight: "bold",
-                    bgcolor: "#22264B",
-                }}
-            >
-                For you
-            </Typography>
+            <Box sx={{
+                display: "flex",
+                justifyContent: "space-between"
+            }}>
+                <Typography
+                    variant="h6"
+                    color="white"
+                    sx={{
+                        padding: "20px",
+                        position: "sticky",
+                        top: 0,
+                        zIndex: 1,
+                        fontWeight: "bold",
+                        bgcolor: "#22264B",
+                    }}
+                >
+                    For you
+                </Typography>
+                {showCreate && (
+                    <Button
+                        href={"/create-full-screen"}
+                        variant="contained"
+                        color="primary"
+                        sx={{
+                            margin: "20px",
+                            position: "sticky",
+                            top: 0,
+                            zIndex: 1,
+                        }}
+                    >
+                        New Post
+                    </Button>
+                )}
+            </Box>
+
             <Grid container spacing={4}
                   sx={{
                       width: "100%",

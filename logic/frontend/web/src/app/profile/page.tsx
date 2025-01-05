@@ -1,10 +1,9 @@
 "use client";
 import React, {useEffect, useState} from "react";
-import {Box, Typography, CircularProgress, Avatar, Grid, Card, CardContent} from "@mui/material";
+import {Box, Typography, CircularProgress, Avatar, Card, CardContent} from "@mui/material";
 import axios from "axios";
 import {useUser} from "@/provider/UserProvider";
 import {ProfileModel, PostModel} from "@/model/model";
-import {fontSize} from "@mui/system";
 import Link from "next/link";
 
 
@@ -69,16 +68,16 @@ export default function Page() {
                 flexDirection: "column",
                 alignItems: "center",
                 overflowY: "scroll",
-                marginTop: {sm: 12, xs: 8}
+                width: "100%",
             }}>
 
             <Box sx={{
                 width: "100%",
-                borderRadius: "5px",
+                borderRadius: "1vw",
                 padding: "3%",
                 backgroundColor: "#22264B",
                 display: "flex",
-                marginBottom: "5vh",
+                marginBottom: "2vh",
             }}>
                 <Avatar
                     sx={{
@@ -129,7 +128,7 @@ export default function Page() {
                 </Box>
             </Box>
 
-            <Box sx={{width: "100%", borderRadius: "5px", padding: "3%", backgroundColor: "#22264B"}}>
+            <Box sx={{width: "100%", borderRadius: "1vw", padding: "3%", backgroundColor: "#22264B"}}>
                 <Typography variant="h6" sx={{mb: 2, fontWeight: "bold"}}>
                     Posts
                 </Typography>

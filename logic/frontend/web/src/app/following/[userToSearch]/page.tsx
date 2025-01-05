@@ -73,54 +73,60 @@ export default function Page({params}: { params: { userToSearch: string } }) {
     }
 
     return (
-        <Box sx={{
-            marginTop: "10rem",
+        <Box p={3} sx={{
             color: "#fff",
+            width: "100%",
         }}>
             {follower.length === 0 ? (
                 <Typography variant="body2" sx={{color: "#C20B4E", textAlign: 'center', width: '100%'}}>
                     No followers yet.
                 </Typography>
             ) : (
-                follower.map((follower, index) => (
-                    <Card key={index}
-                          sx={{
-                              bgcolor: "#51588a",
-                              color: "#fff",
-                              width: "90%",
-                              margin: "auto",
-                              marginBottom: "2%",
-                              alignItems: "center",
-                              justifyContent: "center"
-                          }}>
-                        <CardContent sx={{alignItems: "center", justifyContent: "center"}}>
-                            <Link href={"/profile/" + follower.username} style={{textDecoration: "none"}}>
-                                <Box display={"flex"} sx={{justifyContent: "center", alignItems: "center"}}>
-                                    <Avatar
-                                        sx={{
-                                            width: {sm: 100, xs: 50},
-                                            height: {sm: 100, xs: 50},
-                                            bgcolor: "#4ECA31",
-                                            fontSize: {sm: "3rem", xs: "2rem"},
-                                            margin: "2%",
-                                            marginRight: "15%"
-                                        }}>
-                                        {follower.username[0]}
-                                    </Avatar>
-                                    <Typography variant="h6" fontWeight={"bold"}
-                                                sx={{
-                                                    width: {sm: "92%", xs: "72%"},
-                                                    alignItems: "center",
-                                                    justifyContent: "center",
-                                                    color: "#FFF",
-                                                }}>
-                                        {follower.username}
-                                    </Typography>
-                                </Box>
-                            </Link>
-                        </CardContent>
-                    </Card>
-                ))
+                <>
+                <Typography variant="h4" sx={{color: "#fff", textAlign: 'center', width: '100%', marginBottom: "1vh"}}>
+                    {params.userToSearch} follows
+                </Typography>
+                {
+                    follower.map((follower, index) => (
+                        <Card key={index}
+                              sx={{
+                                  bgcolor: "#51588a",
+                                  color: "#fff",
+                                  margin: "auto",
+                                  marginBottom: "2%",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  borderRadius: "1vw"
+                              }}>
+                            <CardContent sx={{alignItems: "center", justifyContent: "center"}}>
+                                <Link href={"/profile/" + follower.username} style={{textDecoration: "none"}}>
+                                    <Box display={"flex"} sx={{justifyContent: "center", alignItems: "center"}}>
+                                        <Avatar
+                                            sx={{
+                                                width: {sm: 100, xs: 50},
+                                                height: {sm: 100, xs: 50},
+                                                bgcolor: "#4ECA31",
+                                                fontSize: {sm: "3rem", xs: "2rem"},
+                                                marginRight: "15%"
+                                            }}>
+                                            {follower.username[0]}
+                                        </Avatar>
+                                        <Typography variant="h6" fontWeight={"bold"}
+                                                    sx={{
+                                                        width: {sm: "92%", xs: "72%"},
+                                                        alignItems: "center",
+                                                        justifyContent: "center",
+                                                        color: "#FFF",
+                                                    }}>
+                                            {follower.username}
+                                        </Typography>
+                                    </Box>
+                                </Link>
+                            </CardContent>
+                        </Card>
+                    ))
+                }
+                </>
             )}
         </Box>
     )

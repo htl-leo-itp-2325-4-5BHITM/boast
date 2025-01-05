@@ -88,7 +88,7 @@ export default function Page({params}: { params: { slug: string } }) {
                 flexDirection: "column",
                 alignItems: "center",
                 overflowY: "scroll",
-                marginTop: {sm: 12, xs: 8}
+                width: "100%",
             }}
         >
 

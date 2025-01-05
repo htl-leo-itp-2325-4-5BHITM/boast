@@ -2,10 +2,10 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {useUser} from "@/provider/UserProvider";
-import {Box, List, ListItem, Typography} from "@mui/material";
+import {Box, List, ListItem, Typography, useMediaQuery} from "@mui/material";
 
 interface Notification {
-    id: string;
+    notificationId: number;
     createdOn: string;
     description: string;
     notificationType: string;
@@ -17,6 +17,7 @@ interface Notification {
 }
 
 export default function Page() {
+    const isMobile = useMediaQuery("(max-width: 991px)");
     const {user} = useUser();
     const [notifications, setNotifications] = useState<Notification[]>([]);
 
@@ -56,44 +57,54 @@ export default function Page() {
     }, [user]);
 
     return (
-        <Box color={"white"} margin={5} mt={12} borderRadius={2} position={"absolute"}
-             sx={{bgcolor: "#22264B", zIndex: "100"}}>
-            <Typography variant="h4" margin={3}>{notifications.length} Notifications</Typography>
-            <Box overflow={"auto"} sx={{bgcolor: "#22264B", width: "78vw", height: "75vh"}} p={3}>
+        <Box m={3} color={"white"} sx={{
+            width: "100%",
+            borderRadius: "1vw",
+            padding: "3%",
+            backgroundColor: "#22264B",
+            height: isMobile ? "calc(95vh - 64px - 60px)" : "calc(95vh - 64px)",
+            overflow: "hidden"
+        }}>
+            <Typography variant="h4" sx={{
+                height: "4vh"
+            }}>{notifications.length} Notifications</Typography>
+            <List sx={{
+                height: isMobile ? "calc(90vh - 64px - 60px)" : "calc(90vh - 64px)",
+                overflow: "scroll",
+                paddingBottom: "10vh"
+            }}>
+                {notifications.length === 0 && (
+                    <Typography component="span" color="grey">
+                        No notifications yet
+                    </Typography>
+                )
+                }
 
-                <List>
-                    {notifications.length === 0 && (
-                        <Typography component="span" color="grey">
-                            No notifications yet
-                        </Typography>
-                    )
-                    }
-
-                    {notifications.map((notification, index) => (
-                        <ListItem key={notification.id} sx={{
-                            bgcolor: "#51588a",
-                            color: "#fff",
-                            border: "2px solid",
-                            borderColor: colors[index % colors.length],
-                            borderRadius: "5px",
-                            marginBottom: "2%",
-                            width: "100%"
+                {notifications.map((notification, index) => (
+                    <ListItem key={Math.random()} sx={{
+                        bgcolor: "#51588a",
+                        color: "#fff",
+                        border: "2px solid",
+                        borderColor: colors[index % colors.length],
+                        borderRadius: "5px",
+                        marginBottom: "2%",
+                        width: "100%"
+                    }}>
+                        <Box sx={{
+                            width: "100%",
                         }}>
-                            <Box sx={{
-                                width: "100%",
-                            }}>
-                                <Typography fontWeight={"bold"}>{notification.description.split(":")[0]}</Typography>
-                                <Box display="flex" justifyContent="space-between">
-                                        <Typography>{notification.sendingUserName} voted: {notification.description.split(":")[1]}</Typography>
-                                    <Typography align={"right"}>
-                                        {notification.createdOn}
-                                    </Typography>
-                                </Box>
+                            <Typography
+                                fontWeight={"bold"}>{notification.description.split(":")[0]}</Typography>
+                            <Box display="flex" justifyContent="space-between">
+                                <Typography>{notification.sendingUserName} voted: {notification.description.split(":")[1]}</Typography>
+                                <Typography align={"right"}>
+                                    {notification.createdOn}
+                                </Typography>
                             </Box>
-                        </ListItem>
-                    ))}
-                </List>
-            </Box>
+                        </Box>
+                    </ListItem>
+                ))}
+            </List>
         </Box>
     );
 }
