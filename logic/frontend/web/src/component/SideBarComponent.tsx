@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import {Typography, useMediaQuery, Box, Icon} from "@mui/material";
-import {RocketLaunch, Person, Logout} from "@mui/icons-material";
+import {Box, Icon, Typography, useMediaQuery} from "@mui/material";
+import {Logout, Person, RocketLaunch} from "@mui/icons-material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Link from "next/link";
 import {usePathname} from "next/navigation";

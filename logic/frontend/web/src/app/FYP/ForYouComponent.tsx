@@ -1,10 +1,10 @@
 "use client";
-import { Box, Button, Dialog, DialogContent, DialogTitle, TextField, Typography } from "@mui/material";
+import {Box, Button, Dialog, DialogContent, DialogTitle, TextField, Typography} from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import React, { useState } from "react";
+import React, {useState} from "react";
 import axios from "axios";
-import { PostModel } from "@/model/model";
-import { useUser } from "@/provider/UserProvider";
+import {PostModel} from "@/model/model";
+import {useUser} from "@/provider/UserProvider";
 
 
 interface ForYouComponentProps {

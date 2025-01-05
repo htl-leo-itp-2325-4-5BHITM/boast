@@ -1,10 +1,9 @@
 "use client";
 import {Avatar, Box, Card, CardContent, CircularProgress, Typography} from "@mui/material";
 import React, {useEffect, useState} from "react";
-import {ProfileModel, UserModel} from "@/model/model";
+import {UserModel} from "@/model/model";
 import axios from "axios";
 import {useUser} from "@/provider/UserProvider";
-import {List} from "postcss/lib/list";
 import Link from "next/link";
 
 export default function Page({params}: { params: { userToSearch: string } }) {

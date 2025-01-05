@@ -1,8 +1,8 @@
 "use client";
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, {createContext, ReactNode, useContext, useEffect, useState} from 'react';
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
-import { UserModel } from '@/model/model';
+import {useRouter} from 'next/navigation';
+import {UserModel} from '@/model/model';
 
 interface UserProviderProps {
     children: ReactNode;

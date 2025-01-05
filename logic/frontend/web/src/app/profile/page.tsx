@@ -1,9 +1,9 @@
 "use client";
 import React, {useEffect, useState} from "react";
-import {Box, Typography, CircularProgress, Avatar, Card, CardContent} from "@mui/material";
+import {Avatar, Box, Card, CardContent, CircularProgress, Typography} from "@mui/material";
 import axios from "axios";
 import {useUser} from "@/provider/UserProvider";
-import {ProfileModel, PostModel} from "@/model/model";
+import {PostModel, ProfileModel} from "@/model/model";
 import Link from "next/link";
 
 

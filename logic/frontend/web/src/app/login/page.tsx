@@ -1,8 +1,8 @@
 // src/app/login/page.tsx
 "use client"
-import { useState } from "react";
-import { TextField, Button, Box, Typography } from "@mui/material";
-import { useUser } from '@/provider/UserProvider';
+import {useState} from "react";
+import {Box, Button, TextField, Typography} from "@mui/material";
+import {useUser} from '@/provider/UserProvider';
 
 export default function Page() {
     const [name, setName] = useState("");

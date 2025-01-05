@@ -1,8 +1,8 @@
-import { Box, CssBaseline } from "@mui/material";
+import {Box, CssBaseline} from "@mui/material";
 import HeaderComponent from "@/component/HeaderComponent";
 import React from "react";
 import SideBarComponent from "@/component/SideBarComponent";
-import { UserProvider } from "@/provider/UserProvider";
+import {UserProvider} from "@/provider/UserProvider";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (

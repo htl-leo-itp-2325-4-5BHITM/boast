@@ -1,5 +1,5 @@
 "use client";
-import {Avatar, Box, Card, CardContent, CircularProgress, Typography, useMediaQuery} from "@mui/material";
+import {Avatar, Box, Card, CardContent, CircularProgress, Typography} from "@mui/material";
 import React, {useEffect, useState} from "react";
 import {UserModel} from "@/model/model";
 import axios from "axios";

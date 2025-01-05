@@ -1,16 +1,11 @@
 "use client"
-import { PostModel } from "@/model/model";
-import {
-    Box,
-    Button,
-    IconButton, TextField,
-    Typography
-} from "@mui/material";
+import {PostModel} from "@/model/model";
+import {Box, Button, IconButton, TextField, Typography} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import Grid from "@mui/material/Grid2";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
-import { useUser } from "@/provider/UserProvider";
+import {useUser} from "@/provider/UserProvider";
 
 export default function PostComponent({ postData, onGoBack }: { postData: PostModel, onGoBack: () => void }) {
     const [post, setPost] = useState<PostModel>(postData);
