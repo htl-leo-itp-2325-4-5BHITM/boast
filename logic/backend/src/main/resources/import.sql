@@ -1,12 +1,12 @@
 --BOASTUSER
-insert into BOASTUSER (CREATEDON, USERID, USERNAME, NAME, EMAIL)
-VALUES (current_timestamp, 100, 'felix.0202', 'Felix', 'felix.wimberger@gmail.com');
+insert into BOASTUSER (CREATEDON, USERID, USERNAME, NAME, EMAIL, SUB)
+VALUES (current_timestamp, 100, 'felix.0202', 'Felix', 'wimberger.felix@icloud.com', 'auth0|679bb77db2ba27af2a4be546');
 
 insert into BOASTUSER (CREATEDON, USERID, USERNAME, NAME, EMAIL)
 VALUES (current_timestamp, 101, 'raphi.s','Raphi', 'raphael.scharrer@gmail.com');
 
-insert into BOASTUSER (CREATEDON, USERID, USERNAME, NAME, EMAIL)
-VALUES (current_timestamp, 102, 'jayanis','Jannis', 'jannis.sideras@gmail.com');
+insert into BOASTUSER (CREATEDON, USERID, USERNAME, NAME, EMAIL, SUB)
+VALUES (current_timestamp, 102, 'jayanis','Jannis', 'jannis.sideras@gmail.com', 'auth0|679bcebec54e988dd8586b19');
 
 insert into BOASTUSER (CREATEDON, USERID, USERNAME, NAME, EMAIL)
 VALUES (current_timestamp, 103, 'teo.m','Teo', 'teofan.mihaescu@gmail.com');
@@ -65,8 +65,8 @@ VALUES (current_timestamp, 120, 'tuana', 'Tuana', 'tuana.sevic@gmail.com');
 insert into BOASTUSER (CREATEDON, USERID, USERNAME, NAME, EMAIL)
 VALUES (current_timestamp, 121, 'leon','Leon', 'leon.steinhuber@gmail.com');
 
-insert into BOASTUSER (CREATEDON, USERID, USERNAME, NAME, EMAIL)
-VALUES (current_timestamp, 122, 'heiko','Hugo', 'heiko.vichtbauer@gmail.com');
+insert into BOASTUSER (CREATEDON, USERID, USERNAME, NAME, EMAIL, SUB)
+VALUES (current_timestamp, 122, 'heiko','Hugo', 'heiko.vichtbauer@gmail.com', 'auth0|679bcef096ef24816b8ebbcf');
 
 insert into BOASTUSER (CREATEDON, USERID, USERNAME, NAME, EMAIL)
 VALUES (current_timestamp, 123, 'janine','Janine', 'janine.wenninger@gmail.com');

@@ -4,28 +4,27 @@ import {Box, Button, IconButton, TextField, Typography} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import Grid from "@mui/material/Grid2";
 import {useEffect, useState} from "react";
-import axios from "axios";
-import {useUser} from "@/provider/UserProvider";
+import {checkAuth, getData, postData} from "@/service/ApiService";
 
-export default function PostComponent({ postData, onGoBack }: { postData: PostModel, onGoBack: () => void }) {
-    const [post, setPost] = useState<PostModel>(postData);
+export default function PostComponent({ data, onGoBack }: { data: PostModel, onGoBack: () => void }) {
+    const [post, setPost] = useState<PostModel>(data);
     const [selectedOption, setSelectedOption] = useState<number | null>(null);
     const [answer, setAnswer] = useState<string>("");
-    const { user } = useUser();
 
     const placeBet = async () => {
+        let authUser = checkAuth();
         const requestBody = {
             postDetailsId: 0,
             createdOn: new Date().toISOString(),
-            creatorId: user?.userId || 0,
-            creatorName: user?.username || "string",
+            creatorId: authUser?.userId || 0,
+            creatorName: authUser?.username || "string",
             postId: post.postId,
             text: answer
         };
 
         try {
-            const response = await axios.post("https://www.boast.social/api/post-details/text", requestBody);
-            console.log(response.data);
+            const response = await postData<any>("/post-details/text", requestBody);
+            console.log(response);
             setAnswer("");
             await reloadPost();
         } catch (error) {
@@ -35,30 +34,31 @@ export default function PostComponent({ postData, onGoBack }: { postData: PostMo
 
     const reloadPost = async () => {
         try {
-            const r = await axios.get(`https://www.boast.social/api/posts/${postData.postId}`);
-            setPost(r.data);
+            const r = await getData<PostModel>(`/posts/${data.postId}`);
+            setPost(r);
         } catch (error) {
             console.error("Error reloading post:", error);
         }
     }
 
     useEffect(() => {
-        setPost(postData);
-    }, [postData]);
+        setPost(data);
+    }, [data]);
 
     const handlePollOptionClick = async (poll_answerId: number) => {
+        let authUser = checkAuth();
         const requestBody = {
             postDetailsId: 0,
             createdOn: new Date().toISOString(),
-            creatorId: user?.userId || 0,
-            creatorName: user?.username || "string",
+            creatorId: authUser?.userId || 0,
+            creatorName: authUser?.username || "string",
             postId: post.postId,
             poll_answerId: poll_answerId
         };
 
         try {
-            const response = await axios.post("https://www.boast.social/api/post-details/poll", requestBody);
-            console.log(response.data);
+            const response= await postData<any>("/post-details/poll", requestBody);
+            console.log(response);
             setSelectedOption(poll_answerId);
             await reloadPost();
         } catch (error) {

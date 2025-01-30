@@ -10,6 +10,7 @@ import jakarta.ws.rs.core.Response;
 @Path("/users")
 public class UserResource {
 
+    /*
     @POST
     @Path("")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -21,7 +22,7 @@ public class UserResource {
             e.printStackTrace();
             return Response.status(422).build();
         }
-    }
+    }*/
 
     @GET
     @Path("/{id}")
@@ -60,6 +61,19 @@ public class UserResource {
     }
 
     @GET
+    @Path("/profile/username/{username}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response getUserProfileByName(@HeaderParam("reqUserId") Long reqUserId, @PathParam("username") String username) {
+        try {
+            return Response.ok(BoastUser.getUserProfileDTOByUsername(reqUserId, username)).status(200).build();
+        } catch (Exception e) {
+            return Response.status(404).build();
+        }
+    }
+
+    /*
+    @GET
     @Path("/login/{username}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
@@ -69,7 +83,7 @@ public class UserResource {
         } catch (Exception e) {
             return Response.status(404).build();
         }
-    }
+    }*/
 
     @GET
     @Path("/search/{searchParam}")

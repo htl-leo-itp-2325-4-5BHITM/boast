@@ -3,11 +3,11 @@ import {Box, Button, Dialog, DialogContent, DialogTitle, IconButton, TextField, 
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from "axios";
-import {useUser} from "@/provider/UserProvider";
 import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import Confetti from "react-confetti";
+import {checkAuth, postData} from "@/service/ApiService";
 
 interface CreateComponentProps {
     fetchPosts: () => void;
@@ -18,7 +18,6 @@ export default function CreateComponent({fetchPosts}: CreateComponentProps) {
     const [description, setDescription] = useState("");
     const [pollOptions, setPollOptions] = useState([{id: 1, title: ""}, {id: 2, title: ""}]);
     const [pollDialogOpen, setPollDialogOpen] = useState(false);
-    const {user} = useUser();
     const [betType, setBetType] = useState<string | null>("text");
     const [showConfetti, setShowConfetti] = useState(false);
     const [showThankYou, setShowThankYou] = useState(false);
@@ -50,12 +49,13 @@ export default function CreateComponent({fetchPosts}: CreateComponentProps) {
     const handleCreate = async () => {
         console.log("Creating bet...");
         console.log(betType)
+        let authUser = checkAuth();
         const newBet = {
             createdOn: new Date().toISOString(),
             title,
             definition: description,
-            creatorId: user?.userId,
-            creatorName: user?.username,
+            creatorId: authUser?.userId,
+            creatorName: authUser?.username,
             status: "OPEN",
             type: betType,
             typeInfo: betType === "POLL" ? {pollAnswers: pollOptions.map(option => ({title: option.title}))} : undefined,
@@ -63,8 +63,8 @@ export default function CreateComponent({fetchPosts}: CreateComponentProps) {
         console.log(newBet);
 
         try {
-            const url = betType === "POLL" ? "https://www.boast.social/api/posts/poll" : "https://www.boast.social/api/posts/text";
-            await axios.post(url, newBet);
+            const url = betType === "POLL" ? "/posts/poll" : "/posts/text";
+            await postData(url, newBet);
             console.log("Bet created successfully:", newBet);
             resetForm(); // Clear the form after successful creation
             fetchPosts(); // Fetch the latest posts

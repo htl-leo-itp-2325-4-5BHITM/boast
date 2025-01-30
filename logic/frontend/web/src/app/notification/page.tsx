@@ -1,8 +1,7 @@
 "use client"
 import React, {useEffect, useState} from "react";
-import axios from "axios";
-import {useUser} from "@/provider/UserProvider";
 import {Box, List, ListItem, Typography, useMediaQuery} from "@mui/material";
+import {getData} from "@/service/ApiService";
 
 interface Notification {
     notificationId: number;
@@ -18,7 +17,6 @@ interface Notification {
 
 export default function Page() {
     const isMobile = useMediaQuery("(max-width: 991px)");
-    const {user} = useUser();
     const [notifications, setNotifications] = useState<Notification[]>([]);
 
     const colors = ["#3656FF", "#C20B4E", "#4ECA31"]
@@ -26,35 +24,21 @@ export default function Page() {
     useEffect(() => {
         const fetchNotifications = async () => {
             try {
-                const userId = user?.userId || '';
-                const response = await axios.get('https://www.boast.social/api/notifications', {
-                    headers: {
-                        'accept': '*/*',
-                        'reqUserId': userId,
-                    }
-                });
+                const response = await getData<number[]>('/notifications');
 
-                const notificationIds = response.data;
-                const notificationPromises = notificationIds.map((id: string) =>
-                    axios.get(`https://www.boast.social/api/notifications/${id}`, {
-                        headers: {
-                            'accept': '*/*',
-                            'reqUserId': userId,
-                        }
-                    })
-                );
+                const notificationResponses = await Promise.all(response.map((notificationId: number) =>
+                    getData<Notification>(`/notifications/${notificationId}`)
+                ));
 
-                const notificationResponses = await Promise.all(notificationPromises);
-                const notificationsData = notificationResponses.map((res) => res.data);
-                setNotifications(notificationsData);
-                console.log(notificationsData)
+                setNotifications(notificationResponses);
+                console.log(notificationResponses)
             } catch (error) {
                 console.error("Error fetching notifications:", error);
             }
         };
 
         fetchNotifications();
-    }, [user]);
+    }, []);
 
     return (
         <Box m={3} color={"white"} sx={{

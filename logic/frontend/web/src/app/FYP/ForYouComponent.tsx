@@ -4,8 +4,7 @@ import Grid from "@mui/material/Grid2";
 import React, {useState} from "react";
 import axios from "axios";
 import {PostModel} from "@/model/model";
-import {useUser} from "@/provider/UserProvider";
-
+import {checkAuth, postData} from "@/service/ApiService";
 
 interface ForYouComponentProps {
     posts: PostModel[];
@@ -20,8 +19,6 @@ export default function ForYouComponent({ setShowPostComponent, setSelectedPost,
     const [textInput, setTextInput] = useState("");
     const [selectedPollAnswer, setSelectedPollAnswer] = useState("1");
     const [currentPost, setCurrentPost] = useState<PostModel | null>(null);
-    const { user } = useUser();
-
 
     const handleGridItemClick = (post: PostModel) => {
         setSelectedPost(post);
@@ -37,31 +34,32 @@ export default function ForYouComponent({ setShowPostComponent, setSelectedPost,
     };
 
     const handleBet = async () => {
+        let authUser = checkAuth();
         if (currentPost?.type === "TEXT") {
             const requestBody = {
                 createdOn: new Date().toISOString(),
-                creatorId: user?.userId,
-                creatorName: user?.username,
+                creatorId: authUser?.userId,
+                creatorName: authUser?.username,
                 postId: currentPost.postId,
                 text: textInput
             };
 
             try {
-                await axios.post("https://www.boast.social/api/post-details/text", requestBody);
+                await postData("/post-details/text", requestBody);
                 handleClose();
             } catch (error) {
                 console.error("Error sending bet:", error);
             }
         } else if (currentPost?.type === "POLL") {
             const requestBody = {
-                creatorId: user?.userId,
-                creatorName: user?.username,
+                creatorId: authUser?.userId,
+                creatorName: authUser?.username,
                 postId: currentPost.postId,
                 pollAnswerId: selectedPollAnswer
             };
 
             try {
-                await axios.post("https://www.boast.social/api/post-details/poll", requestBody);
+                await postData("/post-details/poll", requestBody);
                 handleClose();
             } catch (error) {
                 console.error("Error sending bet:", error);

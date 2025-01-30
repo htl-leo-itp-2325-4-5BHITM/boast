@@ -2,14 +2,12 @@
 import React, {useEffect, useState} from 'react';
 import {AppBar, Autocomplete, Box, TextField, Toolbar, Typography, useMediaQuery} from "@mui/material";
 import Image from "next/image";
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import {useUser} from '@/provider/UserProvider';
-import axios from "axios";
 import {UserModel} from "@/model/model";
 import Link from "next/link";
+import HeaderAuth from "@/component/HeaderAuth";
+import {getData} from "@/service/ApiService";
 
 const HeaderComponent = () => {
-    const {user} = useUser();
     const [searchTerm, setSearchTerm] = useState('');
     const [options, setOptions] = useState<UserModel[]>([]);
     const isMobile = useMediaQuery('(max-width: 991px)'); // Detects small screens
@@ -17,13 +15,8 @@ const HeaderComponent = () => {
     const fetchUsers = async () => {
         if (searchTerm.length > 1) {
             try {
-                const response = await axios.get(`https://www.boast.social/api/users/search/${searchTerm}`, {
-                    headers: {
-                        'accept': '*/*',
-                        'reqUserId': user?.userId || '100',
-                    }
-                });
-                setOptions(response.data);
+                const response = await getData<UserModel[]>(`/users/search/${searchTerm}`);
+                setOptions(response);
             } catch (error) {
                 console.error('Error fetching users:', error);
             }
@@ -76,18 +69,7 @@ const HeaderComponent = () => {
 
                 {!isMobile && (
                     <>
-                        <Box sx={{flexGrow: 1}}></Box>
-                        <Box sx={{display: "flex", flexDirection: "row", alignItems: "center"}}>
-                            <AccountCircle sx={{fontSize: 50, mx: 1}}/>
-                            <Box>
-                                <Typography variant="h6" component="div">
-                                    {user?.username || 'Guest'}
-                                </Typography>
-                                <Typography variant="h6" component="div">
-                                    {user?.email || 'guest@example.com'}
-                                </Typography>
-                            </Box>
-                        </Box>
+                        <HeaderAuth />
                     </>
                 )}
             </Toolbar>

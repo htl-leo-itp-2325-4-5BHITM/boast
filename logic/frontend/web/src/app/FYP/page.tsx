@@ -6,7 +6,7 @@ import CreateComponent from "@/app/FYP/CreateComponent";
 import PostComponent from "@/app/FYP/PostComponent";
 import {PostModel} from "@/model/model";
 import {Box, useMediaQuery} from "@mui/material";
-import {getPost, getPosts} from "@/service/post";
+import {getData} from "@/service/ApiService";
 
 export default function Page() {
     const isMobile = useMediaQuery("(max-width: 991px)");
@@ -16,8 +16,8 @@ export default function Page() {
 
     const fetchPosts = async () => {
         try {
-            const postIds = await getPosts();
-            const postDetails = await Promise.all(postIds.map(id => getPost(id)));
+            const postIds = await getData<number[]>("/posts");
+            const postDetails = await Promise.all(postIds.map(id => getData<PostModel>(`/posts/${id}`)));
             setPosts(postDetails);
         } catch (error) {
             console.error('Error fetching posts:', error);
@@ -49,7 +49,7 @@ export default function Page() {
                 >
                     {
                         showPostComponent && selectedPost ?
-                            <PostComponent postData={selectedPost} onGoBack={handleGoBack}/>
+                            <PostComponent data={selectedPost} onGoBack={handleGoBack}/>
                             :
                             <ForYouComponent setShowPostComponent={setShowPostComponent}
                                              setSelectedPost={setSelectedPost} posts={posts} fetchPosts={fetchPosts}

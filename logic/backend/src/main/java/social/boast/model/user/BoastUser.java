@@ -1,5 +1,6 @@
 package social.boast.model.user;
 
+import com.auth0.jwt.interfaces.Claim;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import social.boast.dto.user.UserDTO;
 import social.boast.dto.user.UserPreviewDTO;
@@ -10,6 +11,7 @@ import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 public class BoastUser extends PanacheEntityBase {
@@ -31,6 +33,9 @@ public class BoastUser extends PanacheEntityBase {
 
     @Column(length = 320)
     public String email;
+
+    @Column(unique = true)
+    private String sub;
 
     @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
     public List<Post> posts;
@@ -88,11 +93,12 @@ public class BoastUser extends PanacheEntityBase {
         this.createdOn = (userDTO.createdOn() != null) ? userDTO.createdOn() : new Date();
     }
 
+    /*
     public static UserDTO createUser(UserDTO userDTO) {
         BoastUser user = new BoastUser(userDTO);
         persist(user);
         return new UserDTO(user.userId, user.createdOn, user.isPublic, user.name, user.username, user.email);
-    }
+    }*/
 
     public static BoastUser getBoastUserByName(String username) {
         return find("username", username).firstResult();
@@ -101,7 +107,7 @@ public class BoastUser extends PanacheEntityBase {
     public static UserDTO getUserDTO(Long id) {
         BoastUser user = findById(id);
         if (user == null) throw new IllegalArgumentException();
-        return new UserDTO(user.userId, user.createdOn, user.isPublic, user.name, user.username, user.email);
+        return new UserDTO("", user.userId, user.createdOn, user.isPublic, user.name, user.username, user.email);
     }
 
     public static UserPreviewDTO getUserPreviewDTO(Long reqUserId, Long id) {
@@ -138,11 +144,32 @@ public class BoastUser extends PanacheEntityBase {
                 user.posts.stream().map(p -> p.postId).toList());
     }
 
+    public static UserProfileDTO getUserProfileDTOByUsername(Long reqUserId, String username) {
+        BoastUser reqUser = BoastUser.findById(reqUserId);
+        BoastUser user = BoastUser.find("username", username).firstResult();
+        if (reqUser == null || user == null) throw new IllegalArgumentException();
+        Relation relation = null;
+        if (!reqUserId.equals(user.userId)) {
+            RelationId relationId = new RelationId(reqUser, user);
+            relation = Relation.find("id", relationId).firstResult();
+        }
+        if (user == null) throw new IllegalArgumentException();
+        return new UserProfileDTO(user.userId,
+                user.createdOn,
+                user.name,
+                user.username,
+                Relation.getFollower(user.userId).size(),
+                Relation.getFollowing(user.userId).size(),
+                (relation == null ? RelationStatus.NO_RELATION.toString() : relation.relationStatus.toString()),
+                user.posts.stream().map(p -> p.postId).toList());
+    }
+
+    /*
     public static UserDTO loginUser(String username) {
         BoastUser user = find("username", username).firstResult();
         if (user == null) throw new IllegalArgumentException();
         return new UserDTO(user.userId, user.createdOn, user.isPublic, user.name, user.username, user.email);
-    }
+    }*/
 
     public static List<UserPreviewDTO> searchUsers (Long reqUserId, String searchParam) {
         System.out.println(searchParam);
@@ -153,5 +180,9 @@ public class BoastUser extends PanacheEntityBase {
                         " order by u.username limit 10", Long.class)
                 .setParameter("searchParam", "%" + searchParam + "%")
                 .getResultList().stream().map(i -> getUserPreviewDTO(reqUserId, i)).toList();
+    }
+
+    public static BoastUser findBySub(Map<String, Claim> claims) {
+        return find("sub", claims.get("sub").asString()).firstResult();
     }
 }

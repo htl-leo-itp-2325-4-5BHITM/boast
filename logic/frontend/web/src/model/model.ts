@@ -1,3 +1,11 @@
+export interface AuthUser {
+    jwt: string;
+    userId: number;
+    isPublic: boolean;
+    name: string;
+    username: string;
+    email: string;
+}
 
 export interface PostModel {
     postId: number;

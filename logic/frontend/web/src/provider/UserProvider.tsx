@@ -1,4 +1,4 @@
-"use client";
+/*"use client";
 import React, {createContext, ReactNode, useContext, useEffect, useState} from 'react';
 import axios from 'axios';
 import {useRouter} from 'next/navigation';
@@ -70,4 +70,4 @@ export const useUser = (): UserContextProps => {
         throw new Error('useUser must be used within a UserProvider');
     }
     return context;
-};
+};*/

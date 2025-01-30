@@ -1,37 +1,30 @@
 "use client";
 import React, {useEffect, useState} from "react";
 import {Avatar, Box, Card, CardContent, CircularProgress, Typography} from "@mui/material";
-import axios from "axios";
-import {useUser} from "@/provider/UserProvider";
 import {PostModel, ProfileModel} from "@/model/model";
 import Link from "next/link";
+import {checkAuth, getData} from "@/service/ApiService";
 
 
 export default function Page() {
     const [profile, setProfile] = useState<ProfileModel | null>(null);
     const [posts, setPosts] = useState<Array<PostModel>>([]);
     const [loading, setLoading] = useState(true);
-    const {user} = useUser();
-
     useEffect(() => {
         async function fetchProfile() {
             try {
-                const response = await axios.get(`https://www.boast.social/api/users/profile/${user?.userId}`, {
-                    headers: {
-                        reqUserId: user?.userId.toString(),
-                        accept: "*/*",
-                    },
-                });
-                setProfile(response.data);
+                const response = await getData<ProfileModel>(`/users/profile/${checkAuth()?.userId || 0}`);
+                setProfile(response);
+                console.log(response)
 
-                const postIds = response.data.posts;
+                const postIds = response.posts;
                 const postResponses = await Promise.all(postIds.map((postId: number) =>
-                    axios.get(`https://www.boast.social/api/posts/${postId}`)
+                    getData<PostModel>(`/posts/${postId}`)
                 ));
 
                 console.log(postResponses)
 
-                setPosts(postResponses.map(res => res.data));
+                setPosts(postResponses);
             } catch (error) {
                 console.error("Error fetching profile or posts:", error);
             } finally {
@@ -40,7 +33,7 @@ export default function Page() {
         }
 
         fetchProfile();
-    }, [user?.userId]);
+    }, []);
 
     if (loading) {
         return (

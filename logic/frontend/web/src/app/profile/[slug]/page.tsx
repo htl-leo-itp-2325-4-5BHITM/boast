@@ -2,49 +2,29 @@
 import React, {useEffect, useState} from "react";
 import {Avatar, Box, Button, Card, CardContent, CircularProgress, Typography} from "@mui/material";
 import axios from "axios";
-import {useUser} from "@/provider/UserProvider";
 import {PostModel, ProfileModel} from "@/model/model";
 import Link from "next/link";
+import {checkAuth, getData, postData} from "@/service/ApiService";
 
 export default function Page({params}: { params: { slug: string } }) {
     const [profile, setProfile] = useState<ProfileModel | null>(null);
     const [posts, setPosts] = useState<Array<PostModel>>([]);
     const [loading, setLoading] = useState(true);
-    const {user} = useUser();
 
     async function fetchProfile() {
         try {
-            // First request to get the user ID
-            const searchResponse = await axios.get(`https://www.boast.social/api/users/search/${params.slug}`, {
-                headers: {
-                    'reqUserId': user?.userId.toString(),
-                    'accept': '*/*'
-                }
-            });
+            const response = await getData<ProfileModel>(`/users/profile/username/${params.slug}`);
+            setProfile(response);
+            console.log(response)
 
-            const userId = searchResponse.data[0]?.userId;
-            if (!userId) {
-                throw new Error("User ID not found");
-            }
-
-            // Second request to get the profile details
-            const profileResponse = await axios.get(`https://www.boast.social/api/users/profile/${userId}`, {
-                headers: {
-                    'reqUserId': user?.userId.toString(),
-                    'accept': '*/*'
-                }
-            });
-
-            console.log(profileResponse.data)
-
-            const postIds = profileResponse.data.posts;
+            const postIds = response.posts;
             const postResponses = await Promise.all(postIds.map((postId: number) =>
-                axios.get(`https://www.boast.social/api/posts/${postId}`)
+                getData<PostModel>(`/posts/${postId}`)
             ));
 
-            setPosts(postResponses.map(res => res.data));
+            console.log(postResponses)
 
-            setProfile(profileResponse.data);
+            setPosts(postResponses);
         } catch (error) {
             console.error("Error fetching profile:", error);
         } finally {
@@ -54,7 +34,7 @@ export default function Page({params}: { params: { slug: string } }) {
 
     useEffect(() => {
         fetchProfile();
-    }, [user?.userId, params.slug]);
+    }, [params.slug]);
 
     if (loading) {
         return <CircularProgress/>;
@@ -65,12 +45,7 @@ export default function Page({params}: { params: { slug: string } }) {
     }
 
     const followToggle = () => {
-        axios.post(`https://www.boast.social/api/relations/${profile.relationStatus === "NO_RELATION" ? "follow" : "unfollow"}/${profile.userId}`, {}, {
-            headers: {
-                'reqUserId': user?.userId.toString(),
-                'accept': '*/*'
-            }
-        }).then(() => {
+        postData<any>(`/relations/${profile.relationStatus === "NO_RELATION" ? "follow" : "unfollow"}/${profile.userId}`, {}).then(() => {
             console.log("User followed/unfollowed successfully");
             fetchProfile()
         }).catch(error => {
@@ -148,7 +123,7 @@ export default function Page({params}: { params: { slug: string } }) {
                     </Box>
                     <Typography>{profile.name}</Typography>
                     {
-                        profile.userId !== user?.userId && (
+                        profile.userId !== checkAuth()?.userId && (
                             <Button
                                 variant="contained"
                                 onClick={followToggle}
