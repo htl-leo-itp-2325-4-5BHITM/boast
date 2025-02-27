@@ -12,6 +12,7 @@ export interface PostModel {
     creatorName: string;
     status: string;
     createdOn: string;
+    creatorId: number;
     title: string;
     definition: string;
     type: string;
@@ -72,4 +73,10 @@ export interface ProfileModel {
 export interface PollOption {
     id: number,
     title: string
+}
+
+export interface MilestoneData {
+    title: string;
+    description: string;
+    isCompleted: boolean;
 }

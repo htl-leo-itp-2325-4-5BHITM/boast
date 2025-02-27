@@ -1,15 +1,18 @@
 "use client"
 import {PostModel} from "@/model/model";
-import {Box, Button, IconButton, TextField, Typography} from "@mui/material";
+import {Box, Button, Dialog, DialogContent, DialogTitle, IconButton, TextField, Typography} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import {checkAuth, getData, postData} from "@/service/ApiService";
+import {checkAuth, getData, loadedAuthUser, postData} from "@/service/ApiService";
 import Grid from "@mui/material/Grid";
 import { useEffect, useState } from "react";
+import {DialogHeader} from "next/dist/client/components/react-dev-overlay/internal/components/Dialog";
 
 export default function PostComponent({ data, onGoBack }: { data: PostModel, onGoBack: () => void }) {
     const [post, setPost] = useState<PostModel>(data);
     const [selectedOption, setSelectedOption] = useState<number | null>(null);
     const [answer, setAnswer] = useState<string>("");
+    const [open, setOpen] = useState(false);
+
 
     const placeBet = async () => {
         let authUser = checkAuth();
@@ -32,6 +35,16 @@ export default function PostComponent({ data, onGoBack }: { data: PostModel, onG
         }
     }
 
+    const postWinner = async (postId: number, winnerPostAnswerId: number) => {
+        try {
+            const response = await postData(`/posts/${postId}/poll/winners/${winnerPostAnswerId}`, {});
+            setOpen(false)
+            console.log("Winner posted successfully:", response);
+        } catch (error) {
+            console.error("Error posting winner:", error);
+        }
+    };
+
     const reloadPost = async () => {
         try {
             const r = await getData<PostModel>(`/posts/${data.postId}`);
@@ -43,6 +56,7 @@ export default function PostComponent({ data, onGoBack }: { data: PostModel, onG
 
     useEffect(() => {
         setPost(data);
+        console.log(post)
     }, [data]);
 
     const handlePollOptionClick = async (poll_answerId: number) => {
@@ -133,6 +147,35 @@ export default function PostComponent({ data, onGoBack }: { data: PostModel, onG
                                     </Typography>
                                 </Button>
                             ))}
+                            {post.creatorId == loadedAuthUser.userId && (
+
+                                <>
+                                    <Button onClick={() => setOpen(true)}>
+                                        <Typography>
+                                            Pick a winner!
+                                        </Typography>
+                                    </Button>
+                                    <Dialog open={open} onClose={() => setOpen(false)}>
+                                        <DialogTitle>Select the winner!</DialogTitle>
+                                        <DialogContent>
+                                            {post?.typeInfo?.pollAnswers?.map((answer) => (
+                                                <Button
+                                                    key={answer.poll_answerId}
+                                                    variant="contained"
+                                                    fullWidth
+                                                    onClick={() => postWinner(post.postId, answer.poll_answerId)}
+                                                    sx={{ mt: 1 }}
+                                                >
+                                                    <Typography fontWeight="bold" textAlign="center">
+                                                        { answer.title }
+                                                    </Typography>
+                                                </Button>
+                                            ))}
+                                        </DialogContent>
+                                        <Button onClick={() => setOpen(false)}>Close</Button>
+                                    </Dialog>
+                                </>
+                            )}
                         </Box>
                     )}
 
@@ -161,20 +204,24 @@ export default function PostComponent({ data, onGoBack }: { data: PostModel, onG
                                 </Button>
                             </Box>
                         </Box>
+
+
                     )}
                 </Grid>
 
                 {/* Sidebar */}
-                <Grid item xs={12} md={5}>
-                    <Typography variant="h6" fontWeight="bold" mb={1}>{post.type === "POLL" ? "" : "Placed Bets"}</Typography>
-                    <Box sx={{ maxHeight: "50vh", overflowY: "auto", border: "1px solid #4ECA31", borderRadius: 2, p: 1 }}>
-                        {post.type === "TEXT" && post?.postDetails?.map((bet, index) => (
-                            <Box key={index} sx={{ borderBottom: "1px solid #4ECA31", p: 1 }}>
-                                <Typography variant="body2"><strong>{bet.creatorName}:</strong> {bet.text}</Typography>
-                            </Box>
-                        ))}
-                    </Box>
-                </Grid>
+                {post.type === "TEXT" && (
+                    <Grid item xs={12} md={5}>
+                        <Typography variant="h6" fontWeight="bold" mb={1}>{post.type === "POLL" ? "" : "Placed Bets"}</Typography>
+                        <Box sx={{ maxHeight: "50vh", overflowY: "auto", border: "1px solid #4ECA31", borderRadius: 2, p: 1 }}>
+                            {post.type === "TEXT" && post?.postDetails?.map((bet, index) => (
+                                <Box key={index} sx={{ borderBottom: "1px solid #4ECA31", p: 1 }}>
+                                    <Typography variant="body2"><strong>{bet.creatorName}:</strong> {bet.text}</Typography>
+                                </Box>
+                            ))}
+                        </Box>
+                    </Grid>
+                )}
             </Grid>
         </Box>
     );

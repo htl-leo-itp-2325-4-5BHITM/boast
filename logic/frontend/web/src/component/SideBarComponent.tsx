@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import {Box, Button, Icon, Typography, useMediaQuery} from "@mui/material";
-import {Logout, Person, RocketLaunch} from "@mui/icons-material";
+import {Box, Icon, Typography, useMediaQuery} from "@mui/material";
+import {Logout, Person, RocketLaunch, EmojiEvents} from "@mui/icons-material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
@@ -47,6 +47,14 @@ export default function SideBarComponent() {
                     label="Notifications"
                     isMobile={isMobile}
                     active={pathname === "/notification"}
+                />
+
+                <NavItem
+                    href="/milestones"
+                    icon={<EmojiEvents/>}
+                    label="Milestones"
+                    isMobile={isMobile}
+                    active={pathname === "/milestones"}
                 />
 
                 <NavItem
