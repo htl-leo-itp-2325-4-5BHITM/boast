@@ -21,10 +21,10 @@ public class MilestoneService {
         BoastUser user = BoastUser.findById(reqUserId);
         List<MilestoneDTO> milestones = new LinkedList<>();
 
-        boolean dailyBoast = checkDailyBoast(user);
-        milestones.add(new MilestoneDTO("Daily Boast", "Create a boast everyday for 3 days.", dailyBoast));
-        if (dailyBoast) {
-            milestones.add(new MilestoneDTO("Win", "Win a boast.", checkWin(user)));
+        boolean checkWin = checkWin(user);
+        milestones.add(new MilestoneDTO("Win", "Be the Winner of a boast!", checkWin));
+        if (checkWin) {
+            milestones.add(new MilestoneDTO("Daily Boast", "Create a boast everyday for 3 days in a row.", checkDailyBoast(user)));
         }
 
         return milestones;
