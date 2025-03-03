@@ -1,8 +1,8 @@
 "use client"
 
-import { Box, Typography } from "@mui/material";
+import {Box} from "@mui/material";
 import Milestone from "@/app/milestones/milestone";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import {getData} from "@/service/ApiService";
 import {MilestoneData} from "@/model/model";
 

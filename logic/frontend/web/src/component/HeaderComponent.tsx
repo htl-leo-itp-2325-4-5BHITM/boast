@@ -1,6 +1,6 @@
 "use client";
 import React, {useEffect, useState} from 'react';
-import {AppBar, Autocomplete, Box, TextField, Toolbar, Typography, useMediaQuery} from "@mui/material";
+import {AppBar, Autocomplete, Box, TextField, Toolbar, useMediaQuery} from "@mui/material";
 import Image from "next/image";
 import {UserModel} from "@/model/model";
 import Link from "next/link";

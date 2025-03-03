@@ -2,7 +2,7 @@
 
 import React from "react";
 import {Box, Icon, Typography, useMediaQuery} from "@mui/material";
-import {Logout, Person, RocketLaunch, EmojiEvents} from "@mui/icons-material";
+import {EmojiEvents, Logout, Person, RocketLaunch} from "@mui/icons-material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Link from "next/link";
 import {usePathname} from "next/navigation";

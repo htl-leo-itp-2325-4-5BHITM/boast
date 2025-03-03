@@ -1,8 +1,7 @@
 "use client";
 import {Avatar, Box, Card, CardContent, CircularProgress, Typography} from "@mui/material";
 import React, {useEffect, useState} from "react";
-import {PostModel, ProfileModel, UserModel} from "@/model/model";
-import axios from "axios";
+import {ProfileModel, UserModel} from "@/model/model";
 import Link from "next/link";
 import {getData} from "@/service/ApiService";
 

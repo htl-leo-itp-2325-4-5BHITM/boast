@@ -4,8 +4,7 @@ import {Box, Button, Dialog, DialogContent, DialogTitle, IconButton, TextField, 
 import CloseIcon from "@mui/icons-material/Close";
 import {checkAuth, getData, loadedAuthUser, postData} from "@/service/ApiService";
 import Grid from "@mui/material/Grid";
-import { useEffect, useState } from "react";
-import {DialogHeader} from "next/dist/client/components/react-dev-overlay/internal/components/Dialog";
+import {useEffect, useState} from "react";
 
 export default function PostComponent({ data, onGoBack }: { data: PostModel, onGoBack: () => void }) {
     const [post, setPost] = useState<PostModel>(data);
@@ -212,7 +211,7 @@ export default function PostComponent({ data, onGoBack }: { data: PostModel, onG
                 {/* Sidebar */}
                 {post.type === "TEXT" && (
                     <Grid item xs={12} md={5}>
-                        <Typography variant="h6" fontWeight="bold" mb={1}>{post.type === "POLL" ? "" : "Placed Bets"}</Typography>
+                        <Typography variant="h6" fontWeight="bold" mb={1}>Placed Bets</Typography>
                         <Box sx={{ maxHeight: "50vh", overflowY: "auto", border: "1px solid #4ECA31", borderRadius: 2, p: 1 }}>
                             {post.type === "TEXT" && post?.postDetails?.map((bet, index) => (
                                 <Box key={index} sx={{ borderBottom: "1px solid #4ECA31", p: 1 }}>

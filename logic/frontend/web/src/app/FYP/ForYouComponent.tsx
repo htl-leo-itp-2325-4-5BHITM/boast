@@ -2,7 +2,6 @@
 import {Box, Button, Dialog, DialogContent, DialogTitle, TextField, Typography} from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import React, {useState} from "react";
-import axios from "axios";
 import {PostModel} from "@/model/model";
 import {checkAuth, postData} from "@/service/ApiService";
 

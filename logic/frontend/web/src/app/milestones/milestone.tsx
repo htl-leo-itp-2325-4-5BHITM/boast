@@ -1,6 +1,6 @@
 "use client"
 
-import {Box, Typography, Tooltip} from "@mui/material";
+import {Box, Tooltip, Typography} from "@mui/material";
 import {useEffect, useState} from "react";
 import {MilestoneData} from "@/model/model";
 import {DoneAll} from "@mui/icons-material";
