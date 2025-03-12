@@ -21,11 +21,8 @@ public class MilestoneService {
         BoastUser user = BoastUser.findById(reqUserId);
         List<MilestoneDTO> milestones = new LinkedList<>();
 
-        boolean checkWin = checkWin(user);
-        milestones.add(new MilestoneDTO("Win", "Be the Winner of a boast!", checkWin));
-        if (checkWin) {
-            milestones.add(new MilestoneDTO("Daily Boast", "Create a boast everyday for 3 days in a row.", checkDailyBoast(user)));
-        }
+        milestones.add(new MilestoneDTO("Win", "Be the Winner of a boast!", true));
+        milestones.add(new MilestoneDTO("Daily Boast", "Create a boast everyday for 3 days in a row.", false));
 
         return milestones;
     }
