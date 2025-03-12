@@ -99,10 +99,10 @@ export default function CreateComponent({fetchPosts}: CreateComponentProps) {
                  width: "100%",
                  bgcolor: "#22264B",
                  color: "white",
-                 borderRadius: "1vw"
+                 borderRadius: "1vw",
+                 position: "relative"
              }}>
-            {showConfetti && <Confetti width={boxDimensions.width} height={boxDimensions.height}
-                                       style={{position: "absolute", top: 0, left: 0}}/>}
+            {showConfetti && <Confetti width={boxDimensions.width} height={boxDimensions.height} />}
             {showThankYou ? (
                 <Box p={2} borderRadius="8px" sx={{
                     height: "100%",
@@ -111,8 +111,7 @@ export default function CreateComponent({fetchPosts}: CreateComponentProps) {
                     alignItems: "center",
                     justifyContent: "center"
                 }}>
-                    <Typography variant="h4" fontWeight={"bold"} color="white" textAlign="center">Thank you for creating
-                        a bet!</Typography>
+                    <Typography variant="h4" fontWeight={"bold"} color="white" textAlign="center">Thank you for creating a bet!</Typography>
                 </Box>
             ) : (
                 <Box>

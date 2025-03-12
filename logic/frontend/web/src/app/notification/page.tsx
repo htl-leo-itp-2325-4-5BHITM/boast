@@ -40,6 +40,8 @@ export default function Page() {
         fetchNotifications();
     }, []);
 
+    const userNotifications = notifications.filter(notification => notification.notificationType === "USER");
+
     return (
         <Box m={3} color={"white"} sx={{
             width: "100%",
@@ -51,20 +53,19 @@ export default function Page() {
         }}>
             <Typography variant="h4" sx={{
                 height: "4vh"
-            }}>{notifications.length} Notifications</Typography>
+            }}>{userNotifications.length} Notifications</Typography>
             <List sx={{
                 height: isMobile ? "calc(90vh - 64px - 60px)" : "calc(90vh - 64px)",
                 overflow: "scroll",
                 paddingBottom: "10vh"
             }}>
-                {notifications.length === 0 && (
+                {userNotifications.length === 0 && (
                     <Typography component="span" color="grey">
                         No notifications yet
                     </Typography>
-                )
-                }
+                )}
 
-                {notifications.map((notification, index) => (
+                {userNotifications.map((notification, index) => (
                     <ListItem key={Math.random()} sx={{
                         bgcolor: "#51588a",
                         color: "#fff",
@@ -77,8 +78,9 @@ export default function Page() {
                         <Box sx={{
                             width: "100%",
                         }}>
-                            <Typography
-                                fontWeight={"bold"}>{notification.description.split(":")[0]}</Typography>
+                            <Typography fontWeight={"bold"}>
+                                {notification.description.split(":")[0]}
+                            </Typography>
                             <Box display="flex" justifyContent="space-between">
                                 <Typography>{notification.sendingUserName} voted: {notification.description.split(":")[1]}</Typography>
                                 <Typography align={"right"}>

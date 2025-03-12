@@ -16,7 +16,7 @@ export default function SideBarComponent() {
         <Box
             sx={{
                 position: isMobile ? "fixed" : "block",
-                zIndex: "10000",
+                zIndex: "100",
                 bottom: "0",
                 width: isMobile ? "100%" : "calc((100vw/12)*2)",
                 height: isMobile ? "60px" : "calc(100vh - 64px)",
